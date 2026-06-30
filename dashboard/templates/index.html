@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal AI — Hedge Fund Terminal</title>
+    <meta name="description" content="Institutional-grade AI quantitative trading terminal powered by an 18-Dimensional Deep Q-Network.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lightweight-charts@3.8.0/dist/lightweight-charts.standalone.production.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>UNIVERSAL AI</h1>
+            <div id="conn-badge" class="conn-badge online">
+                <span class="dot"></span>
+                <span id="conn-text">LIVE</span>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">🌓</button>
+        </div>
+        <div class="metrics-bar">
+            <div class="metric">
+                <span class="label">Live Price</span>
+                <span class="value" id="top-price" style="color: var(--text-primary);">—</span>
+                <span class="sub" id="top-change" style="color: var(--text-muted);">—</span>
+            </div>
+            <div class="metric">
+                <span class="label">Balance</span>
+                <span class="value" id="top-balance" style="color: #60a5fa;">$10,000.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">Realized PNL</span>
+                <span class="value" id="top-pnl">$0.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">Status</span>
+                <span class="value live-pulse" style="font-size: 0.8rem;">PAPER</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- Chart Panel -->
+        <div class="glass-panel">
+            <div class="panel-header">
+                <div style="display:flex; align-items:center; gap: 0.5rem;">
+                    <div class="chart-tabs">
+                        <span id="tab-candles" class="chart-tab active">Price Chart</span>
+                        <span id="tab-equity" class="chart-tab">Equity Curve</span>
+                    </div>
+                    <select id="asset-select" class="glass-select">
+                        <option value="BTC/USDT" selected>BTC/USDT</option>
+                        <option value="ETH/USDT">ETH/USDT</option>
+                        <option value="BNB/USDT">BNB/USDT</option>
+                        <option value="SOL/USDT">SOL/USDT</option>
+                        <option value="XRP/USDT">XRP/USDT</option>
+                    </select>
+                    <select id="timeframe-select" class="glass-select">
+                        <option value="1m">1M</option>
+                        <option value="5m">5M</option>
+                        <option value="15m" selected>15M</option>
+                        <option value="1h">1H</option>
+                        <option value="4h">4H</option>
+                        <option value="1d">1D</option>
+                    </select>
+                </div>
+                <div style="display:flex; align-items:center; gap: 0.75rem;">
+                    <span id="last-updated" style="font-size:0.65rem; color:var(--text-muted); font-family:'JetBrains Mono',monospace;">—</span>
+                    <span id="chart-status" style="color: var(--accent-blue); font-family:'JetBrains Mono',monospace;">SYNCING</span>
+                </div>
+            </div>
+            <div id="tvchart" class="chart-container"></div>
+            <!-- Stats Bar -->
+            <div class="stats-bar" id="stats-bar">
+                <div class="stat-item"><div class="stat-label">Total Trades</div><div class="stat-value" id="stat-total">—</div></div>
+                <div class="stat-item"><div class="stat-label">Wins</div><div class="stat-value" id="stat-wins" style="color:var(--long-color);">—</div></div>
+                <div class="stat-item"><div class="stat-label">Losses</div><div class="stat-value" id="stat-losses" style="color:var(--short-color);">—</div></div>
+                <div class="stat-item"><div class="stat-label">Win Rate</div><div class="stat-value" id="stat-winrate">—</div></div>
+                <div class="stat-item"><div class="stat-label">24H High</div><div class="stat-value" id="stat-high">—</div></div>
+                <div class="stat-item"><div class="stat-label">24H Low</div><div class="stat-value" id="stat-low">—</div></div>
+            </div>
+        </div>
+
+        <!-- Positions Panel -->
+        <div class="glass-panel positions-panel">
+            <div class="panel-header">
+                <span>Active Positions</span>
+                <span id="cash-allocation" style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted);">—</span>
+            </div>
+            <div class="pos-scroll">
+                <table class="pos-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Side</th>
+                            <th>Entry</th>
+                            <th>Current</th>
+                            <th>Size</th>
+                            <th style="text-align:right;">Float PNL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="positions-body">
+                        <tr><td colspan="6" style="padding:1rem; text-align:center; color:var(--text-muted);">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Execution Feed -->
+        <div class="glass-panel feed-panel">
+            <div class="panel-header">
+                <span>Execution Feed</span>
+                <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.65rem; cursor:pointer; color:var(--text-muted);">
+                    <input type="checkbox" id="filter-feed" style="accent-color:var(--accent-blue); cursor:pointer;">
+                    Filter by chart
+                </label>
+            </div>
+            <div id="order-feed" class="feed-scroll">
+                <div class="skeleton" style="height:60px; margin-bottom:0.4rem;"></div>
+                <div class="skeleton" style="height:60px; margin-bottom:0.4rem;"></div>
+                <div class="skeleton" style="height:60px; margin-bottom:0.4rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

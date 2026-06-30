@@ -1,0 +1,20 @@
+# Docker ignore file for SENTINEL AI Project
+
+# Git
+.git
+.gitignore
+
+# Python virtual environment
+venv/
+then/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE and OS files
+.vscode/
+.idea/
+*.DS_Store

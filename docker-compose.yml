@@ -1,0 +1,135 @@
+# Multi-Agent Financial Intelligence System - Docker Compose
+# Orchestrates all services: main app, dashboard, and optional storage backends
+
+services:
+  # Main application
+  app:
+    build: .
+    container_name: financial-ai-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"  # Dashboard API
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - USE_REDIS=${USE_REDIS:-false}
+      - USE_CHROMADB=${USE_CHROMADB:-false}
+      - USE_INFLUXDB=${USE_INFLUXDB:-false}
+      - DOCKER_ENV=true
+      - REDIS_HOST=redis
+      - CHROMADB_HOST=chromadb
+      - INFLUXDB_HOST=influxdb
+    depends_on:
+      - redis
+      - chromadb
+      - influxdb
+    volumes:
+      - .:/app
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - financial-ai-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Live Trading Bot
+  bot:
+    build: .
+    container_name: financial-ai-bot
+    restart: unless-stopped
+    command: python scripts/live_trader.py
+    environment:
+      - BINANCE_API_KEY=${BINANCE_API_KEY}
+      - BINANCE_SECRET_KEY=${BINANCE_SECRET_KEY}
+      - USE_INFLUXDB=true
+    depends_on:
+      - influxdb
+    volumes:
+      - .:/app
+    networks:
+      - financial-ai-network
+
+  # Redis for pub/sub and caching
+  redis:
+    image: redis:7-alpine
+    container_name: financial-ai-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - financial-ai-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+        reservations:
+          cpus: '0.10'
+          memory: 64M
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+
+  # ChromaDB for vector search
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: financial-ai-chromadb
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma-data:/chroma/chroma_data
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - financial-ai-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+
+  # InfluxDB for time-series data
+  influxdb:
+    image: influxdb:2.7
+    container_name: financial-ai-influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - influx-data:/var/lib/influxdb2
+      - influx-config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
+      - DOCKER_INFLUXDB_INIT_ORG=financial_ai
+      - DOCKER_INFLUXDB_INIT_BUCKET=market_data
+    networks:
+      - financial-ai-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "influx", "bucket", "list"]
+      interval: 30s
+
+volumes:
+  redis-data:
+  chroma-data:
+  influx-data:
+  influx-config:
+
+networks:
+  financial-ai-network:
+    driver: bridge
