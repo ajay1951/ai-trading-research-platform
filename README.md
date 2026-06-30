@@ -2,90 +2,108 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C.svg)
-![TradingView](https://img.shields.io/badge/UI-TradingView%20Charts-131722.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Docker](https://img.shields.io/badge/Docker-24/7%20Cloud-2496ED.svg)
+![Binance](https://img.shields.io/badge/Exchange-Binance%20Futures-F3BA2F.svg)
+![InfluxDB](https://img.shields.io/badge/Database-InfluxDB-22ADF6.svg)
 
-An institutional-grade, multi-asset algorithmic trading engine powered by an **18-Dimensional Deep Q-Network (DQN)**. Designed to operate as a fully autonomous quantitative hedge fund, this system ingests live market data, evaluates mathematical risk, executes bi-directional trades (Long/Short), and tracks portfolio performance through a premium glassmorphism web dashboard.
-
----
-
-## 🧠 Core Architecture
-
-The system is built on a highly modular, decoupled architecture separating the machine learning brain from the execution engine and the user interface.
-
-### 1. The Universal Meta-Agent
-Unlike traditional bots that rely on hardcoded indicators (RSI, MACD), this engine utilizes a Deep Reinforcement Learning Agent (`agents/meta_agent.py`). 
-- **18-Dimensional State Space:** Ingests normalized Z-scores, rolling volatility metrics, volume spikes, and macro structural trends.
-- **Multi-Asset Generalization:** Trained via walk-forward validation on 8 years of historical data across 5 distinct assets (`BTC`, `ETH`, `BNB`, `SOL`, `XRP`). The brain learns universal market mechanics rather than over-fitting to a single coin.
-
-### 2. Live Execution Engine
-The `live_trader.py` script acts as the automated execution layer.
-- **Bi-Directional Trading:** Capable of borrowing and short-selling assets to profit during macro market crashes.
-- **Risk Desk (`risk_agent.py`):** Dynamically scales position sizes based on neural network confidence thresholds.
-- **Swing Trade Logic:** Operates on the `15m` timeframe with strict, mathematically enforced Take-Profit (+2%) and Stop-Loss (-1%) constraints to mitigate exchange fee bleed and whipsaw volatility.
-
-### 3. Glassmorphism Hedge Fund Terminal
-A modern, real-time command center built with Flask and Vanilla JS.
-- **Live TradingView Integration:** Automatically plots real-time price action and overlays glowing AI execution markers natively on the candlesticks.
-- **Virtual Portfolio Tracking:** Calculates live Realized PNL, accounting for standard 0.1% exchange fees.
+An institutional-grade, multi-asset algorithmic trading engine powered by an **18-Dimensional Deep Q-Network (DQN)**. Designed to operate as a fully autonomous quantitative hedge fund, this system ingests live market data, evaluates mathematical risk, executes bi-directional trades on Binance, and tracks portfolio performance through a premium glassmorphism web dashboard.
 
 ---
 
-## 🚀 Quick Start Guide
+## 🏛️ System Architecture
 
-### 1. Installation
-Clone the repository and install the necessary dependencies:
-```bash
-git clone https://github.com/your-username/universal-ai-fund.git
-cd universal-ai-fund
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+The ecosystem runs in an isolated Docker environment, connected via high-speed internal networks. 
+
+```mermaid
+graph TD
+    subgraph Cloud Server [24/7 Docker Environment]
+        B[Live Trading Bot] 
+        D[Dashboard UI Server]
+        I[(InfluxDB Time-Series)]
+    end
+
+    A((Binance Exchange API)) -->|Live OHLCV Data| B
+    B -->|Logs Execution & State| I
+    B <-->|Submits BUY/SELL Orders| A
+    
+    I -->|Serves 150k+ Candles| D
+    D -->|Renders UI via WebSockets| U(End User Browser)
+    
+    style Cloud Server fill:#1a1b26,stroke:#7aa2f7,stroke-width:2px,color:#fff
+    style A fill:#F3BA2F,stroke:#333,color:#000
+    style I fill:#22ADF6,stroke:#333,color:#fff
 ```
 
-### 2. Launch the Web Dashboard
-Start the Flask server to bring the terminal online:
-```bash
-python dashboard/app.py
-```
-*Navigate to `http://localhost:5000` in your browser.*
+---
 
-### 3. Ignite the AI Engine
-Open a second terminal window and start the autonomous trading loop:
-```bash
-python scripts/live_trader.py
+## 🧠 The AI Trading Loop
+
+Unlike traditional bots that rely on hardcoded indicators (RSI, MACD), this engine utilizes a Deep Reinforcement Learning Agent (`agents/meta_agent.py`) trained on 8 years of historical data.
+
+```mermaid
+sequenceDiagram
+    participant Market as Binance API
+    participant Bot as AI Execution Engine
+    participant Brain as Deep Q-Network (PyTorch)
+    participant Risk as Risk Manager
+
+    loop Every 15 Seconds
+        Market->>Bot: Fetch live price & volume
+        Bot->>Bot: Calculate Z-Scores & Volatility
+        Bot->>Brain: Inject 18-Dimensional State Vector
+        Brain-->>Bot: Emit Signal (LONG / SHORT / NEUTRAL)
+        Bot->>Risk: Request Position Size
+        Risk-->>Bot: Approved Allocation %
+        Bot->>Market: Execute Market Order via CCXT
+    end
 ```
-*The AI will load its pre-trained `.pth` weights, initialize a virtual $10,000 bank account, and begin actively scanning all 5 coins every 15 seconds.*
+
+---
+
+## 🚀 Quick Start (Cloud Deployment)
+
+The system is fully Dockerized and ready to run 24/7 on any cloud VPS (e.g., AWS, DigitalOcean, Oracle Cloud).
+
+### 1. Configure Environment
+Create a `.env` file in the root directory and add your Binance Testnet keys:
+```env
+BINANCE_API_KEY=your_testnet_api_key_here
+BINANCE_SECRET_KEY=your_testnet_secret_key_here
+```
+
+### 2. Launch the Ecosystem
+Upload your code to your cloud server, navigate to the folder, and run:
+```bash
+docker-compose up -d --build
+```
+*Docker will automatically build the PyTorch environment, spin up the InfluxDB database, initialize the Dashboard on Port 8000, and ignite the Autonomous Bot.*
+
+### 3. Monitor
+- **View Bot Logs:** `docker logs -f financial-ai-bot`
+- **View Dashboard:** Navigate to `http://<YOUR_SERVER_IP>:8000`
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-universal-ai-fund/
+ai_crypto_bot/
 │
 ├── agents/                 # AI Logic and Risk Management
 │   ├── meta_agent.py       # Deep Q-Network Brain
 │   └── risk_agent.py       # Position sizing and capital allocation
 │
-├── backtesting/            # Historical validation engines
-│   └── quant_features.py   # State vector normalization logic
-│
 ├── dashboard/              # Flask Web Server
-│   ├── app.py              # Backend API and routing
+│   ├── app.py              # Backend API pulling from InfluxDB
 │   └── templates/
 │       └── index.html      # Premium TradingView UI
 │
-├── data/                   # Local Datastores
-│   ├── live_trades.csv     # Execution logs
-│   └── portfolio.json      # Virtual account balances
-│
 ├── scripts/                # Utility and Execution Scripts
-│   ├── sync_market_data.py # Historical data scraper via CCXT
-│   └── live_trader.py      # The 24/7 master execution loop
+│   ├── live_trader.py      # The 24/7 master execution loop connecting CCXT
+│   └── convert_csv_to_lp.py# Zero-RAM InfluxDB migration tool
 │
-└── training/               # Model Training Pipelines
-    └── train_dqn.py        # Multi-asset walk-forward trainer
+├── docker-compose.yml      # Orchestrates App, Bot, Redis, Chroma, Influx
+└── Dockerfile              # PyTorch OS configuration
 ```
 
 ---
