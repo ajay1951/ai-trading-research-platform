@@ -894,20 +894,53 @@ async def get_query_history(limit: int = 20):
 
 
 @app.get("/api/trades")
-async def get_trade_history(limit: int = 7):
+async def get_trade_history(limit: int = 15):
     """Get recent trade history from paper log."""
-    file_path = "paper_trades_log.json"
+    file_path = os.path.join("data", "live_trades.csv")
     if not os.path.exists(file_path):
         return {"trades": []}
     try:
-        with open(file_path, "r") as f:
-            trades = json.load(f)
-        # Return last `limit` trades, most recent first
-        return {"trades": sorted(trades, key=lambda x: x.get('timestamp', ''), reverse=True)[:limit]}
+        import pandas as pd
+        df = pd.read_csv(file_path)
+        # Ensure timestamp is string for JSON
+        df['timestamp'] = df['timestamp'].astype(str)
+        trades = df.to_dict('records')
+        # Return last `limit` trades, most recent first (csv is appended to)
+        return {"trades": list(reversed(trades))[:limit]}
     except Exception as e:
         logger.error(f"Error reading trade log: {e}")
         # Return empty list on error to prevent dashboard crash
         return {"trades": [], "error": str(e)}
+
+@app.get("/api/historical/{symbol:path}")
+async def get_historical_data(symbol: str, timeframe: str = "1d"):
+    """Fetch macro historical data for charts."""
+    try:
+        import yfinance as yf
+        yf_symbol = symbol.replace('/', '-')
+        if yf_symbol.endswith('-USDT'):
+            yf_symbol = yf_symbol.replace('-USDT', '-USD')
+            
+        ticker = yf.Ticker(yf_symbol)
+        # For 'all', just pull max history
+        df = ticker.history(period="max" if timeframe == "all" else "1y", interval="1d")
+        if df.empty:
+            return {"data": []}
+            
+        ohlcv = []
+        for index, row in df.iterrows():
+            ohlcv.append({
+                "time": int(index.timestamp()),
+                "open": float(row['Open']),
+                "high": float(row['High']),
+                "low": float(row['Low']),
+                "close": float(row['Close']),
+                "volume": float(row['Volume'])
+            })
+        return {"data": ohlcv}
+    except Exception as e:
+        logger.error(f"Failed to fetch historical macro data: {e}")
+        return {"data": [], "error": str(e)}
 
 
 @app.get("/api/portfolio")

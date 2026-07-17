@@ -594,12 +594,14 @@
         </div>
 
         <!-- Main Content Area - REDESIGNED FOR CHART PRIORITY -->
-        <!-- 1. Full-width Chart Panel -->
-        <div class="panel" style="display: flex; flex-direction: column; padding: 0; overflow: hidden; height: 75vh; min-height: 600px;">
-            <div style="padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                    <h2 id="chart-symbol" style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">BTC/USDT</h2>
-                    <div class="status-dot active pulse-live" style="width: 6px; height: 6px;"></div>
+        <!-- 1. Chart Panel & Execution Log Grid -->
+        <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 20px; height: 75vh; min-height: 600px;">
+            <!-- Chart Panel -->
+            <div class="panel" style="display: flex; flex-direction: column; padding: 0; overflow: hidden; height: 100%;">
+                <div style="padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <h2 id="chart-symbol" style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">BTC/USDT</h2>
+                        <div class="status-dot active pulse-live" style="width: 6px; height: 6px;"></div>
                     <div style="display: flex; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 3px;">
                         <button class="tf-btn" onclick="setTF(this)">1m</button>
                         <button class="tf-btn" onclick="setTF(this)">5m</button>
@@ -609,6 +611,7 @@
                         <button class="tf-btn" onclick="setTF(this)">1h</button>
                         <button class="tf-btn" onclick="setTF(this)">4h</button>
                         <button class="tf-btn active" onclick="setTF(this)">1d</button>
+                        <button class="tf-btn" onclick="setTF(this)">all</button>
                     </div>
                     <div style="display: flex; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 3px;">
                         <button class="chart-type-btn active" onclick="setChartType(this, 'line')"><i class="ti ti-chart-line"></i></button>
@@ -634,6 +637,18 @@
                         <span class="mono" style="font-size: 9px; color: var(--text-muted); margin-bottom: 4px;">MACD: <span id="macd-val">--</span> / <span id="signal-val">--</span></span>
                         <div id="tv-macd-chart" style="flex: 1;"></div>
                     </div>
+                </div>
+            </div>
+            </div>
+            
+            <!-- Execution Log Panel -->
+            <div class="panel" style="display: flex; flex-direction: column; padding: 0; overflow: hidden; height: 100%;">
+                <h3 style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 16px; border-bottom: 1px solid var(--border-subtle); background: rgba(0,0,0,0.2); margin: 0; display: flex; align-items: center; gap: 8px;">
+                    <i class="ti ti-history" style="font-size: 14px;"></i>
+                    Execution Log
+                </h3>
+                <div id="execution-log-container" style="padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex: 1;">
+                    <div style="text-align: center; color: var(--text-muted); font-size: 11px; margin-top: 20px;">Loading trades...</div>
                 </div>
             </div>
         </div>
@@ -1669,14 +1684,34 @@
 
     async function fetchVisualizationData(symbol) {
         try {
-            const marketRes = await fetch('/api/visualization/market_data', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ symbol: symbol, timeframe: currentTF })
-            });
+            let marketRes;
+            if (currentTF === 'all') {
+                marketRes = await fetch(`/api/historical/${symbol.replace('/', '-')}`);
+            } else {
+                marketRes = await fetch('/api/visualization/market_data', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symbol: symbol, timeframe: currentTF })
+                });
+            }
             if (marketRes.ok) {
                 const marketData = await marketRes.json();
-                if (marketData.timestamps) {
+                
+                if (currentTF === 'all' && marketData.data) {
+                    window.currentMarketData = {
+                        timestamps: marketData.data.map(d => new Date(d.time * 1000).toISOString()),
+                        opens: marketData.data.map(d => d.open),
+                        highs: marketData.data.map(d => d.high),
+                        lows: marketData.data.map(d => d.low),
+                        closes: marketData.data.map(d => d.close),
+                        volumes: marketData.data.map(d => d.volume),
+                        historical_signals: []
+                    };
+                } else if (marketData.timestamps) {
                     window.currentMarketData = marketData;
+                }
+                
+                if (window.currentMarketData && window.currentMarketData.timestamps) {
+                    const marketData = window.currentMarketData;
                     renderPriceChart();
                     const last = marketData.closes.length - 1;
                     if(last >= 0) {
@@ -1724,11 +1759,13 @@
         setInterval(fetchLivePrice, 5000);
         setInterval(pollHistory, 2000);
         setInterval(fetchPortfolio, 5000); // Polling as a fallback
+        setInterval(fetchExecutionLog, 3000); // Poll execution log
         
         // Start feeds
         connectWebSocket();
         fetchLivePrice();
         fetchPortfolio();
+        fetchExecutionLog();
         
         logToTerminal("[INIT] SYS: Neural core initialized", "system");
         logToTerminal("[INIT] SYS: Data feeds established", "system");
