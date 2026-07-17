@@ -18,7 +18,7 @@ from core.storage import data_manager
 from agents.data_agent import RealTimeDataAgent
 from agents.quant_agent import QuantitativeAnalysisAgent
 from agents.research_agent import FundamentalResearchAgent
-from agents.risk_agent import RiskManagementAgent
+from agents.risk_agent import RiskAgent
 from agents.multistyle_trading_agent import MultiStyleTradingAgent
 from agents.supervisor_agent import SupervisorAgent
 from agents.cio_agent import CIOAgent
@@ -114,7 +114,7 @@ class FinancialIntelligenceSystem:
             "regime": RegimeAgent(get_memory()),
             "quant": QuantitativeAnalysisAgent(get_memory()),
             "research": FundamentalResearchAgent(get_memory()),
-            "risk": RiskManagementAgent(get_memory()),
+            "risk": RiskAgent(get_memory()),
             "multistyle": MultiStyleTradingAgent(get_memory()),
             "supervisor": SupervisorAgent(get_memory()),
             "cio": CIOAgent(get_memory()),

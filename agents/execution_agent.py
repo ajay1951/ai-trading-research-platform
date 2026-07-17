@@ -19,6 +19,10 @@ class ExecutionAgent:
         self.mode = "LIVE" if live_trading else "PAPER"
         self.trade_log_file = "paper_trades_log.json"
         self.portfolio_file = "portfolio.json"
+        
+        # Circuit Breaker Limits
+        self.max_trades_per_hour = 10
+        self.max_drawdown_pct = 0.05
 
     def _log_trade(self, trade_details: Dict):
         """Logs a trade to the paper trading log file."""

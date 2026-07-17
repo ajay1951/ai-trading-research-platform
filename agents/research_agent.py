@@ -4,12 +4,19 @@ Analyzes SEC filings, earnings reports, and news sentiment.
 """
 import re
 import json
+import os
 from typing import Any, Dict, List, Optional, ClassVar
 from dataclasses import dataclass, field
 from datetime import datetime
 from collections import Counter
 from core.memory import SharedMemory
 from crewai.tools import BaseTool
+
+try:
+    from groq import Groq
+    HAS_GROQ = True
+except ImportError:
+    HAS_GROQ = False
 
 
 @dataclass
@@ -193,12 +200,29 @@ class MacroSummarizerTool(BaseTool):
             keyword_counts = Counter(keywords)
             top_keywords = [kw for kw, _ in keyword_counts.most_common(10)]
 
+            # Generate Narrative using Groq if available
+            narrative = "No narrative available."
+            if HAS_GROQ and os.getenv("GROQ_API_KEY"):
+                try:
+                    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+                    headlines = "\\n".join([f"- {a.get('title', '')}" for a in news_batch[:10]])
+                    prompt = f"Write a 2-3 sentence executive market narrative based on these recent headlines. Focus on the core drivers and sentiment. Keep it punchy and professional:\n{headlines}"
+                    
+                    chat_completion = client.chat.completions.create(
+                        messages=[{"role": "user", "content": prompt}],
+                        model="llama3-8b-8192",
+                    )
+                    narrative = chat_completion.choices[0].message.content.strip()
+                except Exception as e:
+                    narrative = f"Narrative generation failed: {str(e)}"
+
             result = {
                 "overall_sentiment": overall,
                 "sentiment_score": round(avg_score, 2),
                 "confidence": round(avg_conf, 2),
                 "article_count": len(news_batch),
-                "top_keywords": top_keywords
+                "top_keywords": top_keywords,
+                "narrative": narrative
             }
 
             return json.dumps(result)

@@ -6,6 +6,9 @@ and dynamically adjust parameters based on Market Regime.
 from core.memory import SharedMemory
 from typing import Dict, Any, List
 import numpy as np
+import os
+import json
+import asyncpg
 from datetime import datetime
 from models.rl_models import NumpyPolicyNetwork, RLEnvironment
 
@@ -24,6 +27,39 @@ class RLAgent:
         self.policy_net = NumpyPolicyNetwork(self.state_size, self.hidden_size, self.action_size)
         self.is_trained = True 
         self.last_loss = 0.0
+        
+        self.db_pool = None
+        self.db_setup_done = False
+
+    async def _setup_db(self):
+        if self.db_setup_done:
+            return
+            
+        try:
+            # We fetch connection parameters from env vars, matching docker-compose
+            user = os.getenv("POSTGRES_USER", "financial_admin")
+            password = os.getenv("POSTGRES_PASSWORD", "financial_secure_password")
+            db = os.getenv("POSTGRES_DB", "ai_crypto_db")
+            host = os.getenv("POSTGRES_HOST", "postgres")
+            
+            self.db_pool = await asyncpg.create_pool(user=user, password=password, database=db, host=host, port=5432)
+            
+            async with self.db_pool.acquire() as conn:
+                await conn.execute('''
+                    CREATE TABLE IF NOT EXISTS rl_transitions (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        symbol VARCHAR(20),
+                        state_vector JSONB,
+                        action_taken VARCHAR(10),
+                        reward FLOAT,
+                        next_state_vector JSONB
+                    )
+                ''')
+            self.db_setup_done = True
+            print("RL Agent PostgreSQL connected and initialized.")
+        except Exception as e:
+            print(f"Failed to connect to Postgres for RL Agent: {e}")
 
     def _get_state_array(self, context: Dict) -> np.ndarray:
         """
@@ -106,10 +142,35 @@ class RLAgent:
     async def execute(self, parameters: Dict, context: Dict) -> Dict:
         symbol = parameters.get("symbol", "BTC/USDT")
         
-        # In a full system, we would fetch the last state/action/reward here and train
-        # For prototype, we do a forward pass to get the decision.
+        if not self.db_setup_done:
+            await self._setup_db()
+            
+        # Get current state
+        state_vector = self._get_state_array(context)
+        
+        # Predict Action
         action_decision = self.predict_action(context)
         action_decision['timestamp'] = datetime.now().isoformat()
+        
+        # In a full system, we would calculate real reward here based on actual previous trade outcome.
+        # For prototype, we generate a synthetic reward for demonstration.
+        dummy_reward = float(np.random.normal(0, 0.5)) 
+        
+        # Log to DB
+        if self.db_pool:
+            try:
+                async with self.db_pool.acquire() as conn:
+                    await conn.execute('''
+                        INSERT INTO rl_transitions (symbol, state_vector, action_taken, reward)
+                        VALUES ($1, $2, $3, $4)
+                    ''', symbol, json.dumps(state_vector.tolist()), action_decision['action'], dummy_reward)
+            except Exception as e:
+                print(f"Failed to log transition to DB: {e}")
+
+        # Train on the current state -> next_state transition (using dummy next state for now)
+        dummy_next_state = state_vector + np.random.normal(0, 0.01, self.state_size)
+        action_idx = RLEnvironment.ACTIONS.index(action_decision['action'])
+        self.update_model(state_vector, action_idx, dummy_reward, dummy_next_state)
 
         self.memory.store(f"rl_decision:{symbol}", action_decision, agent="rl_agent", publish_update=True)
         return action_decision

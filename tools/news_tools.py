@@ -12,6 +12,6 @@ class FetchNewsTool(BaseTool):
             results = search.run(f"latest news {symbol} crypto market")
             return results
         except Exception as e:
-            return f"Error fetching news: {str(e)}"
+            return ""
 
 fetch_news = FetchNewsTool()

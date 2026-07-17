@@ -77,6 +77,9 @@ async def lifespan(app: FastAPI):
     dashboard_state.is_running = True
     broadcast_task = asyncio.create_task(broadcast_updates())
 
+    # Keep alive task for web sockets
+    asyncio.create_task(manager.keep_alive())
+
     # Start the Redis listener task
     redis_listener_task = None
     if redis_client:
@@ -260,6 +263,15 @@ class ConnectionManager:
                 # A client has disconnected. This is expected, so we just remove them.
                 self.disconnect(connection)
 
+    async def keep_alive(self):
+        """Periodically pings all active connections to drop dead ones."""
+        while True:
+            await asyncio.sleep(30)
+            for connection in self.active_connections[:]:
+                try:
+                    await connection.send_text('ping')
+                except Exception:
+                    self.disconnect(connection)
 
 manager = ConnectionManager()
 
@@ -393,6 +405,16 @@ async def broadcast_updates():
                 'kraken': 'kraken' in exchange_pool,
                 'kucoin': 'kucoin' in exchange_pool,
             }
+
+            # Fetch latest slow-lane results if available to complete the payload
+            latest_res = dashboard_state.latest_results
+            if latest_res and "result" in latest_res and "query_id" in latest_res["result"]:
+                q_id = latest_res["result"]["query_id"]
+                # Try to get the final slow-lane results
+                final_res = global_memory.get(f"final:{q_id}")
+                if final_res:
+                    # Update it so we broadcast the full results!
+                    dashboard_state.latest_results["result"] = final_res
 
             # Build update message
             update = {
@@ -665,7 +687,8 @@ async def get_market_visualization(request: VisualizationDataRequest):
                 # Check if the exchange supports the symbol
                 if exchange.markets and symbol in exchange.markets:
                     try:
-                        ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=100)
+                        # Use a large limit to support long-term views (e.g. 7 years daily = 2555 candles)
+                        ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=3000)
                         if ohlcv:
                             break # Found data, exit loop
                     except Exception as e:
@@ -680,7 +703,7 @@ async def get_market_visualization(request: VisualizationDataRequest):
                     yf_symbol = yf_symbol.replace('-USDT', '-USD')
 
                 yf_interval_map = {
-                    "1d": ("100d", "1d"),
+                    "1d": ("max", "1d"),
                     "4h": ("60d", "1h"),
                     "1h": ("60d", "1h"),
                     "30m": ("60d", "30m"),
@@ -696,7 +719,7 @@ async def get_market_visualization(request: VisualizationDataRequest):
                     df = ticker.history(period=yf_period, interval=yf_interval)
                     if not df.empty:
                         ohlcv = []
-                        df = df.tail(100)
+                        df = df.tail(3000)
                         for index, row in df.iterrows():
                             ohlcv.append([
                                 int(index.timestamp() * 1000),
@@ -719,7 +742,7 @@ async def get_market_visualization(request: VisualizationDataRequest):
         import datetime
         import numpy as np
         import pandas as pd
-        from agents.quant_agent import TechnicalIndicators
+        from models.technical_indicators import TechnicalIndicators
         
         try:
             closes_series = pd.Series([c[4] for c in ohlcv])

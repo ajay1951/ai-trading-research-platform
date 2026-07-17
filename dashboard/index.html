@@ -388,7 +388,7 @@
         <!-- Asset & Strategy Controls -->
         <div style="margin-bottom: 32px;">
             <label style="font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; display: block;">Trading Asset</label>
-            <select id="asset-select" class="input-base" style="width: 100%; margin-bottom: 16px; cursor: pointer;">
+            <select id="asset-select" class="input-base" style="width: 100%; margin-bottom: 16px; cursor: pointer;" onchange="triggerAnalysis(this.value)">
                 <option value="" disabled selected>Select an Asset...</option>
                 <option value="BTC/USDT">Bitcoin (BTC/USDT)</option>
                 <option value="ETH/USDT">Ethereum (ETH/USDT)</option>
@@ -491,7 +491,7 @@
     <div style="padding: 24px 32px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 20px;">
         
         <!-- Top Metrics Row -->
-        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
             
             <!-- AI Signal Card -->
             <div class="panel" style="display: flex; flex-direction: column; position: relative;">
@@ -588,28 +588,6 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Stop Loss</span>
                         <span id="sl-value" class="mono" style="color: var(--accent-red); font-weight: 600; font-size: 14px;">--</span>
-                    </div>
-                </div>
-            </div>
-            </div>
-            
-            <!-- Portfolio Card (NEW) -->
-            <div class="panel" style="position: relative; grid-column: span 2;">
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #eab308, transparent); opacity: 0.5;"></div>
-                <h3 style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">
-                    <i class="ti ti-wallet" style="font-size: 14px; margin-right: 6px;"></i>
-                    Virtual Portfolio
-                </h3>
-                <div style="display: flex; gap: 20px; align-items: flex-end;">
-                    <div>
-                        <span style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">USD Balance</span>
-                        <p id="portfolio-cash" class="mono" style="font-size: 24px; font-weight: 800; color: #eab308;">$100,000.00</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <span style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Open Positions</span>
-                        <div id="portfolio-assets" class="mono" style="font-size: 12px; color: var(--text-main); margin-top: 4px;">
-                            <span style="color: var(--text-muted);">No open positions.</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -757,6 +735,54 @@
 
     </div>
 </main>
+
+<!-- ====== RIGHT SIDEBAR (TRADES & PORTFOLIO) ====== -->
+<aside style="width: 320px; flex-shrink: 0; border-left: 1px solid var(--border-subtle); background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(20px); display: flex; flex-direction: column; position: relative; z-index: 10;">
+    <div style="padding: 24px; display: flex; flex-direction: column; height: 100%; overflow-y: auto; gap: 24px;">
+        
+        <!-- Virtual Portfolio -->
+        <div class="panel" style="position: relative; padding: 20px;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #eab308, transparent); opacity: 0.5;"></div>
+            <h3 style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+                <i class="ti ti-wallet" style="font-size: 14px; margin-right: 6px;"></i>
+                Virtual Portfolio
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                    <span style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; display: block;">Available Balance</span>
+                    <p id="portfolio-cash" class="mono" style="font-size: 28px; font-weight: 800; color: #eab308;">$100,000.00</p>
+                </div>
+                <div style="padding-top: 16px; border-top: 1px solid var(--border-subtle);">
+                    <span style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; display: block;">Portfolio Assets</span>
+                    <div id="portfolio-assets" class="mono" style="font-size: 12px; color: var(--text-main); line-height: 1.6;">
+                        <span style="color: var(--text-muted);">No open positions.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trades Taken / Active Positions -->
+        <div class="panel" style="position: relative; flex: 1; display: flex; flex-direction: column; padding: 0;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); opacity: 0.5;"></div>
+            <div style="padding: 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">
+                    <i class="ti ti-arrows-right-left" style="font-size: 14px; margin-right: 6px;"></i>
+                    Trades Taken
+                </h3>
+                <span class="mono" style="font-size: 10px; background: rgba(6, 182, 212, 0.1); color: var(--accent-cyan); padding: 2px 8px; border-radius: 10px;">LIVE</span>
+            </div>
+            
+            <div id="active-trades-list" style="padding: 16px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;">
+                <!-- Placeholder when empty -->
+                <div style="text-align: center; padding: 40px 0;">
+                    <i class="ti ti-timeline" style="font-size: 24px; color: var(--border-subtle); margin-bottom: 8px;"></i>
+                    <p style="font-size: 11px; color: var(--text-muted);">No active trades yet.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</aside>
 
 <script>
     // Config
@@ -1391,18 +1417,28 @@
 
                 renderAgents(data.agents || {});
                 if (data.latest_results && data.latest_results.result) {
-                    if(window.lastProcessedQueryCount !== data.query_count) {
+                    // Check if we have a full result with supervisor/multistyle to determine if analysis is fully complete
+                    const isFullyComplete = data.latest_results.result && data.latest_results.result.results && data.latest_results.result.results.multistyle;
+                    
+                    if(window.lastProcessedQueryCount !== data.query_count || isFullyComplete) {
                         window.lastProcessedQueryCount = data.query_count;
-                        // Analysis is complete, restore UI
-                        const statusText = document.getElementById('system-status-text');
-                        const statusIndicator = document.getElementById('status-indicator');
-                        statusText.textContent = 'Ready';
-                        statusText.style.color = 'var(--accent-green)';
-                        statusIndicator.style.background = '';
+                        
+                        if (isFullyComplete) {
+                            // Analysis is complete, restore UI
+                            const statusText = document.getElementById('system-status-text');
+                            const statusIndicator = document.getElementById('status-indicator');
+                            if (statusText && statusIndicator) {
+                                statusText.textContent = 'Ready';
+                                statusText.style.color = 'var(--accent-green)';
+                                statusIndicator.style.background = '';
+                            }
+                        }
+                        
                         updateDataFromResults(data.latest_results.result);
                         
-                        // Log the formatted output to the terminal
-                        if (data.latest_results.formatted_output) {
+                        // Log the formatted output to the terminal only if we haven't for this query
+                        if (data.latest_results.formatted_output && window.lastLoggedQuery !== data.query_count && isFullyComplete) {
+                            window.lastLoggedQuery = data.query_count;
                             logToTerminal("--- ANALYSIS REPORT ---", "agent");
                             const lines = data.latest_results.formatted_output.split('\n');
                             lines.forEach(l => { if (l.trim()) logToTerminal(l, 'info'); });
@@ -1467,14 +1503,26 @@
         container.innerHTML = html;
     }
 
-    function renderInvestmentThesis(summary) {
+    function renderInvestmentThesis(summary, narrative) {
         const container = document.getElementById('cio-content');
         if (!container) return;
         if (!summary) {
             container.innerHTML = '<p style="font-size: 10px; color: var(--text-muted); text-align: center; padding-top: 20px;">No investment thesis available.</p>';
             return;
         }
+        
+        let narrativeHtml = '';
+        if (narrative && narrative !== "No narrative available.") {
+            narrativeHtml = `
+                <div style="margin-bottom: 12px; padding: 10px; background: rgba(147, 51, 234, 0.1); border-left: 2px solid var(--accent-purple); border-radius: 6px;">
+                    <p style="font-size: 11px; font-style: italic; color: var(--text-main); margin: 0;">"${narrative}"</p>
+                    <p style="font-size: 9px; color: var(--accent-purple); margin-top: 4px; text-transform: uppercase;">— AI Market Narrative</p>
+                </div>
+            `;
+        }
+
         container.innerHTML = `
+            ${narrativeHtml}
             <div style="font-size: 11px; line-height: 1.4; color: var(--text-main);">
                 <p style="margin-bottom: 4px;"><span style="color:var(--text-muted);">Bias:</span> ${summary.market_bias || 'N/A'}</p>
                 <p style="margin-bottom: 4px;"><span style="color:var(--text-muted);">Regime:</span> ${summary.market_regime || 'N/A'}</p>
@@ -1531,7 +1579,7 @@
 
         renderOrderFlow(results.support_resistance_levels || {});
         renderAgentConsensus(results.rankings);
-        renderInvestmentThesis(results.summary);
+        renderInvestmentThesis(results.summary, results.narrative);
         renderLearningMetrics((fullResult && fullResult.results && fullResult.results.rl_agent) ? fullResult.results.rl_agent : null);
         renderNewsFeed(results.news || []);
 
@@ -1556,7 +1604,7 @@
             triggerList.innerHTML = '';
             
             // Scalping Trade
-            if (scalping.immediate_trade && scalping.immediate_trade.direction !== "Neutral") {
+            if (scalping.immediate_trade) {
                 const tr = scalping.immediate_trade;
                 triggerList.innerHTML += `
                     <div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 2px solid var(--accent-blue);">
@@ -1571,7 +1619,7 @@
                         </div>
                     </div>
                 `;
-            } else if (scalping.next_trade && scalping.next_trade.direction !== "Neutral") {
+            } else if (scalping.next_trade) {
                  const tr = scalping.next_trade;
                  triggerList.innerHTML += `
                     <div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 2px solid var(--accent-purple);">

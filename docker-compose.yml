@@ -18,10 +18,15 @@ services:
       - REDIS_HOST=redis
       - CHROMADB_HOST=chromadb
       - INFLUXDB_HOST=influxdb
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=financial_admin
+      - POSTGRES_PASSWORD=financial_secure_password
+      - POSTGRES_DB=ai_crypto_db
     depends_on:
       - redis
       - chromadb
       - influxdb
+      - postgres
     volumes:
       - .:/app
     dns:
@@ -45,6 +50,21 @@ services:
       - BINANCE_API_KEY=${BINANCE_API_KEY}
       - BINANCE_SECRET_KEY=${BINANCE_SECRET_KEY}
       - USE_INFLUXDB=true
+      - REDIS_HOST=redis
+    depends_on:
+      - influxdb
+    volumes:
+      - .:/app
+    networks:
+      - financial-ai-network
+
+  # MLOps Continuous Learning Pipeline
+  mlops:
+    build: .
+    container_name: financial-ai-mlops
+    restart: unless-stopped
+    # Runs the retraining script once, then sleeps for 7 days (604800 seconds)
+    command: sh -c "while true; do python scripts/mlops_retrainer.py; sleep 604800; done"
     depends_on:
       - influxdb
     volumes:
@@ -124,11 +144,33 @@ services:
       test: ["CMD", "influx", "bucket", "list"]
       interval: 30s
 
+  # PostgreSQL for RL State Persistence
+  postgres:
+    image: postgres:15-alpine
+    container_name: financial-ai-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=financial_admin
+      - POSTGRES_PASSWORD=financial_secure_password
+      - POSTGRES_DB=ai_crypto_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - financial-ai-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U financial_admin -d ai_crypto_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   redis-data:
   chroma-data:
   influx-data:
   influx-config:
+  postgres-data:
 
 networks:
   financial-ai-network:

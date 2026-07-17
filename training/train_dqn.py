@@ -202,7 +202,8 @@ def train_universal_dqn(epochs_per_window=5):
         if avg_portfolio_sharpe > best_overall_sharpe:
             best_overall_sharpe = avg_portfolio_sharpe
             print(f"[!] New Best Universal Sharpe! Saving 'universal_meta_agent.pth'...")
-            torch.save(meta_agent.q_network.state_dict(), "universal_meta_agent.pth")
+            save_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'weights', 'universal_meta_agent.pth')
+            torch.save(meta_agent.q_network.state_dict(), save_path)
             
     print("\n" + "="*80)
     print(f"[OK] Universal Walk-Forward Validation Complete. Peak Unseen Portfolio Sharpe: {best_overall_sharpe:.2f}")

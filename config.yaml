@@ -1,0 +1,26 @@
+# AI Crypto Bot Configuration
+
+trading:
+  # The list of assets the bot will scan and trade
+  universe:
+    - "BTC/USDT"
+    - "ETH/USDT"
+    - "BNB/USDT"
+    - "SOL/USDT"
+    - "XRP/USDT"
+    
+  # The amount of paper/testnet cash the bot assumes it starts with for metrics
+  starting_cash: 10000.00
+  
+  # Exchange fee rate (0.1% standard Binance)
+  fee_rate: 0.001
+  
+  # Maximum daily drawdown allowed before Kill Switch triggers (0.95 = 5% max loss)
+  max_drawdown_limit: 0.95
+
+mlops:
+  # How often the bot scrapes DuckDuckGo for live news (in seconds)
+  news_scrape_interval: 300
+  
+  # The path to the Neural Network weights
+  model_path: "models/weights/universal_meta_agent.pth"

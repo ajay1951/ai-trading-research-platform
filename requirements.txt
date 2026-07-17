@@ -12,15 +12,14 @@ websockets
 python-socketio
 pandas
 numpy
+yfinance
 requests
 beautifulsoup4
 redis
-chromadb
 influxdb-client
 scipy
 aiohttp
 lxml
-rich
 textual
 feedparser
 vectorbt
@@ -29,3 +28,6 @@ xgboost
 lightgbm
 transformers
 torch
+PyYAML
+asyncpg
+groq

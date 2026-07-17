@@ -18,3 +18,9 @@ __pycache__/
 .vscode/
 .idea/
 *.DS_Store
+
+# Data and Logs (Prevent huge build context transfers)
+influxdb2/
+data/
+logs/
+scratch/
