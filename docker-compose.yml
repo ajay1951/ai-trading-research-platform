@@ -7,8 +7,6 @@ services:
     build: .
     container_name: financial-ai-app
     restart: unless-stopped
-    ports:
-      - "8000:8000"  # Dashboard API
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - USE_REDIS=${USE_REDIS:-false}
@@ -164,6 +162,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # Caddy Reverse Proxy for automatic HTTPS
+  caddy:
+    image: caddy:2-alpine
+    container_name: financial-ai-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    command: caddy reverse-proxy --from https://${DOMAIN_NAME} --to http://app:8000
+    depends_on:
+      - app
+    networks:
+      - financial-ai-network
 
 volumes:
   redis-data:
