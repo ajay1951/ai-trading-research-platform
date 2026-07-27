@@ -91,6 +91,7 @@ class AsyncPaperTrader:
         self._init_files()
 
     def _init_files(self) -> None:
+        os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
         if not os.path.exists(self.log_file):
             pd.DataFrame(columns=['timestamp', 'asset', 'price', 'action', 'confidence', 'allocation']).to_csv(self.log_file, index=False)
             
