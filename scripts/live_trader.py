@@ -360,6 +360,8 @@ class AsyncPaperTrader:
                 state_vector, _ = self.construct_state_vector(df, current_sentiment=sentiment_score)
                 with torch.no_grad():
                     action = self.brain.get_action(state_vector, epsilon=0.0)
+                    action_str = {0: "SHORT", 1: "HOLD", 2: "LONG"}.get(action, "UNKNOWN")
+                    logger.info(f"AI Decision for {asset}: {action_str} (Action Code: {action})")
                 
                 conf = 1.0 if action in [0, 2] else 0.5
                 allocation = self.risk_manager.calculate_position_size(conf, 0.02, current_price)
