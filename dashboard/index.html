@@ -1682,6 +1682,70 @@
         }
     }
 
+    async function fetchExecutionLog() {
+        try {
+            const res = await fetch('/api/trades');
+            if (!res.ok) return;
+            const data = await res.json();
+            
+            const exeContainer = document.getElementById('execution-log-container');
+            const activeList = document.getElementById('active-trades-list');
+            
+            if (!data || !Array.isArray(data) || data.length === 0) {
+                if (exeContainer) exeContainer.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p style="font-size: 10px; color: var(--text-muted);">No trades found in log.</p></div>';
+                if (activeList) activeList.innerHTML = '<div style="text-align: center; padding: 40px 0;"><i class="ti ti-timeline" style="font-size: 24px; color: var(--border-subtle); margin-bottom: 8px;"></i><p style="font-size: 11px; color: var(--text-muted);">No active trades yet.</p></div>';
+                return;
+            }
+            
+            let exeHtml = '';
+            let activeHtml = '';
+            
+            data.forEach(t => {
+                const actionColor = t.action === 'LONG' || t.action === 'BUY' ? 'var(--accent-green)' : (t.action === 'SHORT' || t.action === 'SELL' ? 'var(--accent-red)' : 'var(--text-muted)');
+                const d = new Date(t.timestamp);
+                const timeStr = d.toLocaleTimeString('en-US', { hour12: false });
+                
+                exeHtml += `
+                    <div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 2px solid ${actionColor};">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-size: 10px; font-weight: 600; color: ${actionColor};">${t.action} ${t.asset || ''}</span>
+                            <span style="font-size: 10px; color: var(--text-muted);">${timeStr}</span>
+                        </div>
+                        <p style="font-size: 12px; margin-bottom: 4px;">Price: <span style="color:var(--text-main);">$${parseFloat(t.price).toFixed(2)}</span></p>
+                        <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted);">
+                            <span>Size: ${t.amount || t.allocation}</span>
+                            <span>Conf: ${(parseFloat(t.confidence)*100).toFixed(0)}%</span>
+                        </div>
+                    </div>
+                `;
+                
+                activeHtml += `
+                    <div style="padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 4px; height: 32px; background: ${actionColor}; border-radius: 2px;"></div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-weight: 700; font-size: 13px;">${t.asset || 'ASSET'}</span>
+                                    <span class="mono" style="font-size: 9px; padding: 2px 6px; background: rgba(0,0,0,0.3); border-radius: 6px; color: ${actionColor};">${t.action}</span>
+                                </div>
+                                <span style="font-size: 10px; color: var(--text-muted);">${timeStr}</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="mono" style="font-weight: 600; font-size: 13px; color: var(--text-main);">$${parseFloat(t.price).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (exeContainer) exeContainer.innerHTML = exeHtml;
+            if (activeList) activeList.innerHTML = activeHtml;
+            
+        } catch (e) {
+            console.error("Error fetching execution log:", e);
+        }
+    }
+
     async function fetchPortfolio() {
         try {
             const res = await fetch('/api/portfolio');
