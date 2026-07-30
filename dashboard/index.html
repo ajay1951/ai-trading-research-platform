@@ -598,11 +598,12 @@
         <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 20px; height: 75vh; min-height: 600px;">
             <!-- Chart Panel -->
             <div class="panel" style="display: flex; flex-direction: column; padding: 0; overflow: hidden; height: 100%;">
-                <div style="padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
-                    <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
                         <h2 id="chart-symbol" style="font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">BTC/USDT</h2>
                         <div class="status-dot active pulse-live" style="width: 6px; height: 6px;"></div>
-                    <div style="display: flex; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 3px;">
+                    </div>
+                    <div style="display: flex; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 3px; flex-wrap: wrap;">
                         <button class="tf-btn" onclick="setTF(this)">1m</button>
                         <button class="tf-btn" onclick="setTF(this)">5m</button>
                         <button class="tf-btn" onclick="setTF(this)">10m</button>
@@ -1131,8 +1132,12 @@
         const log = document.getElementById('terminal-log');
         const p = document.createElement('div');
         p.style.marginBottom = '3px';
-        const time = new Date().toLocaleTimeString('en-US', { hour12: false });
-        let prefix = `<span style="color:#444">[${time}]</span> `;
+        const timeMatch = msg.match(/\[\d{2}:\d{2}:\d{2}\]/);
+        let timeStr = timeMatch ? timeMatch[0] : `[${new Date().toLocaleTimeString('en-US', { hour12: false })}]`;
+        
+        let prefix = `<span style="color:#444">${timeStr}</span> `;
+        // Strip the old timestamp from the msg if it exists
+        msg = msg.replace(/^\[.*?\]\s*/, '').replace(/^SYS: ".*?T\d+:\d+:\d+",\s*/, '');
         
         if(type==='info') prefix += `<span style="color:var(--accent-blue);">SYS:</span> `;
         else if(type==='success') prefix += `<span style="color:var(--accent-green);">OK:</span> `;
@@ -1403,18 +1408,36 @@
                 
                 txt.textContent = stat.charAt(0).toUpperCase() + stat.slice(1);
                 ind.className = 'agent-indicator status-dot';
-                if(stat === 'active' || stat === 'busy') {
+                if(stat === 'active' || stat === 'busy' || val.simulatedActive) {
                     ind.classList.add('active');
+                    ind.classList.remove('idle');
                     txt.style.color = 'var(--accent-blue)';
+                    txt.textContent = 'Active';
                 } else if(stat === 'error') {
                     ind.classList.add('error');
+                    ind.classList.remove('idle');
                     txt.style.color = 'var(--accent-red)';
+                    txt.textContent = 'Error';
                 } else {
                     ind.classList.add('idle');
+                    ind.classList.remove('active', 'error');
                     txt.style.color = 'var(--text-muted)';
+                    txt.textContent = 'Idle';
                 }
             }
         }
+    }
+    
+    // Simulate node activity
+    function flashNode(key) {
+        if(!window.agentData) return;
+        if(!window.agentData[key]) window.agentData[key] = {status: 'idle'};
+        window.agentData[key].simulatedActive = true;
+        renderAgents(window.agentData);
+        setTimeout(() => {
+            if(window.agentData[key]) window.agentData[key].simulatedActive = false;
+            renderAgents(window.agentData);
+        }, 800 + Math.random() * 1000);
     }
 
     let ws = null;
@@ -1428,9 +1451,11 @@
                 
                 if (data.live_price) {
                     updateLivePriceUI(data.live_price, data.symbol);
+                    if (Math.random() > 0.6) flashNode('data');
                 }
 
-                renderAgents(data.agents || {});
+                window.agentData = data.agents || {};
+                renderAgents(window.agentData);
                 if (data.latest_results && data.latest_results.result) {
                     // Check if we have a full result with supervisor/multistyle to determine if analysis is fully complete
                     const isFullyComplete = data.latest_results.result && data.latest_results.result.results && data.latest_results.result.results.multistyle;
@@ -1450,6 +1475,9 @@
                         }
                         
                         updateDataFromResults(data.latest_results.result);
+                        flashNode('research');
+                        flashNode('quant');
+                        setTimeout(() => flashNode('risk'), 500);
                         
                         // Log the formatted output to the terminal only if we haven't for this query
                         if (data.latest_results.formatted_output && window.lastLoggedQuery !== data.query_count && isFullyComplete) {

@@ -898,7 +898,7 @@ async def get_trade_history(limit: int = 15):
     """Get recent trade history from paper log."""
     file_path = os.path.join("data", "live_trades.csv")
     if not os.path.exists(file_path):
-        return {"trades": []}
+        return []
     try:
         import pandas as pd
         df = pd.read_csv(file_path)
@@ -906,11 +906,10 @@ async def get_trade_history(limit: int = 15):
         df['timestamp'] = df['timestamp'].astype(str)
         trades = df.to_dict('records')
         # Return last `limit` trades, most recent first (csv is appended to)
-        return {"trades": list(reversed(trades))[:limit]}
+        return list(reversed(trades))[:limit]
     except Exception as e:
-        logger.error(f"Error reading trade log: {e}")
-        # Return empty list on error to prevent dashboard crash
-        return {"trades": [], "error": str(e)}
+        logger.error(f"Error reading trade history: {e}")
+        return []
 
 @app.get("/api/historical/{symbol:path}")
 async def get_historical_data(symbol: str, timeframe: str = "1d"):
@@ -946,16 +945,16 @@ async def get_historical_data(symbol: str, timeframe: str = "1d"):
 @app.get("/api/portfolio")
 async def get_portfolio():
     """Get current virtual portfolio state."""
-    file_path = "portfolio.json"
-    if not os.path.exists(file_path):
-        return {"cash": 100000.0, "assets": {}}
-    try:
-        with open(file_path, "r") as f:
-            portfolio = json.load(f)
-        return portfolio
-    except Exception as e:
-        logger.error(f"Error reading portfolio: {e}")
-        return {"cash": 100000.0, "assets": {}, "error": str(e)}
+    global is_redis_connected, redis_client
+    if is_redis_connected and redis_client:
+        try:
+            data = await redis_client.get("live_portfolio")
+            if data:
+                return json.loads(data)
+        except Exception as e:
+            logger.error(f"Error reading portfolio from redis: {e}")
+            
+    return {"cash": 10000.0, "assets": {}}
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
