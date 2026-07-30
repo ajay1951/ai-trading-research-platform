@@ -1444,6 +1444,7 @@
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
         ws = new WebSocket(protocol + '//' + window.location.host + '/ws');
         ws.onmessage = function(event) {
+            if (event.data === 'ping') return;
             const data = JSON.parse(event.data);
             if (data.type === 'dashboard_update') {
                 document.getElementById('query-count').textContent = data.query_count || 0;
@@ -1746,6 +1747,31 @@
         }
     }
 
+    async function fetchSystemStatus() {
+        try {
+            const res = await fetch('/api/status');
+            if (!res.ok) return;
+            const data = await res.json();
+            
+            const varEl = document.getElementById('var-value');
+            const slEl = document.getElementById('sl-value');
+            const tpEl = document.getElementById('tp-value');
+            
+            if (varEl && data.var !== undefined) {
+                varEl.textContent = (data.var * 100).toFixed(2) + '%';
+                varEl.style.color = data.var > 0.05 ? 'var(--accent-red)' : 'var(--accent-green)';
+            }
+            if (slEl && data.sl !== undefined) {
+                slEl.textContent = (data.sl * 100).toFixed(1) + '%';
+            }
+            if (tpEl && data.tp !== undefined) {
+                tpEl.textContent = (data.tp * 100).toFixed(1) + '%';
+            }
+        } catch (e) {
+            console.error("Error fetching system status:", e);
+        }
+    }
+
     async function fetchPortfolio() {
         try {
             const res = await fetch('/api/portfolio');
@@ -1851,12 +1877,14 @@
         setInterval(pollHistory, 2000);
         setInterval(fetchPortfolio, 5000); // Polling as a fallback
         setInterval(fetchExecutionLog, 3000); // Poll execution log
+        setInterval(fetchSystemStatus, 5000); // Poll risk metrics
         
         // Start feeds
         connectWebSocket();
         fetchLivePrice();
         fetchPortfolio();
         fetchExecutionLog();
+        fetchSystemStatus();
         
         logToTerminal("[INIT] SYS: Neural core initialized", "system");
         logToTerminal("[INIT] SYS: Data feeds established", "system");
@@ -1876,8 +1904,11 @@
                          <div><span style="color:#444">[INIT]</span> <span style="color:var(--accent-blue);">SYS:</span> WebSocket connected</div>
                          <div style="margin-top:8px;">Ready for input<span class="terminal-cursor"></span></div>`;
 
-        document.getElementById('live-price-symbol').textContent = "N/A";
-        document.getElementById('chart-symbol').textContent = "Select Asset";
+        document.getElementById('live-price-symbol').textContent = "BTC/USDT";
+        document.getElementById('chart-symbol').textContent = "BTC/USDT";
+        
+        // Trigger initial analysis so the chart populates immediately
+        triggerAnalysis("BTC/USDT");
 
         document.getElementById('asset-select').addEventListener('change', (e) => {
             const newSymbol = e.target.value;
