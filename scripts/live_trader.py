@@ -137,14 +137,12 @@ class AsyncPaperTrader:
         for asset, pos in list(portfolio["positions"].items()):
             try:
                 logger.warning(f"Liquidating {pos['type']} position for {asset}...")
-                if pos["type"] == "LONG":
-                    pass # Paper trade: no real API call
-                else:
-                    pass # Paper trade: no real API call
+                current_price = self.latest_prices.get(asset, pos["entry_price"])
+                portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Emergency Liquidation)")
             except Exception as e:
                 logger.error(f"Could not liquidate {asset}: {e}")
                 
-        portfolio["positions"] = {}
+        portfolio["total_value"] = portfolio["cash"]
         self.save_portfolio(portfolio)
         logger.info("Emergency Liquidation Complete. Shutting down permanently.")
         await self.exchange.close()
@@ -207,7 +205,7 @@ class AsyncPaperTrader:
             short_credit = pos["amount"] * pos["entry_price"]
             pnl = short_credit - buy_cost
             
-        portfolio["cash"] += pnl 
+        portfolio["cash"] += pos.get("locked_cash", 0) + pnl 
         portfolio["realized_pnl"] += pnl
         del portfolio["positions"][asset]
         
