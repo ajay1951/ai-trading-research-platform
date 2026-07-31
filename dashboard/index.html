@@ -1749,7 +1749,8 @@
 
     async function fetchSystemStatus() {
         try {
-            const res = await fetch('/api/status');
+            const symbol = document.getElementById('chart-symbol').textContent || 'BTC/USDT';
+            const res = await fetch(`/api/visualization/risk?symbol=${encodeURIComponent(symbol)}`);
             if (!res.ok) return;
             const data = await res.json();
             
