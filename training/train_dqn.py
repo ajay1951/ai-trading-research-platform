@@ -77,7 +77,7 @@ def train_universal_dqn(epochs_per_window=5):
     # The brain now accepts 18 features!
     meta_agent = MetaAgent(input_dim=18, buffer_size=100000, batch_size=64)
     risk_agent = RiskAgent(0.02, 0.20)
-    quant_agent = QuantAgent(z_score_threshold=2.0)
+    quant_agent = QuantAgent(2.0)
     sentiment_agent = SentimentAgent()
     
     epsilon = 1.0
