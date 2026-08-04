@@ -8,6 +8,7 @@ from models.risk_models import PortfolioAnalyzer
 from typing import Dict, Any
 import json
 import os
+import numpy as np
 
 class PortfolioManagementAgent:
     """
@@ -30,6 +31,37 @@ class PortfolioManagementAgent:
                 return json.load(f)
         except (json.JSONDecodeError, FileNotFoundError):
             return {"cash": self.notional_capital, "assets": {}}
+
+    def _calculate_correlation_penalty(self, symbol: str, current_assets: Dict) -> float:
+        """
+        Calculates a dynamic allocation penalty if the portfolio is already heavily exposed
+        to highly correlated assets.
+        (E.g., if we hold a lot of ETH, reduce target weight for BTC).
+        """
+        if not current_assets:
+            return 1.0 # No penalty if portfolio is empty
+            
+        # Hardcoded correlation matrix proxy for MVP (1.0 = perfect correlation)
+        # In a full production system, this would be rolling 30-day pearson correlation
+        correlation_matrix = {
+            "BTC/USDT": {"ETH/USDT": 0.85, "SOL/USDT": 0.70, "BNB/USDT": 0.75, "XRP/USDT": 0.50},
+            "ETH/USDT": {"BTC/USDT": 0.85, "SOL/USDT": 0.80, "BNB/USDT": 0.70, "XRP/USDT": 0.55},
+            "SOL/USDT": {"BTC/USDT": 0.70, "ETH/USDT": 0.80, "BNB/USDT": 0.60, "XRP/USDT": 0.40},
+        }
+        
+        asset_correlations = correlation_matrix.get(symbol, {})
+        total_correlation_exposure = 0.0
+        
+        for holding_symbol, holding_data in current_assets.items():
+            if holding_symbol != symbol:
+                corr = asset_correlations.get(holding_symbol, 0.5) # Default to 0.5 if unknown
+                total_correlation_exposure += corr
+                
+        # If exposure to highly correlated assets > 1.5 (e.g. holding both BTC and ETH), scale down
+        if total_correlation_exposure > 1.0:
+            return max(0.2, 1.0 - (total_correlation_exposure * 0.15))
+            
+        return 1.0
 
     def execute(self, parameters: Dict, context: Dict) -> Dict:
         """
@@ -75,9 +107,13 @@ class PortfolioManagementAgent:
             cio_res = context.get("cio", {})
             target_weight = cio_res.get("target_weight", 0.0)
             
-            # --- Position Sizing Logic (CIO Target Matching) ---
+            # --- Position Sizing Logic (CIO Target Matching + Correlation Penalty) ---
             total_portfolio_value = cash
             current_position_value = 0.0
+            
+            # Apply Correlation Penalty to the target weight
+            correlation_penalty = self._calculate_correlation_penalty(symbol, assets)
+            target_weight = target_weight * correlation_penalty
             
             # In context, get live price
             live_price = None

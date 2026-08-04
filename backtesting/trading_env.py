@@ -8,10 +8,11 @@ class CryptoTradingEnv:
     determined by the Multi-Agent system. It enforces trading fees and tracks the 
     institutional portfolio value.
     """
-    def __init__(self, data_df: pd.DataFrame, initial_balance=10000.0, trading_fee=0.001):
+    def __init__(self, data_df: pd.DataFrame, initial_balance=10000.0, trading_fee=0.001, slippage_pct=0.0005):
         self.df = data_df.reset_index(drop=True)
         self.initial_balance = initial_balance
         self.trading_fee = trading_fee
+        self.slippage_pct = slippage_pct
         self.current_step = 0
         
         # Portfolio state
@@ -50,8 +51,9 @@ class CryptoTradingEnv:
         value_difference = target_value - current_value
         
         if value_difference > 0: # Buy
-            amount_to_buy = value_difference / current_price
-            cost = amount_to_buy * current_price
+            execution_price = current_price * (1 + self.slippage_pct)
+            amount_to_buy = value_difference / execution_price
+            cost = amount_to_buy * execution_price
             fee = cost * self.trading_fee
             
             # Ensure we have enough cash
@@ -60,10 +62,11 @@ class CryptoTradingEnv:
                 self.coin_held += amount_to_buy
                 
         elif value_difference < 0: # Sell
-            amount_to_sell = abs(value_difference) / current_price
+            execution_price = current_price * (1 - self.slippage_pct)
+            amount_to_sell = abs(value_difference) / execution_price
             # Ensure we have enough coins to sell
             if amount_to_sell <= self.coin_held:
-                revenue = amount_to_sell * current_price
+                revenue = amount_to_sell * execution_price
                 fee = revenue * self.trading_fee
                 self.balance += (revenue - fee)
                 self.coin_held -= amount_to_sell

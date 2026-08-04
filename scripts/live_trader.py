@@ -2,6 +2,7 @@ import os
 import sys
 import asyncio
 import time
+import ccxt
 import ccxt.pro as ccxtpro
 import pandas as pd
 import numpy as np
@@ -50,14 +51,28 @@ class AsyncPaperTrader:
         self.news_interval: int = self.config['mlops']['news_scrape_interval']
         self.model_path: str = self.config['mlops']['model_path']
         
-        logger.info("Connecting to Binance Futures Testnet (WebSockets)...")
-        self.exchange = ccxtpro.binance({
+        self.trading_mode: str = os.getenv('TRADING_MODE', 'PAPER').upper()
+        
+        logger.info(f"Booting Trading Engine in {self.trading_mode} Mode...")
+        
+        exchange_config = {
             'enableRateLimit': True,
             'options': {
                 'defaultType': 'future'
             }
-        })
-        # Binance Sandbox is deprecated for futures. We use Live market data but paper trade locally.
+        }
+        
+        if self.trading_mode == 'LIVE':
+            api_key = os.getenv('BINANCE_API_KEY')
+            secret = os.getenv('BINANCE_API_SECRET')
+            if not api_key or not secret:
+                logger.error("LIVE mode selected but BINANCE_API_KEY or BINANCE_API_SECRET is missing!")
+                sys.exit(1)
+            exchange_config['apiKey'] = api_key
+            exchange_config['secret'] = secret
+            logger.warning("!!! LIVE TRADING ENABLED. REAL FUNDS ARE AT RISK !!!")
+            
+        self.exchange = ccxtpro.binance(exchange_config)
         
         logger.info("Loading Universal AI Brain...")
         self.brain = MetaAgent(input_dim=18, buffer_size=1000, batch_size=64)
@@ -251,6 +266,47 @@ class AsyncPaperTrader:
         logger.info(f"Opened {pos_type} {asset} @ ${executed_price:,.2f} (Limit Order) | Size: ${invest_amount:,.2f}")
         return portfolio, True
 
+    async def execute_live_trade(self, portfolio: Dict[str, Any], asset: str, current_price: float, action: int, conf: float, allocation_pct: float) -> Dict[str, Any]:
+        """
+        Executes a real order against the Binance API.
+        """
+        action_map = {0: "SHORT", 1: "NEUTRAL", 2: "LONG"}
+        action_str = action_map.get(action, "UNKNOWN")
+        
+        try:
+            # Sync balance from real exchange
+            balance = await self.exchange.fetch_balance()
+            usdt_balance = balance['USDT']['free']
+            
+            # If AI wants to execute, calculate real order size
+            if action in [0, 2]:
+                invest_amount = usdt_balance * allocation_pct
+                if invest_amount < 10.0:
+                    logger.warning(f"Trade size too small for {asset}: ${invest_amount:.2f}")
+                    return portfolio
+                    
+                order_qty = invest_amount / current_price
+                
+                # Simplified real execution logic
+                if action == 2: # LONG
+                    logger.warning(f"Executing LIVE MARKET BUY for {asset} Size: {order_qty}")
+                    order = await self.exchange.create_market_buy_order(asset, order_qty)
+                    self.log_trade(asset, current_price, "LONG", conf, allocation_pct)
+                    
+                elif action == 0: # SHORT
+                    logger.warning(f"Executing LIVE MARKET SELL (SHORT) for {asset} Size: {order_qty}")
+                    order = await self.exchange.create_market_sell_order(asset, order_qty)
+                    self.log_trade(asset, current_price, "SHORT", conf, allocation_pct)
+                    
+            elif action == 1:
+                # Close position on NEUTRAL
+                pass # Further implementation required for parsing live open positions
+                
+        except Exception as e:
+            logger.error(f"Live Execution Error on {asset}: {e}")
+            
+        return portfolio
+
     async def execute_paper_trade(self, portfolio: Dict[str, Any], asset: str, current_price: float, action: int, conf: float, allocation_pct: float) -> Dict[str, Any]:
         action_map = {0: "SHORT", 1: "NEUTRAL", 2: "LONG"}
         action_str = action_map.get(action, "UNKNOWN")
@@ -370,14 +426,27 @@ class AsyncPaperTrader:
                 conf = 1.0 if action in [0, 2] else 0.5
                 allocation = self.risk_manager.calculate_position_size(conf, 0.02, current_price)
                 
-                portfolio = await self.execute_paper_trade(portfolio, asset, current_price, action, conf, allocation)
+                if self.trading_mode == 'LIVE':
+                    portfolio = await self.execute_live_trade(portfolio, asset, current_price, action, conf, allocation)
+                else:
+                    portfolio = await self.execute_paper_trade(portfolio, asset, current_price, action, conf, allocation)
+                    
                 self.save_portfolio(portfolio)
                 
+            except ccxt.RateLimitExceeded as e:
+                logger.error(f"[CIRCUIT BREAKER] 429 Too Many Requests on {asset}: {e}")
+                await self.emergency_liquidation("Exchange API Rate Limit Exceeded (429). Triggering Safe Mode.")
+            except ccxt.NetworkError as e:
+                self.error_count += 1
+                logger.error(f"[CIRCUIT BREAKER] Network Error on {asset}: {e}")
+                if self.error_count >= 3:
+                    await self.emergency_liquidation("3 consecutive Binance Network Errors detected. Connection dropped.")
+                await asyncio.sleep(5) 
             except Exception as e:
                 self.error_count += 1
-                logger.error(f"WebSocket Error on {asset}: {e}")
+                logger.error(f"WebSocket General Error on {asset}: {e}")
                 if self.error_count >= 3:
-                    await self.emergency_liquidation("3 consecutive Binance WebSocket Errors detected.")
+                    await self.emergency_liquidation("3 consecutive unknown errors detected.")
                 await asyncio.sleep(5) 
 
     async def run_loop(self) -> None:
