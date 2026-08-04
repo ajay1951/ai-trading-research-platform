@@ -93,7 +93,7 @@ class AsyncPaperTrader:
     def _init_files(self) -> None:
         os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
         if not os.path.exists(self.log_file):
-            pd.DataFrame(columns=['timestamp', 'asset', 'price', 'action', 'confidence', 'allocation']).to_csv(self.log_file, index=False)
+            pd.DataFrame(columns=['timestamp', 'asset', 'price', 'action', 'confidence', 'allocation', 'pnl']).to_csv(self.log_file, index=False)
             
         needs_reset = True
         if self.redis_client.exists("live_portfolio"):
@@ -161,20 +161,21 @@ class AsyncPaperTrader:
         ]
         return [0.0 if np.isnan(x) else float(x) for x in state_vector], float(current_price)
 
-    def log_trade(self, asset: str, price: float, action_str: str, confidence: float, allocation: float) -> None:
+    def log_trade(self, asset: str, price: float, action_str: str, confidence: float, allocation: float, pnl: float = 0.0) -> None:
         trade_data = {
             'timestamp': [pd.Timestamp.now('UTC').isoformat()],
             'asset': [asset],
             'price': [price],
             'action': [action_str],
             'confidence': [f"{confidence:.2f}"],
-            'allocation': [f"{allocation*100:.2f}%"]
+            'allocation': [f"{allocation*100:.2f}%"],
+            'pnl': [f"{pnl:.2f}"]
         }
         pd.DataFrame(trade_data).to_csv(self.log_file, mode='a', header=False, index=False)
 
-    async def close_position(self, portfolio: Dict[str, Any], asset: str, current_price: float, reason: str = "") -> Tuple[Dict[str, Any], bool]:
+    async def close_position(self, portfolio: Dict[str, Any], asset: str, current_price: float, reason: str = "") -> Tuple[Dict[str, Any], bool, float]:
         if asset not in portfolio["positions"]:
-            return portfolio, False
+            return portfolio, False, 0.0
             
         pos = portfolio["positions"][asset]
         
@@ -192,7 +193,7 @@ class AsyncPaperTrader:
             self.error_count += 1
             if self.error_count >= 3:
                 await self.emergency_liquidation("3 consecutive Binance API Errors detected.")
-            return portfolio, False
+            return portfolio, False, 0.0
         
         self.error_count = 0 
         
@@ -210,7 +211,7 @@ class AsyncPaperTrader:
         del portfolio["positions"][asset]
         
         logger.info(f"Closed {pos['type']} {asset} @ ${current_price:,.2f} | PNL: ${pnl:,.2f} {reason}")
-        return portfolio, True
+        return portfolio, True, pnl
 
     async def open_position(self, portfolio: Dict[str, Any], asset: str, current_price: float, pos_type: str, allocation_pct: float) -> Tuple[Dict[str, Any], bool]:
         invest_amount = portfolio["cash"] * allocation_pct
@@ -259,21 +260,26 @@ class AsyncPaperTrader:
         
         if action == 2: 
             if has_pos and portfolio["positions"][asset]["type"] == "SHORT":
-                portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Flipping Long)")
+                portfolio, _, closed_pnl = await self.close_position(portfolio, asset, current_price, "(Flipping Long)")
+                self.log_trade(asset, current_price, "EXIT", 1.0, 0.0, closed_pnl)
                 portfolio, trade_executed = await self.open_position(portfolio, asset, current_price, "LONG", allocation_pct)
             elif not has_pos:
                 portfolio, trade_executed = await self.open_position(portfolio, asset, current_price, "LONG", allocation_pct)
                 
         elif action == 0: 
             if has_pos and portfolio["positions"][asset]["type"] == "LONG":
-                portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Flipping Short)")
+                portfolio, _, closed_pnl = await self.close_position(portfolio, asset, current_price, "(Flipping Short)")
+                self.log_trade(asset, current_price, "EXIT", 1.0, 0.0, closed_pnl)
                 portfolio, trade_executed = await self.open_position(portfolio, asset, current_price, "SHORT", allocation_pct)
             elif not has_pos:
                 portfolio, trade_executed = await self.open_position(portfolio, asset, current_price, "SHORT", allocation_pct)
                 
         elif action == 1: 
             if has_pos:
-                portfolio, trade_executed = await self.close_position(portfolio, asset, current_price, "(Neutral Signal)")
+                portfolio, trade_executed, closed_pnl = await self.close_position(portfolio, asset, current_price, "(Neutral Signal)")
+                if trade_executed:
+                    self.log_trade(asset, current_price, "EXIT", 1.0, 0.0, closed_pnl)
+                    trade_executed = False # Reset so we don't double log below as NEUTRAL
 
         total_val = portfolio["cash"]
         for p_asset, p_data in portfolio["positions"].items():
@@ -307,11 +313,11 @@ class AsyncPaperTrader:
             pct_change = (entry - current_price) / entry
             
         if pct_change >= 0.02: 
-            portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Take-Profit Hit!)")
-            self.log_trade(asset, current_price, "TAKE_PROFIT", 1.0, 0.0)
+            portfolio, _, pnl = await self.close_position(portfolio, asset, current_price, "(Take-Profit Hit!)")
+            self.log_trade(asset, current_price, "TAKE_PROFIT", 1.0, 0.0, pnl)
         elif pct_change <= -0.01: 
-            portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Stop-Loss Hit!)")
-            self.log_trade(asset, current_price, "STOP_LOSS", 1.0, 0.0)
+            portfolio, _, pnl = await self.close_position(portfolio, asset, current_price, "(Stop-Loss Hit!)")
+            self.log_trade(asset, current_price, "STOP_LOSS", 1.0, 0.0, pnl)
             
         return portfolio
 

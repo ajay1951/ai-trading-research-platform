@@ -1702,9 +1702,19 @@
             let activeHtml = '';
             
             data.forEach(t => {
-                const actionColor = t.action === 'LONG' || t.action === 'BUY' ? 'var(--accent-green)' : (t.action === 'SHORT' || t.action === 'SELL' ? 'var(--accent-red)' : 'var(--text-muted)');
+                const isExit = t.action.startsWith('EXIT') || t.action === 'TAKE_PROFIT' || t.action === 'STOP_LOSS';
+                const actionColor = t.action === 'LONG' || t.action === 'BUY' ? 'var(--accent-green)' : (t.action === 'SHORT' || t.action === 'SELL' ? 'var(--accent-red)' : (isExit ? 'var(--accent-purple)' : 'var(--text-muted)'));
+                
                 const d = new Date(t.timestamp);
                 const timeStr = d.toLocaleTimeString('en-US', { hour12: false });
+                
+                let pnlHtml = '';
+                if (t.pnl && parseFloat(t.pnl) !== 0) {
+                    const pnlVal = parseFloat(t.pnl);
+                    const pnlColor = pnlVal > 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                    const sign = pnlVal > 0 ? '+' : '';
+                    pnlHtml = `<span style="color: ${pnlColor}; font-weight: 700;">${sign}$${pnlVal.toFixed(2)}</span>`;
+                }
                 
                 exeHtml += `
                     <div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 2px solid ${actionColor};">
@@ -1712,7 +1722,10 @@
                             <span style="font-size: 10px; font-weight: 600; color: ${actionColor};">${t.action} ${t.asset || ''}</span>
                             <span style="font-size: 10px; color: var(--text-muted);">${timeStr}</span>
                         </div>
-                        <p style="font-size: 12px; margin-bottom: 4px;">Price: <span style="color:var(--text-main);">$${parseFloat(t.price).toFixed(2)}</span></p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <p style="font-size: 12px; margin: 0;">Price: <span style="color:var(--text-main);">$${parseFloat(t.price).toFixed(2)}</span></p>
+                            ${pnlHtml}
+                        </div>
                         <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted);">
                             <span>Size: ${t.amount || t.allocation}</span>
                             <span>Conf: ${(parseFloat(t.confidence)*100).toFixed(0)}%</span>
@@ -1733,7 +1746,8 @@
                             </div>
                         </div>
                         <div style="text-align: right;">
-                            <span class="mono" style="font-weight: 600; font-size: 13px; color: var(--text-main);">$${parseFloat(t.price).toFixed(2)}</span>
+                            <div class="mono" style="font-weight: 600; font-size: 13px; color: var(--text-main);">$${parseFloat(t.price).toFixed(2)}</div>
+                            ${pnlHtml ? `<div style="font-size: 11px; margin-top: 4px;">${pnlHtml}</div>` : ''}
                         </div>
                     </div>
                 `;

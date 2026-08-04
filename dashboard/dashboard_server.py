@@ -902,8 +902,9 @@ async def get_trade_history(limit: int = 15):
     try:
         import pandas as pd
         df = pd.read_csv(file_path)
-        # Ensure timestamp is string for JSON
         df['timestamp'] = df['timestamp'].astype(str)
+        if 'pnl' in df.columns:
+            df['pnl'] = df['pnl'].fillna(0.0)
         trades = df.to_dict('records')
         # Return last `limit` trades, most recent first (csv is appended to)
         return list(reversed(trades))[:limit]
