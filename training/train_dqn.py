@@ -20,7 +20,10 @@ from meta_agent import MetaAgent
 def extract_state_vector(state_dict, env, quant_agent, sentiment_agent):
     """Converts the environment MTF state dict into the 18-Dimensional Neural Network input tensor"""
     quant_conf = quant_agent.analyze(state_dict)
-    sent_conf = sentiment_agent.analyze(state_dict.get('sentiment_score', 0.0))
+    # The historical data already provides a pre-computed sentiment_score float.
+    # We bypass the NLP inference here to save time and avoid float errors.
+    sent_conf = state_dict.get('sentiment_score', 0.5) 
+    if sent_conf == 0.0: sent_conf = 0.5 # Default to neutral
     current_weight = (env.coin_held * state_dict['close']) / env.portfolio_value
     
     # Universal 15-Timeframe Feature Tensor
