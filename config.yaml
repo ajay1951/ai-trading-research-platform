@@ -21,6 +21,6 @@ trading:
 mlops:
   # How often the bot scrapes DuckDuckGo for live news (in seconds)
   news_scrape_interval: 300
-  
-  # The path to the Neural Network weights
-  model_path: "models/weights/universal_meta_agent.pth"
+  # The paths to the Neural Network weights
+  swing_model_path: "models/weights/universal_meta_agent_15m.pth"
+  intraday_model_path: "models/weights/universal_meta_agent_5m.pth"

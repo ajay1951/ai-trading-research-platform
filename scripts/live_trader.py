@@ -49,7 +49,8 @@ class AsyncPaperTrader:
         self.fee_rate: float = self.config['trading']['fee_rate']
         self.max_drawdown: float = self.config['trading']['max_drawdown_limit']
         self.news_interval: int = self.config['mlops']['news_scrape_interval']
-        self.model_path: str = self.config['mlops']['model_path']
+        self.swing_model_path: str = self.config['mlops'].get('swing_model_path', 'models/weights/universal_meta_agent_15m.pth')
+        self.intraday_model_path: str = self.config['mlops'].get('intraday_model_path', 'models/weights/universal_meta_agent_5m.pth')
         
         self.trading_mode: str = os.getenv('TRADING_MODE', 'PAPER').upper()
         
@@ -74,16 +75,25 @@ class AsyncPaperTrader:
             
         self.exchange = ccxtpro.binance(exchange_config)
         
-        logger.info("Loading Universal AI Brain...")
-        self.brain = MetaAgent(input_dim=18, buffer_size=1000, batch_size=64)
+        logger.info("Loading Dual Universal AI Brains (Swing + Intraday)...")
+        self.swing_brain = MetaAgent(input_dim=18, buffer_size=1000, batch_size=64)
+        self.intraday_brain = MetaAgent(input_dim=18, buffer_size=1000, batch_size=64)
         
-        full_model_path = os.path.join(os.path.dirname(__file__), '..', self.model_path)
-        if os.path.exists(full_model_path):
-            self.brain.q_network.load_state_dict(torch.load(full_model_path, map_location=torch.device('cpu'), weights_only=True))
-            self.brain.q_network.eval()
-            logger.info("Neural Network Weights Loaded Successfully.")
+        full_swing_model_path = os.path.join(os.path.dirname(__file__), '..', self.swing_model_path)
+        if os.path.exists(full_swing_model_path):
+            self.swing_brain.q_network.load_state_dict(torch.load(full_swing_model_path, map_location=torch.device('cpu'), weights_only=True))
+            self.swing_brain.q_network.eval()
+            logger.info("Swing Neural Network Weights (15m) Loaded Successfully.")
         else:
-            logger.warning(f"{self.model_path} not found. AI will trade randomly until trained.")
+            logger.warning(f"{self.swing_model_path} not found. Swing AI will trade randomly until trained.")
+            
+        full_intraday_model_path = os.path.join(os.path.dirname(__file__), '..', self.intraday_model_path)
+        if os.path.exists(full_intraday_model_path):
+            self.intraday_brain.q_network.load_state_dict(torch.load(full_intraday_model_path, map_location=torch.device('cpu'), weights_only=True))
+            self.intraday_brain.q_network.eval()
+            logger.info("Intraday Neural Network Weights (5m) Loaded Successfully.")
+        else:
+            logger.warning(f"{self.intraday_model_path} not found. Intraday AI will trade randomly until trained.")
             
         self.risk_manager = RiskAgent()
         self.sentiment_agent = SentimentAgent()
@@ -103,40 +113,45 @@ class AsyncPaperTrader:
         self.kill_switch_activated: bool = False
         self.latest_prices: Dict[str, float] = {}
         
-        self._init_files()
+        self._init_files('15m')
+        self._init_files('5m')
 
-    def _init_files(self) -> None:
+    def _init_files(self, timeframe: str) -> None:
         os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
         if not os.path.exists(self.log_file):
             pd.DataFrame(columns=['timestamp', 'asset', 'price', 'action', 'confidence', 'allocation', 'pnl']).to_csv(self.log_file, index=False)
             
         needs_reset = True
-        if self.redis_client.exists("live_portfolio"):
+        redis_key = f"live_portfolio_{timeframe}"
+        if self.redis_client.exists(redis_key):
             try:
-                current_port = json.loads(self.redis_client.get("live_portfolio"))
-                if current_port.get("total_value", 0) >= (self.starting_cash * self.max_drawdown):
+                current_port = json.loads(self.redis_client.get(redis_key))
+                # Half cash for each strategy
+                if current_port.get("total_value", 0) >= ((self.starting_cash / 2) * self.max_drawdown):
                     needs_reset = False
             except Exception:
                 pass
                 
         if needs_reset:
-            logger.info("Initializing or Resetting Portfolio (Old portfolio was below Max Drawdown)...")
+            logger.info(f"Initializing or Resetting Portfolio for {timeframe}...")
             initial_portfolio = {
-                "cash": self.starting_cash,
+                "cash": self.starting_cash / 2, # Split cash 50/50
                 "positions": {}, 
                 "realized_pnl": 0.0,
-                "total_value": self.starting_cash
+                "total_value": self.starting_cash / 2
             }
-            self.save_portfolio(initial_portfolio)
+            self.save_portfolio(initial_portfolio, timeframe)
 
-    def load_portfolio(self) -> Dict[str, Any]:
-        data = self.redis_client.get("live_portfolio")
+    def load_portfolio(self, timeframe: str) -> Dict[str, Any]:
+        redis_key = f"live_portfolio_{timeframe}"
+        data = self.redis_client.get(redis_key)
         if data:
             return json.loads(str(data))
-        return {"cash": self.starting_cash, "positions": {}, "realized_pnl": 0.0, "total_value": self.starting_cash}
+        return {"cash": self.starting_cash / 2, "positions": {}, "realized_pnl": 0.0, "total_value": self.starting_cash / 2}
 
-    def save_portfolio(self, portfolio: Dict[str, Any]) -> None:
-        self.redis_client.set("live_portfolio", json.dumps(portfolio))
+    def save_portfolio(self, portfolio: Dict[str, Any], timeframe: str) -> None:
+        redis_key = f"live_portfolio_{timeframe}"
+        self.redis_client.set(redis_key, json.dumps(portfolio))
 
     async def emergency_liquidation(self, reason: str) -> None:
         if self.kill_switch_activated: return
@@ -148,17 +163,18 @@ class AsyncPaperTrader:
         logger.error("Initiating Emergency Liquidation of all assets to Cash...")
         logger.error("="*80)
         
-        portfolio = self.load_portfolio()
-        for asset, pos in list(portfolio["positions"].items()):
-            try:
-                logger.warning(f"Liquidating {pos['type']} position for {asset}...")
-                current_price = self.latest_prices.get(asset, pos["entry_price"])
-                portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Emergency Liquidation)")
-            except Exception as e:
-                logger.error(f"Could not liquidate {asset}: {e}")
-                
-        portfolio["total_value"] = portfolio["cash"]
-        self.save_portfolio(portfolio)
+        for tf in ['15m', '5m']:
+            portfolio = self.load_portfolio(tf)
+            for asset, pos in list(portfolio["positions"].items()):
+                try:
+                    logger.warning(f"Liquidating {pos['type']} position for {asset} on {tf}...")
+                    current_price = self.latest_prices.get(asset, pos["entry_price"])
+                    portfolio, _ = await self.close_position(portfolio, asset, current_price, "(Emergency Liquidation)")
+                except Exception as e:
+                    logger.error(f"Could not liquidate {asset}: {e}")
+                    
+            portfolio["total_value"] = portfolio["cash"]
+            self.save_portfolio(portfolio, tf)
         logger.info("Emergency Liquidation Complete. Shutting down permanently.")
         await self.exchange.close()
         sys.exit(1)
@@ -356,7 +372,7 @@ class AsyncPaperTrader:
             
         return portfolio
 
-    async def check_stop_loss_take_profit(self, portfolio: Dict[str, Any], asset: str, current_price: float) -> Dict[str, Any]:
+    async def check_stop_loss_take_profit(self, portfolio: Dict[str, Any], asset: str, current_price: float, timeframe: str) -> Dict[str, Any]:
         if asset not in portfolio["positions"]:
             return portfolio
             
@@ -368,31 +384,34 @@ class AsyncPaperTrader:
         else: # SHORT
             pct_change = (entry - current_price) / entry
             
-        if pct_change >= 0.02: 
-            portfolio, _, pnl = await self.close_position(portfolio, asset, current_price, "(Take-Profit Hit!)")
+        tp_target = 0.01 if timeframe == '5m' else 0.02
+        sl_target = -0.005 if timeframe == '5m' else -0.01
+            
+        if pct_change >= tp_target: 
+            portfolio, _, pnl = await self.close_position(portfolio, asset, current_price, f"(Take-Profit Hit on {timeframe}!)")
             self.log_trade(asset, current_price, "TAKE_PROFIT", 1.0, 0.0, pnl)
-        elif pct_change <= -0.01: 
-            portfolio, _, pnl = await self.close_position(portfolio, asset, current_price, "(Stop-Loss Hit!)")
+        elif pct_change <= sl_target: 
+            portfolio, _, pnl = await self.close_position(portfolio, asset, current_price, f"(Stop-Loss Hit on {timeframe}!)")
             self.log_trade(asset, current_price, "STOP_LOSS", 1.0, 0.0, pnl)
             
         return portfolio
 
-    async def watch_asset(self, asset: str) -> None:
-        logger.info(f"Initializing WebSocket Tunnel for {asset}...")
+    async def watch_asset_timeframe(self, asset: str, timeframe: str, brain: MetaAgent) -> None:
+        logger.info(f"Initializing WebSocket Tunnel for {asset} on {timeframe}...")
         
         try:
-            history = await self.exchange.fetch_ohlcv(asset, '15m', limit=200)
+            history = await self.exchange.fetch_ohlcv(asset, timeframe, limit=200)
             df = pd.DataFrame(history, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
         except Exception as e:
-            logger.error(f"Failed to initialize history for {asset}: {e}")
+            logger.error(f"Failed to initialize history for {asset} on {timeframe}: {e}")
             return
             
-        logger.info(f"{asset} Context Loaded. Awaiting Live WebSocket Ticks...")
+        logger.info(f"{asset} Context Loaded ({timeframe}). Awaiting Live WebSocket Ticks...")
         
         while not self.kill_switch_activated:
             try:
-                candles = await self.exchange.watch_ohlcv(asset, '15m')
+                candles = await self.exchange.watch_ohlcv(asset, timeframe)
                 latest_candle = candles[-1] 
                 
                 timestamp = pd.to_datetime(latest_candle[0], unit='ms')
@@ -404,12 +423,11 @@ class AsyncPaperTrader:
                 current_price = latest_candle[4]
                 self.latest_prices[asset] = current_price
                 
-                portfolio = self.load_portfolio()
-                portfolio = await self.check_stop_loss_take_profit(portfolio, asset, current_price)
+                portfolio = self.load_portfolio(timeframe)
+                portfolio = await self.check_stop_loss_take_profit(portfolio, asset, current_price, timeframe)
                 
                 current_time = time.time()
                 if asset not in self.last_news_time or (current_time - self.last_news_time[asset]) > self.news_interval:
-                    logger.info(f"Scraping latest headlines for {asset}...")
                     raw_news = fetch_news._run(asset.split('/')[0])
                     sentiment_score = self.sentiment_agent.analyze(raw_news)
                     self.news_cache[asset] = sentiment_score
@@ -417,11 +435,38 @@ class AsyncPaperTrader:
                 else:
                     sentiment_score = self.news_cache[asset]
                     
+                # Fetch Level-2 Order Book Data
+                try:
+                    orderbook = await self.exchange.watch_order_book(asset)
+                    bids = sum([b[1] for b in orderbook['bids'][:10]])
+                    asks = sum([a[1] for a in orderbook['asks'][:10]])
+                    order_book_imbalance = (bids - asks) / (bids + asks) if (bids + asks) > 0 else 0.0
+                except Exception as e:
+                    logger.warning(f"L2 Orderbook fetch failed for {asset}: {e}")
+                    order_book_imbalance = 0.0
+                    
                 state_vector, _ = self.construct_state_vector(df, current_sentiment=sentiment_score)
+                # Append L2 Order Book Imbalance to make it 19-Dimensional
+                state_vector.append(float(order_book_imbalance))
+                
+                # Sequence Memory Buffer for Transformer
+                if not hasattr(self, 'sequence_buffers'):
+                    self.sequence_buffers = {}
+                if f"{asset}_{timeframe}" not in self.sequence_buffers:
+                    self.sequence_buffers[f"{asset}_{timeframe}"] = deque(maxlen=10)
+                    
+                self.sequence_buffers[f"{asset}_{timeframe}"].append(state_vector)
+                
+                # We need a full 10-candle sequence before the Transformer can make a decision
+                if len(self.sequence_buffers[f"{asset}_{timeframe}"]) < 10:
+                    logger.info(f"{asset} ({timeframe}): Buffering sequence ({len(self.sequence_buffers[f'{asset}_{timeframe}'])}/10)...")
+                    continue
+                    
                 with torch.no_grad():
-                    action = self.brain.get_action(state_vector, epsilon=0.0)
+                    sequence_list = list(self.sequence_buffers[f"{asset}_{timeframe}"])
+                    action = brain.get_action(sequence_list, epsilon=0.0)
                     action_str = {0: "SHORT", 1: "HOLD", 2: "LONG"}.get(action, "UNKNOWN")
-                    logger.info(f"AI Decision for {asset}: {action_str} (Action Code: {action})")
+                    logger.info(f"AI Decision for {asset} ({timeframe}): {action_str} (Action Code: {action})")
                 
                 conf = 1.0 if action in [0, 2] else 0.5
                 allocation = self.risk_manager.calculate_position_size(conf, 0.02, current_price)
@@ -431,7 +476,7 @@ class AsyncPaperTrader:
                 else:
                     portfolio = await self.execute_paper_trade(portfolio, asset, current_price, action, conf, allocation)
                     
-                self.save_portfolio(portfolio)
+                self.save_portfolio(portfolio, timeframe)
                 
             except ccxt.RateLimitExceeded as e:
                 logger.error(f"[CIRCUIT BREAKER] 429 Too Many Requests on {asset}: {e}")
@@ -450,8 +495,11 @@ class AsyncPaperTrader:
                 await asyncio.sleep(5) 
 
     async def run_loop(self) -> None:
-        logger.info("Booting Institutional WebSocket Architecture...")
-        tasks = [self.watch_asset(asset) for asset in self.assets]
+        logger.info("Booting Dual-Brain Institutional WebSocket Architecture...")
+        tasks = []
+        for asset in self.assets:
+            tasks.append(self.watch_asset_timeframe(asset, '15m', self.swing_brain))
+            tasks.append(self.watch_asset_timeframe(asset, '5m', self.intraday_brain))
         await asyncio.gather(*tasks)
 
 if __name__ == "__main__":
