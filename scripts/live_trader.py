@@ -31,7 +31,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'agents'))
-from meta_agent import MetaAgent
+from transformer_agent import TransformerMetaAgent as MetaAgent
 from risk_agent import RiskAgent
 from sentiment_agent import SentimentAgent
 
