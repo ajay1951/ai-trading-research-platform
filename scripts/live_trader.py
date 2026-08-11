@@ -12,6 +12,7 @@ import redis
 import yaml
 import logging
 from typing import List, Dict, Any, Tuple
+from collections import deque
 from datetime import datetime
 from dotenv import load_dotenv
 
