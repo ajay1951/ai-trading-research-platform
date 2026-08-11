@@ -365,7 +365,7 @@ class AsyncPaperTrader:
                 
         portfolio["total_value"] = total_val
         
-        if portfolio["total_value"] < (self.starting_cash * self.max_drawdown):
+        if portfolio["total_value"] < ((self.starting_cash / 2) * self.max_drawdown):
             await self.emergency_liquidation(f"Portfolio Value dropped below max drawdown! Current: ${portfolio['total_value']:,.2f}")
         
         if trade_executed:
