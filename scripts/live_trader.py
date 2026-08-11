@@ -77,8 +77,8 @@ class AsyncPaperTrader:
         self.exchange = ccxtpro.binance(exchange_config)
         
         logger.info("Loading Dual Universal AI Brains (Swing + Intraday)...")
-        self.swing_brain = MetaAgent(input_dim=18, buffer_size=1000, batch_size=64)
-        self.intraday_brain = MetaAgent(input_dim=18, buffer_size=1000, batch_size=64)
+        self.swing_brain = MetaAgent(input_dim=19, buffer_size=1000, batch_size=64)
+        self.intraday_brain = MetaAgent(input_dim=19, buffer_size=1000, batch_size=64)
         
         full_swing_model_path = os.path.join(os.path.dirname(__file__), '..', self.swing_model_path)
         if os.path.exists(full_swing_model_path):
