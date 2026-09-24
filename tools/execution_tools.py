@@ -30,12 +30,15 @@ class WebSocketExecutionStream:
             'enableRateLimit': True,
         })
         self.order_queue = asyncio.Queue()
+        self.open_positions = {}
         self._is_running = False
 
     async def start_listening(self):
         """Continuously pulls payloads from the order queue and dispatches them via WebSocket."""
         self._is_running = True
         logger.info("Starting WS Execution listener.")
+        
+        asyncio.create_task(self._monitor_open_positions())
         
         while self._is_running:
             try:
@@ -47,6 +50,47 @@ class WebSocketExecutionStream:
             except Exception as e:
                 logger.error(f"Error in execution loop: {e}")
                 await asyncio.sleep(1)
+
+    async def _monitor_open_positions(self):
+        """Background loop to trail stops and take profits dynamically based on live prices."""
+        logger.info("Starting Trailing Stop Monitor.")
+        while self._is_running:
+            try:
+                for symbol, pos in list(self.open_positions.items()):
+                    if float(pos.get('amount', 0)) <= 0:
+                        continue
+                        
+                    try:
+                        ticker = await self.exchange.fetch_ticker(symbol)
+                        current_price = ticker.get('last')
+                    except Exception:
+                        continue
+                        
+                    if not current_price:
+                        continue
+                        
+                    if current_price > pos.get('highest_price', 0):
+                        pos['highest_price'] = current_price
+                        new_stop = current_price * 0.985 # Trail by 1.5%
+                        if new_stop > pos.get('trailing_stop', 0):
+                            pos['trailing_stop'] = new_stop
+                            logger.info(f"[{symbol}] Trailing Stop moved up to {new_stop:.2f}")
+                            
+                    if current_price <= pos.get('trailing_stop', 0):
+                        logger.warning(f"🚨 Trailing Stop Hit for {symbol} at {current_price}! Selling to lock in/cut losses.")
+                        sell_order = {
+                            "action": "SELL",
+                            "symbol": symbol,
+                            "amount": pos['amount'],
+                            "mode": pos['mode']
+                        }
+                        await self.submit_order(sell_order)
+                        del self.open_positions[symbol]
+                        
+            except Exception as e:
+                logger.error(f"Error in trailing stop monitor: {e}")
+                
+            await asyncio.sleep(5) # Check every 5 seconds
 
     async def submit_order(self, trade_data: dict):
         """Public method to push orders to the execution daemon's queue."""
@@ -117,6 +161,14 @@ class WebSocketExecutionStream:
         take_profit = data.get("take_profit")
         amount = data.get("amount")
 
+        entry_price = data.get("price") or data.get("entry_price")
+        if entry_price:
+            slippage = 0.0005 # 0.05%
+            if action == "BUY":
+                entry_price = float(entry_price) * (1 + slippage)
+            elif action == "SELL":
+                entry_price = float(entry_price) * (1 - slippage)
+
         trade_record = {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "action": action,
@@ -124,6 +176,7 @@ class WebSocketExecutionStream:
             "stop_loss": stop_loss,
             "take_profit": take_profit,
             "amount": amount,
+            "entry_price_with_slippage": entry_price,
             "status": "PAPER_TRADE_EXECUTED",
         }
 
@@ -144,6 +197,19 @@ class WebSocketExecutionStream:
 
         logger.info(f"Paper trade executed: {action} {amount} of {symbol}")
         self.memory.publish("trade_executed", trade_record, sender="execution_stream")
+        
+        # Track position for trailing stops
+        if action == "BUY":
+            self.open_positions[symbol] = {
+                "amount": amount,
+                "entry_price": entry_price,
+                "highest_price": entry_price,
+                "trailing_stop": float(entry_price) * 0.985,
+                "mode": "paper"
+            }
+        elif action == "SELL":
+            if symbol in self.open_positions:
+                del self.open_positions[symbol]
 
     async def _execute_live_trade(self, data: dict):
         """Executes a live trade on an exchange using CCXT WebSockets/Async."""
@@ -162,6 +228,20 @@ class WebSocketExecutionStream:
             order = await self.exchange.create_order(symbol, order_type, side, amount, price)
             logger.info(f"Live trade executed via WS: {order['side'].upper()} {order['symbol']} for amount {order['amount']}. ID: {order['id']}")
             self.memory.publish("trade_executed", order, sender="execution_stream")
+            
+            # Track position for trailing stops
+            if side == "buy":
+                exec_price = float(order.get('price') or order.get('average') or price)
+                self.open_positions[symbol] = {
+                    "amount": amount,
+                    "entry_price": exec_price,
+                    "highest_price": exec_price,
+                    "trailing_stop": exec_price * 0.985,
+                    "mode": "live"
+                }
+            elif side == "sell":
+                if symbol in self.open_positions:
+                    del self.open_positions[symbol]
             
         except ccxt.NetworkError as e:
             logger.warning(f"Network error during live WS execution: {e}. Not retrying to prevent dupe orders.")
@@ -182,8 +262,18 @@ class WebSocketExecutionStream:
         num_chunks = max(1, int(math.ceil(total_value / 100.0)))
         chunk_amount = total_amount / num_chunks
         
-        # Space out randomly over 5-10 minutes (300 to 600 seconds)
+        # Scale TWAP duration based on 24h volume to hide institutional size
         total_duration = random.uniform(300, 600)
+        try:
+            if self.exchange.has.get('fetchTicker'):
+                ticker = await self.exchange.fetch_ticker(symbol)
+                quote_volume = float(ticker.get('quoteVolume', 1000000))
+                # If 24h volume is less than $10M, stretch the TWAP out up to 1 hour
+                if quote_volume < 10000000:
+                    total_duration = random.uniform(1800, 3600)
+        except Exception as e:
+            logger.warning(f"Could not fetch ticker for TWAP scaling: {e}")
+            
         base_interval = total_duration / num_chunks if num_chunks > 1 else 0
             
         logger.info(f"Starting TWAP for {symbol}: {num_chunks} chunks, ~{base_interval:.1f}s apart, total ~{total_duration/60:.1f}m.")
@@ -264,9 +354,12 @@ class WebSocketExecutionStream:
                         for order in open_orders:
                             await self.exchange.cancel_order(order['id'], symbol)
                         
-                        # Market sell the entire available balance
-                        order = await self.exchange.create_order(symbol, 'market', 'sell', val)
-                        logger.info(f"🚨 EMERGENCY LIQUIDATION: Sold {val} of {symbol}")
+                        # Aggressive Limit Sell to prevent >5% slippage on illiquid books
+                        ticker = await self.exchange.fetch_ticker(symbol)
+                        bid_price = ticker.get('bid', ticker.get('last', 1.0))
+                        limit_price = float(bid_price) * 0.95
+                        order = await self.exchange.create_order(symbol, 'limit', 'sell', val, limit_price)
+                        logger.info(f"🚨 EMERGENCY LIQUIDATION: Placed limit sell for {val} of {symbol} at {limit_price}")
                     except Exception as e:
                         logger.warning(f"Could not liquidate {symbol}: {e}")
             logger.warning("🚨 EMERGENCY LIQUIDATION COMPLETE.")

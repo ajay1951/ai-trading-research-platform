@@ -37,15 +37,25 @@ class AgentOrchestrator:
             logger.warning(f"[Orchestrator VETO] OnChain Agent blocked trade: Massive Whale Dump detected.")
             return self._cancel_trade("OnChain Veto")
             
-        # 3. Apply Consensus Multipliers
-        # Sentiment Score is -1 to 1. We scale it to a max +/- 15% modifier.
-        sentiment_multiplier = sentiment_data["sentiment_score"] * 0.15 
+        import math
+        
+        # 3. Apply Consensus Multipliers using Log-Odds (Logit) Transformation
+        # Avoid log(0) or division by zero
+        p = max(0.001, min(0.999, transformer_prediction))
+        logit = math.log(p / (1 - p))
+        
+        # Scale the modifiers for logit space
+        sentiment_logit_modifier = sentiment_data["sentiment_score"] * 0.5
+        onchain_logit_modifier = onchain_data["onchain_multiplier"] * 2.0
+        
+        final_logit = logit + sentiment_logit_modifier + onchain_logit_modifier
+        
+        # Sigmoid function to return to probability space [0, 1]
+        final_confidence = 1 / (1 + math.exp(-final_logit))
+        
+        # For tracing backwards compatibility
+        sentiment_multiplier = sentiment_data["sentiment_score"] * 0.15
         onchain_multiplier = onchain_data["onchain_multiplier"]
-        
-        final_confidence = transformer_prediction + sentiment_multiplier + onchain_multiplier
-        
-        # Cap confidence between 0 and 1
-        final_confidence = max(0.0, min(1.0, final_confidence))
         
         # 4. Final Decision
         action = "HOLD"

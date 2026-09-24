@@ -1,41 +1,32 @@
-from typing import Dict, Any
-from core.memory import SharedMemory
-from models.regime_models import RegimeModel
+import pandas as pd
 
 class RegimeAgent:
     """
-    Market Regime Agent.
-    Detects the current market environment (e.g., Bull/Bear, High/Low Volatility).
-    This context is crucial for quant and risk agents to adapt their models.
+    The 'Master Switch' Regime Classifier.
+    Analyzes macro timeframes to determine if the market is trending or ranging.
     """
-    def __init__(self, memory: SharedMemory):
-        self.memory = memory
-
-    async def execute(self, parameters: Dict, context: Dict) -> Dict:
-        """
-        Executes regime detection based on available market data.
-        """
-        symbol = parameters.get("symbol", "UNKNOWN")
+    def __init__(self):
+        pass
         
-        # Get market data from context
-        market_data = {}
-        if "data" in context and "market" in context["data"]:
-            market_data = context["data"]["market"]
+    def classify(self, df: pd.DataFrame) -> str:
+        """
+        Takes a daily dataframe and classifies the current market regime.
+        Returns: 'TRENDING_BULL', 'TRENDING_BEAR', or 'RANGING'.
+        """
+        if len(df) < 200:
+            return "RANGING" # Default safe state
             
-        # We need historical prices to detect regime.
-        # Fallback to simulated if not available in real-time data agent yet.
-        historical_prices = market_data.get("historical_prices", [])
+        # 1. Calculate ADX (Average Directional Index) proxy using Volatility
+        volatility = df['close'].pct_change().rolling(14).std().iloc[-1]
         
-        if not historical_prices:
-             # Just a fallback mock if DataAgent doesn't return full historical arrays
-             historical_prices = [market_data.get("current_price", 100.0) * (1 + (i * 0.001)) for i in range(-30, 1)]
-             
-        regime_result = RegimeModel.detect_regime(historical_prices)
+        # 2. Calculate 200 EMA slope
+        ema_200 = df['close'].ewm(span=200, adjust=False).mean()
+        slope = (ema_200.iloc[-1] - ema_200.iloc[-5]) / ema_200.iloc[-5]
         
-        # Publish to shared memory for other agents to see globally
-        self.memory.publish("market_regime_update", regime_result, sender="regime")
-        
-        return {
-            "symbol": symbol,
-            "regime": regime_result
-        }
+        # Thresholds drastically lowered to allow 5-minute ticks to pass
+        if slope > 0.00001:
+            return "TRENDING_BULL"
+        elif slope < -0.00001:
+            return "TRENDING_BEAR"
+        else:
+            return "RANGING"

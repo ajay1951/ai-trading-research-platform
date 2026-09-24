@@ -41,15 +41,23 @@ class PortfolioManagementAgent:
         if not current_assets:
             return 1.0 # No penalty if portfolio is empty
             
-        # Hardcoded correlation matrix proxy for MVP (1.0 = perfect correlation)
-        # In a full production system, this would be rolling 30-day pearson correlation
-        correlation_matrix = {
-            "BTC/USDT": {"ETH/USDT": 0.85, "SOL/USDT": 0.70, "BNB/USDT": 0.75, "XRP/USDT": 0.50},
-            "ETH/USDT": {"BTC/USDT": 0.85, "SOL/USDT": 0.80, "BNB/USDT": 0.70, "XRP/USDT": 0.55},
-            "SOL/USDT": {"BTC/USDT": 0.70, "ETH/USDT": 0.80, "BNB/USDT": 0.60, "XRP/USDT": 0.40},
-        }
-        
-        asset_correlations = correlation_matrix.get(symbol, {})
+        import pandas as pd
+        asset_correlations = {}
+        try:
+            base_asset = symbol.replace("/", "")
+            df_base = pd.read_csv(f"data/{base_asset}_1d_historical.csv").tail(30)
+            
+            for holding_symbol in current_assets.keys():
+                if holding_symbol != symbol:
+                    hold_asset = holding_symbol.replace("/", "")
+                    df_hold = pd.read_csv(f"data/{hold_asset}_1d_historical.csv").tail(30)
+                    if not df_base.empty and not df_hold.empty:
+                        min_len = min(len(df_base), len(df_hold))
+                        corr = df_base['close'].tail(min_len).corr(df_hold['close'].tail(min_len))
+                        asset_correlations[holding_symbol] = corr if not pd.isna(corr) else 0.5
+        except Exception as e:
+            # Fallback in case of missing data
+            asset_correlations = {}
         total_correlation_exposure = 0.0
         
         for holding_symbol, holding_data in current_assets.items():

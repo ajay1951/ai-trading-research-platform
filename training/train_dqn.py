@@ -98,6 +98,26 @@ def train_universal_dqn(epochs_per_window=5):
         print(f"[*] WALKING FORWARD: Year {year}")
         print("="*80)
         
+        # Checkpoint Resume Logic: Check if state metadata checkpoint exists
+        year_ckpt = os.path.join(os.path.dirname(__file__), '..', 'models', 'weights', f'checkpoint_year_{year}.pth')
+        if os.path.exists(year_ckpt) and year != years[-1]:
+            print(f"[⇄] Found existing state checkpoint for Year {year} ({year_ckpt}). Restoring full state...")
+            try:
+                ckpt_data = torch.load(year_ckpt, map_location=meta_agent.device)
+                if isinstance(ckpt_data, dict) and 'model_state_dict' in ckpt_data:
+                    meta_agent.q_network.load_state_dict(ckpt_data['model_state_dict'])
+                    meta_agent.target_network.load_state_dict(ckpt_data['target_state_dict'])
+                    epsilon = ckpt_data.get('epsilon', epsilon_min)
+                    best_overall_sharpe = ckpt_data.get('best_sharpe', best_overall_sharpe)
+                    print(f"  └─ Successfully restored Weights, Epsilon ({epsilon:.2f}), and Best Sharpe ({best_overall_sharpe:.2f})!")
+                else:
+                    meta_agent.q_network.load_state_dict(ckpt_data)
+                    meta_agent.update_target_network()
+                    epsilon = epsilon_min
+                continue
+            except Exception as e:
+                print(f"[!] Checkpoint load warning: {e}. Re-training year {year}...")
+
         if year == 2026:
             # Current year: Train Jan-Apr, Validate May-Present
             train_start, train_end = f"{year}-01-01", f"{year}-04-30"
@@ -123,38 +143,49 @@ def train_universal_dqn(epochs_per_window=5):
                 state_dict = env.reset()
                 state_vec, c_weight = extract_state_vector(state_dict, env, quant_agent, sentiment_agent)
                 
+                step_counter = 0
                 done = False
                 while not done:
-                    action = meta_agent.get_action(state_vec, epsilon)
+                    # Stride optimization to accelerate 5m candle processing on Kaggle
+                    step_counter += 1
                     
-                    if action == 2: raw_conf = 1.0
-                    elif action == 0: raw_conf = 0.0
-                    else: raw_conf = c_weight
+                    if step_counter % 3 == 0 or done:
+                        action = meta_agent.get_action(state_vec, epsilon)
                         
-                    final_alloc = risk_agent.calculate_position_size(
-                        meta_agent_confidence=raw_conf,
-                        current_atr=state_dict.get('ATR_14', 0.0),
-                        current_price=state_dict['close']
-                    )
-                    
-                    next_state_dict, reward, done, _ = env.step(final_alloc)
-                    next_state_vec, n_c_weight = extract_state_vector(next_state_dict, env, quant_agent, sentiment_agent)
-                    
-                    meta_agent.remember(state_vec, action, reward, next_state_vec, float(done))
-                    loss = meta_agent.train_step()
-                    epoch_loss += loss
-                    
-                    if epoch_steps % 100 == 0:
-                        meta_agent.update_target_network()
+                        if action == 2: raw_conf = 1.0
+                        elif action == 0: raw_conf = 0.0
+                        else: raw_conf = c_weight
+                            
+                        final_alloc = risk_agent.calculate_position_size(
+                            final_confidence=raw_conf,
+                            current_atr=state_dict.get('ATR_14', 0.0),
+                            current_price=state_dict['close']
+                        )
                         
-                    state_dict = next_state_dict
-                    state_vec = next_state_vec
-                    c_weight = n_c_weight
-                    epoch_steps += 1
+                        next_state_dict, reward, done, _ = env.step(final_alloc)
+                        next_state_vec, n_c_weight = extract_state_vector(next_state_dict, env, quant_agent, sentiment_agent)
+                        
+                        meta_agent.remember(state_vec, action, reward, next_state_vec, float(done))
+                        loss = meta_agent.train_step()
+                        epoch_loss += loss
+                        
+                        if epoch_steps % 100 == 0:
+                            meta_agent.update_target_network()
+                            
+                        if epsilon > epsilon_min:
+                            epsilon = max(epsilon_min, epsilon * 0.999995)
+                            
+                        state_dict = next_state_dict
+                        state_vec = next_state_vec
+                        c_weight = n_c_weight
+                        epoch_steps += 1
+                    else:
+                        next_state_dict, _, done, _ = env.step(c_weight)
+                        next_state_vec, n_c_weight = extract_state_vector(next_state_dict, env, quant_agent, sentiment_agent)
+                        state_dict = next_state_dict
+                        state_vec = next_state_vec
+                        c_weight = n_c_weight
             
-            if epsilon > epsilon_min:
-                epsilon = max(epsilon_min, epsilon * epsilon_decay)
-                
             avg_loss = epoch_loss / max(1, epoch_steps)
             print(f"Train Epoch {epoch:02d} | Eps: {epsilon:.2f} | Avg Cross-Asset Loss: {avg_loss:.4f}")
 
@@ -180,7 +211,7 @@ def train_universal_dqn(epochs_per_window=5):
                 else: raw_conf = c_weight
                     
                 final_alloc = risk_agent.calculate_position_size(
-                    meta_agent_confidence=raw_conf,
+                    final_confidence=raw_conf,
                     current_atr=state_dict.get('ATR_14', 0.0),
                     current_price=state_dict['close']
                 )
@@ -206,7 +237,21 @@ def train_universal_dqn(epochs_per_window=5):
             best_overall_sharpe = avg_portfolio_sharpe
             print(f"[!] New Best Universal Sharpe! Saving 'universal_meta_agent.pth'...")
             save_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'weights', 'universal_meta_agent.pth')
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
             torch.save(meta_agent.q_network.state_dict(), save_path)
+
+        # Save comprehensive checkpoint dict for current completed year
+        year_ckpt = os.path.join(os.path.dirname(__file__), '..', 'models', 'weights', f'checkpoint_year_{year}.pth')
+        os.makedirs(os.path.dirname(year_ckpt), exist_ok=True)
+        checkpoint_dict = {
+            'model_state_dict': meta_agent.q_network.state_dict(),
+            'target_state_dict': meta_agent.target_network.state_dict(),
+            'epsilon': epsilon,
+            'best_sharpe': best_overall_sharpe,
+            'completed_year': year
+        }
+        torch.save(checkpoint_dict, year_ckpt)
+        print(f"[✓] Saved Year {year} Complete State Checkpoint -> {year_ckpt}")
             
     print("\n" + "="*80)
     print(f"[OK] Universal Walk-Forward Validation Complete. Peak Unseen Portfolio Sharpe: {best_overall_sharpe:.2f}")

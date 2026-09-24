@@ -10,18 +10,16 @@ class SentimentAgent:
     """
     def __init__(self):
         print("[+] Loading FinBERT NLP Model (this may take a few seconds on first boot)...")
-        # Initialize the heavy NLP model only once
-        self.analyzer = pipeline("sentiment-analysis", model="ProsusAI/finbert")
+        # Initialize the heavy NLP model only once with offline fallback
+        try:
+            self.analyzer = pipeline("sentiment-analysis", model="ProsusAI/finbert")
+        except Exception as e:
+            print(f"[!] Warning: FinBERT online loading failed ({e}). Operating in offline pre-computed sentiment mode.")
+            self.analyzer = None
 
     def analyze(self, text):
-        """
-        Takes raw news text, runs FinBERT inference, and returns a float score [0.0, 1.0].
-        0.0 = Extreme Fear (Negative)
-        0.5 = Neutral
-        1.0 = Extreme Greed (Positive)
-        """
-        if not text or len(text.strip()) == 0:
-            return 0.5 # Default to neutral if no news
+        if not self.analyzer or not text or len(text.strip()) == 0:
+            return 0.5 # Default to neutral if offline or no news text
             
         try:
             # FinBERT can only take up to 512 tokens. We truncate the string just in case.

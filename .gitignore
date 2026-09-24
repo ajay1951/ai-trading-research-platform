@@ -42,7 +42,15 @@ ENV/
 *.csv
 *.json
 !schema.json
+!frontend/**/*.json
+!frontend/*.json
 paper_trades_log.json
+
+# Archives & Large Training Packages (>100MB)
+*.zip
+catboost_info/
+colab_training_package.zip
+
 
 # Database files
 *.db

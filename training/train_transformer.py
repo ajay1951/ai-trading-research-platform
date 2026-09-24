@@ -46,7 +46,7 @@ def extract_state_vector(state_dict, current_weight):
 
 def get_asset_features(asset, base_dir):
     print(f"\n[+] Extracting Transformer Features for {asset}...")
-    engineer = QuantFeatureEngineer(asset_name=asset, data_dir=base_dir)
+    engineer = QuantFeatureEngineer(asset_name=asset, data_dir=base_dir, base_timeframe="5m")
     engineer.calculate_macro_trend()
     engineer.calculate_base_trend()
     engineer.calculate_intermediate_volatility()
@@ -105,20 +105,26 @@ def train_transformer(epochs_per_window=3):
                     if len(sequence_buffer) < SEQ_LEN:
                         continue
                         
-                    # Calculate Reward based on price action
+                    # Calculate Base Price Change
                     price_change = (next_row['close'] - current_row['close']) / current_row['close']
                     
                     # Get Action from Transformer
                     action = agent.get_action(list(sequence_buffer), epsilon)
                     
+                    # Cost Aware Reward Function (V2 Fix Phase 1)
+                    # Deduct 0.15% (0.1% Taker + 0.05% slippage) on position changes
+                    trade_cost = 0.0
                     if action == 2: # LONG
-                        reward = price_change * 100
+                        if current_weight != 1.0: trade_cost = 0.15
+                        reward = (price_change * 100) - trade_cost
                         current_weight = 1.0
                     elif action == 0: # SHORT
-                        reward = -price_change * 100
+                        if current_weight != -1.0: trade_cost = 0.15
+                        reward = (-price_change * 100) - trade_cost
                         current_weight = -1.0
-                    else:
-                        reward = -0.01 # Small penalty for holding to encourage trading
+                    else: # HOLD FLAT
+                        if current_weight != 0.0: trade_cost = 0.15
+                        reward = -trade_cost - 0.01 # Small penalty for holding to encourage trading
                         current_weight = 0.0
                         
                     next_state_vec = extract_state_vector(next_row, current_weight)

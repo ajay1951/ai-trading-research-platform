@@ -8,7 +8,7 @@ class CryptoTradingEnv:
     determined by the Multi-Agent system. It enforces trading fees and tracks the 
     institutional portfolio value.
     """
-    def __init__(self, data_df: pd.DataFrame, initial_balance=10000.0, trading_fee=0.001, slippage_pct=0.0005):
+    def __init__(self, data_df: pd.DataFrame, initial_balance=50.0, trading_fee=0.001, slippage_pct=0.0005):
         self.df = data_df.reset_index(drop=True)
         self.initial_balance = initial_balance
         self.trading_fee = trading_fee
@@ -20,6 +20,7 @@ class CryptoTradingEnv:
         self.coin_held = 0.0
         self.portfolio_value = initial_balance
         self.portfolio_history = []
+        self.total_trades = 0
 
     def reset(self):
         self.current_step = 0
@@ -27,6 +28,7 @@ class CryptoTradingEnv:
         self.coin_held = 0.0
         self.portfolio_value = self.initial_balance
         self.portfolio_history = [self.initial_balance]
+        self.total_trades = 0
         return self._get_state()
 
     def _get_state(self):
@@ -37,52 +39,49 @@ class CryptoTradingEnv:
     def step(self, final_allocation_pct):
         """
         Executes a trade based on the exact % of the portfolio to allocate to the coin.
-        `final_allocation_pct` is determined by the Meta-Agent and rigorously throttled 
-        by the Risk Agent's Kelly/ATR logic.
+        `final_allocation_pct` is determined by the Meta-Agent and throttled by Risk Agent.
         """
         row = self.df.iloc[self.current_step]
         current_price = row['close']
         
-        # 1. Target value of coins to hold based on the Agent's decision
-        target_value = self.portfolio_value * final_allocation_pct
+        # 1. Target value of coins to hold
+        target_value = self.portfolio_value * max(0.0, final_allocation_pct)
         current_value = self.coin_held * current_price
         
-        # 2. Portfolio Rebalancing
         value_difference = target_value - current_value
+        MIN_ORDER_VALUE = 5.0
         
-        if value_difference > 0: # Buy
+        if value_difference > MIN_ORDER_VALUE: # Buy
             execution_price = current_price * (1 + self.slippage_pct)
             amount_to_buy = value_difference / execution_price
             cost = amount_to_buy * execution_price
             fee = cost * self.trading_fee
             
-            # Ensure we have enough cash
             if self.balance >= (cost + fee):
                 self.balance -= (cost + fee)
                 self.coin_held += amount_to_buy
+                self.total_trades += 1
                 
-        elif value_difference < 0: # Sell
+        elif value_difference < -MIN_ORDER_VALUE: # Sell
             execution_price = current_price * (1 - self.slippage_pct)
             amount_to_sell = abs(value_difference) / execution_price
-            # Ensure we have enough coins to sell
             if amount_to_sell <= self.coin_held:
                 revenue = amount_to_sell * execution_price
                 fee = revenue * self.trading_fee
                 self.balance += (revenue - fee)
                 self.coin_held -= amount_to_sell
+                self.total_trades += 1
 
-        # 3. Fast-forward time
+        # Fast-forward time
         self.current_step += 1
         done = self.current_step >= len(self.df) - 1
         
-        # 4. Mark-to-Market Portfolio Valuation
+        # Mark-to-Market Portfolio Valuation
         next_price = self.df.iloc[self.current_step]['close'] if not done else current_price
         self.portfolio_value = self.balance + (self.coin_held * next_price)
         self.portfolio_history.append(self.portfolio_value)
         
-        # 5. Reward Function (Daily Return for Sharpe Ratio optimization)
         reward = (self.portfolio_value - self.portfolio_history[-2]) / self.portfolio_history[-2]
-        
         return self._get_state(), reward, done, {}
         
     def get_portfolio_metrics(self):
@@ -101,5 +100,6 @@ class CryptoTradingEnv:
         return {
             'final_balance': self.portfolio_value,
             'total_return_pct': total_return * 100,
-            'sharpe_ratio': sharpe_ratio
+            'sharpe_ratio': sharpe_ratio,
+            'total_trades': self.total_trades
         }

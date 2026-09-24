@@ -10,7 +10,7 @@ trading:
     - "XRP/USDT"
     
   # The amount of paper/testnet cash the bot assumes it starts with for metrics
-  starting_cash: 10000.00
+  starting_cash: 50.00
   
   # Exchange fee rate (0.1% standard Binance)
   fee_rate: 0.001
