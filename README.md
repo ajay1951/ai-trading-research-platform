@@ -1,5 +1,6 @@
 # AI Trading Research Platform
 
+[![CI](https://github.com/ajay1951/ai-trading-research-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ajay1951/ai-trading-research-platform/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3-black.svg)](https://nextjs.org/)
