@@ -1,0 +1,90 @@
+[
+  {
+    "Model":"Random Forest",
+    "Return (%)":1.12,
+    "Sharpe":3.77,
+    "Sortino":559.97,
+    "Max DD (%)":0.1,
+    "Calmar":10.76,
+    "Trades":4,
+    "Win Rate (%)":100.0,
+    "Profit Factor":99.0
+  },
+  {
+    "Model":"PyTorch LSTM",
+    "Return (%)":4.27,
+    "Sharpe":1.67,
+    "Sortino":1.4,
+    "Max DD (%)":4.73,
+    "Calmar":0.9,
+    "Trades":30,
+    "Win Rate (%)":66.7,
+    "Profit Factor":2.55
+  },
+  {
+    "Model":"Buy & Hold",
+    "Return (%)":2.56,
+    "Sharpe":0.7,
+    "Sortino":0.9,
+    "Max DD (%)":11.11,
+    "Calmar":0.23,
+    "Trades":1,
+    "Win Rate (%)":100.0,
+    "Profit Factor":99.0
+  },
+  {
+    "Model":"Transformer (Attention)",
+    "Return (%)":-0.48,
+    "Sharpe":-0.12,
+    "Sortino":-0.09,
+    "Max DD (%)":3.89,
+    "Calmar":-0.12,
+    "Trades":50,
+    "Win Rate (%)":46.0,
+    "Profit Factor":1.77
+  },
+  {
+    "Model":"Logistic Regression",
+    "Return (%)":-2.71,
+    "Sharpe":-2.05,
+    "Sortino":-0.64,
+    "Max DD (%)":4.19,
+    "Calmar":-0.65,
+    "Trades":18,
+    "Win Rate (%)":50.0,
+    "Profit Factor":0.9
+  },
+  {
+    "Model":"LightGBM",
+    "Return (%)":-2.57,
+    "Sharpe":-2.07,
+    "Sortino":-0.91,
+    "Max DD (%)":5.1,
+    "Calmar":-0.5,
+    "Trades":30,
+    "Win Rate (%)":53.3,
+    "Profit Factor":1.18
+  },
+  {
+    "Model":"Moving Average (20\/50)",
+    "Return (%)":-8.53,
+    "Sharpe":-2.72,
+    "Sortino":-2.83,
+    "Max DD (%)":12.55,
+    "Calmar":-0.68,
+    "Trades":13,
+    "Win Rate (%)":38.5,
+    "Profit Factor":0.56
+  },
+  {
+    "Model":"Random Baseline",
+    "Return (%)":-31.01,
+    "Sharpe":-11.72,
+    "Sortino":-14.53,
+    "Max DD (%)":31.69,
+    "Calmar":-0.98,
+    "Trades":281,
+    "Win Rate (%)":52.7,
+    "Profit Factor":1.08
+  }
+]

@@ -1,13 +1,13 @@
-# AI Trading Research Platform & Quantitative Workstation
+# AI Trading Research Platform
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3-black.svg)](https://nextjs.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![Tests](https://img.shields.io/badge/tests-36%20passed%20(100%25)-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-37%20passed%20(100%25)-brightgreen.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A quantitative research platform, machine learning systems architecture, and backend execution workstation for cryptocurrency microstructure. Enforces mathematical anti-leakage guarantees, point-in-time causality, realistic trading frictions (0.04% fee + 0.02% slippage), multi-asset empirical benchmarking across 13 liquid assets, and a containerized FastAPI backend.
+A quantitative research platform for evaluating machine-learning trading strategies under temporal validation, transaction costs, execution constraints, risk controls, and anti-leakage testing.
 
 ---
 
@@ -24,7 +24,7 @@ This platform addresses these challenges by enforcing **automated leakage preven
 
 ## 2. Multi-Asset Portfolio Benchmark Results (13 Assets)
 
-All results are empirically measured on an identical out-of-sample chronological test set under **0.04% maker/taker fees + 0.02% slippage per fill (12 bps round-trip)** across all 13 universe assets (`BTC`, `ETH`, `SOL`, `BNB`, `XRP`, `DOGE`, `ADA`, `AVAX`, `LINK`, `NEAR`, `LTC`, `DOT`, `SUI`).
+All results are empirically measured on an identical out-of-sample chronological test set under **0.04% maker/taker fees + 0.02% slippage per fill (12 bps round-trip)** across all 13 universe assets (`BTC`, `ETH`, `SOL`, `BNB`, `XRP`, `DOGE`, `ADA`, `AVAX`, `LINK`, `NEAR`, `LTC`, `DOT`, `SUI`). Detailed run logs are archived in [`artifacts/benchmark/`](artifacts/benchmark/) and [`results/metrics.json`](results/metrics.json).
 
 | Model Architecture | Portfolio Return (%) | Average Sharpe | Average Max DD (%) | Total Trades | Average Win Rate (%) | Average Profit Factor |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -37,7 +37,7 @@ All results are empirically measured on an identical out-of-sample chronological
 
 ---
 
-## 2. System Architecture
+## 3. System Architecture & Pipeline Flow
 
 ```mermaid
 graph TD
@@ -77,7 +77,7 @@ graph TD
 
 ---
 
-## 3. Measured Experimental Results
+## 4. Single-Asset Baseline Benchmark Results (BTCUSDT)
 
 All results are empirically measured on an identical out-of-sample chronological test set (1,146 hours) under **0.04% maker/taker fees + 0.02% slippage per fill (12 bps round-trip)**.
 
@@ -96,7 +96,7 @@ All results are empirically measured on an identical out-of-sample chronological
 
 ---
 
-## 4. Verification & Anti-Leakage Test Hierarchy (36 Automated Tests)
+## 5. Verification & Anti-Leakage Test Hierarchy (37 Automated Tests)
 
 The test suite enforces mathematical rigor across 6 dedicated test packages:
 
@@ -107,30 +107,31 @@ tests/
 ├── backtest/   # 2 tests: Fee + slippage deduction, mark-to-market accounting
 ├── risk/       # 5 tests: Volatility-parity sizing, single-asset concentration, circuit breakers
 ├── execution/  # 8 tests: Order idempotency, WebSocket backoff reconnection, stale price rejection
-└── api/        # 5 tests: FastAPI health, models, manifests, results, and backtest endpoints
+└── api/        # 6 tests: FastAPI health, models, manifests, results, metrics, and backtest endpoints
 ```
 
 Run the complete institutional test suite:
 ```bash
-pytest
+pytest -q
 ```
-*Result: 36 passed in 6.10s (100% pass rate).*
+*Result: 37 passed in ~6s (100% pass rate).*
 
 ---
 
-## 5. Recruiter Evidence Matrix
+## 6. Recruiter Evidence Matrix
 
 | Core Engineering Dimension | Primary Repository Evidence | Verification Command / File |
 |---|---|---|
 | **ML Systems Engineering** | Causal feature pipelines, experiment manifests, model registry | [`features/`](features/), [`data/manifests/`](data/manifests/), [`api/routes/models.py`](api/routes/models.py) |
 | **Data Leakage Prevention** | Automated future candle mutation & train-only scaler tests | [`tests/leakage/`](tests/leakage/) |
-| **Quantitative Research** | Multi-asset benchmark suite, 1,000-path Monte Carlo, Sharpe bootstrap | [`RESEARCH.md`](./RESEARCH.md), [`RESULTS.md`](./RESULTS.md), [`results/metrics.json`](results/metrics.json) |
+| **Quantitative Research** | Multi-asset benchmark suite, 1,000-path Monte Carlo, Sharpe bootstrap | [`RESEARCH.md`](./RESEARCH.md), [`RESULTS.md`](./RESULTS.md), [`artifacts/benchmark/`](artifacts/benchmark/) |
 | **Trading Realism** | 0.04% maker fee + 0.02% slippage deducted on all fills | [`tests/backtest/test_transaction_costs.py`](tests/backtest/test_transaction_costs.py) |
 | **Risk Engineering** | Volatility parity sizing, leverage limits, circuit breakers | [`risk/`](risk/), [`tests/risk/`](tests/risk/) |
 | **Backend & Distributed Systems** | FastAPI v1 endpoints, Celery workers, Redis caching, Docker Compose | [`api/main.py`](api/main.py), [`docker-compose.yml`](docker-compose.yml), [`tasks/`](tasks/) |
 | **Engineering Decisions** | 8 Architecture Decision Records | [`docs/adr/`](docs/adr/) |
 | **Negative Results & Rigor** | Documented failure of naive momentum under trading costs | [`docs/FAILURE_ANALYSIS.md`](docs/FAILURE_ANALYSIS.md) |
-| **Reliability & Load Testing** | Order idempotency, WebSocket exponential backoff, Locust test script | [`load-tests/locustfile.py`](load-tests/locustfile.py), [`tests/execution/`](tests/execution/) |
+| **Observability & Metrics** | Prometheus scraper configuration & application metrics endpoint | [`observability/prometheus.yml`](observability/prometheus.yml), [`api/main.py`](api/main.py) |
+| **Reliability & Load Testing** | Order idempotency, WebSocket exponential backoff, Locust test report | [`docs/LOAD_TESTING.md`](docs/LOAD_TESTING.md), [`load-tests/locustfile.py`](load-tests/locustfile.py) |
 
 ---
 

@@ -21,19 +21,30 @@ app = FastAPI(
     version="2.0.0"
 )
 
-# CORS configuration
+# Security: Explicit CORS configuration (no wildcard)
+import os
+raw_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+allowed_origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
 
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from fastapi import Response
+
+REQUEST_COUNT = Counter("api_requests_total", "Total HTTP requests", ["method", "endpoint", "status"])
+REQUEST_LATENCY = Histogram("api_request_duration_seconds", "HTTP request latency in seconds", ["method", "endpoint"])
+
+
 @app.middleware("http")
 async def request_context_middleware(request: Request, call_next):
-    """Injects X-Request-ID and measures request latency."""
+    """Injects X-Request-ID, logs latency, and records Prometheus metrics."""
     request_id = str(uuid.uuid4())
     start_time = time.time()
     
@@ -43,8 +54,20 @@ async def request_context_middleware(request: Request, call_next):
     response.headers["X-Request-ID"] = request_id
     response.headers["X-Process-Time"] = f"{duration:.4f}s"
     
-    logger.info(f"[{request_id}] {request.method} {request.url.path} completed in {duration:.4f}s ({response.status_code})")
+    endpoint = request.url.path
+    status_str = str(response.status_code)
+    REQUEST_COUNT.labels(method=request.method, endpoint=endpoint, status=status_str).inc()
+    REQUEST_LATENCY.labels(method=request.method, endpoint=endpoint).observe(duration)
+    
+    logger.info(f"[{request_id}] {request.method} {endpoint} completed in {duration:.4f}s ({status_str})")
     return response
+
+
+# Prometheus Observability Endpoint
+@app.get("/metrics", tags=["Observability"])
+def get_metrics():
+    """Exposes real-time Prometheus application metrics."""
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 
 # Include Versioned API Routers

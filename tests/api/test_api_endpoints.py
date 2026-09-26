@@ -60,3 +60,11 @@ def test_api_backtest_run_endpoint():
     assert data["status"] == "completed"
     assert "net_return_pct" in data
     assert data["cost_deducted_usd"] > 0.0
+
+
+def test_prometheus_metrics_endpoint():
+    response = client.get("/metrics")
+    assert response.status_code == 200
+    assert "api_requests_total" in response.text
+    assert "api_request_duration_seconds" in response.text
+

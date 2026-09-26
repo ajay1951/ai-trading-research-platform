@@ -7,6 +7,18 @@
 
 ## 1. High-Churn Strategy Failure Under Transaction Costs
 
+```yaml
+Experiment: EXP-001
+Commit: c5f4318
+Dataset: BTCUSDT-1h-v1
+Dataset Hash: a43ef5cb0278bd14cf4c935ee025b306e98c5dae858a74ec9908cf82218bbca1
+Model: Random Baseline & 20/50 SMA
+Split: 70/15/15 Chronological
+Embargo: 24 bars
+Output: artifacts/benchmark/run_metadata.json
+Conclusion: High trade churning causes 28.91% friction drag, proving minimum conviction thresholds are mandatory.
+```
+
 ### The Phenomenon
 Initial unconstrained baseline models (such as the 20/50 Moving Average and Random Execution Baseline) displayed high trade frequency (up to 281 trades per quarter on hourly data).
 
@@ -29,6 +41,18 @@ Without a conviction threshold filter or holding period constraint, strategy ret
 
 ## 2. Transformer Overfitting on Short Time Horizons
 
+```yaml
+Experiment: EXP-002
+Commit: c5f4318
+Dataset: BTCUSDT-1h-v1
+Dataset Hash: a43ef5cb0278bd14cf4c935ee025b306e98c5dae858a74ec9908cf82218bbca1
+Model: Transformer (Multi-Head Self-Attention)
+Split: 70/15/15 Chronological
+Embargo: 24 bars
+Output: configs/transformer.yaml
+Conclusion: Deep attention models overfit low-SNR hourly crypto noise (OOS Sharpe -0.12); simpler GBDT models generalize better.
+```
+
 ### The Phenomenon
 A Multi-Head Self-Attention Transformer model was trained on hourly bar returns and technical feature sequences.
 
@@ -47,6 +71,16 @@ Crypto hourly returns exhibit low signal-to-noise ratios ($R^2 < 0.03$). Deep mu
 ---
 
 ## 3. Pruned & Removed Features
+
+```yaml
+Experiment: EXP-003
+Commit: c5f4318
+Dataset: BTCUSDT-1h-v1
+Dataset Hash: a43ef5cb0278bd14cf4c935ee025b306e98c5dae858a74ec9908cf82218bbca1
+Ablation Target: Cross-Exchange Social Sentiment & 200 SMA
+Output: training/ablation_study.py
+Conclusion: Social sentiment introduces an 8.4% error increase due to 1-3 hour reaction lag; 200 SMA introduces 200 warmup NaNs.
+```
 
 During feature ablation studies, several candidate indicators were rejected and removed from the production pipeline:
 
