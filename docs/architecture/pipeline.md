@@ -61,3 +61,8 @@ FastAPI Service Layer & Asynchronous Workers (Celery + Redis)
 - **Redis 7**: Sub-millisecond state caching and Celery message broker.
 - **PostgreSQL 15**: Relational persistence for orders, ledger transactions, and experiment metadata.
 - **Prometheus**: Metrics collection scraping `/metrics` for request counts and latency histograms.
+
+## 7. Interactive Quantitative Workstation
+- Real-time trading terminal built with Next.js and Tailwind CSS.
+- Live order execution telemetry, TWAP order slicing visualization, active risk limits monitoring, and full blotter auditing.
+- UI screenshots and visual interface references are archived in [docs/screenshots/](../screenshots/).

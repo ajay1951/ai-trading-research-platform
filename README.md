@@ -77,7 +77,24 @@ graph TD
 
 ---
 
-## 4. Single-Asset Baseline Benchmark Results (BTCUSDT)
+## 4. Quantitative Workstation & Real-Time Telemetry
+
+The platform includes a low-latency, modular Next.js quantitative workstation interface for live position monitoring, TWAP execution slicing telemetry, risk bounds enforcement, and trade auditing:
+
+| Autonomous Trading Workstation | Live Execution Telemetry |
+| :---: | :---: |
+| ![Workstation Overview](docs/screenshots/01_workstation_overview.png) | ![Risk & Execution Telemetry](docs/screenshots/02_risk_and_execution_telemetry.png) |
+| *Active Position Risk Monitor, Mark-to-Market PnL, TWAP Slicing, and 2,331-Trade Audit Blotter* | *Order Slicing Telemetry, Realized Slippage Edge, Circuit Breakers, and Tick Engine* |
+
+<p align="center">
+  <img src="docs/screenshots/03_collapsed_dock_view.png" alt="Collapsed Dock Full-Screen View" width="100%" />
+  <br />
+  <em>Hotkey-Enabled Modular Dock Architecture (Press <code>[E]</code> to toggle telemetry docks for full-screen analysis, <code>[1-4]</code> to switch blotters/audits)</em>
+</p>
+
+---
+
+## 5. Single-Asset Baseline Benchmark Results (BTCUSDT)
 
 All results are empirically measured on an identical out-of-sample chronological test set (1,146 hours) under **0.04% maker/taker fees + 0.02% slippage per fill (12 bps round-trip)**.
 
@@ -96,7 +113,7 @@ All results are empirically measured on an identical out-of-sample chronological
 
 ---
 
-## 5. Verification & Anti-Leakage Test Hierarchy (37 Automated Tests)
+## 6. Verification & Anti-Leakage Test Hierarchy (37 Automated Tests)
 
 The test suite enforces mathematical rigor across 6 dedicated test packages:
 
@@ -118,7 +135,7 @@ pytest -q
 
 ---
 
-## 6. Recruiter Evidence Matrix
+## 7. Recruiter Evidence Matrix
 
 | Core Engineering Dimension | Primary Repository Evidence | Verification Command / File |
 |---|---|---|
@@ -135,7 +152,7 @@ pytest -q
 
 ---
 
-## 6. Step-by-Step Reproducibility
+## 8. Step-by-Step Reproducibility
 
 ### 1. Validate Dataset Integrity
 ```bash
@@ -178,7 +195,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the workstation:
 
 ---
 
-## 7. 1-Click Cloud Deployment (Oracle Cloud / Ubuntu)
+## 9. 1-Click Cloud Deployment (Oracle Cloud / Ubuntu)
 
 The repository includes an automated 1-click cloud bootstrap script:
 
@@ -198,7 +215,7 @@ nexus update    # 1-command: git pull, rebuild frontend, and restart
 
 ---
 
-## 8. Known Limitations
+## 10. Known Limitations
 
 1. **Market Impact**: Backtests model 2 bps slippage on liquid pairs ($> \$50\text{M}$ volume). Illiquid altcoins or orders $>\$500\text{k}$ require non-linear square-root market impact modeling.
 2. **Regime Vulnerability**: Long-only momentum algorithms experience drawdown during multi-quarter crypto bear markets without cash defense or shorting rules.
@@ -206,6 +223,6 @@ nexus update    # 1-command: git pull, rebuild frontend, and restart
 
 ---
 
-## 9. License
+## 11. License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
