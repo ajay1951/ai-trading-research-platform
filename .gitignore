@@ -1,4 +1,10 @@
-# Python
+# Environments
+.venv/
+venv/
+env/
+then/
+
+# Python cache & artifacts
 __pycache__/
 *.py[cod]
 *$py.class
@@ -20,63 +26,61 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual Environment
-venv/
-env/
-ENV/
-.venv
-
-# IDE
+# IDE & OS
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 .DS_Store
+Thumbs.db
 
-# Environment variables
+# Secrets & Local Environment
 .env
+.env.*
 .env.local
 
-# Data files
-*.csv
-*.json
-!schema.json
-!frontend/**/*.json
-!frontend/*.json
-paper_trades_log.json
-
-# Archives & Large Training Packages (>100MB)
-*.zip
-catboost_info/
-colab_training_package.zip
-
-
-# Database files
-*.db
-*.sqlite
-*.duckdb
-
-# Logs
+# Logs & Temporary Files
 logs/
 *.log
+tmp/
+temp/
+scratch/
+*.tmp
+catboost_info/
 
-# Storage
-data/
+# Storage & Databases
 chroma_db/
 influxdb/
 influxdb2/
 redis/
+*.db
+*.sqlite
+*.duckdb
 *.lp
+
+# Large Data & Training Packages
+data/*.csv
+data/*.lp
+data/*.xlsx
+data/*.html
+data/live_state.json
+data/live_trades.csv
+colab_training_package.zip
+*.zip
+paper_trades_log.json
+memory_dump.json
+
+# Whitelist tracked manifests and code in data
+!data/**/*.py
+!data/*.py
+!data/manifests/
+!data/manifests/**
 
 # Docker
 docker-compose.override.yml
 
-# OS
-Thumbs.db
-.DS_Store
-
-# Tests
+# Tests & Coverage
 .pytest_cache/
 coverage.xml
 htmlcov/
@@ -84,7 +88,3 @@ htmlcov/
 # Model cache
 .huggingface/
 .cache/
-
-# Temporary
-tmp/
-temp/

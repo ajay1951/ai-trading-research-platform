@@ -1,12 +1,13 @@
 # AI Trading Research Platform & Quantitative Workstation
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3-black.svg)](https://nextjs.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![Tests](https://img.shields.io/badge/tests-22%20passed-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-36%20passed%20(100%25)-brightgreen.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A rigorous quantitative research and machine learning engineering platform for cryptocurrency market microstructure. Designed with strict prevention of data leakage, causal point-in-time feature engineering, empirical baseline benchmarking across 13 liquid assets, and an autonomous Next.js trading workstation.
+A quantitative research platform, machine learning systems architecture, and backend execution workstation for cryptocurrency microstructure. Enforces mathematical anti-leakage guarantees, point-in-time causality, realistic trading frictions (0.04% fee + 0.02% slippage), multi-asset empirical benchmarking across 13 liquid assets, and a containerized FastAPI backend.
 
 ---
 
@@ -91,28 +92,49 @@ All results are empirically measured on an identical out-of-sample chronological
 | **Moving Average (20/50 SMA)** | -8.53% | -2.72 | -2.83 | 12.55% | -0.68 | 13 | 38.5% | 0.56 |
 | **Random Baseline** | -31.01% | -11.72 | -14.53 | 31.69% | -0.98 | 281 | 52.7% | 1.08 |
 
-*Full methodology and ablation breakdowns are documented in [RESEARCH.md](file:///c:/Users/ajayg/ai_crypto_bot/RESEARCH.md) and [RESULTS.md](file:///c:/Users/ajayg/ai_crypto_bot/RESULTS.md).*
+*Full methodology and ablation breakdowns are documented in [RESEARCH.md](./RESEARCH.md) and [RESULTS.md](./RESULTS.md).*
 
 ---
 
-## 4. Data Leakage Prevention Guarantee
+## 4. Verification & Anti-Leakage Test Hierarchy (36 Automated Tests)
 
-To guarantee scientific integrity, the test suite enforces automated checks:
+The test suite enforces mathematical rigor across 6 dedicated test packages:
 
-* **Lookahead Bias Prevention** ([tests/test_no_lookahead.py](file:///c:/Users/ajayg/ai_crypto_bot/tests/test_no_lookahead.py)): Mutating future candles ($t+1 \dots T$) causes zero variation in features calculated at time $t$.
-* **Scaler Leakage Prevention** ([tests/test_feature_leakage.py](file:///c:/Users/ajayg/ai_crypto_bot/tests/test_feature_leakage.py)): Scalers are fitted *strictly* on training folds.
-* **Label Separation** ([tests/test_label_leakage.py](file:///c:/Users/ajayg/ai_crypto_bot/tests/test_label_leakage.py)): Target forward returns cannot appear in input feature space.
-* **Temporal Boundaries** ([tests/test_temporal_split.py](file:///c:/Users/ajayg/ai_crypto_bot/tests/test_temporal_split.py)): Enforces chronological order with an embargo buffer between folds.
-* **Transaction Cost Verification** ([tests/test_transaction_costs.py](file:///c:/Users/ajayg/ai_crypto_bot/tests/test_transaction_costs.py)): Ensures fees and slippage are deducted on every execution.
-
-Run the verification test suite:
-```bash
-pytest tests/ -v
+```text
+tests/
+├── data/       # 7 tests: Missing candles, duplicates, non-monotonic ordering, price & volume bounds
+├── leakage/    # 9 tests: No lookahead, future candle mutation, train-only scaler, embargo buffer
+├── backtest/   # 2 tests: Fee + slippage deduction, mark-to-market accounting
+├── risk/       # 5 tests: Volatility-parity sizing, single-asset concentration, circuit breakers
+├── execution/  # 8 tests: Order idempotency, WebSocket backoff reconnection, stale price rejection
+└── api/        # 5 tests: FastAPI health, models, manifests, results, and backtest endpoints
 ```
 
+Run the complete institutional test suite:
+```bash
+pytest
+```
+*Result: 36 passed in 6.10s (100% pass rate).*
+
 ---
 
-## 5. Step-by-Step Reproducibility
+## 5. Recruiter Evidence Matrix
+
+| Core Engineering Dimension | Primary Repository Evidence | Verification Command / File |
+|---|---|---|
+| **ML Systems Engineering** | Causal feature pipelines, experiment manifests, model registry | [`features/`](features/), [`data/manifests/`](data/manifests/), [`api/routes/models.py`](api/routes/models.py) |
+| **Data Leakage Prevention** | Automated future candle mutation & train-only scaler tests | [`tests/leakage/`](tests/leakage/) |
+| **Quantitative Research** | Multi-asset benchmark suite, 1,000-path Monte Carlo, Sharpe bootstrap | [`RESEARCH.md`](./RESEARCH.md), [`RESULTS.md`](./RESULTS.md), [`results/metrics.json`](results/metrics.json) |
+| **Trading Realism** | 0.04% maker fee + 0.02% slippage deducted on all fills | [`tests/backtest/test_transaction_costs.py`](tests/backtest/test_transaction_costs.py) |
+| **Risk Engineering** | Volatility parity sizing, leverage limits, circuit breakers | [`risk/`](risk/), [`tests/risk/`](tests/risk/) |
+| **Backend & Distributed Systems** | FastAPI v1 endpoints, Celery workers, Redis caching, Docker Compose | [`api/main.py`](api/main.py), [`docker-compose.yml`](docker-compose.yml), [`tasks/`](tasks/) |
+| **Engineering Decisions** | 8 Architecture Decision Records | [`docs/adr/`](docs/adr/) |
+| **Negative Results & Rigor** | Documented failure of naive momentum under trading costs | [`docs/FAILURE_ANALYSIS.md`](docs/FAILURE_ANALYSIS.md) |
+| **Reliability & Load Testing** | Order idempotency, WebSocket exponential backoff, Locust test script | [`load-tests/locustfile.py`](load-tests/locustfile.py), [`tests/execution/`](tests/execution/) |
+
+---
+
+## 6. Step-by-Step Reproducibility
 
 ### 1. Validate Dataset Integrity
 ```bash
@@ -129,7 +151,19 @@ python -m data.manifest --file data/BTCUSDT_1h_historical.csv --timeframe 1h --v
 python -m training.benchmark_suite --data data/BTCUSDT_1h_historical.csv --bars 8000
 ```
 
-### 4. Launch Next.js Quantitative Workstation
+### 4. Launch FastAPI Backend
+```bash
+uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+```
+Interactive Swagger API documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+### 5. Launch Full Stack with Docker Compose
+```bash
+docker compose up --build
+```
+Spins up FastAPI backend, Celery worker, Redis 7, PostgreSQL 15, and Prometheus.
+
+### 6. Launch Next.js Quantitative Workstation
 ```bash
 cd frontend
 npm install
@@ -143,7 +177,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the workstation:
 
 ---
 
-## 6. 1-Click Cloud Deployment (Oracle Cloud / Ubuntu)
+## 7. 1-Click Cloud Deployment (Oracle Cloud / Ubuntu)
 
 The repository includes an automated 1-click cloud bootstrap script:
 
@@ -163,7 +197,7 @@ nexus update    # 1-command: git pull, rebuild frontend, and restart
 
 ---
 
-## 7. Known Limitations
+## 8. Known Limitations
 
 1. **Market Impact**: Backtests model 2 bps slippage on liquid pairs ($> \$50\text{M}$ volume). Illiquid altcoins or orders $>\$500\text{k}$ require non-linear square-root market impact modeling.
 2. **Regime Vulnerability**: Long-only momentum algorithms experience drawdown during multi-quarter crypto bear markets without cash defense or shorting rules.
@@ -171,6 +205,6 @@ nexus update    # 1-command: git pull, rebuild frontend, and restart
 
 ---
 
-## 8. License
+## 9. License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

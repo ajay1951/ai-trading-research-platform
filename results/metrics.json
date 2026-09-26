@@ -1,0 +1,130 @@
+{
+  "platform": "ai-trading-research-platform",
+  "version": "2.0.0",
+  "timestamp": "2026-09-26T12:00:00Z",
+  "execution_cost_model": {
+    "maker_fee_bps": 4.0,
+    "slippage_bps": 2.0,
+    "total_round_trip_bps": 12.0
+  },
+  "single_asset_benchmarks": {
+    "asset": "BTCUSDT",
+    "timeframe": "1h",
+    "test_period": "2024-03-01 to 2024-06-30",
+    "models": [
+      {
+        "model": "Random Forest",
+        "return_pct": 1.12,
+        "sharpe": 3.77,
+        "sortino": 559.97,
+        "max_drawdown_pct": 0.10,
+        "calmar": 10.76,
+        "trades": 4,
+        "win_rate_pct": 100.0,
+        "profit_factor": 99.0
+      },
+      {
+        "model": "PyTorch LSTM",
+        "return_pct": 4.27,
+        "sharpe": 1.67,
+        "sortino": 1.40,
+        "max_drawdown_pct": 4.73,
+        "calmar": 0.90,
+        "trades": 30,
+        "win_rate_pct": 66.7,
+        "profit_factor": 2.55
+      },
+      {
+        "model": "Buy & Hold",
+        "return_pct": 2.56,
+        "sharpe": 0.70,
+        "sortino": 0.90,
+        "max_drawdown_pct": 11.11,
+        "calmar": 0.23,
+        "trades": 1,
+        "win_rate_pct": 100.0,
+        "profit_factor": 99.0
+      },
+      {
+        "model": "Transformer (Attention)",
+        "return_pct": -0.48,
+        "sharpe": -0.12,
+        "sortino": -0.09,
+        "max_drawdown_pct": 3.89,
+        "calmar": -0.12,
+        "trades": 50,
+        "win_rate_pct": 46.0,
+        "profit_factor": 1.77
+      },
+      {
+        "model": "LightGBM",
+        "return_pct": -2.57,
+        "sharpe": -2.07,
+        "sortino": -0.91,
+        "max_drawdown_pct": 5.10,
+        "calmar": -0.50,
+        "trades": 30,
+        "win_rate_pct": 53.3,
+        "profit_factor": 1.18
+      },
+      {
+        "model": "Logistic Regression",
+        "return_pct": -2.71,
+        "sharpe": -2.05,
+        "sortino": -0.64,
+        "max_drawdown_pct": 4.19,
+        "calmar": -0.65,
+        "trades": 18,
+        "win_rate_pct": 50.0,
+        "profit_factor": 0.90
+      },
+      {
+        "model": "Moving Average (20/50 SMA)",
+        "return_pct": -8.53,
+        "sharpe": -2.72,
+        "sortino": -2.83,
+        "max_drawdown_pct": 12.55,
+        "calmar": -0.68,
+        "trades": 13,
+        "win_rate_pct": 38.5,
+        "profit_factor": 0.56
+      },
+      {
+        "model": "Random Baseline",
+        "return_pct": -31.01,
+        "sharpe": -11.72,
+        "sortino": -14.53,
+        "max_drawdown_pct": 31.69,
+        "calmar": -0.98,
+        "trades": 281,
+        "win_rate_pct": 52.7,
+        "profit_factor": 1.08
+      }
+    ]
+  },
+  "universe_13_asset_benchmarks": {
+    "assets": ["BTC", "ETH", "SOL", "BNB", "XRP", "DOGE", "ADA", "AVAX", "LINK", "NEAR", "LTC", "DOT", "SUI"],
+    "portfolio_strategy": "LightGBM Cross-Sectional Ranking",
+    "portfolio_net_return_pct": 3.05,
+    "portfolio_max_drawdown_pct": 6.54,
+    "buy_and_hold_net_return_pct": -0.23,
+    "buy_and_hold_max_drawdown_pct": 15.12,
+    "drawdown_reduction_pct": 56.7,
+    "total_universe_trades": 390,
+    "win_rate_pct": 53.8
+  },
+  "statistical_validation": {
+    "bootstrap_sharpe_ci_95": [0.15, 5.28],
+    "monte_carlo_1000": {
+      "median_max_drawdown_pct": 11.75,
+      "var_95_pct": 21.67,
+      "cvar_95_pct": 26.88,
+      "probability_of_profit_pct": 96.5
+    },
+    "regime_analysis": {
+      "bull_regime_sharpe": 2.14,
+      "bear_regime_sharpe": 1.48,
+      "sideways_regime_sharpe": -0.32
+    }
+  }
+}

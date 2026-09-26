@@ -1,0 +1,9 @@
+model,return_pct,sharpe,sortino,max_drawdown_pct,calmar,trades,win_rate_pct,profit_factor
+Random Forest,1.12,3.77,559.97,0.10,10.76,4,100.0,99.0
+PyTorch LSTM,4.27,1.67,1.40,4.73,0.90,30,66.7,2.55
+Buy & Hold,2.56,0.70,0.90,11.11,0.23,1,100.0,99.0
+Transformer (Attention),-0.48,-0.12,-0.09,3.89,-0.12,50,46.0,1.77
+LightGBM,-2.57,-2.07,-0.91,5.10,-0.50,30,53.3,1.18
+Logistic Regression,-2.71,-2.05,-0.64,4.19,-0.65,18,50.0,0.90
+Moving Average (20/50 SMA),-8.53,-2.72,-2.83,12.55,-0.68,13,38.5,0.56
+Random Baseline,-31.01,-11.72,-14.53,31.69,-0.98,281,52.7,1.08

@@ -1,0 +1,42 @@
+experiment_id: exp_002
+description: "PyTorch 2-layer LSTM sequence model trained on BTCUSDT hourly features"
+
+dataset:
+  name: BTCUSDT-1h
+  version: 2026-09-01
+  hash: "a43ef5cb0278bd14cf4c935ee025b306e98c5dae858a74ec9908cf82218bbca1"
+
+assets:
+  - BTC
+
+timeframe: 1h
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  embargo_bars: 24
+
+model:
+  name: lstm
+  seed: 42
+  hyperparameters:
+    sequence_length: 24
+    hidden_size: 64
+    num_layers: 2
+    dropout: 0.2
+    learning_rate: 0.001
+    batch_size: 64
+    epochs: 50
+
+costs:
+  fee: 0.0004
+  slippage: 0.0002
+
+metrics:
+  return_pct: 4.27
+  sharpe: 1.67
+  max_drawdown_pct: 4.73
+  trades: 30
+  win_rate_pct: 66.7
+  profit_factor: 2.55

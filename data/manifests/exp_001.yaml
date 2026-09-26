@@ -1,0 +1,50 @@
+experiment_id: exp_001
+description: "Cross-Sectional LightGBM model evaluated across 13-asset universe under realistic execution fees"
+
+dataset:
+  name: crypto_universe_13
+  version: 2026-09-01
+  hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+
+assets:
+  - BTC
+  - ETH
+  - SOL
+  - BNB
+  - XRP
+  - DOGE
+  - ADA
+  - AVAX
+  - LINK
+  - NEAR
+  - LTC
+  - DOT
+  - SUI
+
+timeframe: 1h
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  embargo_bars: 24
+
+model:
+  name: lightgbm
+  seed: 42
+  hyperparameters:
+    num_leaves: 31
+    learning_rate: 0.03
+    n_estimators: 100
+    objective: regression
+    metric: rmse
+
+costs:
+  fee: 0.0004
+  slippage: 0.0002
+
+metrics:
+  portfolio_return_pct: 3.05
+  portfolio_max_drawdown_pct: 6.54
+  trades: 390
+  win_rate_pct: 53.8

@@ -1,4 +1,14 @@
-@app.route('/api/equity')
+import os
+import time
+import json
+import pandas as pd
+from flask import Blueprint, jsonify
+
+equity_bp = Blueprint('equity_bp', __name__)
+DATA_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'trades.csv')
+
+
+@equity_bp.route('/api/equity')
 def get_equity():
     """Calculate portfolio equity curve from trade history."""
     if not os.path.exists(DATA_FILE):
@@ -29,7 +39,6 @@ def get_equity():
         # Add current equity
         port_file = os.path.join(os.path.dirname(__file__), '..', 'data', 'portfolio.json')
         if os.path.exists(port_file):
-            import json
             with open(port_file, 'r') as f:
                 port = json.load(f)
                 equity_curve.append({"time": time.time(), "value": port.get('total_value', equity)})

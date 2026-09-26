@@ -35,7 +35,7 @@ redis_client = None
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Application startup initiated.")
-    global exchange_for_ticker, exchange_pool, redis_client, is_redis_connected
+    global exchange_for_ticker, redis_client, is_redis_connected
 
     # Initialize a pool of exchanges to be reused
     exchange_ids = ['binance', 'kraken', 'kucoin']
@@ -946,7 +946,6 @@ async def get_historical_data(symbol: str, timeframe: str = "1d"):
 @app.get("/api/portfolio")
 async def get_portfolio():
     """Get current virtual portfolio state."""
-    global is_redis_connected, redis_client
     if is_redis_connected and redis_client:
         try:
             data = await redis_client.get("live_portfolio")

@@ -1,4 +1,4 @@
-name: AI Crypto Bot CI/CD
+name: AI Trading Research Platform CI/CD
 
 on:
   push:
@@ -22,19 +22,17 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Install testing requirements
-        pip install pytest flake8
-        # Mock install some heavy dependencies for CI speed if needed, or install all
+        pip install pytest flake8 pytest-asyncio
         pip install -r requirements.txt
         
     - name: Lint with flake8
       run: |
         # Stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings
-        flake8 . --count --exit-zero --max-complexity=15 --max-line-length=120 --statistics
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=venv,.venv,scratch,catboost_info,then
+        # Exit-zero for styling warnings
+        flake8 . --count --exit-zero --max-complexity=15 --max-line-length=120 --statistics --exclude=venv,.venv,scratch,catboost_info,then
         
-    - name: Run PyTest
+    - name: Run Institutional PyTest Suite
       run: |
-        # Run the test suite in the tests/ directory
-        pytest tests/
+        # Executes tests/data, tests/leakage, tests/backtest, tests/risk, tests/execution
+        pytest
