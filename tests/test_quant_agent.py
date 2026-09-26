@@ -5,7 +5,8 @@ import unittest
 import json
 import numpy as np
 import pandas as pd
-from agents.quant_agent import QuantitativeAnalysisAgent, TechnicalIndicators, Signal, BacktestResult
+from models.technical_indicators import TechnicalIndicators
+from agents.quant_agent import QuantitativeAnalysisAgent
 
 
 class TestTechnicalIndicators(unittest.TestCase):

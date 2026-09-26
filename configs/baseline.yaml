@@ -1,0 +1,30 @@
+# Classical Quantitative Baseline Configurations
+baseline:
+  moving_average:
+    fast_window: 20
+    slow_window: 50
+    signal_type: "crossover"
+
+  logistic_regression:
+    penalty: "l2"
+    C: 1.0
+    max_iter: 1000
+    solver: "lbfgs"
+    random_state: 42
+    threshold: 0.52
+
+  random_forest:
+    n_estimators: 100
+    max_depth: 6
+    min_samples_split: 10
+    random_state: 42
+    n_jobs: -1
+    threshold: 0.52
+
+  lightgbm:
+    n_estimators: 150
+    max_depth: 5
+    learning_rate: 0.03
+    num_leaves: 31
+    random_state: 42
+    threshold: 0.52

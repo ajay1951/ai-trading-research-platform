@@ -1,0 +1,32 @@
+# Production Trading Daemon & Risk Engine Configuration
+trading:
+  universe:
+    - "BTC/USDT"
+    - "ETH/USDT"
+    - "SOL/USDT"
+    - "BNB/USDT"
+    - "XRP/USDT"
+    - "DOGE/USDT"
+    - "ADA/USDT"
+    - "AVAX/USDT"
+    - "LINK/USDT"
+    - "NEAR/USDT"
+    - "LTC/USDT"
+    - "DOT/USDT"
+    - "SUI/USDT"
+  cadence: "1h"
+  candle_close_execution: true
+
+risk:
+  max_portfolio_slots: 2
+  max_capital_utilization: 0.50  # 50% max gross exposure
+  bull_trailing_stop: 0.05       # 5% trailing stop
+  bull_take_profit: 0.25          # 25% take profit
+  bear_trailing_stop: 0.16       # 16% trailing stop
+  bear_take_profit: 0.15          # 15% take profit
+  emergency_circuit_breaker_pct: 0.015  # 1.5% max price deviation
+
+friction:
+  maker_fee: 0.0002
+  taker_fee: 0.0004
+  estimated_slippage: 0.0002

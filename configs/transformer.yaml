@@ -1,0 +1,25 @@
+# PyTorch Self-Attention Transformer Model Configuration
+model:
+  type: "transformer"
+  architecture:
+    input_dim: null  # Dynamically inferred from feature pipeline
+    d_model: 48
+    nhead: 4
+    num_layers: 2
+    dim_feedforward: 128
+    dropout: 0.20
+    output_dim: 2
+
+training:
+  sequence_length: 24   # 24-hour lookback window
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  epochs: 10
+  seed: 42
+  device: "cuda_if_available"
+
+execution:
+  prediction_threshold: 0.52
+  fee_rate: 0.0004
+  slippage: 0.0002
