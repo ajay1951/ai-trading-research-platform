@@ -1,38 +1,55 @@
 {
+  "experiment_id": "EXP-001",
+  "source_trades": "artifacts/experiments/EXP-001/trades.csv",
+  "source_equity_curve": "artifacts/experiments/EXP-001/equity_curve.csv",
+  "commit_sha": "138fda1e52c3c93f3ef700182eb05b7d6465d5dd",
+  "trade_count": 9,
   "monte_carlo": {
     "n_simulations": 1000,
-    "sample_trade_count": 80,
-    "median_max_dd_pct": 11.75,
-    "var_95_max_dd_pct": 21.67,
-    "var_99_max_dd_pct": 26.94,
-    "worst_case_max_dd_pct": 35.25,
-    "probability_of_profit_pct": 96.5
+    "sample_trade_count": 9,
+    "median_max_dd_pct": 0.29,
+    "var_95_max_dd_pct": 0.58,
+    "var_99_max_dd_pct": 0.58,
+    "cvar_95_max_dd_pct": 0.63,
+    "worst_case_max_dd_pct": 1.99,
+    "probability_of_profit_pct": 99.8
   },
   "bootstrap_sharpe_ci": {
-    "median_sharpe": 2.61,
+    "median_sharpe": 4.46,
     "confidence_level": 0.95,
-    "ci_lower": 0.15,
-    "ci_upper": 5.28,
-    "p_sharpe_positive": 97.9
+    "ci_lower": 0.83,
+    "ci_upper": 8.44,
+    "p_sharpe_positive": 99.7
   },
   "regime_breakdown": {
     "bull_regime": {
       "regime": "Bull (BTC > +5% 100d SMA)",
-      "bars": 942,
-      "cumulative_return_pct": 8.71,
-      "sharpe": 2.66
+      "bars": 0,
+      "cumulative_return_pct": 0.0,
+      "sharpe": 0.0
     },
     "bear_regime": {
       "regime": "Bear (BTC < -5% 100d SMA)",
-      "bars": 5372,
-      "cumulative_return_pct": -45.21,
-      "sharpe": -1.8
+      "bars": 1144,
+      "cumulative_return_pct": 8.26,
+      "sharpe": 4.08
     },
     "sideways_regime": {
       "regime": "Sideways (Consolidation)",
-      "bars": 3685,
-      "cumulative_return_pct": 3.23,
-      "sharpe": 0.39
+      "bars": 2,
+      "cumulative_return_pct": 0.0,
+      "sharpe": 0.0
     }
+  },
+  "stability_analysis": {
+    "is_statistically_unstable": true,
+    "sample_size": 9,
+    "sample_size_assessment": "INSUFFICIENT",
+    "warnings": [
+      "Small sample size (9 trades < 30 threshold). Statistical metrics exhibit high estimation variance and regime sensitivity.",
+      "Extremely high Sharpe ratio (4.08 > 3.0) on short test slice. Likely indicates regime-specific tail-event filtering rather than stationary multi-year edge.",
+      "Near-infinite profit factor (53.84) due to zero or negligible losing trades in short slice."
+    ],
+    "cautionary_flag": "Small sample size / statistically unstable metric."
   }
 }

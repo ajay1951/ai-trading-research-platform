@@ -1,0 +1,10 @@
+{
+  "return_pct": 8.26,
+  "sharpe": 4.08,
+  "sortino": 2.01,
+  "max_drawdown": 2.74,
+  "calmar": 3.02,
+  "trades": 9,
+  "win_rate": 88.9,
+  "profit_factor": 53.84
+}

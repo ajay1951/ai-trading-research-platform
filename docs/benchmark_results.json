@@ -12,14 +12,14 @@
   },
   {
     "Model":"PyTorch LSTM",
-    "Return (%)":4.27,
-    "Sharpe":1.67,
-    "Sortino":1.4,
-    "Max DD (%)":4.73,
-    "Calmar":0.9,
-    "Trades":30,
-    "Win Rate (%)":66.7,
-    "Profit Factor":2.55
+    "Return (%)":7.58,
+    "Sharpe":3.24,
+    "Sortino":2.0,
+    "Max DD (%)":2.89,
+    "Calmar":2.62,
+    "Trades":18,
+    "Win Rate (%)":77.8,
+    "Profit Factor":4.62
   },
   {
     "Model":"Buy & Hold",
@@ -34,14 +34,14 @@
   },
   {
     "Model":"Transformer (Attention)",
-    "Return (%)":-0.48,
-    "Sharpe":-0.12,
-    "Sortino":-0.09,
-    "Max DD (%)":3.89,
-    "Calmar":-0.12,
-    "Trades":50,
-    "Win Rate (%)":46.0,
-    "Profit Factor":1.77
+    "Return (%)":-2.63,
+    "Sharpe":-1.03,
+    "Sortino":-0.61,
+    "Max DD (%)":6.07,
+    "Calmar":-0.43,
+    "Trades":33,
+    "Win Rate (%)":51.5,
+    "Profit Factor":1.2
   },
   {
     "Model":"Logistic Regression",

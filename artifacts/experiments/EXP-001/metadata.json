@@ -1,0 +1,19 @@
+{
+  "experiment_id": "EXP-001",
+  "dataset": "BTCUSDT-1h-v1",
+  "dataset_file": "data/BTCUSDT_1h_historical.csv",
+  "dataset_hash": "151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68",
+  "commit_sha": "138fda1e52c3c93f3ef700182eb05b7d6465d5dd",
+  "train_period": "2025-09-09 01:00:00+00:00 to 2026-04-28 22:00:00+00:00",
+  "validation_period": "2026-04-29 23:00:00+00:00 to 2026-06-18 14:00:00+00:00",
+  "test_period": "2026-06-19 15:00:00+00:00 to 2026-08-06 08:00:00+00:00",
+  "split": "70/15/15",
+  "embargo_bars": 24,
+  "seed": 42,
+  "fee_bps": 4.0,
+  "slippage_bps": 2.0,
+  "total_round_trip_bps": 12.0,
+  "execution": "t+1_open",
+  "model": "PyTorch LSTM",
+  "created_at": "2026-09-26T14:25:48.009294+00:00"
+}

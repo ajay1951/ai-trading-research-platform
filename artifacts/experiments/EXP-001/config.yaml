@@ -1,0 +1,34 @@
+# Reproducible Experiment Configuration: EXP-001
+experiment_id: EXP-001
+dataset:
+  name: BTCUSDT-1h-v1
+  file: data/BTCUSDT_1h_historical.csv
+  timeframe: 1h
+  sample_bars: 8000
+  dataset_hash: 151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68
+
+temporal_split:
+  train_pct: 0.70
+  val_pct: 0.15
+  test_pct: 0.15
+  embargo_bars: 24
+  train_bars: 5566
+  val_bars: 1192
+  test_bars: 1146
+
+execution:
+  timing: t+1_open
+  signal_threshold: 0.52
+  fee_bps: 4.0
+  slippage_bps: 2.0
+  round_trip_cost_bps: 12.0
+
+model:
+  type: PyTorch LSTM
+  architecture: 2-Layer Recurrent Neural Network
+  random_seed: 42
+
+features:
+  pipeline: TechnicalFeaturePipeline
+  feature_count: 31
+  normalization: StandardScaler (fit strictly on train fold only)

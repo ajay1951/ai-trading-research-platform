@@ -1,0 +1,27 @@
+# Walk-Forward Optimization Configuration: EXP-WFO-001
+experiment_id: EXP-WFO-001
+dataset:
+  name: BTCUSDT-1h-v1
+  file: data/BTCUSDT_1h_historical.csv
+  timeframe: 1h
+  sample_bars: 12000
+  dataset_hash: 151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68
+
+walk_forward:
+  n_splits: 5
+  embargo_pct: 0.01
+  split_method: PurgedWalkForwardOptimization (De Prado methodology)
+
+execution:
+  timing: t+1_open
+  signal_threshold: 0.52
+  fee_bps: 4.0
+  slippage_bps: 2.0
+  round_trip_bps: 12.000000000000002
+
+model:
+  type: LightGBM
+  parameters:
+    n_estimators: 100
+    max_depth: 5
+    learning_rate: 0.03

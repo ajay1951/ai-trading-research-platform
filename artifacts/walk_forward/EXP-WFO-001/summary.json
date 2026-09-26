@@ -1,0 +1,21 @@
+{
+  "wfo_experiment_id": "EXP-WFO-001",
+  "asset": "BTCUSDT",
+  "model": "LightGBM",
+  "total_folds": 5,
+  "profitable_folds": 1,
+  "profitable_folds_pct": 20.0,
+  "initial_balance": 1000.0,
+  "ending_balance": 635.31,
+  "total_return_pct": -36.47,
+  "mean_fold_return_pct": -8.44,
+  "mean_fold_sharpe": -2.13,
+  "mean_fold_max_drawdown_pct": 12.88,
+  "overall_max_drawdown_pct": 41.61,
+  "total_trades": 388,
+  "execution_frictions": {
+    "maker_fee_bps": 4.0,
+    "slippage_bps": 2.0,
+    "total_round_trip_bps": 12.000000000000002
+  }
+}
