@@ -53,9 +53,13 @@ def run_portfolio_backtest():
         print(f"[!] Warning: Weights file not found at {weights_path}.", flush=True)
 
     base_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
-    assets = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"]
+    assets = [
+        "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT",
+        "DOGEUSDT", "ADAUSDT", "AVAXUSDT", "LINKUSDT", "NEARUSDT",
+        "LTCUSDT", "DOTUSDT", "SUIUSDT"
+    ]
     
-    print("\n2. Loading & Aligning 5-Asset Hourly Data (2019–2026)...", flush=True)
+    print(f"\n2. Loading & Aligning {len(assets)}-Asset Hourly Universe Data (2020–2026)...", flush=True)
     dfs = {}
     for asset in assets:
         print(f"  [+] Pre-processing {asset} (1h resolution)...", flush=True)
@@ -72,11 +76,9 @@ def run_portfolio_backtest():
         df = engineer.get_features().sort_index()
         dfs[asset] = df
 
-    # Find common timestamp index across all assets
-    common_idx = dfs[assets[0]].index
-    for asset in assets[1:]:
-        common_idx = common_idx.intersection(dfs[asset].index)
-    common_idx = common_idx.sort_values()
+    # Master Timeline: Driven by BTCUSDT (2020 to 2026) to avoid truncating history for newer listings
+    master_idx = dfs["BTCUSDT"].index.sort_values()
+    common_idx = master_idx[master_idx >= '2020-01-01']
     
     # Add Dummy USDT Asset for Cash Position
     assets.append("USDTUSDT")
@@ -85,7 +87,7 @@ def run_portfolio_backtest():
     df_usdt['ATR_14'] = 0.0
     dfs["USDTUSDT"] = df_usdt
     
-    print(f"\n[+] Total Synchronized Timestamps: {len(common_idx):,} steps")
+    print(f"\n[+] Total Synchronized Timestamps: {len(common_idx):,} steps across {len(assets)-1} universe assets")
     
     # Portfolio State ($50 initial shared balance)
     initial_cash = 50.0
@@ -119,14 +121,18 @@ def run_portfolio_backtest():
     asset_1mo_z = {}
     
     for asset in assets:
-        df_aligned = dfs[asset].loc[common_idx]
-        asset_closes[asset] = df_aligned['close'].values
-        asset_atrs[asset] = df_aligned['ATR_14'].values if 'ATR_14' in df_aligned.columns else np.zeros(len(common_idx))
-        asset_1mo_z[asset] = df_aligned['1mo_z_score'].values if '1mo_z_score' in df_aligned.columns else np.zeros(len(common_idx))
+        df_aligned = dfs[asset].reindex(common_idx)
+        asset_closes[asset] = np.nan_to_num(df_aligned['close'].values, nan=0.0)
+        asset_atrs[asset] = np.nan_to_num(df_aligned['ATR_14'].values, nan=0.0) if 'ATR_14' in df_aligned.columns else np.zeros(len(common_idx))
+        asset_1mo_z[asset] = np.nan_to_num(df_aligned['1mo_z_score'].values, nan=0.0) if '1mo_z_score' in df_aligned.columns else np.zeros(len(common_idx))
         
         # Pre-build feature matrix array (steps x features)
         cols_present = [c for c in feature_cols if c in df_aligned.columns]
-        asset_matrices[asset] = df_aligned[cols_present].values
+        mat_arr = np.nan_to_num(df_aligned[cols_present].values, nan=0.0)
+        if mat_arr.shape[1] < 18:
+            pad = np.zeros((len(common_idx), 18 - mat_arr.shape[1]))
+            mat_arr = np.hstack([mat_arr, pad])
+        asset_matrices[asset] = mat_arr
 
     # Calculate Macro Regime Filter (100-day SMA of BTC on 1h data: 24h * 100 = 2400 steps)
     print("\n[+] Calculating Macro Regime Filter (100-day SMA on 1h data)...", flush=True)
@@ -198,6 +204,9 @@ def run_portfolio_backtest():
             raw_targets = {}
             for idx, asset in enumerate(assets):
                 c_price = current_prices[asset]
+                if c_price <= 0.0 or asset == "USDTUSDT":
+                    raw_targets[asset] = 0.0
+                    continue
                 action = actions[idx]
                 
                 raw_conf = 1.0 if action == 2 else (0.5 if action == 1 else -1.0)
@@ -228,8 +237,15 @@ def run_portfolio_backtest():
                     
                 raw_targets[asset] = t_alloc if abs(t_alloc) > 0.05 else 0.0
 
-            # Step 2: Proportional Kelly Normalization (All 5 Assets Shared)
-            total_target_alloc = sum(abs(v) for v in raw_targets.values())
+            # Step 2: Proportional Kelly Normalization with Top-2 Concentration
+            # In a 13-asset universe, focusing capital into the top 2 highest-conviction runners
+            # prevents diluting a $50 account into 13 sub-$4 micro-positions that violate MIN_ORDER_VALUE ($5.00)
+            MAX_SLOTS = 2
+            valid_active = [a for a in assets if a != "USDTUSDT" and current_prices[a] > 0 and raw_targets.get(a, 0.0) > 0]
+            sorted_by_conf = sorted(valid_active, key=lambda a: raw_targets[a], reverse=True)
+            top_active_set = set(sorted_by_conf[:MAX_SLOTS])
+            top_target_alloc = sum(raw_targets[a] for a in top_active_set)
+            
             focused_allocations = {}
             
             # Macro Regime Filter
@@ -261,6 +277,9 @@ def run_portfolio_backtest():
             
             for asset in assets:
                 c_price = current_prices[asset]
+                if c_price <= 0.0 or asset == "USDTUSDT":
+                    focused_allocations[asset] = 0.0
+                    continue
                 atr_val = asset_atrs[asset][i]
                 # Dynamic ATR-adjusted Trailing Stop (15% to 25%) to prevent fee churn
                 atr_trail = float(np.clip((atr_val / c_price) * 4.0 if c_price > 0 else 0.15, 0.15, 0.25))
@@ -270,17 +289,22 @@ def run_portfolio_backtest():
                     focused_allocations[asset] = 0.0
                 elif holdings[asset] < 0 and current_prices[asset] > lowest_price[asset] * (1.0 + atr_trail):
                     focused_allocations[asset] = 0.0
-                elif total_target_alloc > max_portfolio_exposure:
-                    focused_allocations[asset] = (raw_targets[asset] / total_target_alloc) * max_portfolio_exposure
+                elif asset in top_active_set and top_target_alloc > 0:
+                    focused_allocations[asset] = (raw_targets[asset] / top_target_alloc) * max_portfolio_exposure
+                elif holdings[asset] != 0:
+                    # Keep existing position until trailing stop or profit target hits
+                    focused_allocations[asset] = (holdings[asset] * c_price) / max(1.0, total_portfolio_val)
                 else:
-                    focused_allocations[asset] = raw_targets[asset]
+                    focused_allocations[asset] = 0.0
 
             # Step 3: Execute Rebalancing Orders with Institutional Tolerance Band
             MIN_ORDER_PCT = 0.20 # 20% portfolio band to avoid fee churn
             MIN_ORDER_VALUE = 5.0 # $5 minimum order
             for asset in assets:
                 c_price = current_prices[asset]
-                target_val = total_portfolio_val * focused_allocations[asset]
+                if c_price <= 0.0 or asset == "USDTUSDT":
+                    continue
+                target_val = total_portfolio_val * focused_allocations.get(asset, 0.0)
                 current_val = holdings[asset] * c_price
                 val_diff = target_val - current_val
                 min_trade_size = max(MIN_ORDER_VALUE, total_portfolio_val * MIN_ORDER_PCT)
