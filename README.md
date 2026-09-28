@@ -1,13 +1,15 @@
 # AI Trading Research Platform
 
 [![CI](https://github.com/ajay1951/ai-trading-research-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ajay1951/ai-trading-research-platform/actions/workflows/ci.yml)
-[![Live Demo](https://img.shields.io/badge/Live%20Workstation-Oracle%20Cloud-success.svg)](http://129.225.85.106)
+[![Live Demo](https://img.shields.io/badge/Live%20Paper%20Trading-Oracle%20Cloud-success.svg)](http://129.225.85.106)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![Tests](https://img.shields.io/badge/tests-37%20passed%20(100%25)-brightgreen.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Research, MLOps, and algorithmic trading engineering platform evaluating quantitative strategies under strict anti-leakage controls, realistic execution costs, walk-forward validation, statistical testing, and 24/7 cloud production deployment.**
+> **Research Disclaimer**: This system is intended for research and paper trading. It does not execute real-money trades. Backtest and paper-trading results do not imply future profitability.
+
+> **Research and ML engineering platform for evaluating quantitative cryptocurrency trading strategies under strict anti-leakage controls, realistic execution costs, walk-forward validation, statistical testing, and 24/7 autonomous paper trading using live market data.**
 
 ```text
 This is not a simple trading bot.
@@ -27,6 +29,7 @@ It includes:
 - reproducible experiments
 - automated testing
 - CI/CD
+- 24/7 autonomous paper trading using live market data
 ```
 
 ---
@@ -34,7 +37,7 @@ It includes:
 ## 1. Project Overview
 
 ### What the Project Is
-The **AI Trading Research Platform** is an auditable, end-to-end quantitative research environment built in Python. It provides the disciplined infrastructure required to formulate, train, backtest, and statistically validate machine learning trading strategies without common methodological traps like lookahead bias, unmodeled transaction frictions, or cherry-picked backtest windows.
+The **AI Trading Research Platform** is an auditable, end-to-end quantitative research environment built in Python. It provides the disciplined infrastructure required to formulate, train, backtest, statistically validate, and paper-trade machine learning trading strategies without common methodological traps like lookahead bias, unmodeled transaction frictions, or cherry-picked backtest windows.
 
 ### What Problem It Solves
 Most algorithmic trading projects online suffer from fatal credibility issues:
@@ -54,22 +57,24 @@ Most algorithmic trading projects online suffer from fatal credibility issues:
 * **Empirical Statistical Validation Engine**: Stationary block bootstrap Sharpe distributions and Monte Carlo drawdown simulations consuming real trade-level return series ([evaluation/statistical_tests.py](evaluation/statistical_tests.py)).
 * **Purged Walk-Forward Engine**: 5-fold expanding cross-validation with embargo buffers and artifact export ([training/walk_forward.py](training/walk_forward.py)).
 * **37-Test Verification Hierarchy**: Pytest test suite covering data integrity, timestamp causality, transaction costs, risk constraints, execution idempotency, and API endpoints ([tests/](tests/)).
-* **Production API Service**: FastAPI backend exposing model registries, health checks, execution endpoints, and Prometheus metrics ([api/](api/)).
+* **Production API Service & Cloud Paper-Trading Workstation**: FastAPI backend and Next.js quantitative dashboard deployed for continuous 24/7 paper trading with live exchange data feeds ([api/](api/), [execution/live_momentum_daemon.py](execution/live_momentum_daemon.py)).
 
 ### Why It Is Different from a Simple Trading Bot
-Simple trading bots are scripts that connect to an exchange API and place basic RSI/MACD buy/sell orders. They lack data quality validation, temporal leakage prevention, walk-forward testing, transaction cost modeling, sample-size stability checks, and reproducible experiment artifact tracking. This platform is a **research and verification testbed** designed to determine whether a trading strategy possesses real, statistically significant edge before any live capital is deployed.
+Simple trading bots are scripts that connect to an exchange API and place basic RSI/MACD buy/sell orders. They lack data quality validation, temporal leakage prevention, walk-forward testing, transaction cost modeling, sample-size stability checks, and reproducible experiment artifact tracking. This platform is a **research and verification testbed** designed to evaluate quantitative strategies rigorously before any capital allocation.
 
 ---
 
-## 2. Key Features
+## 2. Cloud Paper-Trading Deployment
 
-- **Data Integrity & Cryptographic Manifests**: Automated OHLCV anomaly validation (missing bars, non-monotonic timestamps, abnormal price spikes) paired with SHA-256 dataset hashing for auditability.
-- **Strict Anti-Leakage Discipline**: Temporal train/val/test splits separated by an embargo buffer (24 bars / 1%), with standardizers fitted strictly on training data.
-- **Multi-Model Comparison**: Evaluates Buy & Hold, Moving Average (20/50 SMA), Logistic Regression, Random Forest, LightGBM, and PyTorch LSTM side-by-side.
-- **Institutional Transaction Cost Engine**: Explicitly accounts for 0.04% maker/taker fee + 0.02% slippage per fill (12 bps total round-trip).
-- **Real-Data Statistical Stress-Testing**: Monte Carlo drawdown resampling, Value at Risk (VaR 95/99), Conditional VaR, and Stationary Block Bootstrap Sharpe confidence intervals.
-- **Reproducible Experiment Artifacts**: Every run archives `metadata.json`, `config.yaml`, `metrics.json`, `trades.csv`, `equity_curve.csv`, and `README.md` linked to git commit SHAs.
-- **100% Passing Test Suite**: 37 unit and integration tests running automatically in CI.
+The platform is deployed in a live cloud environment to demonstrate production ML systems engineering, continuous operational monitoring, and automated paper execution:
+
+* **Live Web Workstation**: **[http://129.225.85.106](http://129.225.85.106)** *(or `https://129-225-85-106.sslip.io`)*
+* **Oracle Cloud Infrastructure (OCI)**: Hosted on an Ubuntu 24.04 LTS instance with 2GB swap protection, managed under PM2 process supervision and an Nginx reverse proxy.
+* **Live Market-Data Ingestion**: Ingests real-time candle and ticker data directly from public exchange feeds (Binance spot/futures via CCXT) on an hourly candle-close trigger.
+* **ML Signal Generation**: Evaluates rolling point-in-time technical and momentum features at finalized candle closes to generate directional predictions without lookahead.
+* **Risk Controls**: Enforces strict exposure limits, single-asset concentration limits (max 2 active slots), and automatic macro regime filtering (cash preservation in bear regimes).
+* **Simulated / Paper Order Execution**: Fills orders purely in simulation against live exchange prices, tracking synthetic fills, slippage, and fees. **The platform does NOT execute real-money orders.**
+* **Continuous 24×7 Operation**: Supervised 24/7 by PM2 (`nexus-bot` and `nexus-frontend`) with state persistence (`data/live_state.json`) ensuring resilient recovery across network disruptions or host restarts.
 
 ---
 
@@ -79,16 +84,17 @@ The following diagram illustrates the unidirectional data and execution flow thr
 
 ```mermaid
 flowchart TD
-    A[Market Data: OHLCV CSVs / Exchange Feeds] --> B[Data Validation: data/validator.py]
+    A[Market Data: OHLCV CSVs / Live Feeds] --> B[Data Validation: data/validator.py]
     B --> C[Data Hashing & Manifest: SHA-256]
     C --> D[Temporal Splitting: Train / Val / Test with Embargo Gap]
     D --> E[Feature Engineering: features/technical.py]
     E --> F[Machine Learning Models: Scikit-Learn, LightGBM, PyTorch LSTM]
     F --> G[Trading Signals: Threshold & Confidence Scores]
     G --> H[Backtesting: simulate_strategy_returns with 12 bps Round-Trip Frictions]
-    H --> I[Risk & Execution: Position Sizing, Concentration, Circuit Breakers]
-    I --> J[Statistical Validation: evaluation/statistical_tests.py]
-    J --> K[Experiment Artifacts: artifacts/experiments/ & artifacts/walk_forward/]
+    H --> I[Risk Controls: Position Sizing, Exposure Limits, Regime Filtering]
+    I --> J[Simulated / Paper Execution: execution/live_momentum_daemon.py]
+    I --> K[Statistical Validation: evaluation/statistical_tests.py]
+    K --> L[Experiment Artifacts: artifacts/experiments/ & artifacts/walk_forward/]
 ```
 
 ### Architecture Pipeline Summary
@@ -99,7 +105,7 @@ flowchart TD
 5. **Machine Learning Models**: Fits models strictly on in-sample data and generates out-of-sample directional probabilities.
 6. **Trading Signals**: Applies confidence thresholds and volatility filters to generate entry and exit signals.
 7. **Backtesting & Costs**: Simulates next-bar open execution (`t+1_open`) deducting 4 bps fee + 2 bps slippage per fill.
-8. **Risk & Execution**: Enforces position slot limits, exposure bounds, trailing stops, and daily circuit breakers.
+8. **Risk Controls & Paper Execution**: Enforces slot limits, cash preservation, and executes simulated paper trades. **No real-money orders are sent to exchanges.**
 9. **Statistical Validation**: Evaluates actual trade returns via block bootstrap and Monte Carlo resampling.
 10. **Experiment Artifacts**: Emits standardized, reproducible artifacts with full git commit provenance.
 
@@ -188,7 +194,7 @@ $$\text{Total Round-Trip Friction} = 2 \times 0.06\% = 0.12\% \text{ (12 bps)}$$
 
 ---
 
-## 10. Benchmark Results
+## 10. Benchmark Suite Results
 
 ### A. 13-Asset Multi-Asset Universe Benchmark
 Evaluated across all 13 liquid assets (`BTC`, `ETH`, `SOL`, `BNB`, `XRP`, `DOGE`, `ADA`, `AVAX`, `LINK`, `NEAR`, `LTC`, `DOT`, `SUI`) on an out-of-sample test window with 24-bar embargo under full 12 bps frictions. Source: [docs/universe_benchmark_results.md](docs/universe_benchmark_results.md).
@@ -217,9 +223,44 @@ Evaluated on 1,146 hourly out-of-sample bars under identical 12 bps round-trip f
 
 ---
 
-## 11. Walk-Forward Testing
+## 11. EXP-001 Reproducible Experiment
 
-Walk-Forward Optimization (WFO) tests whether a strategy's predictive performance persists across rolling, unseen chronological folds rather than a single fixed test split.
+The `EXP-001` experiment serves as the repository's immutable baseline artifact. All metadata, configurations, trade logs, and metrics are preserved verbatim in [artifacts/experiments/EXP-001/](artifacts/experiments/EXP-001/):
+
+### Experiment Metadata ([artifacts/experiments/EXP-001/metadata.json](artifacts/experiments/EXP-001/metadata.json))
+* **Experiment ID**: `EXP-001`
+* **Commit SHA**: `138fda1e52c3c93f3ef700182eb05b7d6465d5dd`
+* **Dataset**: `BTCUSDT-1h-v1` ([data/BTCUSDT_1h_historical.csv](data/BTCUSDT_1h_historical.csv))
+* **Dataset SHA-256 Hash**: `151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68`
+* **Train Period**: `2025-09-09 01:00:00+00:00 to 2026-04-28 22:00:00+00:00`
+* **Validation Period**: `2026-04-29 23:00:00+00:00 to 2026-06-18 14:00:00+00:00`
+* **Test Period**: `2026-06-19 15:00:00+00:00 to 2026-08-06 08:00:00+00:00`
+* **Train/Val/Test Split**: `70 / 15 / 15`
+* **Embargo Buffer**: `24 bars` (hourly)
+* **Random Seed**: `42`
+* **Execution Model**: `t+1_open` (next-bar open execution)
+* **Exchange Fee**: `4.0 bps` per fill
+* **Slippage**: `2.0 bps` per fill
+* **Total Round-Trip Frictions**: `12.0 bps`
+* **Model**: `PyTorch LSTM`
+
+### EXP-001 Verified Performance Metrics ([artifacts/experiments/EXP-001/metrics.json](artifacts/experiments/EXP-001/metrics.json))
+| Metric | Value | Assessment |
+| :--- | :---: | :--- |
+| **Net Return** | **+8.26%** | Outperformed baseline over test slice |
+| **Sharpe Ratio** | **4.08** | High in-regime metric (see statistical instability warning below) |
+| **Sortino Ratio** | **2.01** | Measured against negative returns |
+| **Max Drawdown** | **2.74%** | Controlled risk during test window |
+| **Calmar Ratio** | **3.02** | Return to max drawdown ratio |
+| **Total Trades** | **9** | ⚠️ **Small Sample Size (< 30 threshold)** |
+| **Win Rate** | **88.9%** | 8 wins / 1 loss |
+| **Profit Factor** | **53.84** | Driven by low trade frequency in single regime |
+
+---
+
+## 12. Walk-Forward Validation
+
+Walk-Forward Optimization (WFO) evaluates whether an ML strategy's predictive performance persists across rolling, unseen chronological folds rather than a single favorable test split.
 
 ### Empirical WFO Artifact: `EXP-WFO-001`
 * **Artifact Directory**: [artifacts/walk_forward/EXP-WFO-001/](artifacts/walk_forward/EXP-WFO-001/)
@@ -230,25 +271,25 @@ Walk-Forward Optimization (WFO) tests whether a strategy's predictive performanc
 
 ### Fold-by-Fold Results ([artifacts/walk_forward/EXP-WFO-001/fold_results.csv](artifacts/walk_forward/EXP-WFO-001/fold_results.csv)):
 
-| Fold | In-Sample Train Period | Out-of-Sample Test Period | Return (%) | Sharpe | Trades | Win Rate (%) | Max DD (%) |
-| :---: | :---| :---| :---: | :---: | :---: | :---: | :---: |
-| **1** | `2025-03-26 to 2025-06-21` | `2025-06-22 to 2025-09-08` | -10.76% | -3.98 | 102 | 34.3% | 11.23% |
-| **2** | `2025-03-26 to 2025-09-11` | `2025-09-13 to 2025-11-30` | -13.10% | -2.53 | 97 | 37.1% | 15.68% |
-| **3** | `2025-03-26 to 2025-12-03` | `2025-12-05 to 2026-02-21` | -16.02% | -3.22 | 84 | 33.3% | 17.52% |
-| **4** | `2025-03-26 to 2026-02-24` | `2026-02-26 to 2026-05-15` | -4.82% | -1.80 | 65 | 40.0% | 8.84% |
-| **5** | `2025-03-26 to 2026-05-18` | `2026-05-20 to 2026-08-06` | **+2.49%** | **+0.89** | 40 | 50.0% | 11.13% |
+| Fold | In-Sample Train Period | Out-of-Sample Test Period | Return (%) | Sharpe | Trades | Win Rate (%) | Max DD (%) | Fold Result |
+| :---: | :---| :---| :---: | :---: | :---: | :---: | :---: | :--- |
+| **1** | `2025-03-26 to 2025-06-21` | `2025-06-22 to 2025-09-08` | -10.76% | -3.98 | 102 | 34.3% | 11.23% | **Failed (Choppy Regime)** |
+| **2** | `2025-03-26 to 2025-09-11` | `2025-09-13 to 2025-11-30` | -13.10% | -2.53 | 97 | 37.1% | 15.68% | **Failed (High Churn / Fee Drag)** |
+| **3** | `2025-03-26 to 2025-12-03` | `2025-12-05 to 2026-02-21` | -16.02% | -3.22 | 84 | 33.3% | 17.52% | **Failed (Mean-Reversion Drag)** |
+| **4** | `2025-03-26 to 2026-02-24` | `2026-02-26 to 2026-05-15` | -4.82% | -1.80 | 65 | 40.0% | 8.84% | **Failed (Consolidation)** |
+| **5** | `2025-03-26 to 2026-05-18` | `2026-05-20 to 2026-08-06` | **+2.49%** | **+0.89** | 40 | 50.0% | 11.13% | **Passed (Directional Expansion)** |
 
-**Summary Findings**:
-- **Total Trades**: 388 out-of-sample trades recorded in [trades.csv](artifacts/walk_forward/EXP-WFO-001/trades.csv).
-- **Compounded Return**: `-36.47%` across 5 sequential folds under full trading frictions.
-- **Profitable Folds**: 1 of 5 (Fold 5 produced `+2.49%` net return and `+0.89` Sharpe).
-- **Key Insight**: Single-asset LightGBM on BTC suffered during choppy consolidation periods (Folds 1–4) due to fee drag from 388 trades, but turned profitable when directional volatility expanded in Fold 5.
+### Scientific WFO Findings (Preserved for Transparency)
+* **Total Out-of-Sample Trades**: 388 trades recorded in [trades.csv](artifacts/walk_forward/EXP-WFO-001/trades.csv).
+* **Compounded Out-of-Sample Return**: **`-36.47%`** across all 5 sequential folds under full 12 bps frictions.
+* **Profitable Folds**: Only **1 of 5** folds achieved positive net returns (Fold 5 produced `+2.49%` return, `+0.89` Sharpe).
+* **Critical Insight**: Single-asset LightGBM on BTC suffered sustained fee drag during sideways consolidation (Folds 1–4), demonstrating why multi-asset concentration and macro regime filters are required before deploying live capital. **These negative folds are intentionally published to uphold scientific integrity.**
 
 ---
 
-## 12. Statistical Validation
+## 13. Statistical Validation
 
-Rather than generating artificial Gaussian returns, the statistical validation engine ([evaluation/statistical_tests.py](evaluation/statistical_tests.py)) consumes **real trade returns** and **actual equity curves** from [artifacts/experiments/EXP-001/](artifacts/experiments/EXP-001/).
+Rather than generating artificial Gaussian returns, the statistical validation engine ([evaluation/statistical_tests.py](evaluation/statistical_tests.py)) performs **Monte Carlo bootstrap/resampling with replacement using actual trade-level returns** from [artifacts/experiments/EXP-001/trades.csv](artifacts/experiments/EXP-001/trades.csv) and [equity_curve.csv](artifacts/experiments/EXP-001/equity_curve.csv).
 
 Source: [docs/statistical_validation.json](docs/statistical_validation.json)
 
@@ -257,12 +298,14 @@ Source: [docs/statistical_validation.json](docs/statistical_validation.json)
   "experiment_id": "EXP-001",
   "source_trades": "artifacts/experiments/EXP-001/trades.csv",
   "source_equity_curve": "artifacts/experiments/EXP-001/equity_curve.csv",
-  "commit_sha": "19ac49b73f36844e156bcdd9e50d9c0c1920cddb",
+  "commit_sha": "138fda1e52c3c93f3ef700182eb05b7d6465d5dd",
   "trade_count": 9,
   "monte_carlo": {
     "n_simulations": 1000,
+    "sample_trade_count": 9,
     "median_max_dd_pct": 0.29,
     "var_95_max_dd_pct": 0.58,
+    "var_99_max_dd_pct": 0.58,
     "cvar_95_max_dd_pct": 0.63,
     "worst_case_max_dd_pct": 1.99,
     "probability_of_profit_pct": 99.8
@@ -278,19 +321,55 @@ Source: [docs/statistical_validation.json](docs/statistical_validation.json)
     "is_statistically_unstable": true,
     "sample_size": 9,
     "sample_size_assessment": "INSUFFICIENT",
+    "warnings": [
+      "Small sample size (9 trades < 30 threshold). Statistical metrics exhibit high estimation variance and regime sensitivity.",
+      "Extremely high Sharpe ratio (4.08 > 3.0) on short test slice. Likely indicates regime-specific tail-event filtering rather than stationary multi-year edge.",
+      "Near-infinite profit factor (53.84) due to zero or negligible losing trades in short slice."
+    ],
     "cautionary_flag": "Small sample size / statistically unstable metric."
   }
 }
 ```
 
-### Explanation of Statistical Methods
-* **Monte Carlo Resampling (1,000 paths)**: Shuffles actual historical trade outcomes to construct empirical probability distributions for maximum drawdown, Value at Risk (VaR 95%), and Conditional Value at Risk (CVaR 95%).
-* **Stationary Block Bootstrap**: Preserves temporal serial correlation in daily return series by resampling in blocks of 24 bars to produce a two-sided 95% Confidence Interval for the Sharpe ratio.
-* **Sample Size Warning**: The validation engine automatically triggers `"is_statistically_unstable": true` whenever sample size is below 30 trades, alerting researchers to estimation variance.
+### Statistical Analysis & Honest Disclosures
+* **Methodology**: Monte Carlo bootstrap/resampling with replacement using actual trade-level returns (1,000 resampled paths) to evaluate maximum drawdown distributions, Value at Risk (VaR 95%), and Conditional Value at Risk (CVaR 95%).
+* **Stationary Block Bootstrap**: Resamples the equity curve in 24-bar blocks to generate a 95% Confidence Interval for the Sharpe ratio (`[0.83, 8.44]`).
+* **⚠️ Sample Size Instability**: The engine explicitly flags `"is_statistically_unstable": true` and `"sample_size_assessment": "INSUFFICIENT"`. Because `EXP-001` contains only **9 trades**, the high Sharpe ratio (4.08) and high probability of profit (99.8%) are **statistically unstable and must NOT be interpreted as proof of reliable profitability**. They reflect performance within a single favorable market slice rather than a stationary multi-year statistical edge.
 
 ---
 
-## 13. Failure Analysis
+## 14. Reproducibility
+
+Every experiment in the platform is deterministic and fully reproducible from source code:
+
+| Parameter | Specification |
+| :--- | :--- |
+| **Dataset** | `BTCUSDT-1h-v1` ([data/BTCUSDT_1h_historical.csv](data/BTCUSDT_1h_historical.csv)) |
+| **Dataset SHA-256 Hash** | `151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68` |
+| **Train / Validation / Test Split** | `70% / 15% / 15%` (chronological) |
+| **Embargo Buffer** | `24 bars` (hourly) |
+| **Random Seed** | `42` |
+| **Execution Timing** | `t+1_open` (next-bar open execution) |
+| **Exchange Fee** | `4.0 bps` (0.04% per fill) |
+| **Slippage** | `2.0 bps` (0.02% per fill) |
+| **Total Round-Trip Frictions** | `12.0 bps` (0.12%) |
+| **Models** | `PyTorch LSTM` (EXP-001) / `LightGBM` (EXP-WFO-001) |
+
+### How to Reproduce All Experiments:
+```bash
+# 1. Reproduce baseline EXP-001
+python -m training.benchmark_suite --bars 8000 --export-exp EXP-001
+
+# 2. Run statistical validation on EXP-001 trade logs
+python -m evaluation.statistical_tests --trades artifacts/experiments/EXP-001/trades.csv --equity artifacts/experiments/EXP-001/equity_curve.csv
+
+# 3. Reproduce 5-fold Walk-Forward Optimization
+python -m training.walk_forward --bars 12000 --splits 5 --out-dir artifacts/walk_forward/EXP-WFO-001
+```
+
+---
+
+## 15. Failure Analysis
 
 Documenting negative results and failed experiments is standard scientific practice:
 
@@ -311,7 +390,7 @@ Documenting negative results and failed experiments is standard scientific pract
 
 ---
 
-## 14. Backend & API
+## 16. Backend & API
 
 The platform provides a production-grade FastAPI service ([api/main.py](api/main.py)) structured cleanly into route modules:
 
@@ -326,7 +405,7 @@ Interactive Swagger documentation is available at [http://localhost:8000/docs](h
 
 ---
 
-## 15. Testing
+## 17. Testing
 
 The repository maintains an automated test suite with **37 passing tests across 6 dedicated packages**:
 
@@ -344,57 +423,21 @@ tests/
 # Run test suite:
 pytest -v
 ```
-*Current Status: 37 passed in ~11s (100% pass rate).*
+*Current Status: 37 passed in ~20s (100% pass rate).*
 
 ---
 
-## 16. Reproducibility
-
-Every experiment in the platform follows a strict provenance chain:
-
-```text
-Dataset + SHA-256 Hash
-        ↓
-Configuration (config.yaml)
-        ↓
-Git Commit SHA
-        ↓
-Experiment Execution
-        ↓
-Closed Trades (trades.csv)
-        ↓
-Continuous Curve (equity_curve.csv)
-        ↓
-Standardized Metrics (metrics.json)
-```
-
-### Reproducing `EXP-001`
-To reproduce the exact `EXP-001` baseline experiment:
-```bash
-python -m training.benchmark_suite --bars 8000 --export-exp EXP-001
-```
-All outputs are automatically validated and exported to [artifacts/experiments/EXP-001/](artifacts/experiments/EXP-001/).
-
-### Reproducing `EXP-WFO-001`
-To reproduce the exact 5-fold Walk-Forward Optimization experiment:
-```bash
-python -m training.walk_forward --bars 12000 --splits 5 --out-dir artifacts/walk_forward/EXP-WFO-001
-```
-All fold metrics, trade logs, and continuous curves are exported to [artifacts/walk_forward/EXP-WFO-001/](artifacts/walk_forward/EXP-WFO-001/).
-
----
-
-## 17. Limitations
+## 18. Limitations & Research Ethics
 
 1. **Past Performance Does Not Guarantee Future Results**: Historical backtest and walk-forward profits are empirical research evidence, not guarantees of live trading profitability.
 2. **Modeled Transaction Costs**: Frictions are modeled at 4 bps maker fee + 2 bps slippage. During severe market liquidity panics, realized slippage on large market orders may exceed 2 bps.
 3. **Regime Vulnerability**: Models trained predominantly during trend regimes will experience drawdown during extended sideways or choppy markets unless filtered by macro regime switches.
 4. **Small Sample Size Sensitivity**: Any metric derived from fewer than 30 trades carries wide confidence intervals and must be interpreted with caution.
-5. **Research Platform, Not Financial Advice**: This software is designed exclusively for quantitative research, algorithmic verification, and machine learning systems engineering.
+5. **Research Platform, Not Financial Advice**: This software is designed exclusively for quantitative research, algorithmic verification, and machine learning systems engineering. **It does not execute real-money trades.**
 
 ---
 
-## 18. How to Run the Project
+## 19. How to Run the Project
 
 ### Prerequisites
 * Python 3.10+
@@ -440,30 +483,6 @@ python -m training.universe_benchmark --bars 5000
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 View Swagger API documentation at: [http://localhost:8000/docs](http://localhost:8000/docs)
-
----
-
-## 19. Live Cloud Deployment & MLOps Architecture
-
-The platform is deployed **24/7 in production on Oracle Cloud Infrastructure (OCI)**, demonstrating end-to-end MLOps and production reliability:
-
-* **Live Web Workstation URL**: **[http://129.225.85.106](http://129.225.85.106)** *(or `https://129-225-85-106.sslip.io`)*
-* **Cloud Infrastructure**: Oracle Cloud Infrastructure Always Free Compute (`Ubuntu 24.04 LTS`, AMD x86_64, 2GB swap protection).
-* **Reverse Proxy & Routing**: Nginx reverse proxy routing port 80/443 traffic to the Next.js workstation on port 3000 with gzip compression and WebSocket forwarding.
-* **Process Supervisor**: PM2 runtime process manager supervising background services with auto-restart on crashes and systemd persistence:
-  * `nexus-bot`: Autonomous live trading & market ingestion daemon.
-  * `nexus-frontend`: Next.js production quantitative dashboard.
-* **State Persistence & Crash Recovery**: Open positions and portfolio balances are continuously persisted to `data/live_state.json` to prevent state amnesia during network drops or VM restarts.
-
-### Why This Project Qualifies as MLOps
-
-| MLOps Core Principle | Platform Implementation |
-| :--- | :--- |
-| **1. Continuous Integration & Testing (CI/CD)** | Automated GitHub Actions CI workflow running 37 tests across data integrity, leakage prevention, execution models, and API endpoints. |
-| **2. Experiment Lineage & Reproducibility** | Version-controlled artifacts (`metadata.json`, `config.yaml`, `metrics.json`, `trades.csv`, `equity_curve.csv`) bound to git commit SHAs and dataset hashes. |
-| **3. Pipeline & Data Validation** | Strict chronological train/validation/test splits with 1% embargo buffers; zero lookahead in causal rolling indicators. |
-| **4. Continuous Model Evaluation** | 5-fold Purged Walk-Forward Cross-Validation (WFO) and Stationary Block Bootstrap Sharpe validation on real out-of-sample trades. |
-| **5. 24/7 Production Deployment & Monitoring** | Cloud deployment with PM2 daemon supervision, Nginx reverse proxying, and live telemetry endpoints. |
 
 ---
 

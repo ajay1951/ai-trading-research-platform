@@ -2,6 +2,7 @@
   "experiment_id": "EXP-001",
   "source_trades": "artifacts/experiments/EXP-001/trades.csv",
   "source_equity_curve": "artifacts/experiments/EXP-001/equity_curve.csv",
+  "source_metrics": "artifacts/experiments/EXP-001/metrics.json",
   "commit_sha": "138fda1e52c3c93f3ef700182eb05b7d6465d5dd",
   "trade_count": 9,
   "monte_carlo": {
