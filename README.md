@@ -1,12 +1,13 @@
 # AI Trading Research Platform
 
 [![CI](https://github.com/ajay1951/ai-trading-research-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ajay1951/ai-trading-research-platform/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Workstation-Oracle%20Cloud-success.svg)](http://129.225.85.106)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![Tests](https://img.shields.io/badge/tests-37%20passed%20(100%25)-brightgreen.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Research and ML engineering platform for evaluating quantitative cryptocurrency trading strategies under strict anti-leakage controls, realistic execution costs, walk-forward evaluation, statistical validation, and reproducible experiments.**
+> **Research, MLOps, and algorithmic trading engineering platform evaluating quantitative strategies under strict anti-leakage controls, realistic execution costs, walk-forward validation, statistical testing, and 24/7 cloud production deployment.**
 
 ```text
 This is not a simple trading bot.
@@ -439,6 +440,30 @@ python -m training.universe_benchmark --bars 5000
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 View Swagger API documentation at: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 19. Live Cloud Deployment & MLOps Architecture
+
+The platform is deployed **24/7 in production on Oracle Cloud Infrastructure (OCI)**, demonstrating end-to-end MLOps and production reliability:
+
+* **Live Web Workstation URL**: **[http://129.225.85.106](http://129.225.85.106)** *(or `https://129-225-85-106.sslip.io`)*
+* **Cloud Infrastructure**: Oracle Cloud Infrastructure Always Free Compute (`Ubuntu 24.04 LTS`, AMD x86_64, 2GB swap protection).
+* **Reverse Proxy & Routing**: Nginx reverse proxy routing port 80/443 traffic to the Next.js workstation on port 3000 with gzip compression and WebSocket forwarding.
+* **Process Supervisor**: PM2 runtime process manager supervising background services with auto-restart on crashes and systemd persistence:
+  * `nexus-bot`: Autonomous live trading & market ingestion daemon.
+  * `nexus-frontend`: Next.js production quantitative dashboard.
+* **State Persistence & Crash Recovery**: Open positions and portfolio balances are continuously persisted to `data/live_state.json` to prevent state amnesia during network drops or VM restarts.
+
+### Why This Project Qualifies as MLOps
+
+| MLOps Core Principle | Platform Implementation |
+| :--- | :--- |
+| **1. Continuous Integration & Testing (CI/CD)** | Automated GitHub Actions CI workflow running 37 tests across data integrity, leakage prevention, execution models, and API endpoints. |
+| **2. Experiment Lineage & Reproducibility** | Version-controlled artifacts (`metadata.json`, `config.yaml`, `metrics.json`, `trades.csv`, `equity_curve.csv`) bound to git commit SHAs and dataset hashes. |
+| **3. Pipeline & Data Validation** | Strict chronological train/validation/test splits with 1% embargo buffers; zero lookahead in causal rolling indicators. |
+| **4. Continuous Model Evaluation** | 5-fold Purged Walk-Forward Cross-Validation (WFO) and Stationary Block Bootstrap Sharpe validation on real out-of-sample trades. |
+| **5. 24/7 Production Deployment & Monitoring** | Cloud deployment with PM2 daemon supervision, Nginx reverse proxying, and live telemetry endpoints. |
 
 ---
 
