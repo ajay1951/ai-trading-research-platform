@@ -48,7 +48,7 @@ Most algorithmic trading projects online suffer from fatal credibility issues:
 
 ### Who It Is Designed For
 * **Quantitative Researchers & ML Engineers** who require a rigorous test harness with causal point-in-time features, out-of-sample temporal cross-validation, and statistical stress testing.
-* **Institutional Interviewers & Recruiters** evaluating production-grade ML engineering, clean system architecture, statistical honesty, and auditable research methodology.
+* **Engineering Teams** evaluating production-grade quantitative software architecture, continuous paper execution, statistical rigor, and auditable ML pipelines.
 
 ### What I Personally Built
 * **Causal Feature Pipeline**: Point-in-time indicator engine ([features/technical.py](features/technical.py), [backtesting/quant_features.py](backtesting/quant_features.py)) ensuring zero forward-looking lookahead.
@@ -188,8 +188,9 @@ Trading without costs produces completely misleading research. The platform enfo
 $$\text{Frictions Per Fill} = \text{Exchange Fee} (0.04\%) + \text{Slippage} (0.02\%) = 0.06\% \text{ per fill}$$
 $$\text{Total Round-Trip Friction} = 2 \times 0.06\% = 0.12\% \text{ (12 bps)}$$
 
-* **Exchange Fee (4.0 bps)**: Matches standard Binance VIP 0 / Bybit taker fee tiers.
-* **Slippage (2.0 bps)**: Models market impact and bid-ask spread crossing on liquid cryptocurrency pairs ($>\$50\text{M}$ daily volume).
+* **Configured Fee (4.0 bps)**: 0.04% per fill.
+* **Configured Slippage (2.0 bps)**: 0.02% per fill modeling bid-ask crossing and market impact.
+* **Total Round-Trip Friction (12.0 bps)**: 0.12% round-trip friction deducted on all completed transactions.
 * **Impact Verification**: Validated by automated tests in [tests/backtest/test_transaction_costs.py](tests/backtest/test_transaction_costs.py), proving that net returns correctly deduct 12 bps per completed round trip.
 
 ---

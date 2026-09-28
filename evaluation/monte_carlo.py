@@ -15,7 +15,7 @@ class MonteCarloSimulator:
         self.seed = seed
 
     def simulate(self, trade_returns: List[float]) -> Dict[str, Any]:
-        """Runs Monte Carlo permutation resampling across historical trade returns."""
+        """Runs Monte Carlo bootstrap/resampling with replacement across historical trade returns."""
         if len(trade_returns) < 5:
             return {"error": "Insufficient trade count for simulation"}
 

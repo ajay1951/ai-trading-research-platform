@@ -4,7 +4,7 @@
 - **Model**: PyTorch LSTM
 - **Dataset**: `BTCUSDT-1h-v1` (data/BTCUSDT_1h_historical.csv)
 - **Dataset Hash**: `151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68`
-- **Git Commit**: `5ee004cc8db4dd4164175d242538e2732c97fb64`
+- **Git Commit**: `138fda1e52c3c93f3ef700182eb05b7d6465d5dd`
 - **Execution**: Signal at bar close $t$, fill at bar open $t+1$
 - **Frictions**: 0.04% maker fee + 0.02% slippage per fill (12 bps round-trip)
 

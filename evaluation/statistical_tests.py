@@ -2,7 +2,7 @@
 Statistical Validation & Robustness Analysis Engine
 ===================================================
 Rigorous quantitative statistical validation on REAL backtest outputs:
-1. Monte Carlo Permutation Resampling on historical trade returns (1,000 runs)
+1. Monte Carlo Bootstrap/Resampling with Replacement on historical trade returns (1,000 runs)
    -> 95% & 99% Max Drawdown VaR, CVaR 95, worst-case drawdown, probability of profit.
 2. Stationary Block Bootstrap for Sharpe Ratio (95% CI) on real periodic returns.
 3. Market Regime Segmentation (Bull, Bear, Sideways) against benchmark moving average.
@@ -34,12 +34,12 @@ class StatisticalValidationEngine:
         initial_capital: float = 1000.0
     ) -> Dict[str, Any]:
         """
-        Runs Monte Carlo permutation resampling with replacement on real trade returns
+        Runs Monte Carlo bootstrap/resampling with replacement on real trade returns
         to compute the empirical distribution of Max Drawdowns, VaR 95, CVaR 95, and Probability of Profit.
         """
         n_trades = len(trade_returns)
         if n_trades < 3:
-            raise ValueError(f"Insufficient trade count ({n_trades} trades) to execute Monte Carlo permutation resampling.")
+            raise ValueError(f"Insufficient trade count ({n_trades} trades) to execute Monte Carlo bootstrap/resampling with replacement.")
 
         simulated_max_dds = []
         simulated_final_equities = []
