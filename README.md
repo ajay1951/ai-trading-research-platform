@@ -11,25 +11,82 @@
 
 > **Research and ML engineering platform for evaluating quantitative cryptocurrency trading strategies under strict anti-leakage controls, realistic execution costs, walk-forward validation, statistical testing, and 24/7 autonomous paper trading using live market data.**
 
+
+## At a Glance
+
+| Area | Evidence |
+| :--- | :--- |
+| **Data** | `BTCUSDT_1h_historical.csv` and 13-asset benchmark universe |
+| **Models** | Logistic Regression, Random Forest, LightGBM, PyTorch LSTM |
+| **Validation** | Chronological splits, 24-bar embargo buffer, 5-fold purged walk-forward cross-validation |
+| **Backtesting** | `t+1_open` execution with 12 bps round-trip transaction costs |
+| **Leakage Testing** | Future-candle mutation invariance, train-only scaler validation |
+| **Statistical Testing** | Monte Carlo bootstrap/resampling with replacement using actual trade logs |
+| **Reproducibility** | Git commit `138fda1e52c3c93f3ef700182eb05b7d6465d5dd`, dataset SHA-256 `151b72be3a6cb775776b8869eae8da13a45a10fc6dfd2c0ea855a36a288c4f68`, seed `42` |
+| **Backend** | FastAPI service with automated API testing |
+| **Observability** | Prometheus-compatible metrics |
+| **Deployment** | Oracle Cloud + PM2 + Nginx |
+| **Execution** | Simulated paper trading only |
+| **Testing** | 37 passing automated tests (100% pass rate) |
+| **License** | MIT |
+
+## Key Engineering Evidence
+
+* **Leakage Detection**: Validates causal point-in-time features using automated tests, including future-candle mutation to prove features at time *t* remain bitwise identical when future prices change.
+* **Reproducibility**: Experiments capture complete provenance, including git commit SHA, dataset SHA-256 hash, random seeds, execution timing models, and strict fee/slippage configurations.
+* **Out-of-Sample Validation**: Evaluates models using purged walk-forward cross-validation with a 1% embargo buffer to eliminate serial correlation leakage.
+* **Statistical Validation**: Evaluates actual simulated trade logs via block bootstrap and Monte Carlo resampling rather than synthetic Gaussian returns.
+* **Failure Validation**: Preserves negative results and failed experiments (e.g., compounding losses under fees) to maintain scientific integrity and realistic modeling limitations.
+
+## Research Result
+
+The repository demonstrates the critical difference between single-slice performance and long-term out-of-sample stability:
+
+* **EXP-001 (Single Slice)**: Demonstrated an +8.26% net return and 4.08 Sharpe ratio across **only 9 trades**. This high Sharpe ratio is statistically unstable and must NOT be treated as proof of generalizable strategy performance.
+* **EXP-WFO-001 (Walk-Forward)**: Demonstrated a compounded out-of-sample return of **-36.47%** and a mean fold Sharpe of -2.13 across 5 chronological folds (388 trades), with only 1 out of 5 folds achieving profitability.
+
+*This divergence demonstrates why a favorable single test slice cannot be treated as evidence of a robust, generalizable trading system.*
+
+## What This Project Demonstrates
+
+* Designing leakage-resistant time-series ML pipelines
+* Building reproducible ML experiments
+* Implementing chronological and purged validation
+* Building backtesting infrastructure with execution-cost modeling
+* Testing ML systems with automated regression tests
+* Building FastAPI services around ML systems
+* Deploying continuous paper-trading infrastructure
+* Preserving and analyzing failed experiments
+
+## Technology Stack
+
+| Category | Technology |
+| :--- | :--- |
+| **Language** | Python 3.10+ |
+| **Machine Learning** | Scikit-Learn, LightGBM, PyTorch |
+| **Data Processing** | Pandas, NumPy |
+| **Backend API** | FastAPI, Uvicorn |
+| **Market Data** | CCXT (Binance spot/futures) |
+| **Testing** | Pytest, pytest-asyncio |
+| **Observability** | Prometheus (via FastAPI metrics) |
+| **Deployment** | Oracle Cloud (OCI), PM2, Nginx |
+
+## Repository Structure
+
 ```text
-This is not a simple trading bot.
-
-It is a research and ML engineering platform.
-
-It includes:
-- data validation
-- leakage prevention
-- multiple ML models
-- realistic transaction costs
-- backtesting
-- risk controls
-- walk-forward testing
-- statistical validation
-- failure analysis
-- reproducible experiments
-- automated testing
-- CI/CD
-- 24/7 autonomous paper trading using live market data
+ai-trading-research-platform/
+├── api/             # FastAPI backend routes and production metrics
+├── artifacts/       # Immutable experiment configurations, metadata, and trade logs
+├── backtesting/     # Quant features and causal pipeline utilities
+├── data/            # Market data validation and chronological splitters
+├── docs/            # Statistical validation and universe benchmark documentation
+├── evaluation/      # Monte Carlo bootstrap and statistical testing engine
+├── execution/       # Live momentum daemon and simulated order mechanics
+├── features/        # Point-in-time rolling technical indicators
+├── results/         # Standardized metrics output
+├── tests/           # 37 automated tests for data, leakage, risk, and execution
+├── training/        # Walk-forward validation and benchmark suites
+└── README.md
 ```
 
 ---
@@ -40,10 +97,10 @@ It includes:
 The **AI Trading Research Platform** is an auditable, end-to-end quantitative research environment built in Python. It provides the disciplined infrastructure required to formulate, train, backtest, statistically validate, and paper-trade machine learning trading strategies without common methodological traps like lookahead bias, unmodeled transaction frictions, or cherry-picked backtest windows.
 
 ### What Problem It Solves
-Most algorithmic trading projects online suffer from fatal credibility issues:
+Most algorithmic trading projects online suffer from methodological issues:
 1. **Pervasive Data Leakage**: Fitting standard scalers across the full dataset, computing rolling indicators over future bars, or misaligning timestamps causes artificially inflated backtest profits that collapse in live markets.
-2. **Frictionless Delusions**: Ignoring exchange taker fees (e.g. 0.04%) and market impact slippage (e.g. 0.02%) creates high-frequency churn strategies whose theoretical gains are entirely consumed by fees.
-3. **Overfitting & Single-Window Cherry-Picking**: Optimizing a model on one favorable slice (e.g., a massive bull market) and claiming persistent alpha without out-of-sample or walk-forward verification.
+2. **Unmodeled Transaction Frictions**: Ignoring exchange taker fees (e.g. 0.04%) and market impact slippage (e.g. 0.02%) creates high-frequency churn strategies whose theoretical gains are entirely consumed by fees.
+3. **Overfitting & Favorable Window Bias**: Optimizing a model on one favorable slice (e.g., a massive bull market) and claiming reliable profitability without out-of-sample or walk-forward verification.
 4. **Synthetic Statistical Validation**: Generating synthetic Gaussian returns rather than validating actual empirical trade logs.
 
 ### Who It Is Designed For
@@ -59,8 +116,6 @@ Most algorithmic trading projects online suffer from fatal credibility issues:
 * **37-Test Verification Hierarchy**: Pytest test suite covering data integrity, timestamp causality, transaction costs, risk constraints, execution idempotency, and API endpoints ([tests/](tests/)).
 * **Production API Service & Cloud Paper-Trading Workstation**: FastAPI backend and Next.js quantitative dashboard deployed for continuous 24/7 paper trading with live exchange data feeds ([api/](api/), [execution/live_momentum_daemon.py](execution/live_momentum_daemon.py)).
 
-### Why It Is Different from a Simple Trading Bot
-Simple trading bots are scripts that connect to an exchange API and place basic RSI/MACD buy/sell orders. They lack data quality validation, temporal leakage prevention, walk-forward testing, transaction cost modeling, sample-size stability checks, and reproducible experiment artifact tracking. This platform is a **research and verification testbed** designed to evaluate quantitative strategies rigorously before any capital allocation.
 
 ---
 
@@ -117,7 +172,7 @@ flowchart TD
 2. **Strict In-Sample / Out-of-Sample Separation**: No parameters, hyperparameter searches, or feature normalizers are tuned or fit on validation or test periods.
 3. **Purged Embargo Buffers**: Following Marcos López de Prado's methodology, an embargo buffer of 24 bars (or 1% of the timeline) separates training and testing windows to eliminate serial correlation leakage from rolling technical indicators.
 4. **Standardized Comparison**: All model architectures are evaluated on the exact same out-of-sample timestamps with identical transaction costs and position rules.
-5. **Empirical Honesty**: Metrics derived from small sample sizes (< 30 trades) are explicitly flagged as statistically unstable rather than reported as persistent alpha.
+5. **Empirical Honesty**: Metrics derived from small sample sizes (< 30 trades) are explicitly flagged as statistically unstable rather than reported as reliable profitability.
 
 ---
 
@@ -220,7 +275,7 @@ Evaluated on 1,146 hourly out-of-sample bars under identical 12 bps round-trip f
 | **Logistic Regression** | -2.71% | -2.05 | -0.64 | 4.19% | 18 | 50.0% | 0.90 | Underperformed |
 | **Moving Average (20/50)** | -8.53% | -2.72 | -2.83 | 12.55% | 13 | 38.5% | 0.56 | Trend whipsaw losses |
 
-> **⚠️ Honest Quantitative Disclosure**: The Random Forest single-asset Sharpe ratio (3.77) was produced from only **4 trades**. In our statistical validation report, this is explicitly flagged as **statistically unstable due to small sample size**. It is preserved for transparency, but must not be interpreted as evidence of persistent alpha.
+> **⚠️ Honest Quantitative Disclosure**: The Random Forest single-asset Sharpe ratio (3.77) was produced from only **4 trades**. In our statistical validation report, this is explicitly flagged as **statistically unstable due to small sample size**. It is preserved for transparency, but must not be interpreted as evidence of reliable profitability.
 
 ---
 
@@ -393,7 +448,7 @@ Documenting negative results and failed experiments is standard scientific pract
 
 ## 16. Backend & API
 
-The platform provides a production-grade FastAPI service ([api/main.py](api/main.py)) structured cleanly into route modules:
+The platform provides a FastAPI service with API validation, automated tests, and Prometheus-compatible metrics ([api/main.py](api/main.py)) structured cleanly into route modules:
 
 * **`GET /health`**: Health check and active database/model status.
 * **`GET /models`**: Model registry listing supported architectures and parameters.
@@ -431,7 +486,7 @@ pytest -v
 ## 18. Limitations & Research Ethics
 
 1. **Past Performance Does Not Guarantee Future Results**: Historical backtest and walk-forward profits are empirical research evidence, not guarantees of live trading profitability.
-2. **Modeled Transaction Costs**: Frictions are modeled at 4 bps maker fee + 2 bps slippage. During severe market liquidity panics, realized slippage on large market orders may exceed 2 bps.
+2. **Modeled Transaction Costs**: Frictions are modeled at 4 bps fee + 2 bps slippage. During severe market liquidity panics, realized slippage on large market orders may exceed 2 bps.
 3. **Regime Vulnerability**: Models trained predominantly during trend regimes will experience drawdown during extended sideways or choppy markets unless filtered by macro regime switches.
 4. **Small Sample Size Sensitivity**: Any metric derived from fewer than 30 trades carries wide confidence intervals and must be interpreted with caution.
 5. **Research Platform, Not Financial Advice**: This software is designed exclusively for quantitative research, algorithmic verification, and machine learning systems engineering. **It does not execute real-money trades.**
