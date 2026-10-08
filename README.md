@@ -1,23 +1,24 @@
 # AI Trading Research & Model Governance Platform
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![Tests Passing](https://img.shields.io/badge/Tests-402%20Passing-brightgreen.svg)](https://pytest.org/)
-[![Architecture](https://img.shields.io/badge/Architecture-ACID%20%7C%20WAL%20%7C%20FastAPI-orange.svg)](docs/architecture/system_architecture.md)
+[![Tests Passing](https://img.shields.io/badge/Tests-417%20Passing-brightgreen.svg)](https://pytest.org/)
+[![Architecture](https://img.shields.io/badge/Architecture-Transactional%20WAL%20%7C%20FastAPI-orange.svg)](docs/architecture/system_architecture.md)
 [![MLOps](https://img.shields.io/badge/MLOps-10--Gate%20Governance-purple.svg)](docs/decisions/ADR-009-fail-closed-promotion.md)
+[![LLMOps](https://img.shields.io/badge/LLMOps-Evaluation%20%7C%20Gates-blueviolet.svg)](docs/llmops-equivalence.md)
 [![Research Integrity](https://img.shields.io/badge/Research-Purged%20WFO%20%7C%20Embargoed-red.svg)](docs/decisions/ADR-001-purged-walk-forward-validation.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **A research-grade quantitative ML platform combining leakage-controlled walk-forward validation, cross-sectional portfolio modeling, realistic transaction-cost analysis, correlation-aware risk intelligence, crash-resilient paper execution, real-time probability calibration/drift monitoring, and a 10-gate Champion/Challenger model governance framework with isolated shadow deployment and atomic rollback.**
+> **A quantitative ML research and model governance platform combining leakage-controlled walk-forward validation, cross-sectional portfolio modeling, realistic transaction-cost analysis, correlation-aware risk intelligence, crash-resilient paper execution, probability calibration and model-health monitoring, and a 10-gate Champion/Challenger model governance framework with isolated shadow deployment and atomic rollback.**
 
 ---
 
 ## 1. Executive Summary
 
-The **AI Trading Research & Model Governance Platform** is an institutional-grade quantitative machine learning system engineered in Python. It addresses the fundamental reasons why machine learning systems fail in high-stakes operational environments: **data leakage**, **unmodeled transaction costs**, **uncontrolled portfolio concentration**, **brittle execution systems prone to duplicate orders during network drops**, **unmonitored probability calibration breakdown**, and **the absence of fail-closed model governance**.
+The **AI Trading Research & Model Governance Platform** is an end-to-end quantitative machine learning, backend reliability, and MLOps system engineered in Python. It addresses the fundamental reasons why ML systems degrade in operational environments: **data leakage**, **unmodeled transaction friction**, **uncontrolled asset correlation**, **execution state drift during network disconnects**, **unmonitored probability calibration breakdown**, and **the absence of fail-closed model governance**.
 
-The platform provides a complete end-to-end engineering pipeline: from strictly purged and embargoed walk-forward research validation across a 13-asset crypto universe, to ACID-compliant SQLite WAL paper execution with continuous external broker reconciliation, to a 10-gate Champion/Challenger model governance platform validated across an extended 75.8-day longitudinal out-of-sample study.
+The platform provides a complete engineering pipeline: from strictly purged and embargoed walk-forward research validation across a 13-asset universe, to a transactional SQLite WAL paper execution engine with continuous 3-way broker reconciliation, to a 10-gate Champion/Challenger model governance framework evaluated across a 75.8-day longitudinal out-of-sample study.
 
-**Primary Recruiter Message**: *"I can build, validate, operate, monitor, govern, and safely evolve production-grade ML and backend systems."*
+**Primary Engineering Focus**: Building, testing, operating, monitoring, governing, and safely evolving reliable ML, MLOps, and backend execution systems.
 
 ---
 
@@ -31,13 +32,13 @@ Typical ML Project:
 This Platform:
 [ Raw Multi-Asset Data ]
        │
-       ├──> [ 5-Fold Purged Walk-Forward Split with 24-Bar Embargo ] (Zero Lookahead Leakage)
+       ├──> [ 5-Fold Purged Walk-Forward Split with 24-Bar Embargo ] (Leakage Prevention)
        ├──> [ Realistic Transaction-Cost Model: 21.38 bps base ] (Slippage + Spread + Fees)
        ├──> [ Dynamic Correlation Ceilings & Regime Conditioning ] (Downside Protection)
-       ├──> [ Durable SQLite WAL OMS with Deduplication Tokens ] (Crash Resilient & Idempotent)
+       ├──> [ Transactional SQLite WAL OMS with Deduplication Tokens ] (Crash Resilient & Idempotent)
        ├──> [ Continuous 3-Way Broker Reconciliation ] (Automated Balance Sheet Conservation)
-       ├──> [ Real-Time Probability Calibration & PSI Drift Detection ] (ECE <= 0.08, Brier)
-       ├──> [ Isolated Shadow Deployment Harness ] (Proven Bitwise Non-Interference)
+       ├──> [ Probability Calibration & PSI Drift Detection ] (ECE <= 0.08, Brier Score)
+       ├──> [ Isolated Shadow Deployment Harness ] (Verified Non-Interference)
        ├──> [ 10-Gate Fail-Closed Promotion Hierarchy ] (Return Alone Cannot Promote a Model)
        └──> [ Verified Atomic Champion Rollback ] (Safe Operational Evolution)
 ```
@@ -61,7 +62,7 @@ flowchart TD
     end
 
     subgraph Execution_OMS [3. Reliability & OMS Layer]
-        G --> H[Durable SQLite WAL Order Management System]
+        G --> H[Transactional SQLite WAL Order Management System]
         H --> I[Idempotent Order State Machine: SHA-256 Tokens]
         I --> J[External Broker Adapter / FakeBroker Staging]
         J --> K[Continuous 3-Way Portfolio Reconciler]
@@ -80,23 +81,24 @@ flowchart TD
 
 ## 4. Key Engineering Capabilities
 
-- 🛡️ **Research Integrity**: 5-Fold Purged Walk-Forward Optimization with 24-bar embargoes. Zero lookahead bias validated via automated counterfactual future-mutation unit tests.
-- 📉 **Transaction Cost Realism**: Modeled 21.38 bps one-way (42.76 bps round-trip) friction. Proved why 1H rebalancing collapses (-90.8% net return) while 48H cadence preserves edge (+11.96% return, 2.61 Net Sharpe).
-- ⚡ **Execution Reliability**: ACID-compliant SQLite WAL Order Management System with deterministic SHA-256 deduplication tokens, continuous 3-way external broker reconciliation, and automated crash recovery.
+- 🛡️ **Research Integrity**: 5-Fold Purged Walk-Forward Optimization with 24-bar embargoes designed to prevent lookahead leakage and validated with counterfactual future-mutation unit tests.
+- 📉 **Transaction Cost Realism**: Modeled 21.38 bps one-way (42.76 bps round-trip) friction. Proved why 1H rebalancing collapses (-90.8% net return) while 48H cadence preserves positive net returns (+11.96% return, 2.61 Net Sharpe).
+- ⚡ **Execution Reliability**: Transactional SQLite WAL Order Management System with deterministic SHA-256 deduplication tokens, continuous 3-way broker reconciliation, and automated crash recovery.
 - 🔬 **Model Intelligence (MLOps)**: Expected Calibration Error ($\text{ECE} \le 0.08$), Brier score tracking, Population Stability Index (PSI) drift detection, and multi-state health alerts.
 - 🏛️ **Model Governance & Shadow Deployment**: 10-Gate Fail-Closed Promotion Hierarchy with isolated shadow evaluation and atomic rollback. Validated across 1,819 unseen hourly bars (23,600+ predictions).
-- 🧪 **Test Automation**: **402 / 402 passing Pytest tests (100% pass rate, 0 regressions)**.
+- 🤖 **LLMOps Transferability**: Provider-agnostic LLM benchmarking and 5-gate fail-closed evaluation subsystem (`evaluation/llmops/`) covering structured output, safety refusal, context grounding, and regression tracking.
+- 🧪 **Test Automation**: **417 automated Pytest tests passing with 0 errors and 0 warnings**.
 
 ---
 
-## 5. Hard Verified Numbers
+## 5. Verified Operational Numbers
 
 | Dimension | Metric | Verified Value | Evidence Source |
 |---|---|:---:|---|
 | **Asset Universe** | Canonical Crypto Assets | **13 Assets** (`BTC`, `ETH`, `SOL`, `BNB`, `XRP`, `DOGE`, `ADA`, `AVAX`, `LINK`, `NEAR`, `LTC`, `DOT`, `SUI`) | `data/` |
 | **Validation Scheme** | Purged Walk-Forward Splits | **5 Folds (24-bar embargo)** | `training/cross_sectional_runner.py` |
 | **Transaction Cost** | Modeled Base Friction | **21.38 bps one-way (42.76 bps round-trip)** | `training/p3_1f_integrity_audit.py` |
-| **Test Suite** | Automated Pytest Tests | **402 / 402 Passing (0 errors, 0 warnings)** | `tests/` |
+| **Test Suite** | Automated Pytest Tests | **417 / 417 Passing (0 errors, 0 warnings)** | `tests/` |
 | **P4-1 Shadow Study** | Extended Unseen Timeline | **1,819 hourly bars (75.8 days / 37 rebalances)** | `training/p4_1_extended_shadow.py` |
 | **P4-1 Predictions** | Out-of-Sample Predictions | **23,647 point-in-time predictions** | `results/cross_sectional/p4_1_extended_shadow.json` |
 | **Behavioral Agreement**| Directional Agreement Rate | **98.13%** (Challenger vs Champion) | `artifacts/cross_sectional/EXP-CS-P41-EXTENDED-SHADOW-001/` |
@@ -109,14 +111,14 @@ flowchart TD
 
 ## 6. P1 to P4 Engineering Evolution Timeline
 
-- **P1: Research Validity & Walk-Forward Optimization**: Eliminated lookahead leakage via 5-Fold Purged WFO and 24-bar embargoes. Established baseline Top-2 48H cross-sectional strategy (+11.96% net return, 2.61 Net Sharpe).
-- **P2: Execution Reliability & OMS Hardening**: Built ACID-compliant SQLite WAL Order Management System with idempotent SHA-256 tokens, continuous 3-way external broker reconciliation, and automated crash recovery validated via a 168-hour continuous soak test.
+- **P1: Research Validity & Walk-Forward Optimization**: Controlled lookahead leakage via 5-Fold Purged WFO and 24-bar embargoes. Established baseline Top-2 48H cross-sectional strategy (+11.96% net return, 2.61 Net Sharpe).
+- **P2: Execution Reliability & OMS Hardening**: Built transactional SQLite WAL Order Management System with idempotent SHA-256 tokens, continuous 3-way external broker reconciliation, and automated crash recovery validated via a deterministic 168-hour soak scenario harness.
 - **P3-1 & P3-1F: Transaction-Cost Intelligence**: Formulated realistic 21.38 bps cost model. Audited and eliminated execution delay double-counting, proving why high-frequency 1H rebalancing is unviable.
 - **P3-2 & P3-2F: Dynamic Risk Intelligence**: Engineered correlation-aware exposure ceilings ($\rho > 0.80$) and macro BTC regime conditioning to protect capital during simultaneous asset selloffs.
 - **P3-3: Model Intelligence, Calibration & Drift**: Implemented Expected Calibration Error ($\text{ECE} \le 0.08$), Brier score tracking, PSI distribution drift monitoring, and multi-state health alerts.
 - **P3-4: Model Governance, Promotion & Lifecycle**: Designed immutable Model Registry with SHA-256 checksums, unique Champion enforcement, isolated shadow evaluation, a 10-gate fail-closed promotion hierarchy, and atomic rollback.
 - **P4-1: Extended Longitudinal Champion vs Challenger Shadow Study**: Evaluated Champion vs Challenger across 1,819 unseen hourly bars (75.8 days / 23,600+ predictions). Proved shadow non-interference and demonstrated fail-closed governance during a macro market drawdown.
-- **P4-2: Recruiter & Portfolio Presentation**: Consolidated technical case studies, 10 Architecture Decision Records, STAR interview stories, and multi-format portfolio assets.
+- **P4-2: Recruiter & Architecture Documentation**: Consolidated technical case studies, 10 Architecture Decision Records, STAR interview stories, and LLMOps equivalence documentation.
 
 ---
 
@@ -198,30 +200,36 @@ flowchart TD
 | **Python 3.12** | Core language for ML pipelines, asynchronous backend engines, and evaluation suites. |
 | **LightGBM & Scikit-learn** | Predictive cross-sectional ranking models, Platt probability calibration, and feature scaling. |
 | **FastAPI & Uvicorn** | High-throughput asynchronous REST APIs for telemetry, model health state, and governance metrics. |
-| **SQLite WAL (ACID)** | High-speed, transactional write-ahead logging for orders, fills, account snapshots, and audit trails. |
-| **NumPy & Pandas** | High-performance point-in-time time-series manipulation, matrix operations, and metric calculations. |
-| **Pytest & Pytest-Asyncio** | 402-test automated regression suite validating research integrity, state machines, and fault injection. |
-| **Prometheus & Grafana** | Real-time observability: latency histograms (P50/P95), error rates, calibration ECE, and health alerts. |
-| **Oracle Cloud Infrastructure** | Linux staging host, PM2 process supervision, and Nginx reverse proxy. |
+| **SQLite WAL (Transactional)** | Transactional write-ahead logging for orders, fills, account snapshots, and audit trails. |
+| **NumPy & Pandas** | Point-in-time time-series manipulation, matrix operations, and metric calculations. |
+| **Pytest & Pytest-Asyncio** | 417-test automated regression suite validating research integrity, state machines, and fault injection. |
+| **Prometheus & Grafana** | Observability: latency histograms (P50/P95), error rates, calibration ECE, and health alerts. |
+| **Docker & Docker Compose** | Multi-container orchestration for backend API, database, and telemetry services. |
 
 ---
 
-## 11. Cross-Role Engineering Transferability
+## 11. LLMOps & GenAI Transferability
 
-| Role | Directly Transferable Platform Capabilities |
-|---|---|
-| **ML / AI Engineer** | Purged cross-validation, feature pipelines, probability calibration (ECE/Brier), confidence auditing, distribution drift (PSI/KS). |
-| **MLOps / Platform Engineer** | Model registry, immutable artifact versioning, isolated shadow deployment, 10-gate promotion hierarchies, atomic rollback. |
-| **Backend / Distributed Systems** | ACID transactions, idempotent state machines, deduplication tokens, crash recovery, continuous 3-way reconciliation. |
-| **SRE / Production Reliability** | Deterministic soak testing, failure injection, circuit breakers, health checks, automated fail-closed error handling. |
+While this platform is built on quantitative ML and backend execution systems, its model lifecycle, shadow evaluation, and fail-closed promotion hierarchy transfer directly to Large Language Model (LLM) and GenAI agent platforms:
+
+| Quantitative ML Subsystem | LLMOps Equivalent | Subsystem in Repo |
+|---|---|---|
+| **Champion Model** | Production Prompt / LLM Version | [`evaluation/llmops/`](evaluation/llmops/) |
+| **Challenger Model** | Candidate Prompt / Fine-tuned LLM | [`evaluation/llmops/`](evaluation/llmops/) |
+| **Shadow Evaluation** | Shadow Dual-Run Inference | [`evaluation/llmops/governance.py`](evaluation/llmops/governance.py) |
+| **Calibration (ECE)** | Grounding / Confidence Scoring | [`evaluation/llmops/metrics.py`](evaluation/llmops/metrics.py) |
+| **Feature Drift (PSI)** | Semantic / Input Prompt Drift | [`evaluation/drift_detection.py`](evaluation/drift_detection.py) |
+| **Promotion Gates** | 5-Gate Release & Safety Checks | [`evaluation/llmops/governance.py`](evaluation/llmops/governance.py) |
+
+> 📖 **Full Architectural Mapping**: See [**LLMOps Equivalence Guide**](docs/llmops-equivalence.md) for detailed mappings, differences, and benchmark implementation details.
 
 ---
 
-## 12. Complete Automated Test Suite (402 Tests Passing)
+## 12. Complete Automated Test Suite (417 Tests Passing)
 
 ```
 ======================================================================================================================
-                                         AUTOMATED TEST SUITE SUMMARY (402/402)
+                                         AUTOMATED TEST SUITE SUMMARY (417/417)
 ======================================================================================================================
   Test Category                                 Test File Path                                 Tests   Status
   --------------------------------------------------------------------------------------------------------------------
@@ -237,16 +245,17 @@ flowchart TD
   P3-3 Model Calibration, Drift & Health        tests/cross_sectional/test_p3_3*.py              4     PASS
   P3-4 Model Lifecycle, Registry & Promotion    tests/cross_sectional/test_p3_4*.py              7     PASS
   P4-1 Longitudinal Shadow Study & Integrity    tests/cross_sectional/test_p4_1*.py              4     PASS
-  P2 Paper Trading & Execution Reliability      tests/paper_trading/test_state_machine.py        1     PASS
-  P2 Idempotency & Deduplication                tests/paper_trading/test_idempotency.py          1     PASS
-  P2 Partial Fills & VWAP Execution             tests/paper_trading/test_partial_fills.py        1     PASS
-  P2 Crash Recovery & Journal Hydration         tests/paper_trading/test_crash_recovery.py       1     PASS
-  P2 Market Data Reliability & Heartbeats       tests/paper_trading/test_market_data_*.py        1     PASS
-  P2 Broker Fault Injection & UNKNOWN Recovery  tests/paper_trading/test_broker_fault_*.py       1     PASS
-  P2 Continuous 3-Way Portfolio Reconciliation  tests/paper_trading/test_portfolio_reconcil*.py  1     PASS
-  P2-8 168-Hour Continuous Soak Test Harness    tests/paper_trading/test_soak_validation.py      1     PASS
+  P2 Paper Trading & Execution Reliability      tests/paper_trading/test_state_machine.py        18    PASS
+  P2 Idempotency & Deduplication                tests/paper_trading/test_idempotency.py          12    PASS
+  P2 Partial Fills & VWAP Execution             tests/paper_trading/test_partial_fills.py        17    PASS
+  P2 Crash Recovery & Journal Hydration         tests/paper_trading/test_crash_recovery.py       12    PASS
+  P2 Market Data Reliability & Heartbeats       tests/paper_trading/test_market_data_*.py        74    PASS
+  P2 Broker Fault Injection & UNKNOWN Recovery  tests/paper_trading/test_broker_fault_*.py       37    PASS
+  P2 Continuous 3-Way Portfolio Reconciliation  tests/paper_trading/test_portfolio_reconcil*.py  38    PASS
+  P2-8 168-Hour Continuous Soak Test Harness    tests/paper_trading/test_soak_validation.py      8     PASS
+  LLMOps Benchmark & Governance Gates           tests/llmops/test_*.py                          15     PASS
   --------------------------------------------------------------------------------------------------------------------
-  TOTAL REPOSITORY TESTS:                                                                      402     PASS (100%)
+  TOTAL REPOSITORY TESTS:                                                                      417     PASS (100%)
 ======================================================================================================================
 ```
 
@@ -256,6 +265,7 @@ flowchart TD
 
 - 📖 **[Technical Case Study](docs/case-study.md)**: Comprehensive ~3,000-word engineering deep dive.
 - 📄 **[Recruiter One-Pager](docs/recruiter-one-pager.md)**: 2-page executive summary for technical recruiters and hiring managers.
+- 🤖 **[LLMOps Equivalence Guide](docs/llmops-equivalence.md)**: Transfer guide mapping quantitative governance to GenAI evaluation.
 - 💼 **[Resume Project Entries](docs/resume-project-entry.md)**: ATS, technical, and compact resume project bullets.
 - 👔 **[LinkedIn Description](docs/linkedin-project-description.md)**: Concise project overview for technical networking.
 - 🌐 **[Portfolio Website Page](docs/portfolio-project-page.md)**: Clean web-ready project presentation page.
@@ -277,8 +287,8 @@ flowchart TD
 
 ## 14. Explicit Limitations & Honest Research Disclosures
 
-1. **Modeled Transaction Costs**: Friction is modeled at 21.38 bps base based on empirical crypto spreads and fees. Live execution with high capital may experience market impact beyond the modeled constant.
+1. **Modeled Transaction Costs**: Friction is modeled at 21.38 bps base based on empirical crypto spreads and fees. Live execution with large capital may experience market impact beyond the modeled constant.
 2. **Historical Data Dependency**: Evaluated on historical Binance spot OHLCV data. Past performance does not guarantee future financial returns.
-3. **Paper Trading Scope**: The system is validated under local and cloud staging paper trading environments; it does not constitute real-money institutional trading.
+3. **Paper Trading Scope**: The system is validated under local and cloud staging paper trading environments; it does not constitute real-money trading.
 4. **Macro Downtrend Exposure**: Long-only momentum strategies inherently experience drawdown during prolonged macro crypto bear markets unless cash allocation is forced.
 5. **No Profitability Guarantee**: This project is an engineering and research platform demonstrating ML lifecycle governance, not a commercial trading product.
