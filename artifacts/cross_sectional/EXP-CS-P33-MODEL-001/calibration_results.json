@@ -1,0 +1,18 @@
+{
+  "brier_score": 0.2458,
+  "log_loss": 0.6848,
+  "expected_calibration_error": 0.0273,
+  "maximum_calibration_error": 0.5557,
+  "calibration_slope": 0.3663,
+  "calibration_intercept": -0.1974,
+  "brier_ci_95": [
+    0.245,
+    0.2467
+  ],
+  "ece_ci_95": [
+    0.0226,
+    0.0316
+  ],
+  "sample_size": 45968,
+  "is_well_calibrated": false
+}

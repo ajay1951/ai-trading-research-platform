@@ -1,0 +1,30 @@
+{
+  "hour": 142,
+  "sim_timestamp": "2026-10-06T22:00:00+00:00",
+  "uptime_seconds": 511200.0,
+  "cash": 17735.897,
+  "equity": 84366.4027,
+  "positions": {
+    "DOTUSDT": 10.0,
+    "BTCUSDT": 0.5215,
+    "ETHUSDT": 10.7892
+  },
+  "open_orders_count": 1,
+  "total_orders": 25,
+  "total_executions": 27,
+  "total_fills": 19,
+  "total_partial_fills": 5,
+  "total_cancels": 0,
+  "total_rejections": 1,
+  "total_unknown": 4,
+  "total_recovered": 4,
+  "recon_status": "HEALTHY",
+  "drift_count": 0,
+  "critical_drift_count": 0,
+  "restart_count": 4,
+  "rss_mb": 52.1,
+  "cpu_pct": 2.5,
+  "db_size_bytes": 61440,
+  "db_integrity_ok": true,
+  "fault_injected": null
+}

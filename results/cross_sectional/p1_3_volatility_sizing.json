@@ -1,0 +1,959 @@
+{
+  "title": "P1-3: Volatility Parity & Risk-Managed Position Sizing Benchmark",
+  "git_commit_sha": "d0281cf6068c08048cc0c296de1d8977faad8a5b",
+  "timestamp_utc": "2026-10-06T18:32:19.824651+00:00",
+  "volatility_parameters": {
+    "estimator": "rolling_realized_volatility",
+    "window_hours": 168,
+    "annualization_factor": "sqrt(24 * 365)"
+  },
+  "aggregate_summary": [
+    {
+      "strategy": "Equal Weight (EXP-CS-P13-EQ)",
+      "mode": "equal",
+      "mean_net_return_pct": 17.97,
+      "median_net_return_pct": 20.97,
+      "mean_gross_return_pct": 19.71,
+      "mean_costs_pct": 1.74,
+      "mean_sharpe": 3.65,
+      "mean_sortino": 5.63,
+      "mean_max_dd_pct": 13.38,
+      "calmar_ratio": 17.0,
+      "mean_daily_turnover": 1.006,
+      "mean_trades": 673.8,
+      "mean_holding_period_hours": 51.51,
+      "profitable_folds": "5/5",
+      "worst_fold_return_pct": 7.98,
+      "best_fold_return_pct": 23.25,
+      "fold_std_dev_pct": 5.59
+    },
+    {
+      "strategy": "Inverse Volatility (EXP-CS-P13-IV)",
+      "mode": "inverse_vol",
+      "mean_net_return_pct": 16.57,
+      "median_net_return_pct": 17.35,
+      "mean_gross_return_pct": 18.33,
+      "mean_costs_pct": 1.76,
+      "mean_sharpe": 3.48,
+      "mean_sortino": 5.28,
+      "mean_max_dd_pct": 13.7,
+      "calmar_ratio": 15.31,
+      "mean_daily_turnover": 1.0171,
+      "mean_trades": 673.6,
+      "mean_holding_period_hours": 51.51,
+      "profitable_folds": "5/5",
+      "worst_fold_return_pct": 4.69,
+      "best_fold_return_pct": 24.89,
+      "fold_std_dev_pct": 6.57
+    },
+    {
+      "strategy": "IV Capped [25%, 75%] (EXP-CS-P13-IV-CAP)",
+      "mode": "iv_capped",
+      "mean_net_return_pct": 16.56,
+      "median_net_return_pct": 17.3,
+      "mean_gross_return_pct": 18.32,
+      "mean_costs_pct": 1.76,
+      "mean_sharpe": 3.48,
+      "mean_sortino": 5.28,
+      "mean_max_dd_pct": 13.7,
+      "calmar_ratio": 15.3,
+      "mean_daily_turnover": 1.0171,
+      "mean_trades": 673.6,
+      "mean_holding_period_hours": 51.51,
+      "profitable_folds": "5/5",
+      "worst_fold_return_pct": 4.69,
+      "best_fold_return_pct": 24.89,
+      "fold_std_dev_pct": 6.57
+    }
+  ],
+  "fold_level_comparison": [
+    {
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "eq_net_return_pct": 15.81,
+      "eq_gross_return_pct": 17.66,
+      "eq_costs_pct": 1.85,
+      "eq_sharpe": 3.43,
+      "eq_sortino": 5.47,
+      "eq_max_dd_pct": 17.5,
+      "eq_turnover": 1.0692,
+      "eq_trades": 674,
+      "iv_net_return_pct": 17.35,
+      "iv_gross_return_pct": 19.2,
+      "iv_costs_pct": 1.85,
+      "iv_sharpe": 3.86,
+      "iv_sortino": 5.95,
+      "iv_max_dd_pct": 16.97,
+      "iv_turnover": 1.0692,
+      "iv_trades": 674,
+      "iv_cap_net_return_pct": 17.3,
+      "iv_cap_gross_return_pct": 19.15,
+      "iv_cap_costs_pct": 1.85,
+      "iv_cap_sharpe": 3.85,
+      "iv_cap_sortino": 5.94,
+      "iv_cap_max_dd_pct": 16.97,
+      "iv_cap_turnover": 1.0693,
+      "iv_cap_trades": 674
+    },
+    {
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "eq_net_return_pct": 23.25,
+      "eq_gross_return_pct": 24.83,
+      "eq_costs_pct": 1.59,
+      "eq_sharpe": 4.44,
+      "eq_sortino": 6.64,
+      "eq_max_dd_pct": 14.87,
+      "eq_turnover": 0.9167,
+      "eq_trades": 671,
+      "iv_net_return_pct": 24.89,
+      "iv_gross_return_pct": 26.51,
+      "iv_costs_pct": 1.62,
+      "iv_sharpe": 4.72,
+      "iv_sortino": 6.98,
+      "iv_max_dd_pct": 14.15,
+      "iv_turnover": 0.9374,
+      "iv_trades": 671,
+      "iv_cap_net_return_pct": 24.89,
+      "iv_cap_gross_return_pct": 26.51,
+      "iv_cap_costs_pct": 1.62,
+      "iv_cap_sharpe": 4.72,
+      "iv_cap_sortino": 6.98,
+      "iv_cap_max_dd_pct": 14.15,
+      "iv_cap_turnover": 0.9374,
+      "iv_cap_trades": 671
+    },
+    {
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "eq_net_return_pct": 7.98,
+      "eq_gross_return_pct": 9.6,
+      "eq_costs_pct": 1.62,
+      "eq_sharpe": 1.82,
+      "eq_sortino": 2.81,
+      "eq_max_dd_pct": 12.24,
+      "eq_turnover": 0.9341,
+      "eq_trades": 676,
+      "iv_net_return_pct": 4.69,
+      "iv_gross_return_pct": 6.34,
+      "iv_costs_pct": 1.65,
+      "iv_sharpe": 1.24,
+      "iv_sortino": 1.88,
+      "iv_max_dd_pct": 13.55,
+      "iv_turnover": 0.9551,
+      "iv_trades": 675,
+      "iv_cap_net_return_pct": 4.69,
+      "iv_cap_gross_return_pct": 6.34,
+      "iv_cap_costs_pct": 1.65,
+      "iv_cap_sharpe": 1.24,
+      "iv_cap_sortino": 1.88,
+      "iv_cap_max_dd_pct": 13.55,
+      "iv_cap_turnover": 0.9551,
+      "iv_cap_trades": 675
+    },
+    {
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "eq_net_return_pct": 20.97,
+      "eq_gross_return_pct": 22.83,
+      "eq_costs_pct": 1.86,
+      "eq_sharpe": 4.62,
+      "eq_sortino": 7.21,
+      "eq_max_dd_pct": 11.0,
+      "eq_turnover": 1.0748,
+      "eq_trades": 679,
+      "iv_net_return_pct": 18.67,
+      "iv_gross_return_pct": 20.53,
+      "iv_costs_pct": 1.86,
+      "iv_sharpe": 4.29,
+      "iv_sortino": 6.6,
+      "iv_max_dd_pct": 12.7,
+      "iv_turnover": 1.0753,
+      "iv_trades": 679,
+      "iv_cap_net_return_pct": 18.67,
+      "iv_cap_gross_return_pct": 20.53,
+      "iv_cap_costs_pct": 1.86,
+      "iv_cap_sharpe": 4.29,
+      "iv_cap_sortino": 6.6,
+      "iv_cap_max_dd_pct": 12.7,
+      "iv_cap_turnover": 1.0753,
+      "iv_cap_trades": 679
+    },
+    {
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "eq_net_return_pct": 21.83,
+      "eq_gross_return_pct": 23.62,
+      "eq_costs_pct": 1.79,
+      "eq_sharpe": 3.94,
+      "eq_sortino": 6.04,
+      "eq_max_dd_pct": 11.29,
+      "eq_turnover": 1.0352,
+      "eq_trades": 669,
+      "iv_net_return_pct": 17.24,
+      "iv_gross_return_pct": 19.06,
+      "iv_costs_pct": 1.81,
+      "iv_sharpe": 3.31,
+      "iv_sortino": 4.99,
+      "iv_max_dd_pct": 11.13,
+      "iv_turnover": 1.0484,
+      "iv_trades": 669,
+      "iv_cap_net_return_pct": 17.24,
+      "iv_cap_gross_return_pct": 19.06,
+      "iv_cap_costs_pct": 1.81,
+      "iv_cap_sharpe": 3.31,
+      "iv_cap_sortino": 4.99,
+      "iv_cap_max_dd_pct": 11.13,
+      "iv_cap_turnover": 1.0484,
+      "iv_cap_trades": 669
+    }
+  ],
+  "asset_exposure_analysis": [
+    {
+      "symbol": "BTCUSDT",
+      "selection_pct": 16.0,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 67.85,
+      "iv_cap_avg_weight_pct": 67.79,
+      "iv_raw_max_weight_pct": 75.72,
+      "iv_raw_min_weight_pct": 59.13,
+      "iv_cap_max_weight_pct": 75.0,
+      "iv_cap_min_weight_pct": 59.13
+    },
+    {
+      "symbol": "ETHUSDT",
+      "selection_pct": 10.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 54.82,
+      "iv_cap_avg_weight_pct": 54.82,
+      "iv_raw_max_weight_pct": 68.83,
+      "iv_raw_min_weight_pct": 40.87,
+      "iv_cap_max_weight_pct": 68.83,
+      "iv_cap_min_weight_pct": 40.87
+    },
+    {
+      "symbol": "SOLUSDT",
+      "selection_pct": 17.33,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 46.3,
+      "iv_cap_avg_weight_pct": 46.3,
+      "iv_raw_max_weight_pct": 55.75,
+      "iv_raw_min_weight_pct": 30.79,
+      "iv_cap_max_weight_pct": 55.75,
+      "iv_cap_min_weight_pct": 30.79
+    },
+    {
+      "symbol": "BNBUSDT",
+      "selection_pct": 9.33,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 47.05,
+      "iv_cap_avg_weight_pct": 47.05,
+      "iv_raw_max_weight_pct": 64.42,
+      "iv_raw_min_weight_pct": 27.25,
+      "iv_cap_max_weight_pct": 64.42,
+      "iv_cap_min_weight_pct": 27.25
+    },
+    {
+      "symbol": "XRPUSDT",
+      "selection_pct": 16.0,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 51.63,
+      "iv_cap_avg_weight_pct": 51.63,
+      "iv_raw_max_weight_pct": 64.46,
+      "iv_raw_min_weight_pct": 34.08,
+      "iv_cap_max_weight_pct": 64.46,
+      "iv_cap_min_weight_pct": 34.08
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "selection_pct": 18.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 47.33,
+      "iv_cap_avg_weight_pct": 47.33,
+      "iv_raw_max_weight_pct": 54.51,
+      "iv_raw_min_weight_pct": 28.57,
+      "iv_cap_max_weight_pct": 54.51,
+      "iv_cap_min_weight_pct": 28.57
+    },
+    {
+      "symbol": "ADAUSDT",
+      "selection_pct": 10.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 50.17,
+      "iv_cap_avg_weight_pct": 50.17,
+      "iv_raw_max_weight_pct": 56.04,
+      "iv_raw_min_weight_pct": 42.55,
+      "iv_cap_max_weight_pct": 56.04,
+      "iv_cap_min_weight_pct": 42.55
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "selection_pct": 14.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 47.16,
+      "iv_cap_avg_weight_pct": 47.16,
+      "iv_raw_max_weight_pct": 55.24,
+      "iv_raw_min_weight_pct": 30.05,
+      "iv_cap_max_weight_pct": 55.24,
+      "iv_cap_min_weight_pct": 30.05
+    },
+    {
+      "symbol": "LINKUSDT",
+      "selection_pct": 18.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 47.17,
+      "iv_cap_avg_weight_pct": 47.17,
+      "iv_raw_max_weight_pct": 55.29,
+      "iv_raw_min_weight_pct": 40.51,
+      "iv_cap_max_weight_pct": 55.29,
+      "iv_cap_min_weight_pct": 40.51
+    },
+    {
+      "symbol": "NEARUSDT",
+      "selection_pct": 18.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 41.7,
+      "iv_cap_avg_weight_pct": 41.75,
+      "iv_raw_max_weight_pct": 56.26,
+      "iv_raw_min_weight_pct": 24.28,
+      "iv_cap_max_weight_pct": 56.26,
+      "iv_cap_min_weight_pct": 25.0
+    },
+    {
+      "symbol": "LTCUSDT",
+      "selection_pct": 25.33,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 50.76,
+      "iv_cap_avg_weight_pct": 50.76,
+      "iv_raw_max_weight_pct": 59.03,
+      "iv_raw_min_weight_pct": 33.25,
+      "iv_cap_max_weight_pct": 59.03,
+      "iv_cap_min_weight_pct": 33.25
+    },
+    {
+      "symbol": "DOTUSDT",
+      "selection_pct": 13.33,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 51.96,
+      "iv_cap_avg_weight_pct": 51.96,
+      "iv_raw_max_weight_pct": 57.37,
+      "iv_raw_min_weight_pct": 47.35,
+      "iv_cap_max_weight_pct": 57.37,
+      "iv_cap_min_weight_pct": 47.35
+    },
+    {
+      "symbol": "SUIUSDT",
+      "selection_pct": 10.67,
+      "eq_avg_weight_pct": 50.0,
+      "iv_avg_weight_pct": 48.18,
+      "iv_cap_avg_weight_pct": 48.18,
+      "iv_raw_max_weight_pct": 54.98,
+      "iv_raw_min_weight_pct": 41.41,
+      "iv_cap_max_weight_pct": 54.98,
+      "iv_cap_min_weight_pct": 41.41
+    }
+  ],
+  "risk_contributions": {
+    "equal_weight": {
+      "portfolio_annualized_volatility": 55.34,
+      "asset_risk_contributions": {
+        "BTCUSDT": {
+          "mean_weight_pct": 7.92,
+          "marginal_risk_contrib": 0.1122,
+          "percentage_risk_contrib": 1.6
+        },
+        "ETHUSDT": {
+          "mean_weight_pct": 5.55,
+          "marginal_risk_contrib": 0.2034,
+          "percentage_risk_contrib": 2.04
+        },
+        "SOLUSDT": {
+          "mean_weight_pct": 8.61,
+          "marginal_risk_contrib": 0.1273,
+          "percentage_risk_contrib": 1.98
+        },
+        "BNBUSDT": {
+          "mean_weight_pct": 4.86,
+          "marginal_risk_contrib": 0.1448,
+          "percentage_risk_contrib": 1.27
+        },
+        "XRPUSDT": {
+          "mean_weight_pct": 8.32,
+          "marginal_risk_contrib": 0.1638,
+          "percentage_risk_contrib": 2.46
+        },
+        "DOGEUSDT": {
+          "mean_weight_pct": 9.31,
+          "marginal_risk_contrib": 0.8268,
+          "percentage_risk_contrib": 13.9
+        },
+        "ADAUSDT": {
+          "mean_weight_pct": 5.55,
+          "marginal_risk_contrib": 0.7603,
+          "percentage_risk_contrib": 7.62
+        },
+        "AVAXUSDT": {
+          "mean_weight_pct": 6.82,
+          "marginal_risk_contrib": 0.7687,
+          "percentage_risk_contrib": 9.47
+        },
+        "LINKUSDT": {
+          "mean_weight_pct": 9.31,
+          "marginal_risk_contrib": 0.8331,
+          "percentage_risk_contrib": 14.01
+        },
+        "NEARUSDT": {
+          "mean_weight_pct": 8.5,
+          "marginal_risk_contrib": 0.8504,
+          "percentage_risk_contrib": 13.06
+        },
+        "LTCUSDT": {
+          "mean_weight_pct": 12.77,
+          "marginal_risk_contrib": 0.628,
+          "percentage_risk_contrib": 14.5
+        },
+        "DOTUSDT": {
+          "mean_weight_pct": 6.94,
+          "marginal_risk_contrib": 0.796,
+          "percentage_risk_contrib": 9.98
+        },
+        "SUIUSDT": {
+          "mean_weight_pct": 5.55,
+          "marginal_risk_contrib": 0.8083,
+          "percentage_risk_contrib": 8.1
+        }
+      }
+    },
+    "inverse_vol": {
+      "portfolio_annualized_volatility": 53.48,
+      "asset_risk_contributions": {
+        "BTCUSDT": {
+          "mean_weight_pct": 10.77,
+          "marginal_risk_contrib": 0.1255,
+          "percentage_risk_contrib": 2.53
+        },
+        "ETHUSDT": {
+          "mean_weight_pct": 6.08,
+          "marginal_risk_contrib": 0.2258,
+          "percentage_risk_contrib": 2.57
+        },
+        "SOLUSDT": {
+          "mean_weight_pct": 7.9,
+          "marginal_risk_contrib": 0.1237,
+          "percentage_risk_contrib": 1.83
+        },
+        "BNBUSDT": {
+          "mean_weight_pct": 4.57,
+          "marginal_risk_contrib": 0.1599,
+          "percentage_risk_contrib": 1.37
+        },
+        "XRPUSDT": {
+          "mean_weight_pct": 8.59,
+          "marginal_risk_contrib": 0.1855,
+          "percentage_risk_contrib": 2.98
+        },
+        "DOGEUSDT": {
+          "mean_weight_pct": 8.84,
+          "marginal_risk_contrib": 0.8185,
+          "percentage_risk_contrib": 13.52
+        },
+        "ADAUSDT": {
+          "mean_weight_pct": 5.57,
+          "marginal_risk_contrib": 0.7537,
+          "percentage_risk_contrib": 7.85
+        },
+        "AVAXUSDT": {
+          "mean_weight_pct": 6.37,
+          "marginal_risk_contrib": 0.7598,
+          "percentage_risk_contrib": 9.04
+        },
+        "LINKUSDT": {
+          "mean_weight_pct": 8.74,
+          "marginal_risk_contrib": 0.8243,
+          "percentage_risk_contrib": 13.47
+        },
+        "NEARUSDT": {
+          "mean_weight_pct": 7.09,
+          "marginal_risk_contrib": 0.8394,
+          "percentage_risk_contrib": 11.12
+        },
+        "LTCUSDT": {
+          "mean_weight_pct": 12.94,
+          "marginal_risk_contrib": 0.624,
+          "percentage_risk_contrib": 15.09
+        },
+        "DOTUSDT": {
+          "mean_weight_pct": 7.21,
+          "marginal_risk_contrib": 0.7891,
+          "percentage_risk_contrib": 10.64
+        },
+        "SUIUSDT": {
+          "mean_weight_pct": 5.35,
+          "marginal_risk_contrib": 0.8002,
+          "percentage_risk_contrib": 8.0
+        }
+      }
+    },
+    "iv_capped": {
+      "portfolio_annualized_volatility": 53.49,
+      "asset_risk_contributions": {
+        "BTCUSDT": {
+          "mean_weight_pct": 10.76,
+          "marginal_risk_contrib": 0.1255,
+          "percentage_risk_contrib": 2.52
+        },
+        "ETHUSDT": {
+          "mean_weight_pct": 6.08,
+          "marginal_risk_contrib": 0.2257,
+          "percentage_risk_contrib": 2.57
+        },
+        "SOLUSDT": {
+          "mean_weight_pct": 7.9,
+          "marginal_risk_contrib": 0.1237,
+          "percentage_risk_contrib": 1.83
+        },
+        "BNBUSDT": {
+          "mean_weight_pct": 4.57,
+          "marginal_risk_contrib": 0.1599,
+          "percentage_risk_contrib": 1.37
+        },
+        "XRPUSDT": {
+          "mean_weight_pct": 8.59,
+          "marginal_risk_contrib": 0.1854,
+          "percentage_risk_contrib": 2.98
+        },
+        "DOGEUSDT": {
+          "mean_weight_pct": 8.84,
+          "marginal_risk_contrib": 0.8185,
+          "percentage_risk_contrib": 13.52
+        },
+        "ADAUSDT": {
+          "mean_weight_pct": 5.57,
+          "marginal_risk_contrib": 0.7537,
+          "percentage_risk_contrib": 7.85
+        },
+        "AVAXUSDT": {
+          "mean_weight_pct": 6.37,
+          "marginal_risk_contrib": 0.7598,
+          "percentage_risk_contrib": 9.04
+        },
+        "LINKUSDT": {
+          "mean_weight_pct": 8.74,
+          "marginal_risk_contrib": 0.8243,
+          "percentage_risk_contrib": 13.47
+        },
+        "NEARUSDT": {
+          "mean_weight_pct": 7.1,
+          "marginal_risk_contrib": 0.8394,
+          "percentage_risk_contrib": 11.14
+        },
+        "LTCUSDT": {
+          "mean_weight_pct": 12.94,
+          "marginal_risk_contrib": 0.624,
+          "percentage_risk_contrib": 15.09
+        },
+        "DOTUSDT": {
+          "mean_weight_pct": 7.21,
+          "marginal_risk_contrib": 0.7891,
+          "percentage_risk_contrib": 10.63
+        },
+        "SUIUSDT": {
+          "mean_weight_pct": 5.35,
+          "marginal_risk_contrib": 0.8002,
+          "percentage_risk_contrib": 8.0
+        }
+      }
+    }
+  },
+  "cap_diagnostics": {
+    "total_rebalance_events": 75,
+    "cap_activation_count": 1,
+    "cap_activation_rate_pct": 1.33,
+    "upper_cap_hits": 1,
+    "lower_cap_hits": 1,
+    "max_raw_weight_pct": 75.72,
+    "min_raw_weight_pct": 24.28,
+    "max_final_weight_pct": 75.0,
+    "min_final_weight_pct": 25.0,
+    "cap_lower_bound_pct": 25.0,
+    "cap_upper_bound_pct": 75.0,
+    "is_cap_binding": true,
+    "sample_decisions": [
+      {
+        "timestamp": "2025-06-08 20:00:00+00:00",
+        "assets": [
+          "NEARUSDT",
+          "DOTUSDT"
+        ],
+        "volatilities": {
+          "NEARUSDT": 0.7491,
+          "DOTUSDT": 0.6053
+        },
+        "raw_weights": {
+          "NEARUSDT": 0.4469,
+          "DOTUSDT": 0.5531
+        },
+        "capped_weights": {
+          "NEARUSDT": 0.4469,
+          "DOTUSDT": 0.5531
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-10 20:00:00+00:00",
+        "assets": [
+          "ADAUSDT",
+          "NEARUSDT"
+        ],
+        "volatilities": {
+          "ADAUSDT": 0.6689,
+          "NEARUSDT": 0.7987
+        },
+        "raw_weights": {
+          "ADAUSDT": 0.5442,
+          "NEARUSDT": 0.4558
+        },
+        "capped_weights": {
+          "ADAUSDT": 0.5442,
+          "NEARUSDT": 0.4558
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-12 20:00:00+00:00",
+        "assets": [
+          "BTCUSDT",
+          "DOGEUSDT"
+        ],
+        "volatilities": {
+          "BTCUSDT": 0.2977,
+          "DOGEUSDT": 0.7444
+        },
+        "raw_weights": {
+          "BTCUSDT": 0.7143,
+          "DOGEUSDT": 0.2857
+        },
+        "capped_weights": {
+          "BTCUSDT": 0.7143,
+          "DOGEUSDT": 0.2857
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-14 20:00:00+00:00",
+        "assets": [
+          "DOTUSDT",
+          "SUIUSDT"
+        ],
+        "volatilities": {
+          "DOTUSDT": 0.6607,
+          "SUIUSDT": 0.8891
+        },
+        "raw_weights": {
+          "DOTUSDT": 0.5737,
+          "SUIUSDT": 0.4263
+        },
+        "capped_weights": {
+          "DOTUSDT": 0.5737,
+          "SUIUSDT": 0.4263
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-16 20:00:00+00:00",
+        "assets": [
+          "SOLUSDT",
+          "NEARUSDT"
+        ],
+        "volatilities": {
+          "SOLUSDT": 0.8106,
+          "NEARUSDT": 0.8761
+        },
+        "raw_weights": {
+          "SOLUSDT": 0.5194,
+          "NEARUSDT": 0.4806
+        },
+        "capped_weights": {
+          "SOLUSDT": 0.5194,
+          "NEARUSDT": 0.4806
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-18 20:00:00+00:00",
+        "assets": [
+          "ETHUSDT",
+          "ADAUSDT"
+        ],
+        "volatilities": {
+          "ETHUSDT": 0.5521,
+          "ADAUSDT": 0.7055
+        },
+        "raw_weights": {
+          "ETHUSDT": 0.561,
+          "ADAUSDT": 0.439
+        },
+        "capped_weights": {
+          "ETHUSDT": 0.561,
+          "ADAUSDT": 0.439
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-20 20:00:00+00:00",
+        "assets": [
+          "BNBUSDT",
+          "XRPUSDT"
+        ],
+        "volatilities": {
+          "BNBUSDT": 0.3141,
+          "XRPUSDT": 0.5686
+        },
+        "raw_weights": {
+          "BNBUSDT": 0.6442,
+          "XRPUSDT": 0.3558
+        },
+        "capped_weights": {
+          "BNBUSDT": 0.6442,
+          "XRPUSDT": 0.3558
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-22 20:00:00+00:00",
+        "assets": [
+          "LTCUSDT",
+          "SUIUSDT"
+        ],
+        "volatilities": {
+          "LTCUSDT": 0.6026,
+          "SUIUSDT": 0.8525
+        },
+        "raw_weights": {
+          "LTCUSDT": 0.5859,
+          "SUIUSDT": 0.4141
+        },
+        "capped_weights": {
+          "LTCUSDT": 0.5859,
+          "SUIUSDT": 0.4141
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-24 20:00:00+00:00",
+        "assets": [
+          "XRPUSDT",
+          "NEARUSDT"
+        ],
+        "volatilities": {
+          "XRPUSDT": 0.6935,
+          "NEARUSDT": 1.0125
+        },
+        "raw_weights": {
+          "XRPUSDT": 0.5935,
+          "NEARUSDT": 0.4065
+        },
+        "capped_weights": {
+          "XRPUSDT": 0.5935,
+          "NEARUSDT": 0.4065
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      },
+      {
+        "timestamp": "2025-06-26 20:00:00+00:00",
+        "assets": [
+          "DOGEUSDT",
+          "AVAXUSDT"
+        ],
+        "volatilities": {
+          "DOGEUSDT": 0.8857,
+          "AVAXUSDT": 0.8711
+        },
+        "raw_weights": {
+          "DOGEUSDT": 0.4959,
+          "AVAXUSDT": 0.5041
+        },
+        "capped_weights": {
+          "DOGEUSDT": 0.4959,
+          "AVAXUSDT": 0.5041
+        },
+        "cap_lower_bound": 0.25,
+        "cap_upper_bound": 0.75,
+        "cap_active": false,
+        "cap_type": "None"
+      }
+    ]
+  },
+  "sol_dependency": [
+    {
+      "mode": "equal",
+      "strategy": "Equal Weight",
+      "full_mean_return_pct": 17.97,
+      "full_mean_sharpe": 3.65,
+      "full_max_dd_pct": 13.38,
+      "nosol_mean_return_pct": 20.84,
+      "nosol_mean_sharpe": 3.94,
+      "nosol_max_dd_pct": 13.84,
+      "sol_delta_return_pct": -2.87
+    },
+    {
+      "mode": "inverse_vol",
+      "strategy": "Inverse Vol",
+      "full_mean_return_pct": 16.57,
+      "full_mean_sharpe": 3.48,
+      "full_max_dd_pct": 13.7,
+      "nosol_mean_return_pct": 22.09,
+      "nosol_mean_sharpe": 4.14,
+      "nosol_max_dd_pct": 14.17,
+      "sol_delta_return_pct": -5.52
+    },
+    {
+      "mode": "iv_capped",
+      "strategy": "IV Capped",
+      "full_mean_return_pct": 16.56,
+      "full_mean_sharpe": 3.48,
+      "full_max_dd_pct": 13.7,
+      "nosol_mean_return_pct": 22.07,
+      "nosol_mean_sharpe": 4.14,
+      "nosol_max_dd_pct": 14.17,
+      "sol_delta_return_pct": -5.51
+    }
+  ],
+  "cost_sensitivity": [
+    {
+      "cost_bps": 0.0,
+      "mode": "equal",
+      "strategy": "Equal Weight",
+      "mean_net_return_pct": 20.04,
+      "mean_gross_return_pct": 20.04,
+      "mean_costs_pct": 0.0,
+      "mean_sharpe": 3.99,
+      "mean_max_dd_pct": 12.98,
+      "mean_daily_turnover": 1.006,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 0.0,
+      "mode": "inverse_vol",
+      "strategy": "Inverse Vol",
+      "mean_net_return_pct": 18.64,
+      "mean_gross_return_pct": 18.64,
+      "mean_costs_pct": 0.0,
+      "mean_sharpe": 3.84,
+      "mean_max_dd_pct": 13.22,
+      "mean_daily_turnover": 1.0171,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 0.0,
+      "mode": "iv_capped",
+      "strategy": "IV Capped",
+      "mean_net_return_pct": 18.63,
+      "mean_gross_return_pct": 18.63,
+      "mean_costs_pct": 0.0,
+      "mean_sharpe": 3.83,
+      "mean_max_dd_pct": 13.22,
+      "mean_daily_turnover": 1.0171,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 12.0,
+      "mode": "equal",
+      "strategy": "Equal Weight",
+      "mean_net_return_pct": 17.97,
+      "mean_gross_return_pct": 19.71,
+      "mean_costs_pct": 1.74,
+      "mean_sharpe": 3.65,
+      "mean_max_dd_pct": 13.38,
+      "mean_daily_turnover": 1.006,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 12.0,
+      "mode": "inverse_vol",
+      "strategy": "Inverse Vol",
+      "mean_net_return_pct": 16.57,
+      "mean_gross_return_pct": 18.33,
+      "mean_costs_pct": 1.76,
+      "mean_sharpe": 3.48,
+      "mean_max_dd_pct": 13.7,
+      "mean_daily_turnover": 1.0171,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 12.0,
+      "mode": "iv_capped",
+      "strategy": "IV Capped",
+      "mean_net_return_pct": 16.56,
+      "mean_gross_return_pct": 18.32,
+      "mean_costs_pct": 1.76,
+      "mean_sharpe": 3.48,
+      "mean_max_dd_pct": 13.7,
+      "mean_daily_turnover": 1.0171,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 20.0,
+      "mode": "equal",
+      "strategy": "Equal Weight",
+      "mean_net_return_pct": 16.61,
+      "mean_gross_return_pct": 19.5,
+      "mean_costs_pct": 2.9,
+      "mean_sharpe": 3.42,
+      "mean_max_dd_pct": 13.64,
+      "mean_daily_turnover": 1.006,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 20.0,
+      "mode": "inverse_vol",
+      "strategy": "Inverse Vol",
+      "mean_net_return_pct": 15.2,
+      "mean_gross_return_pct": 18.14,
+      "mean_costs_pct": 2.93,
+      "mean_sharpe": 3.25,
+      "mean_max_dd_pct": 14.02,
+      "mean_daily_turnover": 1.0171,
+      "profitable_folds": "5/5"
+    },
+    {
+      "cost_bps": 20.0,
+      "mode": "iv_capped",
+      "strategy": "IV Capped",
+      "mean_net_return_pct": 15.19,
+      "mean_gross_return_pct": 18.13,
+      "mean_costs_pct": 2.93,
+      "mean_sharpe": 3.24,
+      "mean_max_dd_pct": 14.02,
+      "mean_daily_turnover": 1.0171,
+      "profitable_folds": "5/5"
+    }
+  ]
+}

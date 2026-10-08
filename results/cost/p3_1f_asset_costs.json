@@ -1,0 +1,132 @@
+[
+  {
+    "symbol": "NEARUSDT",
+    "trade_count": 21,
+    "avg_cost_bps": 26.08,
+    "median_cost_bps": 26.05,
+    "p95_cost_bps": 35.04,
+    "max_cost_bps": 35.98,
+    "total_cost_dollars": 273.83,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "trade_count": 18,
+    "avg_cost_bps": 25.49,
+    "median_cost_bps": 23.31,
+    "p95_cost_bps": 35.28,
+    "max_cost_bps": 35.47,
+    "total_cost_dollars": 229.38,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "trade_count": 27,
+    "avg_cost_bps": 25.13,
+    "median_cost_bps": 25.01,
+    "p95_cost_bps": 34.36,
+    "max_cost_bps": 34.44,
+    "total_cost_dollars": 339.31,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "trade_count": 23,
+    "avg_cost_bps": 24.2,
+    "median_cost_bps": 23.08,
+    "p95_cost_bps": 34.29,
+    "max_cost_bps": 34.33,
+    "total_cost_dollars": 278.32,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "trade_count": 16,
+    "avg_cost_bps": 24.04,
+    "median_cost_bps": 22.7,
+    "p95_cost_bps": 34.32,
+    "max_cost_bps": 34.49,
+    "total_cost_dollars": 192.36,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "trade_count": 16,
+    "avg_cost_bps": 23.33,
+    "median_cost_bps": 19.73,
+    "p95_cost_bps": 34.86,
+    "max_cost_bps": 36.62,
+    "total_cost_dollars": 186.67,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "trade_count": 16,
+    "avg_cost_bps": 21.82,
+    "median_cost_bps": 19.66,
+    "p95_cost_bps": 34.24,
+    "max_cost_bps": 34.26,
+    "total_cost_dollars": 174.59,
+    "liquidity_tier": "EXTREME"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "trade_count": 14,
+    "avg_cost_bps": 19.45,
+    "median_cost_bps": 16.88,
+    "p95_cost_bps": 33.63,
+    "max_cost_bps": 33.88,
+    "total_cost_dollars": 136.13,
+    "liquidity_tier": "MEDIUM"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "trade_count": 27,
+    "avg_cost_bps": 19.09,
+    "median_cost_bps": 15.71,
+    "p95_cost_bps": 33.97,
+    "max_cost_bps": 34.19,
+    "total_cost_dollars": 257.77,
+    "liquidity_tier": "LOW"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "trade_count": 22,
+    "avg_cost_bps": 18.98,
+    "median_cost_bps": 13.9,
+    "p95_cost_bps": 34.05,
+    "max_cost_bps": 34.06,
+    "total_cost_dollars": 208.74,
+    "liquidity_tier": "LOW"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "trade_count": 16,
+    "avg_cost_bps": 18.35,
+    "median_cost_bps": 15.47,
+    "p95_cost_bps": 33.07,
+    "max_cost_bps": 33.09,
+    "total_cost_dollars": 146.78,
+    "liquidity_tier": "HIGH"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "trade_count": 21,
+    "avg_cost_bps": 17.66,
+    "median_cost_bps": 12.99,
+    "p95_cost_bps": 33.09,
+    "max_cost_bps": 33.12,
+    "total_cost_dollars": 185.44,
+    "liquidity_tier": "MEDIUM"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "trade_count": 23,
+    "avg_cost_bps": 15.0,
+    "median_cost_bps": 10.67,
+    "p95_cost_bps": 28.36,
+    "max_cost_bps": 33.02,
+    "total_cost_dollars": 172.45,
+    "liquidity_tier": "MEDIUM"
+  }
+]

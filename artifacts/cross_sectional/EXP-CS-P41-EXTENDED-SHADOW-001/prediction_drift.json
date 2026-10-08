@@ -1,0 +1,32 @@
+{
+  "champion_pred_drift": {
+    "entity_name": "prob_champ",
+    "drift_type": "PREDICTION_DRIFT",
+    "psi": 0.0046,
+    "ks_statistic": 0.0144,
+    "ks_pvalue": 5.2e-05,
+    "wasserstein_dist": 0.0021,
+    "mean_shift_zscore": 0.0398,
+    "std_ratio": 1.0007,
+    "missingness_shift": 0.0,
+    "severity": "LOW",
+    "reference_sample_size": 32500,
+    "monitoring_sample_size": 113414,
+    "is_drifted": false
+  },
+  "challenger_pred_drift": {
+    "entity_name": "prob_chall",
+    "drift_type": "PREDICTION_DRIFT",
+    "psi": 0.0042,
+    "ks_statistic": 0.0127,
+    "ks_pvalue": 0.00056,
+    "wasserstein_dist": 0.0021,
+    "mean_shift_zscore": 0.0376,
+    "std_ratio": 1.0031,
+    "missingness_shift": 0.0,
+    "severity": "LOW",
+    "reference_sample_size": 32500,
+    "monitoring_sample_size": 113414,
+    "is_drifted": false
+  }
+}

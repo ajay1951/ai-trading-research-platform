@@ -1,0 +1,34 @@
+{
+  "champion": {
+    "timestamp": "2025-11-07 11:00:00+00:00",
+    "model_version": "1.0.0",
+    "health_state": "HEALTHY",
+    "health_score": 100.0,
+    "calibration_score": 25.0,
+    "feature_drift_score": 25.0,
+    "prediction_drift_score": 25.0,
+    "performance_score": 25.0,
+    "primary_reason": "Healthy: Acceptable calibration, stable distributions, and normal performance.",
+    "reason_codes": [
+      "Normal operational baseline"
+    ],
+    "active_alerts_count": 0,
+    "is_operational": true
+  },
+  "challenger": {
+    "timestamp": "2025-11-07 11:00:00+00:00",
+    "model_version": "1.1.0-challenger.a",
+    "health_state": "HEALTHY",
+    "health_score": 100.0,
+    "calibration_score": 25.0,
+    "feature_drift_score": 25.0,
+    "prediction_drift_score": 25.0,
+    "performance_score": 25.0,
+    "primary_reason": "Healthy: Acceptable calibration, stable distributions, and normal performance.",
+    "reason_codes": [
+      "Normal operational baseline"
+    ],
+    "active_alerts_count": 0,
+    "is_operational": true
+  }
+}

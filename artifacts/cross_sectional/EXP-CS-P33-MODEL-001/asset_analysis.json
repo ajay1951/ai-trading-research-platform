@@ -1,0 +1,145 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.3385,
+    "brier_score": 0.2263,
+    "log_loss": 0.6451,
+    "ece": 0.0552,
+    "accuracy": 0.664,
+    "roc_auc": 0.5265,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "ETHUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4248,
+    "brier_score": 0.2475,
+    "log_loss": 0.6885,
+    "ece": 0.0418,
+    "accuracy": 0.5648,
+    "roc_auc": 0.5039,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "SOLUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4358,
+    "brier_score": 0.2472,
+    "log_loss": 0.6877,
+    "ece": 0.0168,
+    "accuracy": 0.5574,
+    "roc_auc": 0.5213,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "BNBUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4211,
+    "brier_score": 0.2441,
+    "log_loss": 0.6815,
+    "ece": 0.0176,
+    "accuracy": 0.5764,
+    "roc_auc": 0.5251,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "XRPUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4208,
+    "brier_score": 0.2455,
+    "log_loss": 0.6844,
+    "ece": 0.0498,
+    "accuracy": 0.5916,
+    "roc_auc": 0.5001,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4383,
+    "brier_score": 0.2463,
+    "log_loss": 0.6859,
+    "ece": 0.0184,
+    "accuracy": 0.5631,
+    "roc_auc": 0.5367,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "ADAUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4321,
+    "brier_score": 0.2453,
+    "log_loss": 0.6838,
+    "ece": 0.0287,
+    "accuracy": 0.5735,
+    "roc_auc": 0.5348,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4355,
+    "brier_score": 0.25,
+    "log_loss": 0.6935,
+    "ece": 0.0426,
+    "accuracy": 0.5469,
+    "roc_auc": 0.4958,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "LINKUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4488,
+    "brier_score": 0.2492,
+    "log_loss": 0.6917,
+    "ece": 0.0294,
+    "accuracy": 0.539,
+    "roc_auc": 0.5189,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "NEARUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.444,
+    "brier_score": 0.2497,
+    "log_loss": 0.6927,
+    "ece": 0.0323,
+    "accuracy": 0.5337,
+    "roc_auc": 0.5087,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "LTCUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4347,
+    "brier_score": 0.2466,
+    "log_loss": 0.6866,
+    "ece": 0.0224,
+    "accuracy": 0.5648,
+    "roc_auc": 0.5211,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "DOTUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4451,
+    "brier_score": 0.2488,
+    "log_loss": 0.691,
+    "ece": 0.0313,
+    "accuracy": 0.554,
+    "roc_auc": 0.5043,
+    "is_well_calibrated": false
+  },
+  {
+    "symbol": "SUIUSDT",
+    "sample_count": 3536,
+    "hit_rate": 0.4375,
+    "brier_score": 0.2486,
+    "log_loss": 0.6906,
+    "ece": 0.0376,
+    "accuracy": 0.5583,
+    "roc_auc": 0.5103,
+    "is_well_calibrated": false
+  }
+]

@@ -1,0 +1,17 @@
+experiment,variable,setting,net_return_pct,sharpe,max_dd_pct,turnover,cost_drag_pct,profitable_folds
+Baseline (EXP-CS-RB-001),Frozen Baseline,24H / Top 2 / 12 bps,4.1,1.16,15.95,1.7483,3.02,5/5
+EXP-CS-P12-COST,Transaction Cost,0.0 bps,7.3,1.78,14.96,1.7483,0.0,5/5
+EXP-CS-P12-COST,Transaction Cost,5.0 bps,5.96,1.52,15.38,1.7483,1.26,5/5
+EXP-CS-P12-COST,Transaction Cost,12.0 bps,4.1,1.16,15.95,1.7483,3.02,5/5
+EXP-CS-P12-COST,Transaction Cost,20.0 bps,2.02,0.75,16.8,1.7483,5.04,4/5
+EXP-CS-P12-COST,Transaction Cost,30.0 bps,-0.53,0.25,17.9,1.7483,7.56,2/5
+EXP-CS-P12-COST,Transaction Cost,50.0 bps,-5.44,-0.77,20.08,1.7483,12.6,0/5
+EXP-CS-P12-TOPN,Portfolio Concentration,Top 1,3.08,0.86,17.49,1.8174,3.14,4/5
+EXP-CS-P12-TOPN,Portfolio Concentration,Top 2,4.1,1.16,15.95,1.7483,3.02,5/5
+EXP-CS-P12-TOPN,Portfolio Concentration,Top 3,4.08,1.24,15.74,1.6505,2.85,4/5
+EXP-CS-P12-TOPN,Portfolio Concentration,Top 4,-0.52,0.2,18.28,1.5138,2.62,2/5
+EXP-CS-P12-REBAL,Rebalance Frequency,18H,-5.87,-0.91,25.13,2.2254,3.85,2/5
+EXP-CS-P12-REBAL,Rebalance Frequency,24H,4.1,1.16,15.95,1.7483,3.02,5/5
+EXP-CS-P12-REBAL,Rebalance Frequency,36H,4.85,1.28,17.59,1.1706,2.03,4/5
+EXP-CS-P12-REBAL,Rebalance Frequency,48H,17.97,3.65,13.38,1.006,1.74,5/5
+EXP-CS-P12-ASSET,Universe Robustness,Leave-One-Out Mean,4.16,1.17,16.36,1.7315,3.0,5/5 (13/13 configs)

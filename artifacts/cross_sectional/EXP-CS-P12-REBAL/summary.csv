@@ -1,0 +1,5 @@
+rebalance_hours,interval_bars,mean_gross_return_pct,mean_costs_pct,mean_net_return_pct,mean_sharpe,mean_sortino,mean_max_dd_pct,mean_daily_turnover,mean_holding_period_hours,profitable_folds
+18,18,-2.02,3.85,-5.87,-0.91,-1.25,25.13,2.2254,22.31,2/5
+24,24,7.12,3.02,4.1,1.16,1.76,15.95,1.7483,28.6,5/5
+36,36,6.88,2.03,4.85,1.28,1.88,17.59,1.1706,43.7,4/5
+48,48,19.71,1.74,17.97,3.65,5.63,13.38,1.006,51.51,5/5

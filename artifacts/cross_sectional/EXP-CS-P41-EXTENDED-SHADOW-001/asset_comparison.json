@@ -1,0 +1,119 @@
+{
+  "ADAUSDT": {
+    "sample_count": 9351,
+    "champion_ece": 0.0032,
+    "challenger_ece": 0.003,
+    "champion_brier": 0.2441,
+    "challenger_brier": 0.244,
+    "champion_hit_rate": 0.5658,
+    "challenger_hit_rate": 0.5666
+  },
+  "AVAXUSDT": {
+    "sample_count": 9352,
+    "champion_ece": 0.0333,
+    "challenger_ece": 0.0329,
+    "champion_brier": 0.2429,
+    "challenger_brier": 0.2428,
+    "champion_hit_rate": 0.5884,
+    "challenger_hit_rate": 0.5892
+  },
+  "BNBUSDT": {
+    "sample_count": 7716,
+    "champion_ece": 0.0225,
+    "challenger_ece": 0.0256,
+    "champion_brier": 0.2416,
+    "challenger_brier": 0.2417,
+    "champion_hit_rate": 0.5937,
+    "challenger_hit_rate": 0.5928
+  },
+  "BTCUSDT": {
+    "sample_count": 7716,
+    "champion_ece": 0.0368,
+    "challenger_ece": 0.0371,
+    "champion_brier": 0.2284,
+    "challenger_brier": 0.2284,
+    "champion_hit_rate": 0.6493,
+    "challenger_hit_rate": 0.6489
+  },
+  "DOGEUSDT": {
+    "sample_count": 9351,
+    "champion_ece": 0.0206,
+    "challenger_ece": 0.0189,
+    "champion_brier": 0.2423,
+    "challenger_brier": 0.2421,
+    "champion_hit_rate": 0.5875,
+    "challenger_hit_rate": 0.5867
+  },
+  "DOTUSDT": {
+    "sample_count": 9352,
+    "champion_ece": 0.0308,
+    "challenger_ece": 0.0295,
+    "champion_brier": 0.2435,
+    "challenger_brier": 0.2435,
+    "champion_hit_rate": 0.584,
+    "challenger_hit_rate": 0.5825
+  },
+  "ETHUSDT": {
+    "sample_count": 7716,
+    "champion_ece": 0.0265,
+    "challenger_ece": 0.0265,
+    "champion_brier": 0.2407,
+    "challenger_brier": 0.2405,
+    "champion_hit_rate": 0.5963,
+    "challenger_hit_rate": 0.5963
+  },
+  "LINKUSDT": {
+    "sample_count": 9352,
+    "champion_ece": 0.0071,
+    "challenger_ece": 0.0094,
+    "champion_brier": 0.2458,
+    "challenger_brier": 0.2458,
+    "champion_hit_rate": 0.5564,
+    "challenger_hit_rate": 0.555
+  },
+  "LTCUSDT": {
+    "sample_count": 9352,
+    "champion_ece": 0.0076,
+    "challenger_ece": 0.0068,
+    "champion_brier": 0.2463,
+    "challenger_brier": 0.2463,
+    "champion_hit_rate": 0.5639,
+    "challenger_hit_rate": 0.5639
+  },
+  "NEARUSDT": {
+    "sample_count": 9349,
+    "champion_ece": 0.021,
+    "challenger_ece": 0.0241,
+    "champion_brier": 0.2477,
+    "challenger_brier": 0.2477,
+    "champion_hit_rate": 0.5591,
+    "challenger_hit_rate": 0.5583
+  },
+  "SOLUSDT": {
+    "sample_count": 7739,
+    "champion_ece": 0.018,
+    "challenger_ece": 0.0188,
+    "champion_brier": 0.2422,
+    "challenger_brier": 0.2422,
+    "champion_hit_rate": 0.5852,
+    "challenger_hit_rate": 0.5834
+  },
+  "SUIUSDT": {
+    "sample_count": 9352,
+    "champion_ece": 0.0355,
+    "challenger_ece": 0.0369,
+    "champion_brier": 0.2438,
+    "challenger_brier": 0.2438,
+    "champion_hit_rate": 0.5819,
+    "challenger_hit_rate": 0.5831
+  },
+  "XRPUSDT": {
+    "sample_count": 7716,
+    "champion_ece": 0.0429,
+    "challenger_ece": 0.0423,
+    "champion_brier": 0.2378,
+    "challenger_brier": 0.2377,
+    "champion_hit_rate": 0.6131,
+    "challenger_hit_rate": 0.6139
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "hour": 153,
+  "sim_timestamp": "2026-10-07T09:00:00+00:00",
+  "uptime_seconds": 550800.0,
+  "cash": 16688.5617,
+  "equity": 82328.9292,
+  "positions": {
+    "ADAUSDT": 83750.5632,
+    "SUIUSDT": 16325.4389
+  },
+  "open_orders_count": 1,
+  "total_orders": 30,
+  "total_executions": 32,
+  "total_fills": 24,
+  "total_partial_fills": 5,
+  "total_cancels": 0,
+  "total_rejections": 1,
+  "total_unknown": 4,
+  "total_recovered": 4,
+  "recon_status": "HEALTHY",
+  "drift_count": 0,
+  "critical_drift_count": 0,
+  "restart_count": 4,
+  "rss_mb": 52.65,
+  "cpu_pct": 2.5,
+  "db_size_bytes": 61440,
+  "db_integrity_ok": true,
+  "fault_injected": null
+}

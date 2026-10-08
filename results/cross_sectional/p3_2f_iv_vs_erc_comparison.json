@@ -1,0 +1,8 @@
+{
+  "total_weight_elements": 44980,
+  "max_absolute_weight_difference": 0.0,
+  "mean_absolute_weight_difference": 0.0,
+  "differing_allocations_count": 0,
+  "mathematical_identity_verified": true,
+  "explanation": "For any 2-asset long-only portfolio (w1 + w2 = 1), setting CRC1 = CRC2 yields w1(w1*var1 + w2*cov12) = w2(w2*var2 + w1*cov12). The covariance cross-term w1*w2*cov12 cancels out algebraically on both sides, reducing exactly to w1*sigma1 = w2*sigma2. Thus, Equal Risk Contribution is mathematically identical to Inverse Volatility weighting."
+}

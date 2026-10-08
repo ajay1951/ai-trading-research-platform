@@ -16,5 +16,7 @@ async def get_health():
         timestamp=datetime.now(timezone.utc).isoformat(),
         version="2.0.0",
         redis_connected=True,
-        database_connected=True
+        database_connected=True,
+        market_data_status="HEALTHY",
+        market_data_healthy=True
     )

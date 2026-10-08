@@ -1,0 +1,801 @@
+{
+  "experiment_id": "EXP-CS-P12-ASSET",
+  "full_universe_baseline": {
+    "removed_asset": "None (Full 13 Assets)",
+    "mean_net_return_pct": 4.1,
+    "mean_sharpe": 1.16,
+    "mean_max_dd_pct": 15.95,
+    "mean_daily_turnover": 1.7483,
+    "mean_costs_pct": 3.02,
+    "profitable_folds": "5/5"
+  },
+  "leave_one_out_results": [
+    {
+      "removed_asset": "BTCUSDT",
+      "mean_net_return_pct": 3.96,
+      "mean_sharpe": 1.14,
+      "mean_max_dd_pct": 16.2,
+      "mean_daily_turnover": 1.7358,
+      "mean_costs_pct": 3.0,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "ETHUSDT",
+      "mean_net_return_pct": 7.94,
+      "mean_sharpe": 1.84,
+      "mean_max_dd_pct": 14.79,
+      "mean_daily_turnover": 1.7355,
+      "mean_costs_pct": 3.0,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "SOLUSDT",
+      "mean_net_return_pct": -1.94,
+      "mean_sharpe": -0.02,
+      "mean_max_dd_pct": 20.09,
+      "mean_daily_turnover": 1.7229,
+      "mean_costs_pct": 2.98,
+      "profitable_folds": "2/5"
+    },
+    {
+      "removed_asset": "BNBUSDT",
+      "mean_net_return_pct": 5.91,
+      "mean_sharpe": 1.45,
+      "mean_max_dd_pct": 14.51,
+      "mean_daily_turnover": 1.6854,
+      "mean_costs_pct": 2.92,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "XRPUSDT",
+      "mean_net_return_pct": 2.94,
+      "mean_sharpe": 0.99,
+      "mean_max_dd_pct": 19.58,
+      "mean_daily_turnover": 1.747,
+      "mean_costs_pct": 3.02,
+      "profitable_folds": "4/5"
+    },
+    {
+      "removed_asset": "DOGEUSDT",
+      "mean_net_return_pct": 5.26,
+      "mean_sharpe": 1.41,
+      "mean_max_dd_pct": 16.19,
+      "mean_daily_turnover": 1.6942,
+      "mean_costs_pct": 2.93,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "ADAUSDT",
+      "mean_net_return_pct": 3.76,
+      "mean_sharpe": 1.1,
+      "mean_max_dd_pct": 16.61,
+      "mean_daily_turnover": 1.7287,
+      "mean_costs_pct": 2.99,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "AVAXUSDT",
+      "mean_net_return_pct": 9.34,
+      "mean_sharpe": 2.14,
+      "mean_max_dd_pct": 14.56,
+      "mean_daily_turnover": 1.7552,
+      "mean_costs_pct": 3.04,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "LINKUSDT",
+      "mean_net_return_pct": 6.28,
+      "mean_sharpe": 1.59,
+      "mean_max_dd_pct": 14.93,
+      "mean_daily_turnover": 1.7424,
+      "mean_costs_pct": 3.01,
+      "profitable_folds": "5/5"
+    },
+    {
+      "removed_asset": "NEARUSDT",
+      "mean_net_return_pct": 3.84,
+      "mean_sharpe": 1.14,
+      "mean_max_dd_pct": 15.63,
+      "mean_daily_turnover": 1.7334,
+      "mean_costs_pct": 3.0,
+      "profitable_folds": "4/5"
+    },
+    {
+      "removed_asset": "LTCUSDT",
+      "mean_net_return_pct": -0.04,
+      "mean_sharpe": 0.33,
+      "mean_max_dd_pct": 17.19,
+      "mean_daily_turnover": 1.7218,
+      "mean_costs_pct": 2.98,
+      "profitable_folds": "3/5"
+    },
+    {
+      "removed_asset": "DOTUSDT",
+      "mean_net_return_pct": 4.04,
+      "mean_sharpe": 1.16,
+      "mean_max_dd_pct": 16.42,
+      "mean_daily_turnover": 1.7577,
+      "mean_costs_pct": 3.04,
+      "profitable_folds": "4/5"
+    },
+    {
+      "removed_asset": "SUIUSDT",
+      "mean_net_return_pct": 2.79,
+      "mean_sharpe": 0.89,
+      "mean_max_dd_pct": 15.92,
+      "mean_daily_turnover": 1.749,
+      "mean_costs_pct": 3.03,
+      "profitable_folds": "4/5"
+    }
+  ],
+  "summary_stats": {
+    "full_universe_baseline": {
+      "removed_asset": "None (Full 13 Assets)",
+      "mean_net_return_pct": 4.1,
+      "mean_sharpe": 1.16,
+      "mean_max_dd_pct": 15.95,
+      "mean_daily_turnover": 1.7483,
+      "mean_costs_pct": 3.02,
+      "profitable_folds": "5/5"
+    },
+    "mean_leave_one_out_return_pct": 4.16,
+    "median_leave_one_out_return_pct": 3.96,
+    "min_leave_one_out_return_pct": -1.94,
+    "max_leave_one_out_return_pct": 9.34,
+    "mean_leave_one_out_sharpe": 1.17,
+    "min_leave_one_out_sharpe": -0.02,
+    "max_leave_one_out_sharpe": 2.14
+  },
+  "fold_details": [
+    {
+      "removed_asset": "BTCUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 8.53,
+      "sharpe": 2.13,
+      "max_drawdown": 12.24,
+      "turnover": 1.8667,
+      "total_costs_pct": 3.23
+    },
+    {
+      "removed_asset": "BTCUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 1.82,
+      "sharpe": 0.69,
+      "max_drawdown": 19.83,
+      "turnover": 1.7484,
+      "total_costs_pct": 3.02
+    },
+    {
+      "removed_asset": "BTCUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 3.28,
+      "sharpe": 0.98,
+      "max_drawdown": 10.79,
+      "turnover": 1.7663,
+      "total_costs_pct": 3.06
+    },
+    {
+      "removed_asset": "BTCUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 3.0,
+      "sharpe": 0.96,
+      "max_drawdown": 18.69,
+      "turnover": 1.6965,
+      "total_costs_pct": 2.93
+    },
+    {
+      "removed_asset": "BTCUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 3.18,
+      "sharpe": 0.92,
+      "max_drawdown": 19.43,
+      "turnover": 1.6009,
+      "total_costs_pct": 2.77
+    },
+    {
+      "removed_asset": "ETHUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 5.71,
+      "sharpe": 1.56,
+      "max_drawdown": 13.76,
+      "turnover": 1.7992,
+      "total_costs_pct": 3.11
+    },
+    {
+      "removed_asset": "ETHUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 9.58,
+      "sharpe": 2.02,
+      "max_drawdown": 16.98,
+      "turnover": 1.7835,
+      "total_costs_pct": 3.09
+    },
+    {
+      "removed_asset": "ETHUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 2.14,
+      "sharpe": 0.75,
+      "max_drawdown": 14.08,
+      "turnover": 1.695,
+      "total_costs_pct": 2.93
+    },
+    {
+      "removed_asset": "ETHUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 12.03,
+      "sharpe": 2.74,
+      "max_drawdown": 15.28,
+      "turnover": 1.7627,
+      "total_costs_pct": 3.05
+    },
+    {
+      "removed_asset": "ETHUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 10.24,
+      "sharpe": 2.11,
+      "max_drawdown": 13.83,
+      "turnover": 1.637,
+      "total_costs_pct": 2.83
+    },
+    {
+      "removed_asset": "SOLUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": -7.28,
+      "sharpe": -1.24,
+      "max_drawdown": 19.36,
+      "turnover": 1.8226,
+      "total_costs_pct": 3.15
+    },
+    {
+      "removed_asset": "SOLUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 5.61,
+      "sharpe": 1.33,
+      "max_drawdown": 20.86,
+      "turnover": 1.74,
+      "total_costs_pct": 3.01
+    },
+    {
+      "removed_asset": "SOLUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": -1.97,
+      "sharpe": -0.07,
+      "max_drawdown": 13.46,
+      "turnover": 1.7591,
+      "total_costs_pct": 3.04
+    },
+    {
+      "removed_asset": "SOLUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 6.05,
+      "sharpe": 1.6,
+      "max_drawdown": 18.63,
+      "turnover": 1.69,
+      "total_costs_pct": 2.92
+    },
+    {
+      "removed_asset": "SOLUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": -12.13,
+      "sharpe": -1.73,
+      "max_drawdown": 28.12,
+      "turnover": 1.6028,
+      "total_costs_pct": 2.77
+    },
+    {
+      "removed_asset": "BNBUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 6.72,
+      "sharpe": 1.78,
+      "max_drawdown": 12.93,
+      "turnover": 1.7968,
+      "total_costs_pct": 3.11
+    },
+    {
+      "removed_asset": "BNBUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 11.72,
+      "sharpe": 2.37,
+      "max_drawdown": 15.96,
+      "turnover": 1.6438,
+      "total_costs_pct": 2.84
+    },
+    {
+      "removed_asset": "BNBUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 0.34,
+      "sharpe": 0.39,
+      "max_drawdown": 12.66,
+      "turnover": 1.6973,
+      "total_costs_pct": 2.94
+    },
+    {
+      "removed_asset": "BNBUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 3.76,
+      "sharpe": 1.12,
+      "max_drawdown": 18.08,
+      "turnover": 1.7269,
+      "total_costs_pct": 2.99
+    },
+    {
+      "removed_asset": "BNBUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 7.03,
+      "sharpe": 1.58,
+      "max_drawdown": 12.91,
+      "turnover": 1.5621,
+      "total_costs_pct": 2.7
+    },
+    {
+      "removed_asset": "XRPUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 14.77,
+      "sharpe": 3.45,
+      "max_drawdown": 11.89,
+      "turnover": 1.8651,
+      "total_costs_pct": 3.23
+    },
+    {
+      "removed_asset": "XRPUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 11.22,
+      "sharpe": 2.19,
+      "max_drawdown": 20.61,
+      "turnover": 1.7335,
+      "total_costs_pct": 3.0
+    },
+    {
+      "removed_asset": "XRPUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 3.99,
+      "sharpe": 1.11,
+      "max_drawdown": 12.98,
+      "turnover": 1.769,
+      "total_costs_pct": 3.06
+    },
+    {
+      "removed_asset": "XRPUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 3.43,
+      "sharpe": 1.04,
+      "max_drawdown": 18.98,
+      "turnover": 1.7288,
+      "total_costs_pct": 2.99
+    },
+    {
+      "removed_asset": "XRPUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": -18.69,
+      "sharpe": -2.82,
+      "max_drawdown": 33.44,
+      "turnover": 1.6386,
+      "total_costs_pct": 2.83
+    },
+    {
+      "removed_asset": "DOGEUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 10.9,
+      "sharpe": 2.74,
+      "max_drawdown": 11.09,
+      "turnover": 1.7638,
+      "total_costs_pct": 3.05
+    },
+    {
+      "removed_asset": "DOGEUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 6.49,
+      "sharpe": 1.51,
+      "max_drawdown": 18.29,
+      "turnover": 1.713,
+      "total_costs_pct": 2.96
+    },
+    {
+      "removed_asset": "DOGEUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 0.77,
+      "sharpe": 0.47,
+      "max_drawdown": 13.78,
+      "turnover": 1.6615,
+      "total_costs_pct": 2.87
+    },
+    {
+      "removed_asset": "DOGEUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 4.77,
+      "sharpe": 1.38,
+      "max_drawdown": 17.63,
+      "turnover": 1.6945,
+      "total_costs_pct": 2.93
+    },
+    {
+      "removed_asset": "DOGEUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 3.37,
+      "sharpe": 0.96,
+      "max_drawdown": 20.18,
+      "turnover": 1.6383,
+      "total_costs_pct": 2.83
+    },
+    {
+      "removed_asset": "ADAUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 7.15,
+      "sharpe": 1.92,
+      "max_drawdown": 11.45,
+      "turnover": 1.8335,
+      "total_costs_pct": 3.17
+    },
+    {
+      "removed_asset": "ADAUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 4.96,
+      "sharpe": 1.24,
+      "max_drawdown": 18.24,
+      "turnover": 1.7481,
+      "total_costs_pct": 3.02
+    },
+    {
+      "removed_asset": "ADAUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 3.81,
+      "sharpe": 1.1,
+      "max_drawdown": 13.34,
+      "turnover": 1.6926,
+      "total_costs_pct": 2.93
+    },
+    {
+      "removed_asset": "ADAUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 1.1,
+      "sharpe": 0.54,
+      "max_drawdown": 18.94,
+      "turnover": 1.7341,
+      "total_costs_pct": 3.0
+    },
+    {
+      "removed_asset": "ADAUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 1.77,
+      "sharpe": 0.68,
+      "max_drawdown": 21.06,
+      "turnover": 1.6354,
+      "total_costs_pct": 2.83
+    },
+    {
+      "removed_asset": "AVAXUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 7.09,
+      "sharpe": 1.92,
+      "max_drawdown": 12.21,
+      "turnover": 1.7983,
+      "total_costs_pct": 3.11
+    },
+    {
+      "removed_asset": "AVAXUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 11.88,
+      "sharpe": 2.4,
+      "max_drawdown": 14.06,
+      "turnover": 1.7109,
+      "total_costs_pct": 2.96
+    },
+    {
+      "removed_asset": "AVAXUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 11.22,
+      "sharpe": 2.52,
+      "max_drawdown": 10.92,
+      "turnover": 1.7675,
+      "total_costs_pct": 3.06
+    },
+    {
+      "removed_asset": "AVAXUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 7.45,
+      "sharpe": 1.95,
+      "max_drawdown": 16.93,
+      "turnover": 1.7983,
+      "total_costs_pct": 3.11
+    },
+    {
+      "removed_asset": "AVAXUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 9.08,
+      "sharpe": 1.93,
+      "max_drawdown": 18.67,
+      "turnover": 1.7009,
+      "total_costs_pct": 2.94
+    },
+    {
+      "removed_asset": "LINKUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 7.41,
+      "sharpe": 1.96,
+      "max_drawdown": 11.67,
+      "turnover": 1.7631,
+      "total_costs_pct": 3.05
+    },
+    {
+      "removed_asset": "LINKUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 3.9,
+      "sharpe": 1.07,
+      "max_drawdown": 17.64,
+      "turnover": 1.7493,
+      "total_costs_pct": 3.03
+    },
+    {
+      "removed_asset": "LINKUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 7.25,
+      "sharpe": 1.84,
+      "max_drawdown": 11.85,
+      "turnover": 1.7668,
+      "total_costs_pct": 3.06
+    },
+    {
+      "removed_asset": "LINKUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 4.77,
+      "sharpe": 1.35,
+      "max_drawdown": 17.95,
+      "turnover": 1.7308,
+      "total_costs_pct": 2.99
+    },
+    {
+      "removed_asset": "LINKUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 8.06,
+      "sharpe": 1.74,
+      "max_drawdown": 15.53,
+      "turnover": 1.7022,
+      "total_costs_pct": 2.94
+    },
+    {
+      "removed_asset": "NEARUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 7.78,
+      "sharpe": 2.08,
+      "max_drawdown": 10.01,
+      "turnover": 1.8285,
+      "total_costs_pct": 3.16
+    },
+    {
+      "removed_asset": "NEARUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 6.73,
+      "sharpe": 1.54,
+      "max_drawdown": 18.24,
+      "turnover": 1.7476,
+      "total_costs_pct": 3.02
+    },
+    {
+      "removed_asset": "NEARUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 7.2,
+      "sharpe": 1.77,
+      "max_drawdown": 11.02,
+      "turnover": 1.8337,
+      "total_costs_pct": 3.17
+    },
+    {
+      "removed_asset": "NEARUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 3.57,
+      "sharpe": 1.11,
+      "max_drawdown": 19.75,
+      "turnover": 1.658,
+      "total_costs_pct": 2.87
+    },
+    {
+      "removed_asset": "NEARUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": -6.09,
+      "sharpe": -0.8,
+      "max_drawdown": 19.12,
+      "turnover": 1.5991,
+      "total_costs_pct": 2.77
+    },
+    {
+      "removed_asset": "LTCUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 7.58,
+      "sharpe": 1.94,
+      "max_drawdown": 11.9,
+      "turnover": 1.832,
+      "total_costs_pct": 3.17
+    },
+    {
+      "removed_asset": "LTCUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": -8.4,
+      "sharpe": -1.37,
+      "max_drawdown": 22.8,
+      "turnover": 1.716,
+      "total_costs_pct": 2.97
+    },
+    {
+      "removed_asset": "LTCUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": -1.07,
+      "sharpe": 0.09,
+      "max_drawdown": 11.97,
+      "turnover": 1.7302,
+      "total_costs_pct": 2.99
+    },
+    {
+      "removed_asset": "LTCUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 1.23,
+      "sharpe": 0.57,
+      "max_drawdown": 18.71,
+      "turnover": 1.6593,
+      "total_costs_pct": 2.87
+    },
+    {
+      "removed_asset": "LTCUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 0.45,
+      "sharpe": 0.44,
+      "max_drawdown": 20.56,
+      "turnover": 1.6713,
+      "total_costs_pct": 2.89
+    },
+    {
+      "removed_asset": "DOTUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 11.26,
+      "sharpe": 2.75,
+      "max_drawdown": 11.31,
+      "turnover": 1.8691,
+      "total_costs_pct": 3.23
+    },
+    {
+      "removed_asset": "DOTUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 6.75,
+      "sharpe": 1.54,
+      "max_drawdown": 18.61,
+      "turnover": 1.8219,
+      "total_costs_pct": 3.15
+    },
+    {
+      "removed_asset": "DOTUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 2.75,
+      "sharpe": 0.89,
+      "max_drawdown": 10.92,
+      "turnover": 1.765,
+      "total_costs_pct": 3.05
+    },
+    {
+      "removed_asset": "DOTUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 0.9,
+      "sharpe": 0.5,
+      "max_drawdown": 18.29,
+      "turnover": 1.7293,
+      "total_costs_pct": 2.99
+    },
+    {
+      "removed_asset": "DOTUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": -1.45,
+      "sharpe": 0.11,
+      "max_drawdown": 22.97,
+      "turnover": 1.603,
+      "total_costs_pct": 2.77
+    },
+    {
+      "removed_asset": "SUIUSDT",
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 5.65,
+      "sharpe": 1.64,
+      "max_drawdown": 12.27,
+      "turnover": 1.7958,
+      "total_costs_pct": 3.11
+    },
+    {
+      "removed_asset": "SUIUSDT",
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 4.7,
+      "sharpe": 1.19,
+      "max_drawdown": 17.98,
+      "turnover": 1.7817,
+      "total_costs_pct": 3.08
+    },
+    {
+      "removed_asset": "SUIUSDT",
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 1.01,
+      "sharpe": 0.52,
+      "max_drawdown": 10.92,
+      "turnover": 1.8339,
+      "total_costs_pct": 3.17
+    },
+    {
+      "removed_asset": "SUIUSDT",
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": -0.55,
+      "sharpe": 0.16,
+      "max_drawdown": 19.07,
+      "turnover": 1.7327,
+      "total_costs_pct": 3.0
+    },
+    {
+      "removed_asset": "SUIUSDT",
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 3.16,
+      "sharpe": 0.92,
+      "max_drawdown": 19.36,
+      "turnover": 1.6009,
+      "total_costs_pct": 2.77
+    }
+  ]
+}

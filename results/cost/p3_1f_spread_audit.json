@@ -1,0 +1,145 @@
+{
+  "BTCUSDT": {
+    "symbol": "BTCUSDT",
+    "mean_spread_bps": 12.69,
+    "median_spread_bps": 7.14,
+    "p75_spread_bps": 19.83,
+    "p90_spread_bps": 34.6,
+    "p95_spread_bps": 45.53,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "ETHUSDT": {
+    "symbol": "ETHUSDT",
+    "mean_spread_bps": 20.87,
+    "median_spread_bps": 15.51,
+    "p75_spread_bps": 38.84,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "SOLUSDT": {
+    "symbol": "SOLUSDT",
+    "mean_spread_bps": 24.15,
+    "median_spread_bps": 19.69,
+    "p75_spread_bps": 48.59,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "BNBUSDT": {
+    "symbol": "BNBUSDT",
+    "mean_spread_bps": 18.25,
+    "median_spread_bps": 11.09,
+    "p75_spread_bps": 28.46,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "XRPUSDT": {
+    "symbol": "XRPUSDT",
+    "mean_spread_bps": 22.66,
+    "median_spread_bps": 17.06,
+    "p75_spread_bps": 40.76,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "DOGEUSDT": {
+    "symbol": "DOGEUSDT",
+    "mean_spread_bps": 27.17,
+    "median_spread_bps": 23.21,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "ADAUSDT": {
+    "symbol": "ADAUSDT",
+    "mean_spread_bps": 28.41,
+    "median_spread_bps": 24.88,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "AVAXUSDT": {
+    "symbol": "AVAXUSDT",
+    "mean_spread_bps": 30.86,
+    "median_spread_bps": 28.49,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "LINKUSDT": {
+    "symbol": "LINKUSDT",
+    "mean_spread_bps": 31.36,
+    "median_spread_bps": 29.7,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "NEARUSDT": {
+    "symbol": "NEARUSDT",
+    "mean_spread_bps": 34.08,
+    "median_spread_bps": 33.9,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "LTCUSDT": {
+    "symbol": "LTCUSDT",
+    "mean_spread_bps": 27.5,
+    "median_spread_bps": 23.52,
+    "p75_spread_bps": 44.51,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "DOTUSDT": {
+    "symbol": "DOTUSDT",
+    "mean_spread_bps": 31.44,
+    "median_spread_bps": 29.24,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  },
+  "SUIUSDT": {
+    "symbol": "SUIUSDT",
+    "mean_spread_bps": 29.09,
+    "median_spread_bps": 26.87,
+    "p75_spread_bps": 50.0,
+    "p90_spread_bps": 50.0,
+    "p95_spread_bps": 50.0,
+    "p99_spread_bps": 50.0,
+    "max_spread_bps": 50.0,
+    "min_spread_bps": 1.0
+  }
+}

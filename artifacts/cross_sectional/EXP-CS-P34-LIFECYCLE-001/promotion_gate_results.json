@@ -1,0 +1,123 @@
+{
+  "decision": "PROMOTE",
+  "candidate_model_id": "MOD-CHALLENGER-A-CALIBRATED",
+  "champion_model_id": "MOD-P33-LGBM-CHAMPION",
+  "total_gates": 10,
+  "passed_gates": 10,
+  "failed_gates": 0,
+  "not_ready_gates": 0,
+  "is_promotable": true,
+  "primary_reason": "All 10 validation gates passed successfully.",
+  "gate_results": [
+    {
+      "gate_id": "GATE-01",
+      "gate_name": "Artifact Integrity Gate",
+      "status": "PASS",
+      "reason_code": "SHA256_HASH_VERIFIED",
+      "evidence": {
+        "artifact_valid": true
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-02",
+      "gate_name": "Research Integrity Gate",
+      "status": "PASS",
+      "reason_code": "ZERO_LEAKAGE_WFO_VERIFIED",
+      "evidence": {
+        "research_leakage_free": true
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-03",
+      "gate_name": "Calibration Gate",
+      "status": "PASS",
+      "reason_code": "ECE_AND_BRIER_ACCEPTABLE",
+      "evidence": {
+        "candidate_ece": 0.0192,
+        "candidate_brier": 0.2424,
+        "champion_brier": 0.2424
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-04",
+      "gate_name": "Prediction Confidence Gate",
+      "status": "PASS",
+      "reason_code": "MONOTONIC_OUTCOME_ORDERING",
+      "evidence": {
+        "confidence_monotonic": true
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-05",
+      "gate_name": "Drift & Health Gate",
+      "status": "PASS",
+      "reason_code": "HEALTH_STATE_HEALTHY",
+      "evidence": {
+        "health_state": "HEALTHY",
+        "health_score": 92.0,
+        "active_alerts": 0
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-06",
+      "gate_name": "Economic Performance Gate",
+      "status": "PASS",
+      "reason_code": "ECONOMIC_PERFORMANCE_COMPLIANT",
+      "evidence": {
+        "candidate_net_sharpe": 2.65,
+        "champion_net_sharpe": 2.61,
+        "candidate_net_return": 12.1,
+        "champion_net_return": 11.96
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-07",
+      "gate_name": "Risk Gate",
+      "status": "PASS",
+      "reason_code": "DRAWDOWN_LIMITS_RESPECTED",
+      "evidence": {
+        "mean_fold_max_dd": 0.15,
+        "worst_fold_max_dd": 0.178
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-08",
+      "gate_name": "Operational Reliability Gate",
+      "status": "PASS",
+      "reason_code": "OPERATIONAL_SLAS_MET",
+      "evidence": {
+        "latency_ms": 0.817,
+        "error_rate": 0.0
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-09",
+      "gate_name": "Shadow Evaluation Gate",
+      "status": "PASS",
+      "reason_code": "SHADOW_VALIDATION_COMPLETED",
+      "evidence": {
+        "shadow_sample_count": 100
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    },
+    {
+      "gate_id": "GATE-10",
+      "gate_name": "Governance Approval Gate",
+      "status": "PASS",
+      "reason_code": "APPROVAL_RESEARCH_APPROVED",
+      "evidence": {
+        "approval_status": "RESEARCH_APPROVED"
+      },
+      "timestamp": "2026-10-07 19:22:33 UTC"
+    }
+  ],
+  "timestamp": "2026-10-07 19:22:33 UTC"
+}

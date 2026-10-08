@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2026-06-01 00:00:00",
+    "model_id": "P3-3-LGBM-v1",
+    "entity_name": "volatility_48",
+    "drift_type": "FEATURE_DRIFT",
+    "metric_name": "PSI",
+    "observed_value": 0.1134,
+    "threshold": 0.1,
+    "severity": "MODERATE",
+    "reference_window": "Fold 1-2",
+    "monitoring_window": "Fold 4-5",
+    "message": "Feature volatility_48 exhibited MODERATE drift (PSI=0.1134, KS-p=0.0000e+00)"
+  },
+  {
+    "timestamp": "2026-06-01 00:00:00",
+    "model_id": "P3-3-LGBM-v1",
+    "entity_name": "parkinson_vol_24",
+    "drift_type": "FEATURE_DRIFT",
+    "metric_name": "PSI",
+    "observed_value": 0.1178,
+    "threshold": 0.1,
+    "severity": "MODERATE",
+    "reference_window": "Fold 1-2",
+    "monitoring_window": "Fold 4-5",
+    "message": "Feature parkinson_vol_24 exhibited MODERATE drift (PSI=0.1178, KS-p=0.0000e+00)"
+  }
+]

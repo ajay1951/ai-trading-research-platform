@@ -1,0 +1,2762 @@
+{
+  "experiment_id": "EXP-CS-P34-LIFECYCLE-001",
+  "models_registered": [
+    {
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "model_family": "LGBM_CROSS_SECTIONAL",
+      "training_run_id": "RUN-2026-001",
+      "feature_version": "FEAT-V1",
+      "label_version": "LABEL-V1",
+      "training_data_range": "2026-01-01 to 2026-03-31",
+      "training_timestamp": "2026-04-01 00:00:00 UTC",
+      "code_version": "commit-p3-1f",
+      "experiment_id": "EXP-CS-P31F-001",
+      "calibration_version": "RAW",
+      "risk_profile_version": "DYNAMIC-P32",
+      "transaction_cost_version": "P3-1F-BASE",
+      "parent_model_id": null,
+      "status": "ARCHIVED",
+      "approval_status": "RESEARCH_APPROVED",
+      "artifact_hash": "e931ac7718a9b43cf941d4023fcaf2288c17958a3e69bba1b9b54bc3794fb1ec",
+      "created_at": "2026-04-01 00:00:00 UTC",
+      "metadata": {}
+    },
+    {
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "model_family": "LGBM_CROSS_SECTIONAL",
+      "training_run_id": "RUN-2026-002",
+      "feature_version": "FEAT-V1",
+      "label_version": "LABEL-V1",
+      "training_data_range": "2026-01-01 to 2026-05-31",
+      "training_timestamp": "2026-06-01 00:00:00 UTC",
+      "code_version": "commit-p3-3",
+      "experiment_id": "EXP-CS-P33-MODEL-001",
+      "calibration_version": "RAW",
+      "risk_profile_version": "DYNAMIC-P32",
+      "transaction_cost_version": "P3-1F-BASE",
+      "parent_model_id": "MOD-P3-LGBM-V0",
+      "status": "CHAMPION",
+      "approval_status": "RESEARCH_APPROVED",
+      "artifact_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee",
+      "created_at": "2026-06-01 00:00:00 UTC",
+      "metadata": {}
+    },
+    {
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "model_family": "LGBM_CROSS_SECTIONAL",
+      "training_run_id": "RUN-2026-003",
+      "feature_version": "FEAT-V1",
+      "label_version": "LABEL-V1",
+      "training_data_range": "2026-01-01 to 2026-05-31",
+      "training_timestamp": "2026-06-02 00:00:00 UTC",
+      "code_version": "commit-p3-4",
+      "experiment_id": "EXP-CS-P34-LIFECYCLE-001",
+      "calibration_version": "PLATT_CALIBRATED",
+      "risk_profile_version": "DYNAMIC-P32",
+      "transaction_cost_version": "P3-1F-BASE",
+      "parent_model_id": "MOD-P33-LGBM-CHAMPION",
+      "status": "DEMOTED",
+      "approval_status": "RESEARCH_APPROVED",
+      "artifact_hash": "b1468a5d194cc4a69e331f71a530e9d81df054b60008986060765dc908dc085a",
+      "created_at": "2026-06-02 00:00:00 UTC",
+      "metadata": {}
+    },
+    {
+      "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+      "model_version": "1.1.0-challenger.b",
+      "model_family": "LGBM_CROSS_SECTIONAL",
+      "training_run_id": "RUN-2026-004",
+      "feature_version": "FEAT-V1",
+      "label_version": "LABEL-V1",
+      "training_data_range": "2026-01-01 to 2026-05-31",
+      "training_timestamp": "2026-06-02 00:00:00 UTC",
+      "code_version": "commit-p3-4",
+      "experiment_id": "EXP-CS-P34-LIFECYCLE-001",
+      "calibration_version": "RAW",
+      "risk_profile_version": "DYNAMIC-P32",
+      "transaction_cost_version": "P3-1F-BASE",
+      "parent_model_id": "MOD-P33-LGBM-CHAMPION",
+      "status": "REJECTED",
+      "approval_status": "DRAFT",
+      "artifact_hash": "1c4f3fdb52ec6a2d6fd6512eb1c6640b849380704e530ffad89e24ce0d2b5be3",
+      "created_at": "2026-06-02 00:00:00 UTC",
+      "metadata": {}
+    }
+  ],
+  "active_champion": {
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "model_family": "LGBM_CROSS_SECTIONAL",
+    "promotion_timestamp": "2026-10-07 19:22:33 UTC",
+    "promotion_reason": "ROLLBACK: Simulated post-promotion anomaly detection verification.",
+    "approval_record": "RESEARCH_APPROVED",
+    "evaluation_summary": {
+      "rollback_from": "MOD-CHALLENGER-A-CALIBRATED"
+    },
+    "health_state": "HEALTHY",
+    "rollback_parent": "MOD-P3-LGBM-V0",
+    "artifact_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee"
+  },
+  "challenger_a_decision": {
+    "decision": "PROMOTE",
+    "candidate_model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "champion_model_id": "MOD-P33-LGBM-CHAMPION",
+    "total_gates": 10,
+    "passed_gates": 10,
+    "failed_gates": 0,
+    "not_ready_gates": 0,
+    "is_promotable": true,
+    "primary_reason": "All 10 validation gates passed successfully.",
+    "gate_results": [
+      {
+        "gate_id": "GATE-01",
+        "gate_name": "Artifact Integrity Gate",
+        "status": "PASS",
+        "reason_code": "SHA256_HASH_VERIFIED",
+        "evidence": {
+          "artifact_valid": true
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-02",
+        "gate_name": "Research Integrity Gate",
+        "status": "PASS",
+        "reason_code": "ZERO_LEAKAGE_WFO_VERIFIED",
+        "evidence": {
+          "research_leakage_free": true
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-03",
+        "gate_name": "Calibration Gate",
+        "status": "PASS",
+        "reason_code": "ECE_AND_BRIER_ACCEPTABLE",
+        "evidence": {
+          "candidate_ece": 0.0192,
+          "candidate_brier": 0.2424,
+          "champion_brier": 0.2424
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-04",
+        "gate_name": "Prediction Confidence Gate",
+        "status": "PASS",
+        "reason_code": "MONOTONIC_OUTCOME_ORDERING",
+        "evidence": {
+          "confidence_monotonic": true
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-05",
+        "gate_name": "Drift & Health Gate",
+        "status": "PASS",
+        "reason_code": "HEALTH_STATE_HEALTHY",
+        "evidence": {
+          "health_state": "HEALTHY",
+          "health_score": 92.0,
+          "active_alerts": 0
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-06",
+        "gate_name": "Economic Performance Gate",
+        "status": "PASS",
+        "reason_code": "ECONOMIC_PERFORMANCE_COMPLIANT",
+        "evidence": {
+          "candidate_net_sharpe": 2.65,
+          "champion_net_sharpe": 2.61,
+          "candidate_net_return": 12.1,
+          "champion_net_return": 11.96
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-07",
+        "gate_name": "Risk Gate",
+        "status": "PASS",
+        "reason_code": "DRAWDOWN_LIMITS_RESPECTED",
+        "evidence": {
+          "mean_fold_max_dd": 0.15,
+          "worst_fold_max_dd": 0.178
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-08",
+        "gate_name": "Operational Reliability Gate",
+        "status": "PASS",
+        "reason_code": "OPERATIONAL_SLAS_MET",
+        "evidence": {
+          "latency_ms": 0.817,
+          "error_rate": 0.0
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-09",
+        "gate_name": "Shadow Evaluation Gate",
+        "status": "PASS",
+        "reason_code": "SHADOW_VALIDATION_COMPLETED",
+        "evidence": {
+          "shadow_sample_count": 100
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-10",
+        "gate_name": "Governance Approval Gate",
+        "status": "PASS",
+        "reason_code": "APPROVAL_RESEARCH_APPROVED",
+        "evidence": {
+          "approval_status": "RESEARCH_APPROVED"
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      }
+    ],
+    "timestamp": "2026-10-07 19:22:33 UTC"
+  },
+  "challenger_b_decision": {
+    "decision": "REJECT",
+    "candidate_model_id": "MOD-CHALLENGER-B-OVERFITTED",
+    "champion_model_id": "MOD-P33-LGBM-CHAMPION",
+    "total_gates": 10,
+    "passed_gates": 5,
+    "failed_gates": 5,
+    "not_ready_gates": 0,
+    "is_promotable": false,
+    "primary_reason": "Promotion Rejected: 5 mandatory gates failed.",
+    "gate_results": [
+      {
+        "gate_id": "GATE-01",
+        "gate_name": "Artifact Integrity Gate",
+        "status": "PASS",
+        "reason_code": "SHA256_HASH_VERIFIED",
+        "evidence": {
+          "artifact_valid": true
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-02",
+        "gate_name": "Research Integrity Gate",
+        "status": "PASS",
+        "reason_code": "ZERO_LEAKAGE_WFO_VERIFIED",
+        "evidence": {
+          "research_leakage_free": true
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-03",
+        "gate_name": "Calibration Gate",
+        "status": "FAIL",
+        "reason_code": "CALIBRATION_DEGRADED",
+        "evidence": {
+          "candidate_ece": 0.0812,
+          "candidate_brier": 0.2534,
+          "champion_brier": 0.2424
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-04",
+        "gate_name": "Prediction Confidence Gate",
+        "status": "FAIL",
+        "reason_code": "CONFIDENCE_NON_MONOTONIC",
+        "evidence": {
+          "confidence_monotonic": false
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-05",
+        "gate_name": "Drift & Health Gate",
+        "status": "PASS",
+        "reason_code": "HEALTH_STATE_HEALTHY",
+        "evidence": {
+          "health_state": "HEALTHY",
+          "health_score": 92.0,
+          "active_alerts": 0
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-06",
+        "gate_name": "Economic Performance Gate",
+        "status": "FAIL",
+        "reason_code": "ECONOMIC_UNDERPERFORMANCE",
+        "evidence": {
+          "candidate_net_sharpe": 2.1,
+          "champion_net_sharpe": 2.61,
+          "candidate_net_return": 14.5,
+          "champion_net_return": 11.96
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-07",
+        "gate_name": "Risk Gate",
+        "status": "FAIL",
+        "reason_code": "DRAWDOWN_EXCEEDS_LIMITS",
+        "evidence": {
+          "mean_fold_max_dd": 0.22,
+          "worst_fold_max_dd": 0.28
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-08",
+        "gate_name": "Operational Reliability Gate",
+        "status": "PASS",
+        "reason_code": "OPERATIONAL_SLAS_MET",
+        "evidence": {
+          "latency_ms": 0.875,
+          "error_rate": 0.0
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-09",
+        "gate_name": "Shadow Evaluation Gate",
+        "status": "PASS",
+        "reason_code": "SHADOW_VALIDATION_COMPLETED",
+        "evidence": {
+          "shadow_sample_count": 100
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      },
+      {
+        "gate_id": "GATE-10",
+        "gate_name": "Governance Approval Gate",
+        "status": "FAIL",
+        "reason_code": "APPROVAL_DRAFT",
+        "evidence": {
+          "approval_status": "DRAFT"
+        },
+        "timestamp": "2026-10-07 19:22:33 UTC"
+      }
+    ],
+    "timestamp": "2026-10-07 19:22:33 UTC"
+  },
+  "shadow_summary_a": {
+    "champion_model_id": "MOD-P33-LGBM-CHAMPION",
+    "challenger_model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "total_observations": 100,
+    "agreement_rate": 1.0,
+    "mean_absolute_prob_diff": 0.0075,
+    "correlation": 0.9873,
+    "champion_avg_latency_ms": 0.893,
+    "challenger_avg_latency_ms": 0.817,
+    "error_count": 0,
+    "is_shadow_valid": true,
+    "prediction_records": [
+      {
+        "timestamp": "2025-07-08 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3904,
+        "challenger_probability": 0.4025,
+        "prediction_agreement": true,
+        "probability_diff": 0.0121,
+        "champion_latency_ms": 2.234,
+        "challenger_latency_ms": 0.913
+      },
+      {
+        "timestamp": "2025-07-08 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3825,
+        "challenger_probability": 0.4027,
+        "prediction_agreement": true,
+        "probability_diff": 0.0202,
+        "champion_latency_ms": 0.767,
+        "challenger_latency_ms": 0.654
+      },
+      {
+        "timestamp": "2025-07-08 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3524,
+        "challenger_probability": 0.3523,
+        "prediction_agreement": true,
+        "probability_diff": 0.0,
+        "champion_latency_ms": 0.818,
+        "challenger_latency_ms": 0.63
+      },
+      {
+        "timestamp": "2025-07-08 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3773,
+        "challenger_probability": 0.3885,
+        "prediction_agreement": true,
+        "probability_diff": 0.0112,
+        "champion_latency_ms": 0.635,
+        "challenger_latency_ms": 0.591
+      },
+      {
+        "timestamp": "2025-07-08 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3759,
+        "challenger_probability": 0.3851,
+        "prediction_agreement": true,
+        "probability_diff": 0.0091,
+        "champion_latency_ms": 0.643,
+        "challenger_latency_ms": 0.653
+      },
+      {
+        "timestamp": "2025-07-08 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3736,
+        "challenger_probability": 0.3679,
+        "prediction_agreement": true,
+        "probability_diff": 0.0057,
+        "champion_latency_ms": 0.796,
+        "challenger_latency_ms": 0.956
+      },
+      {
+        "timestamp": "2025-07-08 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3677,
+        "challenger_probability": 0.3645,
+        "prediction_agreement": true,
+        "probability_diff": 0.0032,
+        "champion_latency_ms": 1.103,
+        "challenger_latency_ms": 0.803
+      },
+      {
+        "timestamp": "2025-07-08 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3412,
+        "challenger_probability": 0.3361,
+        "prediction_agreement": true,
+        "probability_diff": 0.005,
+        "champion_latency_ms": 0.842,
+        "challenger_latency_ms": 0.774
+      },
+      {
+        "timestamp": "2025-07-08 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3926,
+        "challenger_probability": 0.3915,
+        "prediction_agreement": true,
+        "probability_diff": 0.0012,
+        "champion_latency_ms": 1.043,
+        "challenger_latency_ms": 0.766
+      },
+      {
+        "timestamp": "2025-07-08 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4108,
+        "challenger_probability": 0.4175,
+        "prediction_agreement": true,
+        "probability_diff": 0.0066,
+        "champion_latency_ms": 0.876,
+        "challenger_latency_ms": 0.781
+      },
+      {
+        "timestamp": "2025-07-08 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4192,
+        "challenger_probability": 0.4118,
+        "prediction_agreement": true,
+        "probability_diff": 0.0073,
+        "champion_latency_ms": 0.835,
+        "challenger_latency_ms": 0.898
+      },
+      {
+        "timestamp": "2025-07-09 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3723,
+        "challenger_probability": 0.3752,
+        "prediction_agreement": true,
+        "probability_diff": 0.0029,
+        "champion_latency_ms": 0.912,
+        "challenger_latency_ms": 0.668
+      },
+      {
+        "timestamp": "2025-07-09 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4002,
+        "challenger_probability": 0.3892,
+        "prediction_agreement": true,
+        "probability_diff": 0.011,
+        "champion_latency_ms": 0.694,
+        "challenger_latency_ms": 0.581
+      },
+      {
+        "timestamp": "2025-07-09 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3976,
+        "challenger_probability": 0.4005,
+        "prediction_agreement": true,
+        "probability_diff": 0.0029,
+        "champion_latency_ms": 0.648,
+        "challenger_latency_ms": 0.61
+      },
+      {
+        "timestamp": "2025-07-09 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.406,
+        "challenger_probability": 0.3939,
+        "prediction_agreement": true,
+        "probability_diff": 0.0121,
+        "champion_latency_ms": 0.629,
+        "challenger_latency_ms": 0.561
+      },
+      {
+        "timestamp": "2025-07-09 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3822,
+        "challenger_probability": 0.3776,
+        "prediction_agreement": true,
+        "probability_diff": 0.0046,
+        "champion_latency_ms": 0.763,
+        "challenger_latency_ms": 0.595
+      },
+      {
+        "timestamp": "2025-07-09 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4208,
+        "challenger_probability": 0.4176,
+        "prediction_agreement": true,
+        "probability_diff": 0.0032,
+        "champion_latency_ms": 0.629,
+        "challenger_latency_ms": 0.567
+      },
+      {
+        "timestamp": "2025-07-09 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3966,
+        "challenger_probability": 0.3904,
+        "prediction_agreement": true,
+        "probability_diff": 0.0062,
+        "champion_latency_ms": 0.637,
+        "challenger_latency_ms": 0.921
+      },
+      {
+        "timestamp": "2025-07-09 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4036,
+        "challenger_probability": 0.3996,
+        "prediction_agreement": true,
+        "probability_diff": 0.004,
+        "champion_latency_ms": 0.99,
+        "challenger_latency_ms": 0.868
+      },
+      {
+        "timestamp": "2025-07-09 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3831,
+        "challenger_probability": 0.3776,
+        "prediction_agreement": true,
+        "probability_diff": 0.0055,
+        "champion_latency_ms": 0.994,
+        "challenger_latency_ms": 0.832
+      },
+      {
+        "timestamp": "2025-07-09 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4171,
+        "challenger_probability": 0.4067,
+        "prediction_agreement": true,
+        "probability_diff": 0.0104,
+        "champion_latency_ms": 0.833,
+        "challenger_latency_ms": 0.782
+      },
+      {
+        "timestamp": "2025-07-09 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.439,
+        "challenger_probability": 0.4407,
+        "prediction_agreement": true,
+        "probability_diff": 0.0017,
+        "champion_latency_ms": 0.856,
+        "challenger_latency_ms": 0.775
+      },
+      {
+        "timestamp": "2025-07-09 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4306,
+        "challenger_probability": 0.432,
+        "prediction_agreement": true,
+        "probability_diff": 0.0014,
+        "champion_latency_ms": 0.85,
+        "challenger_latency_ms": 0.787
+      },
+      {
+        "timestamp": "2025-07-09 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4224,
+        "challenger_probability": 0.4128,
+        "prediction_agreement": true,
+        "probability_diff": 0.0096,
+        "champion_latency_ms": 0.8,
+        "challenger_latency_ms": 0.763
+      },
+      {
+        "timestamp": "2025-07-09 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4098,
+        "challenger_probability": 0.4006,
+        "prediction_agreement": true,
+        "probability_diff": 0.0092,
+        "champion_latency_ms": 0.863,
+        "challenger_latency_ms": 0.811
+      },
+      {
+        "timestamp": "2025-07-09 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.448,
+        "challenger_probability": 0.4399,
+        "prediction_agreement": true,
+        "probability_diff": 0.0081,
+        "champion_latency_ms": 0.964,
+        "challenger_latency_ms": 0.851
+      },
+      {
+        "timestamp": "2025-07-09 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4244,
+        "challenger_probability": 0.4138,
+        "prediction_agreement": true,
+        "probability_diff": 0.0106,
+        "champion_latency_ms": 0.866,
+        "challenger_latency_ms": 0.804
+      },
+      {
+        "timestamp": "2025-07-09 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4039,
+        "challenger_probability": 0.4021,
+        "prediction_agreement": true,
+        "probability_diff": 0.0018,
+        "champion_latency_ms": 0.862,
+        "challenger_latency_ms": 0.794
+      },
+      {
+        "timestamp": "2025-07-09 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4373,
+        "challenger_probability": 0.4379,
+        "prediction_agreement": true,
+        "probability_diff": 0.0006,
+        "champion_latency_ms": 0.857,
+        "challenger_latency_ms": 0.866
+      },
+      {
+        "timestamp": "2025-07-09 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4295,
+        "challenger_probability": 0.4252,
+        "prediction_agreement": true,
+        "probability_diff": 0.0042,
+        "champion_latency_ms": 0.833,
+        "challenger_latency_ms": 0.782
+      },
+      {
+        "timestamp": "2025-07-09 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4039,
+        "challenger_probability": 0.4021,
+        "prediction_agreement": true,
+        "probability_diff": 0.0018,
+        "champion_latency_ms": 1.076,
+        "challenger_latency_ms": 1.022
+      },
+      {
+        "timestamp": "2025-07-09 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4521,
+        "challenger_probability": 0.4416,
+        "prediction_agreement": true,
+        "probability_diff": 0.0105,
+        "champion_latency_ms": 1.2,
+        "challenger_latency_ms": 1.02
+      },
+      {
+        "timestamp": "2025-07-09 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4169,
+        "challenger_probability": 0.4198,
+        "prediction_agreement": true,
+        "probability_diff": 0.0029,
+        "champion_latency_ms": 1.046,
+        "challenger_latency_ms": 1.056
+      },
+      {
+        "timestamp": "2025-07-09 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.44,
+        "challenger_probability": 0.4355,
+        "prediction_agreement": true,
+        "probability_diff": 0.0044,
+        "champion_latency_ms": 1.007,
+        "challenger_latency_ms": 0.967
+      },
+      {
+        "timestamp": "2025-07-09 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4111,
+        "challenger_probability": 0.4075,
+        "prediction_agreement": true,
+        "probability_diff": 0.0036,
+        "champion_latency_ms": 0.969,
+        "challenger_latency_ms": 1.024
+      },
+      {
+        "timestamp": "2025-07-10 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.39,
+        "challenger_probability": 0.3992,
+        "prediction_agreement": true,
+        "probability_diff": 0.0091,
+        "champion_latency_ms": 1.125,
+        "challenger_latency_ms": 1.0
+      },
+      {
+        "timestamp": "2025-07-10 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4472,
+        "challenger_probability": 0.4481,
+        "prediction_agreement": true,
+        "probability_diff": 0.0009,
+        "champion_latency_ms": 1.231,
+        "challenger_latency_ms": 0.984
+      },
+      {
+        "timestamp": "2025-07-10 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.439,
+        "challenger_probability": 0.4475,
+        "prediction_agreement": true,
+        "probability_diff": 0.0085,
+        "champion_latency_ms": 1.002,
+        "challenger_latency_ms": 1.065
+      },
+      {
+        "timestamp": "2025-07-10 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4004,
+        "challenger_probability": 0.4015,
+        "prediction_agreement": true,
+        "probability_diff": 0.001,
+        "champion_latency_ms": 1.008,
+        "challenger_latency_ms": 0.971
+      },
+      {
+        "timestamp": "2025-07-10 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4248,
+        "challenger_probability": 0.4334,
+        "prediction_agreement": true,
+        "probability_diff": 0.0086,
+        "champion_latency_ms": 1.108,
+        "challenger_latency_ms": 1.007
+      },
+      {
+        "timestamp": "2025-07-10 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4313,
+        "challenger_probability": 0.4293,
+        "prediction_agreement": true,
+        "probability_diff": 0.002,
+        "champion_latency_ms": 1.248,
+        "challenger_latency_ms": 1.074
+      },
+      {
+        "timestamp": "2025-07-10 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4305,
+        "challenger_probability": 0.4449,
+        "prediction_agreement": true,
+        "probability_diff": 0.0144,
+        "champion_latency_ms": 1.154,
+        "challenger_latency_ms": 0.98
+      },
+      {
+        "timestamp": "2025-07-10 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3872,
+        "challenger_probability": 0.4007,
+        "prediction_agreement": true,
+        "probability_diff": 0.0136,
+        "champion_latency_ms": 1.003,
+        "challenger_latency_ms": 0.946
+      },
+      {
+        "timestamp": "2025-07-10 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3619,
+        "challenger_probability": 0.3699,
+        "prediction_agreement": true,
+        "probability_diff": 0.008,
+        "champion_latency_ms": 0.96,
+        "challenger_latency_ms": 0.959
+      },
+      {
+        "timestamp": "2025-07-10 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3631,
+        "challenger_probability": 0.3743,
+        "prediction_agreement": true,
+        "probability_diff": 0.0112,
+        "champion_latency_ms": 1.017,
+        "challenger_latency_ms": 0.957
+      },
+      {
+        "timestamp": "2025-07-10 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3459,
+        "challenger_probability": 0.3588,
+        "prediction_agreement": true,
+        "probability_diff": 0.0128,
+        "champion_latency_ms": 0.968,
+        "challenger_latency_ms": 0.957
+      },
+      {
+        "timestamp": "2025-07-10 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3323,
+        "challenger_probability": 0.3485,
+        "prediction_agreement": true,
+        "probability_diff": 0.0162,
+        "champion_latency_ms": 1.177,
+        "challenger_latency_ms": 0.969
+      },
+      {
+        "timestamp": "2025-07-10 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.348,
+        "challenger_probability": 0.3509,
+        "prediction_agreement": true,
+        "probability_diff": 0.0028,
+        "champion_latency_ms": 0.963,
+        "challenger_latency_ms": 0.953
+      },
+      {
+        "timestamp": "2025-07-10 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3082,
+        "challenger_probability": 0.3202,
+        "prediction_agreement": true,
+        "probability_diff": 0.012,
+        "champion_latency_ms": 0.966,
+        "challenger_latency_ms": 0.971
+      },
+      {
+        "timestamp": "2025-07-10 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2925,
+        "challenger_probability": 0.3074,
+        "prediction_agreement": true,
+        "probability_diff": 0.0149,
+        "champion_latency_ms": 0.912,
+        "challenger_latency_ms": 0.808
+      },
+      {
+        "timestamp": "2025-07-10 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3048,
+        "challenger_probability": 0.318,
+        "prediction_agreement": true,
+        "probability_diff": 0.0132,
+        "champion_latency_ms": 0.828,
+        "challenger_latency_ms": 0.759
+      },
+      {
+        "timestamp": "2025-07-10 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3085,
+        "challenger_probability": 0.3127,
+        "prediction_agreement": true,
+        "probability_diff": 0.0042,
+        "champion_latency_ms": 1.036,
+        "challenger_latency_ms": 0.922
+      },
+      {
+        "timestamp": "2025-07-10 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.295,
+        "challenger_probability": 0.2947,
+        "prediction_agreement": true,
+        "probability_diff": 0.0003,
+        "champion_latency_ms": 0.875,
+        "challenger_latency_ms": 0.798
+      },
+      {
+        "timestamp": "2025-07-10 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2807,
+        "challenger_probability": 0.2968,
+        "prediction_agreement": true,
+        "probability_diff": 0.0161,
+        "champion_latency_ms": 0.852,
+        "challenger_latency_ms": 0.808
+      },
+      {
+        "timestamp": "2025-07-10 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2952,
+        "challenger_probability": 0.3101,
+        "prediction_agreement": true,
+        "probability_diff": 0.0149,
+        "champion_latency_ms": 0.845,
+        "challenger_latency_ms": 0.809
+      },
+      {
+        "timestamp": "2025-07-10 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3527,
+        "challenger_probability": 0.3635,
+        "prediction_agreement": true,
+        "probability_diff": 0.0108,
+        "champion_latency_ms": 0.837,
+        "challenger_latency_ms": 0.792
+      },
+      {
+        "timestamp": "2025-07-10 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3172,
+        "challenger_probability": 0.3263,
+        "prediction_agreement": true,
+        "probability_diff": 0.0091,
+        "champion_latency_ms": 0.813,
+        "challenger_latency_ms": 0.875
+      },
+      {
+        "timestamp": "2025-07-10 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3545,
+        "challenger_probability": 0.3579,
+        "prediction_agreement": true,
+        "probability_diff": 0.0034,
+        "champion_latency_ms": 0.911,
+        "challenger_latency_ms": 0.815
+      },
+      {
+        "timestamp": "2025-07-10 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3211,
+        "challenger_probability": 0.3254,
+        "prediction_agreement": true,
+        "probability_diff": 0.0042,
+        "champion_latency_ms": 0.841,
+        "challenger_latency_ms": 0.769
+      },
+      {
+        "timestamp": "2025-07-11 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2732,
+        "challenger_probability": 0.2785,
+        "prediction_agreement": true,
+        "probability_diff": 0.0053,
+        "champion_latency_ms": 0.835,
+        "challenger_latency_ms": 0.815
+      },
+      {
+        "timestamp": "2025-07-11 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4179,
+        "challenger_probability": 0.4228,
+        "prediction_agreement": true,
+        "probability_diff": 0.0049,
+        "champion_latency_ms": 0.861,
+        "challenger_latency_ms": 0.769
+      },
+      {
+        "timestamp": "2025-07-11 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3529,
+        "challenger_probability": 0.3599,
+        "prediction_agreement": true,
+        "probability_diff": 0.007,
+        "champion_latency_ms": 0.835,
+        "challenger_latency_ms": 0.793
+      },
+      {
+        "timestamp": "2025-07-11 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.339,
+        "challenger_probability": 0.3372,
+        "prediction_agreement": true,
+        "probability_diff": 0.0018,
+        "champion_latency_ms": 0.826,
+        "challenger_latency_ms": 0.782
+      },
+      {
+        "timestamp": "2025-07-11 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3659,
+        "challenger_probability": 0.3771,
+        "prediction_agreement": true,
+        "probability_diff": 0.0112,
+        "champion_latency_ms": 0.836,
+        "challenger_latency_ms": 1.004
+      },
+      {
+        "timestamp": "2025-07-11 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3116,
+        "challenger_probability": 0.3201,
+        "prediction_agreement": true,
+        "probability_diff": 0.0084,
+        "champion_latency_ms": 0.901,
+        "challenger_latency_ms": 0.8
+      },
+      {
+        "timestamp": "2025-07-11 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2803,
+        "challenger_probability": 0.2884,
+        "prediction_agreement": true,
+        "probability_diff": 0.008,
+        "champion_latency_ms": 0.853,
+        "challenger_latency_ms": 0.79
+      },
+      {
+        "timestamp": "2025-07-11 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2772,
+        "challenger_probability": 0.2824,
+        "prediction_agreement": true,
+        "probability_diff": 0.0052,
+        "champion_latency_ms": 0.888,
+        "challenger_latency_ms": 0.817
+      },
+      {
+        "timestamp": "2025-07-11 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2723,
+        "challenger_probability": 0.2798,
+        "prediction_agreement": true,
+        "probability_diff": 0.0075,
+        "champion_latency_ms": 0.83,
+        "challenger_latency_ms": 0.79
+      },
+      {
+        "timestamp": "2025-07-11 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2553,
+        "challenger_probability": 0.2721,
+        "prediction_agreement": true,
+        "probability_diff": 0.0167,
+        "champion_latency_ms": 0.828,
+        "challenger_latency_ms": 0.803
+      },
+      {
+        "timestamp": "2025-07-11 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2521,
+        "challenger_probability": 0.2539,
+        "prediction_agreement": true,
+        "probability_diff": 0.0018,
+        "champion_latency_ms": 0.825,
+        "challenger_latency_ms": 0.819
+      },
+      {
+        "timestamp": "2025-07-11 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2774,
+        "challenger_probability": 0.2858,
+        "prediction_agreement": true,
+        "probability_diff": 0.0085,
+        "champion_latency_ms": 0.927,
+        "challenger_latency_ms": 0.816
+      },
+      {
+        "timestamp": "2025-07-11 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2805,
+        "challenger_probability": 0.2842,
+        "prediction_agreement": true,
+        "probability_diff": 0.0038,
+        "champion_latency_ms": 0.848,
+        "challenger_latency_ms": 0.899
+      },
+      {
+        "timestamp": "2025-07-11 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2406,
+        "challenger_probability": 0.2528,
+        "prediction_agreement": true,
+        "probability_diff": 0.0122,
+        "champion_latency_ms": 0.909,
+        "challenger_latency_ms": 1.029
+      },
+      {
+        "timestamp": "2025-07-11 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2522,
+        "challenger_probability": 0.2635,
+        "prediction_agreement": true,
+        "probability_diff": 0.0113,
+        "champion_latency_ms": 1.012,
+        "challenger_latency_ms": 0.998
+      },
+      {
+        "timestamp": "2025-07-11 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2956,
+        "challenger_probability": 0.297,
+        "prediction_agreement": true,
+        "probability_diff": 0.0014,
+        "champion_latency_ms": 1.104,
+        "challenger_latency_ms": 0.976
+      },
+      {
+        "timestamp": "2025-07-11 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2905,
+        "challenger_probability": 0.2792,
+        "prediction_agreement": true,
+        "probability_diff": 0.0113,
+        "champion_latency_ms": 0.991,
+        "challenger_latency_ms": 0.84
+      },
+      {
+        "timestamp": "2025-07-11 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2752,
+        "challenger_probability": 0.2738,
+        "prediction_agreement": true,
+        "probability_diff": 0.0014,
+        "champion_latency_ms": 0.856,
+        "challenger_latency_ms": 0.805
+      },
+      {
+        "timestamp": "2025-07-11 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3017,
+        "challenger_probability": 0.3062,
+        "prediction_agreement": true,
+        "probability_diff": 0.0045,
+        "champion_latency_ms": 0.898,
+        "challenger_latency_ms": 0.822
+      },
+      {
+        "timestamp": "2025-07-11 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4055,
+        "challenger_probability": 0.3901,
+        "prediction_agreement": true,
+        "probability_diff": 0.0154,
+        "champion_latency_ms": 0.832,
+        "challenger_latency_ms": 0.852
+      },
+      {
+        "timestamp": "2025-07-11 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3567,
+        "challenger_probability": 0.3462,
+        "prediction_agreement": true,
+        "probability_diff": 0.0105,
+        "champion_latency_ms": 0.834,
+        "challenger_latency_ms": 0.755
+      },
+      {
+        "timestamp": "2025-07-11 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3574,
+        "challenger_probability": 0.3494,
+        "prediction_agreement": true,
+        "probability_diff": 0.008,
+        "champion_latency_ms": 0.823,
+        "challenger_latency_ms": 0.784
+      },
+      {
+        "timestamp": "2025-07-11 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3353,
+        "challenger_probability": 0.3192,
+        "prediction_agreement": true,
+        "probability_diff": 0.0161,
+        "champion_latency_ms": 0.918,
+        "challenger_latency_ms": 0.832
+      },
+      {
+        "timestamp": "2025-07-11 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3308,
+        "challenger_probability": 0.3144,
+        "prediction_agreement": true,
+        "probability_diff": 0.0164,
+        "champion_latency_ms": 0.881,
+        "challenger_latency_ms": 0.817
+      },
+      {
+        "timestamp": "2025-07-12 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3424,
+        "challenger_probability": 0.3351,
+        "prediction_agreement": true,
+        "probability_diff": 0.0073,
+        "champion_latency_ms": 0.859,
+        "challenger_latency_ms": 0.809
+      },
+      {
+        "timestamp": "2025-07-12 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3209,
+        "challenger_probability": 0.3136,
+        "prediction_agreement": true,
+        "probability_diff": 0.0073,
+        "champion_latency_ms": 1.004,
+        "challenger_latency_ms": 0.728
+      },
+      {
+        "timestamp": "2025-07-12 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3701,
+        "challenger_probability": 0.3606,
+        "prediction_agreement": true,
+        "probability_diff": 0.0096,
+        "champion_latency_ms": 0.799,
+        "challenger_latency_ms": 0.681
+      },
+      {
+        "timestamp": "2025-07-12 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3272,
+        "challenger_probability": 0.3169,
+        "prediction_agreement": true,
+        "probability_diff": 0.0103,
+        "champion_latency_ms": 0.643,
+        "challenger_latency_ms": 0.575
+      },
+      {
+        "timestamp": "2025-07-12 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3352,
+        "challenger_probability": 0.3296,
+        "prediction_agreement": true,
+        "probability_diff": 0.0056,
+        "champion_latency_ms": 0.653,
+        "challenger_latency_ms": 0.621
+      },
+      {
+        "timestamp": "2025-07-12 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3672,
+        "challenger_probability": 0.363,
+        "prediction_agreement": true,
+        "probability_diff": 0.0041,
+        "champion_latency_ms": 0.672,
+        "challenger_latency_ms": 0.584
+      },
+      {
+        "timestamp": "2025-07-12 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2982,
+        "challenger_probability": 0.3019,
+        "prediction_agreement": true,
+        "probability_diff": 0.0037,
+        "champion_latency_ms": 0.643,
+        "challenger_latency_ms": 0.655
+      },
+      {
+        "timestamp": "2025-07-12 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3897,
+        "challenger_probability": 0.3772,
+        "prediction_agreement": true,
+        "probability_diff": 0.0124,
+        "champion_latency_ms": 0.659,
+        "challenger_latency_ms": 0.664
+      },
+      {
+        "timestamp": "2025-07-12 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3847,
+        "challenger_probability": 0.3813,
+        "prediction_agreement": true,
+        "probability_diff": 0.0034,
+        "champion_latency_ms": 0.628,
+        "challenger_latency_ms": 0.592
+      },
+      {
+        "timestamp": "2025-07-12 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3573,
+        "challenger_probability": 0.36,
+        "prediction_agreement": true,
+        "probability_diff": 0.0027,
+        "champion_latency_ms": 0.63,
+        "challenger_latency_ms": 0.619
+      },
+      {
+        "timestamp": "2025-07-12 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3656,
+        "challenger_probability": 0.3724,
+        "prediction_agreement": true,
+        "probability_diff": 0.0068,
+        "champion_latency_ms": 0.632,
+        "challenger_latency_ms": 0.614
+      },
+      {
+        "timestamp": "2025-07-12 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3712,
+        "challenger_probability": 0.3569,
+        "prediction_agreement": true,
+        "probability_diff": 0.0143,
+        "champion_latency_ms": 0.617,
+        "challenger_latency_ms": 0.591
+      },
+      {
+        "timestamp": "2025-07-12 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3814,
+        "challenger_probability": 0.3866,
+        "prediction_agreement": true,
+        "probability_diff": 0.0052,
+        "champion_latency_ms": 0.635,
+        "challenger_latency_ms": 0.621
+      },
+      {
+        "timestamp": "2025-07-12 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3547,
+        "challenger_probability": 0.3493,
+        "prediction_agreement": true,
+        "probability_diff": 0.0054,
+        "champion_latency_ms": 0.682,
+        "challenger_latency_ms": 0.649
+      },
+      {
+        "timestamp": "2025-07-12 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4402,
+        "challenger_probability": 0.4245,
+        "prediction_agreement": true,
+        "probability_diff": 0.0157,
+        "champion_latency_ms": 1.498,
+        "challenger_latency_ms": 0.809
+      },
+      {
+        "timestamp": "2025-07-12 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3844,
+        "challenger_probability": 0.3765,
+        "prediction_agreement": true,
+        "probability_diff": 0.0079,
+        "champion_latency_ms": 0.838,
+        "challenger_latency_ms": 1.052
+      },
+      {
+        "timestamp": "2025-07-12 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4251,
+        "challenger_probability": 0.4239,
+        "prediction_agreement": true,
+        "probability_diff": 0.0012,
+        "champion_latency_ms": 1.018,
+        "challenger_latency_ms": 0.974
+      }
+    ]
+  },
+  "shadow_summary_b": {
+    "champion_model_id": "MOD-P33-LGBM-CHAMPION",
+    "challenger_model_id": "MOD-CHALLENGER-B-OVERFITTED",
+    "total_observations": 100,
+    "agreement_rate": 0.85,
+    "mean_absolute_prob_diff": 0.1349,
+    "correlation": 0.0776,
+    "champion_avg_latency_ms": 0.92,
+    "challenger_avg_latency_ms": 0.875,
+    "error_count": 0,
+    "is_shadow_valid": true,
+    "prediction_records": [
+      {
+        "timestamp": "2025-07-08 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3904,
+        "challenger_probability": 0.1926,
+        "prediction_agreement": true,
+        "probability_diff": 0.1978,
+        "champion_latency_ms": 0.983,
+        "challenger_latency_ms": 1.012
+      },
+      {
+        "timestamp": "2025-07-08 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3825,
+        "challenger_probability": 0.4438,
+        "prediction_agreement": true,
+        "probability_diff": 0.0613,
+        "champion_latency_ms": 1.288,
+        "challenger_latency_ms": 1.164
+      },
+      {
+        "timestamp": "2025-07-08 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3524,
+        "challenger_probability": 0.3713,
+        "prediction_agreement": true,
+        "probability_diff": 0.019,
+        "champion_latency_ms": 1.048,
+        "challenger_latency_ms": 1.009
+      },
+      {
+        "timestamp": "2025-07-08 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3773,
+        "challenger_probability": 0.3873,
+        "prediction_agreement": true,
+        "probability_diff": 0.0099,
+        "champion_latency_ms": 0.972,
+        "challenger_latency_ms": 0.983
+      },
+      {
+        "timestamp": "2025-07-08 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3759,
+        "challenger_probability": 0.5334,
+        "prediction_agreement": false,
+        "probability_diff": 0.1575,
+        "champion_latency_ms": 0.977,
+        "challenger_latency_ms": 0.954
+      },
+      {
+        "timestamp": "2025-07-08 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3736,
+        "challenger_probability": 0.563,
+        "prediction_agreement": false,
+        "probability_diff": 0.1894,
+        "champion_latency_ms": 0.951,
+        "challenger_latency_ms": 0.98
+      },
+      {
+        "timestamp": "2025-07-08 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3677,
+        "challenger_probability": 0.3134,
+        "prediction_agreement": true,
+        "probability_diff": 0.0543,
+        "champion_latency_ms": 1.047,
+        "challenger_latency_ms": 0.946
+      },
+      {
+        "timestamp": "2025-07-08 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3412,
+        "challenger_probability": 0.3079,
+        "prediction_agreement": true,
+        "probability_diff": 0.0332,
+        "champion_latency_ms": 0.902,
+        "challenger_latency_ms": 0.849
+      },
+      {
+        "timestamp": "2025-07-08 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3926,
+        "challenger_probability": 0.2855,
+        "prediction_agreement": true,
+        "probability_diff": 0.1071,
+        "champion_latency_ms": 0.847,
+        "challenger_latency_ms": 0.812
+      },
+      {
+        "timestamp": "2025-07-08 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4108,
+        "challenger_probability": 0.4083,
+        "prediction_agreement": true,
+        "probability_diff": 0.0025,
+        "champion_latency_ms": 0.836,
+        "challenger_latency_ms": 0.832
+      },
+      {
+        "timestamp": "2025-07-08 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4192,
+        "challenger_probability": 0.2716,
+        "prediction_agreement": true,
+        "probability_diff": 0.1476,
+        "champion_latency_ms": 0.842,
+        "challenger_latency_ms": 0.778
+      },
+      {
+        "timestamp": "2025-07-09 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3723,
+        "challenger_probability": 0.2632,
+        "prediction_agreement": true,
+        "probability_diff": 0.1091,
+        "champion_latency_ms": 0.827,
+        "challenger_latency_ms": 0.873
+      },
+      {
+        "timestamp": "2025-07-09 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4002,
+        "challenger_probability": 0.4798,
+        "prediction_agreement": true,
+        "probability_diff": 0.0796,
+        "champion_latency_ms": 0.91,
+        "challenger_latency_ms": 0.911
+      },
+      {
+        "timestamp": "2025-07-09 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3976,
+        "challenger_probability": 0.5109,
+        "prediction_agreement": false,
+        "probability_diff": 0.1133,
+        "champion_latency_ms": 1.041,
+        "challenger_latency_ms": 0.945
+      },
+      {
+        "timestamp": "2025-07-09 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.406,
+        "challenger_probability": 0.3168,
+        "prediction_agreement": true,
+        "probability_diff": 0.0892,
+        "champion_latency_ms": 0.881,
+        "challenger_latency_ms": 0.819
+      },
+      {
+        "timestamp": "2025-07-09 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3822,
+        "challenger_probability": 0.3025,
+        "prediction_agreement": true,
+        "probability_diff": 0.0797,
+        "champion_latency_ms": 0.858,
+        "challenger_latency_ms": 0.815
+      },
+      {
+        "timestamp": "2025-07-09 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4208,
+        "challenger_probability": 0.2727,
+        "prediction_agreement": true,
+        "probability_diff": 0.1481,
+        "champion_latency_ms": 0.815,
+        "challenger_latency_ms": 0.79
+      },
+      {
+        "timestamp": "2025-07-09 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3966,
+        "challenger_probability": 0.2803,
+        "prediction_agreement": true,
+        "probability_diff": 0.1163,
+        "champion_latency_ms": 0.827,
+        "challenger_latency_ms": 0.824
+      },
+      {
+        "timestamp": "2025-07-09 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4036,
+        "challenger_probability": 0.2866,
+        "prediction_agreement": true,
+        "probability_diff": 0.117,
+        "champion_latency_ms": 1.011,
+        "challenger_latency_ms": 0.866
+      },
+      {
+        "timestamp": "2025-07-09 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3831,
+        "challenger_probability": 0.1888,
+        "prediction_agreement": true,
+        "probability_diff": 0.1943,
+        "champion_latency_ms": 0.871,
+        "challenger_latency_ms": 1.064
+      },
+      {
+        "timestamp": "2025-07-09 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4171,
+        "challenger_probability": 0.2224,
+        "prediction_agreement": true,
+        "probability_diff": 0.1948,
+        "champion_latency_ms": 1.03,
+        "challenger_latency_ms": 1.007
+      },
+      {
+        "timestamp": "2025-07-09 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.439,
+        "challenger_probability": 0.3172,
+        "prediction_agreement": true,
+        "probability_diff": 0.1218,
+        "champion_latency_ms": 0.984,
+        "challenger_latency_ms": 0.96
+      },
+      {
+        "timestamp": "2025-07-09 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4306,
+        "challenger_probability": 0.3058,
+        "prediction_agreement": true,
+        "probability_diff": 0.1249,
+        "champion_latency_ms": 0.971,
+        "challenger_latency_ms": 0.971
+      },
+      {
+        "timestamp": "2025-07-09 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4224,
+        "challenger_probability": 0.3815,
+        "prediction_agreement": true,
+        "probability_diff": 0.0409,
+        "champion_latency_ms": 1.017,
+        "challenger_latency_ms": 0.892
+      },
+      {
+        "timestamp": "2025-07-09 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4098,
+        "challenger_probability": 0.375,
+        "prediction_agreement": true,
+        "probability_diff": 0.0348,
+        "champion_latency_ms": 0.883,
+        "challenger_latency_ms": 0.858
+      },
+      {
+        "timestamp": "2025-07-09 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.448,
+        "challenger_probability": 0.2409,
+        "prediction_agreement": true,
+        "probability_diff": 0.207,
+        "champion_latency_ms": 0.83,
+        "challenger_latency_ms": 0.816
+      },
+      {
+        "timestamp": "2025-07-09 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4244,
+        "challenger_probability": 0.1707,
+        "prediction_agreement": true,
+        "probability_diff": 0.2537,
+        "champion_latency_ms": 0.848,
+        "challenger_latency_ms": 0.825
+      },
+      {
+        "timestamp": "2025-07-09 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4039,
+        "challenger_probability": 0.2113,
+        "prediction_agreement": true,
+        "probability_diff": 0.1926,
+        "champion_latency_ms": 0.829,
+        "challenger_latency_ms": 0.778
+      },
+      {
+        "timestamp": "2025-07-09 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4373,
+        "challenger_probability": 0.2342,
+        "prediction_agreement": true,
+        "probability_diff": 0.2032,
+        "champion_latency_ms": 0.826,
+        "challenger_latency_ms": 0.829
+      },
+      {
+        "timestamp": "2025-07-09 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4295,
+        "challenger_probability": 0.2689,
+        "prediction_agreement": true,
+        "probability_diff": 0.1606,
+        "champion_latency_ms": 1.095,
+        "challenger_latency_ms": 0.915
+      },
+      {
+        "timestamp": "2025-07-09 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4039,
+        "challenger_probability": 0.3605,
+        "prediction_agreement": true,
+        "probability_diff": 0.0435,
+        "champion_latency_ms": 0.895,
+        "challenger_latency_ms": 0.892
+      },
+      {
+        "timestamp": "2025-07-09 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4521,
+        "challenger_probability": 0.2738,
+        "prediction_agreement": true,
+        "probability_diff": 0.1782,
+        "champion_latency_ms": 0.958,
+        "challenger_latency_ms": 0.834
+      },
+      {
+        "timestamp": "2025-07-09 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4169,
+        "challenger_probability": 0.2537,
+        "prediction_agreement": true,
+        "probability_diff": 0.1632,
+        "champion_latency_ms": 0.853,
+        "challenger_latency_ms": 1.009
+      },
+      {
+        "timestamp": "2025-07-09 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.44,
+        "challenger_probability": 0.2394,
+        "prediction_agreement": true,
+        "probability_diff": 0.2006,
+        "champion_latency_ms": 0.848,
+        "challenger_latency_ms": 0.787
+      },
+      {
+        "timestamp": "2025-07-09 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4111,
+        "challenger_probability": 0.2974,
+        "prediction_agreement": true,
+        "probability_diff": 0.1137,
+        "champion_latency_ms": 0.856,
+        "challenger_latency_ms": 0.821
+      },
+      {
+        "timestamp": "2025-07-10 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.39,
+        "challenger_probability": 0.2052,
+        "prediction_agreement": true,
+        "probability_diff": 0.1848,
+        "champion_latency_ms": 0.914,
+        "challenger_latency_ms": 0.864
+      },
+      {
+        "timestamp": "2025-07-10 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4472,
+        "challenger_probability": 0.2053,
+        "prediction_agreement": true,
+        "probability_diff": 0.2419,
+        "champion_latency_ms": 0.885,
+        "challenger_latency_ms": 0.84
+      },
+      {
+        "timestamp": "2025-07-10 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.439,
+        "challenger_probability": 0.4615,
+        "prediction_agreement": true,
+        "probability_diff": 0.0225,
+        "champion_latency_ms": 0.815,
+        "challenger_latency_ms": 0.788
+      },
+      {
+        "timestamp": "2025-07-10 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4004,
+        "challenger_probability": 0.3445,
+        "prediction_agreement": true,
+        "probability_diff": 0.0559,
+        "champion_latency_ms": 0.831,
+        "challenger_latency_ms": 0.81
+      },
+      {
+        "timestamp": "2025-07-10 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4248,
+        "challenger_probability": 0.5455,
+        "prediction_agreement": false,
+        "probability_diff": 0.1206,
+        "champion_latency_ms": 0.851,
+        "challenger_latency_ms": 0.806
+      },
+      {
+        "timestamp": "2025-07-10 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4313,
+        "challenger_probability": 0.5446,
+        "prediction_agreement": false,
+        "probability_diff": 0.1133,
+        "champion_latency_ms": 0.842,
+        "challenger_latency_ms": 0.787
+      },
+      {
+        "timestamp": "2025-07-10 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4305,
+        "challenger_probability": 0.5401,
+        "prediction_agreement": false,
+        "probability_diff": 0.1096,
+        "champion_latency_ms": 0.871,
+        "challenger_latency_ms": 0.886
+      },
+      {
+        "timestamp": "2025-07-10 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3872,
+        "challenger_probability": 0.5538,
+        "prediction_agreement": false,
+        "probability_diff": 0.1666,
+        "champion_latency_ms": 1.032,
+        "challenger_latency_ms": 1.03
+      },
+      {
+        "timestamp": "2025-07-10 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3619,
+        "challenger_probability": 0.2764,
+        "prediction_agreement": true,
+        "probability_diff": 0.0855,
+        "champion_latency_ms": 1.111,
+        "challenger_latency_ms": 0.985
+      },
+      {
+        "timestamp": "2025-07-10 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3631,
+        "challenger_probability": 0.363,
+        "prediction_agreement": true,
+        "probability_diff": 0.0001,
+        "champion_latency_ms": 0.962,
+        "challenger_latency_ms": 0.977
+      },
+      {
+        "timestamp": "2025-07-10 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3459,
+        "challenger_probability": 0.4125,
+        "prediction_agreement": true,
+        "probability_diff": 0.0666,
+        "champion_latency_ms": 1.024,
+        "challenger_latency_ms": 0.963
+      },
+      {
+        "timestamp": "2025-07-10 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3323,
+        "challenger_probability": 0.5061,
+        "prediction_agreement": false,
+        "probability_diff": 0.1738,
+        "champion_latency_ms": 0.989,
+        "challenger_latency_ms": 0.962
+      },
+      {
+        "timestamp": "2025-07-10 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.348,
+        "challenger_probability": 0.4545,
+        "prediction_agreement": true,
+        "probability_diff": 0.1065,
+        "champion_latency_ms": 0.975,
+        "challenger_latency_ms": 0.875
+      },
+      {
+        "timestamp": "2025-07-10 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3082,
+        "challenger_probability": 0.5216,
+        "prediction_agreement": false,
+        "probability_diff": 0.2134,
+        "champion_latency_ms": 0.86,
+        "challenger_latency_ms": 0.803
+      },
+      {
+        "timestamp": "2025-07-10 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2925,
+        "challenger_probability": 0.4786,
+        "prediction_agreement": true,
+        "probability_diff": 0.1861,
+        "champion_latency_ms": 0.834,
+        "challenger_latency_ms": 0.807
+      },
+      {
+        "timestamp": "2025-07-10 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3048,
+        "challenger_probability": 0.6233,
+        "prediction_agreement": false,
+        "probability_diff": 0.3186,
+        "champion_latency_ms": 0.85,
+        "challenger_latency_ms": 0.837
+      },
+      {
+        "timestamp": "2025-07-10 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3085,
+        "challenger_probability": 0.4086,
+        "prediction_agreement": true,
+        "probability_diff": 0.1,
+        "champion_latency_ms": 0.856,
+        "challenger_latency_ms": 0.79
+      },
+      {
+        "timestamp": "2025-07-10 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.295,
+        "challenger_probability": 0.4342,
+        "prediction_agreement": true,
+        "probability_diff": 0.1391,
+        "champion_latency_ms": 0.844,
+        "challenger_latency_ms": 0.869
+      },
+      {
+        "timestamp": "2025-07-10 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2807,
+        "challenger_probability": 0.4576,
+        "prediction_agreement": true,
+        "probability_diff": 0.1769,
+        "champion_latency_ms": 1.13,
+        "challenger_latency_ms": 0.998
+      },
+      {
+        "timestamp": "2025-07-10 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2952,
+        "challenger_probability": 0.3181,
+        "prediction_agreement": true,
+        "probability_diff": 0.0229,
+        "champion_latency_ms": 0.88,
+        "challenger_latency_ms": 0.838
+      },
+      {
+        "timestamp": "2025-07-10 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3527,
+        "challenger_probability": 0.5772,
+        "prediction_agreement": false,
+        "probability_diff": 0.2245,
+        "champion_latency_ms": 0.856,
+        "challenger_latency_ms": 0.802
+      },
+      {
+        "timestamp": "2025-07-10 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3172,
+        "challenger_probability": 0.3563,
+        "prediction_agreement": true,
+        "probability_diff": 0.0391,
+        "champion_latency_ms": 0.827,
+        "challenger_latency_ms": 0.805
+      },
+      {
+        "timestamp": "2025-07-10 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3545,
+        "challenger_probability": 0.4624,
+        "prediction_agreement": true,
+        "probability_diff": 0.1079,
+        "champion_latency_ms": 0.826,
+        "challenger_latency_ms": 0.808
+      },
+      {
+        "timestamp": "2025-07-10 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3211,
+        "challenger_probability": 0.3645,
+        "prediction_agreement": true,
+        "probability_diff": 0.0434,
+        "champion_latency_ms": 0.887,
+        "challenger_latency_ms": 1.14
+      },
+      {
+        "timestamp": "2025-07-11 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2732,
+        "challenger_probability": 0.2104,
+        "prediction_agreement": true,
+        "probability_diff": 0.0628,
+        "champion_latency_ms": 1.115,
+        "challenger_latency_ms": 1.045
+      },
+      {
+        "timestamp": "2025-07-11 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4179,
+        "challenger_probability": 0.5796,
+        "prediction_agreement": false,
+        "probability_diff": 0.1617,
+        "champion_latency_ms": 1.219,
+        "challenger_latency_ms": 1.018
+      },
+      {
+        "timestamp": "2025-07-11 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3529,
+        "challenger_probability": 0.5796,
+        "prediction_agreement": false,
+        "probability_diff": 0.2266,
+        "champion_latency_ms": 1.003,
+        "challenger_latency_ms": 0.977
+      },
+      {
+        "timestamp": "2025-07-11 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.339,
+        "challenger_probability": 0.4009,
+        "prediction_agreement": true,
+        "probability_diff": 0.0619,
+        "champion_latency_ms": 0.97,
+        "challenger_latency_ms": 1.0
+      },
+      {
+        "timestamp": "2025-07-11 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3659,
+        "challenger_probability": 0.6062,
+        "prediction_agreement": false,
+        "probability_diff": 0.2403,
+        "champion_latency_ms": 1.103,
+        "challenger_latency_ms": 0.893
+      },
+      {
+        "timestamp": "2025-07-11 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3116,
+        "challenger_probability": 0.4588,
+        "prediction_agreement": true,
+        "probability_diff": 0.1472,
+        "champion_latency_ms": 1.073,
+        "challenger_latency_ms": 0.992
+      },
+      {
+        "timestamp": "2025-07-11 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2803,
+        "challenger_probability": 0.2922,
+        "prediction_agreement": true,
+        "probability_diff": 0.0118,
+        "champion_latency_ms": 1.044,
+        "challenger_latency_ms": 0.906
+      },
+      {
+        "timestamp": "2025-07-11 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2772,
+        "challenger_probability": 0.1509,
+        "prediction_agreement": true,
+        "probability_diff": 0.1263,
+        "champion_latency_ms": 1.018,
+        "challenger_latency_ms": 0.939
+      },
+      {
+        "timestamp": "2025-07-11 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2723,
+        "challenger_probability": 0.31,
+        "prediction_agreement": true,
+        "probability_diff": 0.0377,
+        "champion_latency_ms": 1.043,
+        "challenger_latency_ms": 0.87
+      },
+      {
+        "timestamp": "2025-07-11 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2553,
+        "challenger_probability": 0.3524,
+        "prediction_agreement": true,
+        "probability_diff": 0.097,
+        "champion_latency_ms": 0.915,
+        "challenger_latency_ms": 0.901
+      },
+      {
+        "timestamp": "2025-07-11 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2521,
+        "challenger_probability": 0.1194,
+        "prediction_agreement": true,
+        "probability_diff": 0.1327,
+        "champion_latency_ms": 1.027,
+        "challenger_latency_ms": 0.919
+      },
+      {
+        "timestamp": "2025-07-11 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2774,
+        "challenger_probability": 0.1952,
+        "prediction_agreement": true,
+        "probability_diff": 0.0822,
+        "champion_latency_ms": 1.015,
+        "challenger_latency_ms": 0.916
+      },
+      {
+        "timestamp": "2025-07-11 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2805,
+        "challenger_probability": 0.2891,
+        "prediction_agreement": true,
+        "probability_diff": 0.0086,
+        "champion_latency_ms": 0.882,
+        "challenger_latency_ms": 0.837
+      },
+      {
+        "timestamp": "2025-07-11 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2406,
+        "challenger_probability": 0.2748,
+        "prediction_agreement": true,
+        "probability_diff": 0.0343,
+        "champion_latency_ms": 1.092,
+        "challenger_latency_ms": 0.936
+      },
+      {
+        "timestamp": "2025-07-11 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2522,
+        "challenger_probability": 0.1367,
+        "prediction_agreement": true,
+        "probability_diff": 0.1155,
+        "champion_latency_ms": 0.902,
+        "challenger_latency_ms": 1.227
+      },
+      {
+        "timestamp": "2025-07-11 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2956,
+        "challenger_probability": 0.14,
+        "prediction_agreement": true,
+        "probability_diff": 0.1556,
+        "champion_latency_ms": 0.993,
+        "challenger_latency_ms": 0.887
+      },
+      {
+        "timestamp": "2025-07-11 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2905,
+        "challenger_probability": 0.5591,
+        "prediction_agreement": false,
+        "probability_diff": 0.2685,
+        "champion_latency_ms": 0.853,
+        "challenger_latency_ms": 0.828
+      },
+      {
+        "timestamp": "2025-07-11 17:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2752,
+        "challenger_probability": 0.0671,
+        "prediction_agreement": true,
+        "probability_diff": 0.2081,
+        "champion_latency_ms": 0.881,
+        "challenger_latency_ms": 0.833
+      },
+      {
+        "timestamp": "2025-07-11 18:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3017,
+        "challenger_probability": 0.0744,
+        "prediction_agreement": true,
+        "probability_diff": 0.2272,
+        "champion_latency_ms": 0.834,
+        "challenger_latency_ms": 0.797
+      },
+      {
+        "timestamp": "2025-07-11 19:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4055,
+        "challenger_probability": 0.2615,
+        "prediction_agreement": true,
+        "probability_diff": 0.1441,
+        "champion_latency_ms": 0.924,
+        "challenger_latency_ms": 0.843
+      },
+      {
+        "timestamp": "2025-07-11 20:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3567,
+        "challenger_probability": 0.254,
+        "prediction_agreement": true,
+        "probability_diff": 0.1027,
+        "champion_latency_ms": 1.464,
+        "challenger_latency_ms": 1.13
+      },
+      {
+        "timestamp": "2025-07-11 21:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3574,
+        "challenger_probability": 0.2616,
+        "prediction_agreement": true,
+        "probability_diff": 0.0958,
+        "champion_latency_ms": 1.257,
+        "challenger_latency_ms": 0.87
+      },
+      {
+        "timestamp": "2025-07-11 22:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3353,
+        "challenger_probability": 0.1631,
+        "prediction_agreement": true,
+        "probability_diff": 0.1722,
+        "champion_latency_ms": 0.857,
+        "challenger_latency_ms": 0.794
+      },
+      {
+        "timestamp": "2025-07-11 23:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3308,
+        "challenger_probability": 0.1633,
+        "prediction_agreement": true,
+        "probability_diff": 0.1675,
+        "champion_latency_ms": 0.895,
+        "challenger_latency_ms": 0.826
+      },
+      {
+        "timestamp": "2025-07-12 00:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3424,
+        "challenger_probability": 0.1963,
+        "prediction_agreement": true,
+        "probability_diff": 0.1461,
+        "champion_latency_ms": 0.807,
+        "challenger_latency_ms": 0.849
+      },
+      {
+        "timestamp": "2025-07-12 01:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3209,
+        "challenger_probability": 0.1771,
+        "prediction_agreement": true,
+        "probability_diff": 0.1438,
+        "champion_latency_ms": 0.932,
+        "challenger_latency_ms": 0.834
+      },
+      {
+        "timestamp": "2025-07-12 02:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3701,
+        "challenger_probability": 0.1859,
+        "prediction_agreement": true,
+        "probability_diff": 0.1843,
+        "champion_latency_ms": 0.912,
+        "challenger_latency_ms": 0.869
+      },
+      {
+        "timestamp": "2025-07-12 03:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3272,
+        "challenger_probability": 0.2118,
+        "prediction_agreement": true,
+        "probability_diff": 0.1155,
+        "champion_latency_ms": 0.931,
+        "challenger_latency_ms": 0.814
+      },
+      {
+        "timestamp": "2025-07-12 04:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3352,
+        "challenger_probability": 0.1596,
+        "prediction_agreement": true,
+        "probability_diff": 0.1756,
+        "champion_latency_ms": 0.686,
+        "challenger_latency_ms": 0.638
+      },
+      {
+        "timestamp": "2025-07-12 05:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3672,
+        "challenger_probability": 0.1462,
+        "prediction_agreement": true,
+        "probability_diff": 0.221,
+        "champion_latency_ms": 0.659,
+        "challenger_latency_ms": 0.805
+      },
+      {
+        "timestamp": "2025-07-12 06:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.2982,
+        "challenger_probability": 0.12,
+        "prediction_agreement": true,
+        "probability_diff": 0.1782,
+        "champion_latency_ms": 0.962,
+        "challenger_latency_ms": 0.717
+      },
+      {
+        "timestamp": "2025-07-12 07:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3897,
+        "challenger_probability": 0.1699,
+        "prediction_agreement": true,
+        "probability_diff": 0.2197,
+        "champion_latency_ms": 0.674,
+        "challenger_latency_ms": 0.662
+      },
+      {
+        "timestamp": "2025-07-12 08:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3847,
+        "challenger_probability": 0.2297,
+        "prediction_agreement": true,
+        "probability_diff": 0.155,
+        "champion_latency_ms": 0.681,
+        "challenger_latency_ms": 0.815
+      },
+      {
+        "timestamp": "2025-07-12 09:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3573,
+        "challenger_probability": 0.2093,
+        "prediction_agreement": true,
+        "probability_diff": 0.148,
+        "champion_latency_ms": 0.778,
+        "challenger_latency_ms": 0.678
+      },
+      {
+        "timestamp": "2025-07-12 10:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3656,
+        "challenger_probability": 0.2164,
+        "prediction_agreement": true,
+        "probability_diff": 0.1492,
+        "champion_latency_ms": 0.654,
+        "challenger_latency_ms": 0.734
+      },
+      {
+        "timestamp": "2025-07-12 11:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3712,
+        "challenger_probability": 0.1796,
+        "prediction_agreement": true,
+        "probability_diff": 0.1916,
+        "champion_latency_ms": 0.854,
+        "challenger_latency_ms": 0.892
+      },
+      {
+        "timestamp": "2025-07-12 12:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3814,
+        "challenger_probability": 0.2037,
+        "prediction_agreement": true,
+        "probability_diff": 0.1777,
+        "champion_latency_ms": 0.75,
+        "challenger_latency_ms": 0.629
+      },
+      {
+        "timestamp": "2025-07-12 13:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3547,
+        "challenger_probability": 0.1664,
+        "prediction_agreement": true,
+        "probability_diff": 0.1883,
+        "champion_latency_ms": 0.664,
+        "challenger_latency_ms": 0.649
+      },
+      {
+        "timestamp": "2025-07-12 14:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4402,
+        "challenger_probability": 0.1325,
+        "prediction_agreement": true,
+        "probability_diff": 0.3077,
+        "champion_latency_ms": 0.833,
+        "challenger_latency_ms": 0.819
+      },
+      {
+        "timestamp": "2025-07-12 15:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.3844,
+        "challenger_probability": 0.1692,
+        "prediction_agreement": true,
+        "probability_diff": 0.2153,
+        "champion_latency_ms": 0.882,
+        "challenger_latency_ms": 0.753
+      },
+      {
+        "timestamp": "2025-07-12 16:00:00+00:00",
+        "symbol": "BTCUSDT",
+        "champion_probability": 0.4251,
+        "challenger_probability": 0.2157,
+        "prediction_agreement": true,
+        "probability_diff": 0.2094,
+        "champion_latency_ms": 0.745,
+        "challenger_latency_ms": 0.627
+      }
+    ]
+  },
+  "retraining_decision": {
+    "status": "NO_ACTION",
+    "persistence_count": 0,
+    "cooldown_active": false,
+    "is_retraining_allowed": false,
+    "reason_code": "MODEL_HEALTHY",
+    "message": "Model is in HEALTHY operational state. No retraining required.",
+    "timestamp": "2026-10-07 19:22:33 UTC"
+  },
+  "rollback_record": {
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "model_family": "LGBM_CROSS_SECTIONAL",
+    "promotion_timestamp": "2026-10-07 19:22:33 UTC",
+    "promotion_reason": "ROLLBACK: Simulated post-promotion anomaly detection verification.",
+    "approval_record": "RESEARCH_APPROVED",
+    "evaluation_summary": {
+      "rollback_from": "MOD-CHALLENGER-A-CALIBRATED"
+    },
+    "health_state": "HEALTHY",
+    "rollback_parent": "MOD-P3-LGBM-V0",
+    "artifact_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee"
+  },
+  "audit_trail": [
+    {
+      "event_id": "EVT-00001",
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "event_type": "MODEL_REGISTERED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "CANDIDATE",
+      "reason_code": "REGISTRATION_SUCCESS",
+      "evidence_hash": "e931ac7718a9b43cf941d4023fcaf2288c17958a3e69bba1b9b54bc3794fb1ec",
+      "actor": "SYSTEM_REGISTRY",
+      "metadata": {
+        "artifact_hash": "e931ac7718a9b43cf941d4023fcaf2288c17958a3e69bba1b9b54bc3794fb1ec"
+      }
+    },
+    {
+      "event_id": "EVT-00002",
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "event_type": "VALIDATION_STARTED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "VALIDATING",
+      "reason_code": "RESEARCH_VALIDATION",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATING"
+      }
+    },
+    {
+      "event_id": "EVT-00003",
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "event_type": "VALIDATION_PASSED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "VALIDATING",
+      "new_state": "VALIDATED",
+      "reason_code": "VALIDATION_PASSED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATED"
+      }
+    },
+    {
+      "event_id": "EVT-00004",
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "event_type": "PROMOTION_ELIGIBLE",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "VALIDATED",
+      "new_state": "ELIGIBLE",
+      "reason_code": "SHADOW_PASSED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "ELIGIBLE"
+      }
+    },
+    {
+      "event_id": "EVT-00005",
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "event_type": "PROMOTED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "ELIGIBLE",
+      "new_state": "CHAMPION",
+      "reason_code": "INITIAL_BASELINE_CHAMPION",
+      "evidence_hash": "14748f0b0c965b9b3ebaabd4f7cac3c174a3d18d4ca69f71a0f545f498d1d3a8",
+      "actor": "PROMOTION_ENGINE",
+      "metadata": {
+        "rollback_parent": null
+      }
+    },
+    {
+      "event_id": "EVT-00006",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "MODEL_REGISTERED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "CANDIDATE",
+      "reason_code": "REGISTRATION_SUCCESS",
+      "evidence_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee",
+      "actor": "SYSTEM_REGISTRY",
+      "metadata": {
+        "artifact_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee"
+      }
+    },
+    {
+      "event_id": "EVT-00007",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "VALIDATING",
+      "reason_code": "VALIDATING_V1",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATING"
+      }
+    },
+    {
+      "event_id": "EVT-00008",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "VALIDATING",
+      "new_state": "VALIDATED",
+      "reason_code": "VALIDATED_V1",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATED"
+      }
+    },
+    {
+      "event_id": "EVT-00009",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "VALIDATED",
+      "new_state": "ELIGIBLE",
+      "reason_code": "ELIGIBLE_V1",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "ELIGIBLE"
+      }
+    },
+    {
+      "event_id": "EVT-00010",
+      "model_id": "MOD-P3-LGBM-V0",
+      "model_version": "0.9.0",
+      "event_type": "DEMOTED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "CHAMPION",
+      "new_state": "ARCHIVED",
+      "reason_code": "SUPERSEDED_BY_NEW_CHAMPION",
+      "evidence_hash": "a6420f6e81a4e6cccde62be6d0eb8b197eebd26a003c91151789903b0ba07352",
+      "actor": "PROMOTION_ENGINE",
+      "metadata": {
+        "new_champion_id": "MOD-P33-LGBM-CHAMPION"
+      }
+    },
+    {
+      "event_id": "EVT-00011",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "PROMOTED",
+      "timestamp": "2026-10-07 19:22:26 UTC",
+      "previous_state": "ELIGIBLE",
+      "new_state": "CHAMPION",
+      "reason_code": "PROMOTED_V1_CHAMPION",
+      "evidence_hash": "14748f0b0c965b9b3ebaabd4f7cac3c174a3d18d4ca69f71a0f545f498d1d3a8",
+      "actor": "PROMOTION_ENGINE",
+      "metadata": {
+        "rollback_parent": "MOD-P3-LGBM-V0"
+      }
+    },
+    {
+      "event_id": "EVT-00012",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "MODEL_REGISTERED",
+      "timestamp": "2026-10-07 19:22:27 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "CANDIDATE",
+      "reason_code": "REGISTRATION_SUCCESS",
+      "evidence_hash": "b1468a5d194cc4a69e331f71a530e9d81df054b60008986060765dc908dc085a",
+      "actor": "SYSTEM_REGISTRY",
+      "metadata": {
+        "artifact_hash": "b1468a5d194cc4a69e331f71a530e9d81df054b60008986060765dc908dc085a"
+      }
+    },
+    {
+      "event_id": "EVT-00013",
+      "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+      "model_version": "1.1.0-challenger.b",
+      "event_type": "MODEL_REGISTERED",
+      "timestamp": "2026-10-07 19:22:27 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "CANDIDATE",
+      "reason_code": "REGISTRATION_SUCCESS",
+      "evidence_hash": "1c4f3fdb52ec6a2d6fd6512eb1c6640b849380704e530ffad89e24ce0d2b5be3",
+      "actor": "SYSTEM_REGISTRY",
+      "metadata": {
+        "artifact_hash": "1c4f3fdb52ec6a2d6fd6512eb1c6640b849380704e530ffad89e24ce0d2b5be3"
+      }
+    },
+    {
+      "event_id": "EVT-00014",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "VALIDATING",
+      "reason_code": "VALIDATION_PASSED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATING"
+      }
+    },
+    {
+      "event_id": "EVT-00015",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "VALIDATING",
+      "new_state": "VALIDATED",
+      "reason_code": "SHADOW_VALIDATION",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATED"
+      }
+    },
+    {
+      "event_id": "EVT-00016",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "VALIDATED",
+      "new_state": "SHADOW",
+      "reason_code": "SHADOW_COMPLETED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "SHADOW"
+      }
+    },
+    {
+      "event_id": "EVT-00017",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "SHADOW",
+      "new_state": "ELIGIBLE",
+      "reason_code": "GATES_PASSED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "ELIGIBLE"
+      }
+    },
+    {
+      "event_id": "EVT-00018",
+      "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+      "model_version": "1.1.0-challenger.b",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "CANDIDATE",
+      "new_state": "VALIDATING",
+      "reason_code": "EVALUATION_FAILED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "VALIDATING"
+      }
+    },
+    {
+      "event_id": "EVT-00019",
+      "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+      "model_version": "1.1.0-challenger.b",
+      "event_type": "HEALTH_CHANGED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "VALIDATING",
+      "new_state": "REJECTED",
+      "reason_code": "FAILED_GATES_REJECTED",
+      "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "actor": "SYSTEM_OPERATOR",
+      "metadata": {
+        "new_state": "REJECTED"
+      }
+    },
+    {
+      "event_id": "EVT-00020",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "DEMOTED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "CHAMPION",
+      "new_state": "ARCHIVED",
+      "reason_code": "SUPERSEDED_BY_NEW_CHAMPION",
+      "evidence_hash": "bb678bfb12ae410b2506913745a741f4c93ca56782c9c949e593754274eb0ff8",
+      "actor": "PROMOTION_ENGINE",
+      "metadata": {
+        "new_champion_id": "MOD-CHALLENGER-A-CALIBRATED"
+      }
+    },
+    {
+      "event_id": "EVT-00021",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "PROMOTED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "ELIGIBLE",
+      "new_state": "CHAMPION",
+      "reason_code": "Passed all 10 promotion gates with superior calibration and risk efficiency.",
+      "evidence_hash": "4ac6d62e610fdeaad12b4a26ec9bdfc1db84e8e8ad8d9a7100b992c5e7ea60e3",
+      "actor": "PROMOTION_ENGINE",
+      "metadata": {
+        "rollback_parent": "MOD-P33-LGBM-CHAMPION"
+      }
+    },
+    {
+      "event_id": "EVT-00022",
+      "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+      "model_version": "1.1.0-challenger.a",
+      "event_type": "DEMOTED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "CHAMPION",
+      "new_state": "DEMOTED",
+      "reason_code": "Simulated post-promotion anomaly detection verification.",
+      "evidence_hash": "368fe1230f0537a2ceca2f74556cd9081ee9a62d3e3167eee1d7c563ceb44feb",
+      "actor": "ROLLBACK_ENGINE",
+      "metadata": {
+        "rollback_to": "MOD-P33-LGBM-CHAMPION"
+      }
+    },
+    {
+      "event_id": "EVT-00023",
+      "model_id": "MOD-P33-LGBM-CHAMPION",
+      "model_version": "1.0.0",
+      "event_type": "ROLLBACK_COMPLETED",
+      "timestamp": "2026-10-07 19:22:33 UTC",
+      "previous_state": "ARCHIVED",
+      "new_state": "CHAMPION",
+      "reason_code": "ROLLBACK_REINSTATED: Simulated post-promotion anomaly detection verification.",
+      "evidence_hash": "368fe1230f0537a2ceca2f74556cd9081ee9a62d3e3167eee1d7c563ceb44feb",
+      "actor": "ROLLBACK_ENGINE",
+      "metadata": {
+        "demoted_champion": "MOD-CHALLENGER-A-CALIBRATED"
+      }
+    }
+  ],
+  "scorecard": {
+    "model_registry_versioning_score": 15.0,
+    "lifecycle_state_machine_score": 10.0,
+    "champion_challenger_score": 15.0,
+    "promotion_gates_score": 15.0,
+    "shadow_evaluation_score": 10.0,
+    "retraining_eligibility_score": 10.0,
+    "demotion_suspension_score": 10.0,
+    "rollback_recovery_score": 5.0,
+    "auditability_score": 5.0,
+    "causality_reproducibility_score": 5.0,
+    "total_p3_4_score": 100.0,
+    "target_threshold": 90.0,
+    "is_accepted": true
+  }
+}

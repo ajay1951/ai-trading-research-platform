@@ -1,0 +1,18 @@
+{
+  "total_hourly_observations": 4419,
+  "hourly_regime_counts": {
+    "BULL": 743,
+    "SIDEWAYS": 3133,
+    "BEAR": 543
+  },
+  "rebalance_regime_counts": {
+    "BULL": 14,
+    "SIDEWAYS": 49,
+    "BEAR": 12
+  },
+  "exposure_multipliers": {
+    "BULL": 1.0,
+    "SIDEWAYS": 0.8,
+    "BEAR": 0.5
+  }
+}

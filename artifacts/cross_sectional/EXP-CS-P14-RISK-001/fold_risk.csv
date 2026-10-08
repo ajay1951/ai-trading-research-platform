@@ -1,0 +1,6 @@
+fold,test_period,net_return_pct,gross_return_pct,sharpe,sortino,max_drawdown_pct,mean_hhi,mean_effective_assets,top_contributing_asset,worst_contributing_asset,fold_share_of_gross_pct
+1,2025-06-08 to 2025-07-07,15.81,17.66,3.43,5.47,17.5,0.5,2.0,SUIUSDT (+13.44%),NEARUSDT (-9.85%),17.92
+2,2025-07-09 to 2025-08-07,23.25,24.83,4.44,6.64,14.87,0.5,2.0,LTCUSDT (+10.92%),SOLUSDT (-6.35%),25.2
+3,2025-08-09 to 2025-09-07,7.98,9.6,1.82,2.81,12.24,0.5,2.0,LINKUSDT (+6.82%),DOGEUSDT (-2.36%),9.74
+4,2025-09-08 to 2025-10-07,20.97,22.83,4.62,7.21,11.0,0.5,2.0,ADAUSDT (+9.71%),XRPUSDT (-2.58%),23.17
+5,2025-10-09 to 2025-11-07,21.83,23.62,3.94,6.04,11.29,0.5,2.0,BNBUSDT (+13.21%),DOGEUSDT (-4.59%),23.97

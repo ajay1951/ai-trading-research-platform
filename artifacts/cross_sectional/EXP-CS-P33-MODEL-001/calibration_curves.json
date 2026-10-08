@@ -1,0 +1,92 @@
+[
+  {
+    "bin_index": 0,
+    "bin_lower": 0.0,
+    "bin_upper": 0.1,
+    "mean_predicted_prob": 0.05,
+    "observed_frequency": 0.0,
+    "sample_count": 0,
+    "calibration_error": 0.0
+  },
+  {
+    "bin_index": 1,
+    "bin_lower": 0.1,
+    "bin_upper": 0.2,
+    "mean_predicted_prob": 0.15,
+    "observed_frequency": 0.0,
+    "sample_count": 0,
+    "calibration_error": 0.0
+  },
+  {
+    "bin_index": 2,
+    "bin_lower": 0.2,
+    "bin_upper": 0.3,
+    "mean_predicted_prob": 0.2799,
+    "observed_frequency": 0.428,
+    "sample_count": 535,
+    "calibration_error": 0.1482
+  },
+  {
+    "bin_index": 3,
+    "bin_lower": 0.3,
+    "bin_upper": 0.4,
+    "mean_predicted_prob": 0.369,
+    "observed_frequency": 0.4035,
+    "sample_count": 10286,
+    "calibration_error": 0.0345
+  },
+  {
+    "bin_index": 4,
+    "bin_lower": 0.4,
+    "bin_upper": 0.5,
+    "mean_predicted_prob": 0.4409,
+    "observed_frequency": 0.4265,
+    "sample_count": 30005,
+    "calibration_error": 0.0144
+  },
+  {
+    "bin_index": 5,
+    "bin_lower": 0.5,
+    "bin_upper": 0.6,
+    "mean_predicted_prob": 0.5341,
+    "observed_frequency": 0.4749,
+    "sample_count": 4207,
+    "calibration_error": 0.0592
+  },
+  {
+    "bin_index": 6,
+    "bin_lower": 0.6,
+    "bin_upper": 0.7,
+    "mean_predicted_prob": 0.6378,
+    "observed_frequency": 0.4897,
+    "sample_count": 778,
+    "calibration_error": 0.1481
+  },
+  {
+    "bin_index": 7,
+    "bin_lower": 0.7,
+    "bin_upper": 0.8,
+    "mean_predicted_prob": 0.7381,
+    "observed_frequency": 0.6338,
+    "sample_count": 142,
+    "calibration_error": 0.1043
+  },
+  {
+    "bin_index": 8,
+    "bin_lower": 0.8,
+    "bin_upper": 0.9,
+    "mean_predicted_prob": 0.8223,
+    "observed_frequency": 0.2667,
+    "sample_count": 15,
+    "calibration_error": 0.5557
+  },
+  {
+    "bin_index": 9,
+    "bin_lower": 0.9,
+    "bin_upper": 1.0,
+    "mean_predicted_prob": 0.95,
+    "observed_frequency": 0.0,
+    "sample_count": 0,
+    "calibration_error": 0.0
+  }
+]

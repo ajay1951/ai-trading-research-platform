@@ -1,0 +1,281 @@
+[
+  {
+    "feature": "macd_signal",
+    "mean_importance": 99.4,
+    "std_importance": 12.4676,
+    "coefficient_of_variation": 0.1254,
+    "min_importance": 79.0,
+    "max_importance": 113.0,
+    "is_stable": true
+  },
+  {
+    "feature": "volatility_48",
+    "mean_importance": 82.2,
+    "std_importance": 22.3374,
+    "coefficient_of_variation": 0.2717,
+    "min_importance": 51.0,
+    "max_importance": 105.0,
+    "is_stable": true
+  },
+  {
+    "feature": "bar_spread",
+    "mean_importance": 81.2,
+    "std_importance": 13.2272,
+    "coefficient_of_variation": 0.1629,
+    "min_importance": 61.0,
+    "max_importance": 101.0,
+    "is_stable": true
+  },
+  {
+    "feature": "atr_norm",
+    "mean_importance": 70.0,
+    "std_importance": 18.0222,
+    "coefficient_of_variation": 0.2575,
+    "min_importance": 53.0,
+    "max_importance": 99.0,
+    "is_stable": true
+  },
+  {
+    "feature": "return_3",
+    "mean_importance": 68.4,
+    "std_importance": 24.1711,
+    "coefficient_of_variation": 0.3534,
+    "min_importance": 48.0,
+    "max_importance": 112.0,
+    "is_stable": true
+  },
+  {
+    "feature": "macd_hist",
+    "mean_importance": 68.0,
+    "std_importance": 25.0839,
+    "coefficient_of_variation": 0.3689,
+    "min_importance": 38.0,
+    "max_importance": 101.0,
+    "is_stable": true
+  },
+  {
+    "feature": "volatility_24",
+    "mean_importance": 67.6,
+    "std_importance": 19.3969,
+    "coefficient_of_variation": 0.2869,
+    "min_importance": 54.0,
+    "max_importance": 105.0,
+    "is_stable": true
+  },
+  {
+    "feature": "macd",
+    "mean_importance": 67.4,
+    "std_importance": 16.8713,
+    "coefficient_of_variation": 0.2503,
+    "min_importance": 40.0,
+    "max_importance": 89.0,
+    "is_stable": true
+  },
+  {
+    "feature": "upper_wick_ratio",
+    "mean_importance": 63.0,
+    "std_importance": 4.1473,
+    "coefficient_of_variation": 0.0658,
+    "min_importance": 59.0,
+    "max_importance": 71.0,
+    "is_stable": true
+  },
+  {
+    "feature": "return_6",
+    "mean_importance": 62.8,
+    "std_importance": 19.4463,
+    "coefficient_of_variation": 0.3097,
+    "min_importance": 28.0,
+    "max_importance": 83.0,
+    "is_stable": true
+  },
+  {
+    "feature": "volatility_12",
+    "mean_importance": 53.4,
+    "std_importance": 13.4848,
+    "coefficient_of_variation": 0.2525,
+    "min_importance": 37.0,
+    "max_importance": 70.0,
+    "is_stable": true
+  },
+  {
+    "feature": "parkinson_vol_24",
+    "mean_importance": 52.4,
+    "std_importance": 8.015,
+    "coefficient_of_variation": 0.153,
+    "min_importance": 38.0,
+    "max_importance": 60.0,
+    "is_stable": true
+  },
+  {
+    "feature": "lower_wick_ratio",
+    "mean_importance": 51.8,
+    "std_importance": 5.3066,
+    "coefficient_of_variation": 0.1024,
+    "min_importance": 44.0,
+    "max_importance": 60.0,
+    "is_stable": true
+  },
+  {
+    "feature": "bollinger_bandwidth",
+    "mean_importance": 51.4,
+    "std_importance": 10.0519,
+    "coefficient_of_variation": 0.1956,
+    "min_importance": 37.0,
+    "max_importance": 68.0,
+    "is_stable": true
+  },
+  {
+    "feature": "rsi_14",
+    "mean_importance": 50.8,
+    "std_importance": 20.2919,
+    "coefficient_of_variation": 0.3994,
+    "min_importance": 31.0,
+    "max_importance": 88.0,
+    "is_stable": true
+  },
+  {
+    "feature": "atr_14",
+    "mean_importance": 42.6,
+    "std_importance": 15.8947,
+    "coefficient_of_variation": 0.3731,
+    "min_importance": 20.0,
+    "max_importance": 64.0,
+    "is_stable": true
+  },
+  {
+    "feature": "obv_zscore_20",
+    "mean_importance": 42.6,
+    "std_importance": 3.0725,
+    "coefficient_of_variation": 0.0721,
+    "min_importance": 38.0,
+    "max_importance": 46.0,
+    "is_stable": true
+  },
+  {
+    "feature": "return_24",
+    "mean_importance": 41.6,
+    "std_importance": 13.9657,
+    "coefficient_of_variation": 0.3357,
+    "min_importance": 21.0,
+    "max_importance": 60.0,
+    "is_stable": true
+  },
+  {
+    "feature": "vwap_deviation_24",
+    "mean_importance": 39.0,
+    "std_importance": 5.7619,
+    "coefficient_of_variation": 0.1477,
+    "min_importance": 32.0,
+    "max_importance": 49.0,
+    "is_stable": true
+  },
+  {
+    "feature": "body_ratio",
+    "mean_importance": 36.0,
+    "std_importance": 8.1731,
+    "coefficient_of_variation": 0.227,
+    "min_importance": 26.0,
+    "max_importance": 51.0,
+    "is_stable": true
+  },
+  {
+    "feature": "donchian_pos_20",
+    "mean_importance": 36.0,
+    "std_importance": 5.7619,
+    "coefficient_of_variation": 0.1601,
+    "min_importance": 27.0,
+    "max_importance": 44.0,
+    "is_stable": true
+  },
+  {
+    "feature": "return_12",
+    "mean_importance": 35.0,
+    "std_importance": 11.5412,
+    "coefficient_of_variation": 0.3297,
+    "min_importance": 20.0,
+    "max_importance": 53.0,
+    "is_stable": true
+  },
+  {
+    "feature": "stoch_k",
+    "mean_importance": 32.8,
+    "std_importance": 3.544,
+    "coefficient_of_variation": 0.108,
+    "min_importance": 28.0,
+    "max_importance": 38.0,
+    "is_stable": true
+  },
+  {
+    "feature": "return_1",
+    "mean_importance": 32.4,
+    "std_importance": 8.9129,
+    "coefficient_of_variation": 0.2751,
+    "min_importance": 18.0,
+    "max_importance": 46.0,
+    "is_stable": true
+  },
+  {
+    "feature": "volume_zscore_20",
+    "mean_importance": 29.0,
+    "std_importance": 8.438,
+    "coefficient_of_variation": 0.291,
+    "min_importance": 18.0,
+    "max_importance": 42.0,
+    "is_stable": true
+  },
+  {
+    "feature": "stoch_d",
+    "mean_importance": 26.6,
+    "std_importance": 11.3243,
+    "coefficient_of_variation": 0.4257,
+    "min_importance": 15.0,
+    "max_importance": 45.0,
+    "is_stable": true
+  },
+  {
+    "feature": "volume_ratio_20",
+    "mean_importance": 21.8,
+    "std_importance": 8.5417,
+    "coefficient_of_variation": 0.3918,
+    "min_importance": 8.0,
+    "max_importance": 35.0,
+    "is_stable": true
+  },
+  {
+    "feature": "roc_12",
+    "mean_importance": 1.2,
+    "std_importance": 2.4,
+    "coefficient_of_variation": 2.0,
+    "min_importance": 0.0,
+    "max_importance": 6.0,
+    "is_stable": false
+  },
+  {
+    "feature": "roc_6",
+    "mean_importance": 0.8,
+    "std_importance": 1.6,
+    "coefficient_of_variation": 2.0,
+    "min_importance": 0.0,
+    "max_importance": 4.0,
+    "is_stable": false
+  },
+  {
+    "feature": "roc_24",
+    "mean_importance": 0.6,
+    "std_importance": 0.8,
+    "coefficient_of_variation": 1.3333,
+    "min_importance": 0.0,
+    "max_importance": 2.0,
+    "is_stable": false
+  },
+  {
+    "feature": "log_return_1",
+    "mean_importance": 0.0,
+    "std_importance": 0.0,
+    "coefficient_of_variation": 0.0,
+    "min_importance": 0.0,
+    "max_importance": 0.0,
+    "is_stable": true
+  }
+]

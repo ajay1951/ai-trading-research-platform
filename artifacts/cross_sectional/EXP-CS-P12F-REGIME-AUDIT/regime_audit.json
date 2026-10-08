@@ -1,0 +1,32 @@
+{
+  "bull_regime": {
+    "regime_name": "Bull Market (BTC > +5% 100d SMA)",
+    "observations_bars": 920,
+    "observations_days": 38.3,
+    "strategy_cum_return_pct": 7.51,
+    "btc_cum_return_pct": 5.17,
+    "strategy_excess_vs_btc_pct": 2.34,
+    "annualized_sharpe": 1.37,
+    "regime_max_dd_pct": 14.84
+  },
+  "sideways_regime": {
+    "regime_name": "Sideways Market (Consolidation)",
+    "observations_bars": 2246,
+    "observations_days": 93.6,
+    "strategy_cum_return_pct": 16.05,
+    "btc_cum_return_pct": 3.81,
+    "strategy_excess_vs_btc_pct": 12.25,
+    "annualized_sharpe": 1.28,
+    "regime_max_dd_pct": 18.26
+  },
+  "bear_regime": {
+    "regime_name": "Bear Market (BTC < -5% 100d SMA)",
+    "observations_bars": 294,
+    "observations_days": 12.2,
+    "strategy_cum_return_pct": -1.24,
+    "btc_cum_return_pct": -15.08,
+    "strategy_excess_vs_btc_pct": 13.84,
+    "annualized_sharpe": -0.13,
+    "regime_max_dd_pct": 19.02
+  }
+}

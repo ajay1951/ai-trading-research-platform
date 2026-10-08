@@ -1,0 +1,15 @@
+{
+  "entity_name": "model_probabilities",
+  "drift_type": "PREDICTION_DRIFT",
+  "psi": 0.2191,
+  "ks_statistic": 0.1393,
+  "ks_pvalue": 0.0,
+  "wasserstein_dist": 0.0158,
+  "mean_shift_zscore": 0.0368,
+  "std_ratio": 0.7472,
+  "missingness_shift": 0.0,
+  "severity": "MODERATE",
+  "reference_sample_size": 22958,
+  "monitoring_sample_size": 11531,
+  "is_drifted": true
+}

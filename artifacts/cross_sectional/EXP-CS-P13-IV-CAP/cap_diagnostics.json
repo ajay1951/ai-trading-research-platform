@@ -1,0 +1,246 @@
+{
+  "total_rebalance_events": 75,
+  "cap_activation_count": 1,
+  "cap_activation_rate_pct": 1.33,
+  "upper_cap_hits": 1,
+  "lower_cap_hits": 1,
+  "max_raw_weight_pct": 75.72,
+  "min_raw_weight_pct": 24.28,
+  "max_final_weight_pct": 75.0,
+  "min_final_weight_pct": 25.0,
+  "cap_lower_bound_pct": 25.0,
+  "cap_upper_bound_pct": 75.0,
+  "is_cap_binding": true,
+  "sample_decisions": [
+    {
+      "timestamp": "2025-06-08 20:00:00+00:00",
+      "assets": [
+        "NEARUSDT",
+        "DOTUSDT"
+      ],
+      "volatilities": {
+        "NEARUSDT": 0.7491,
+        "DOTUSDT": 0.6053
+      },
+      "raw_weights": {
+        "NEARUSDT": 0.4469,
+        "DOTUSDT": 0.5531
+      },
+      "capped_weights": {
+        "NEARUSDT": 0.4469,
+        "DOTUSDT": 0.5531
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-10 20:00:00+00:00",
+      "assets": [
+        "ADAUSDT",
+        "NEARUSDT"
+      ],
+      "volatilities": {
+        "ADAUSDT": 0.6689,
+        "NEARUSDT": 0.7987
+      },
+      "raw_weights": {
+        "ADAUSDT": 0.5442,
+        "NEARUSDT": 0.4558
+      },
+      "capped_weights": {
+        "ADAUSDT": 0.5442,
+        "NEARUSDT": 0.4558
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-12 20:00:00+00:00",
+      "assets": [
+        "BTCUSDT",
+        "DOGEUSDT"
+      ],
+      "volatilities": {
+        "BTCUSDT": 0.2977,
+        "DOGEUSDT": 0.7444
+      },
+      "raw_weights": {
+        "BTCUSDT": 0.7143,
+        "DOGEUSDT": 0.2857
+      },
+      "capped_weights": {
+        "BTCUSDT": 0.7143,
+        "DOGEUSDT": 0.2857
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-14 20:00:00+00:00",
+      "assets": [
+        "DOTUSDT",
+        "SUIUSDT"
+      ],
+      "volatilities": {
+        "DOTUSDT": 0.6607,
+        "SUIUSDT": 0.8891
+      },
+      "raw_weights": {
+        "DOTUSDT": 0.5737,
+        "SUIUSDT": 0.4263
+      },
+      "capped_weights": {
+        "DOTUSDT": 0.5737,
+        "SUIUSDT": 0.4263
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-16 20:00:00+00:00",
+      "assets": [
+        "SOLUSDT",
+        "NEARUSDT"
+      ],
+      "volatilities": {
+        "SOLUSDT": 0.8106,
+        "NEARUSDT": 0.8761
+      },
+      "raw_weights": {
+        "SOLUSDT": 0.5194,
+        "NEARUSDT": 0.4806
+      },
+      "capped_weights": {
+        "SOLUSDT": 0.5194,
+        "NEARUSDT": 0.4806
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-18 20:00:00+00:00",
+      "assets": [
+        "ETHUSDT",
+        "ADAUSDT"
+      ],
+      "volatilities": {
+        "ETHUSDT": 0.5521,
+        "ADAUSDT": 0.7055
+      },
+      "raw_weights": {
+        "ETHUSDT": 0.561,
+        "ADAUSDT": 0.439
+      },
+      "capped_weights": {
+        "ETHUSDT": 0.561,
+        "ADAUSDT": 0.439
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-20 20:00:00+00:00",
+      "assets": [
+        "BNBUSDT",
+        "XRPUSDT"
+      ],
+      "volatilities": {
+        "BNBUSDT": 0.3141,
+        "XRPUSDT": 0.5686
+      },
+      "raw_weights": {
+        "BNBUSDT": 0.6442,
+        "XRPUSDT": 0.3558
+      },
+      "capped_weights": {
+        "BNBUSDT": 0.6442,
+        "XRPUSDT": 0.3558
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-22 20:00:00+00:00",
+      "assets": [
+        "LTCUSDT",
+        "SUIUSDT"
+      ],
+      "volatilities": {
+        "LTCUSDT": 0.6026,
+        "SUIUSDT": 0.8525
+      },
+      "raw_weights": {
+        "LTCUSDT": 0.5859,
+        "SUIUSDT": 0.4141
+      },
+      "capped_weights": {
+        "LTCUSDT": 0.5859,
+        "SUIUSDT": 0.4141
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-24 20:00:00+00:00",
+      "assets": [
+        "XRPUSDT",
+        "NEARUSDT"
+      ],
+      "volatilities": {
+        "XRPUSDT": 0.6935,
+        "NEARUSDT": 1.0125
+      },
+      "raw_weights": {
+        "XRPUSDT": 0.5935,
+        "NEARUSDT": 0.4065
+      },
+      "capped_weights": {
+        "XRPUSDT": 0.5935,
+        "NEARUSDT": 0.4065
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    },
+    {
+      "timestamp": "2025-06-26 20:00:00+00:00",
+      "assets": [
+        "DOGEUSDT",
+        "AVAXUSDT"
+      ],
+      "volatilities": {
+        "DOGEUSDT": 0.8857,
+        "AVAXUSDT": 0.8711
+      },
+      "raw_weights": {
+        "DOGEUSDT": 0.4959,
+        "AVAXUSDT": 0.5041
+      },
+      "capped_weights": {
+        "DOGEUSDT": 0.4959,
+        "AVAXUSDT": 0.5041
+      },
+      "cap_lower_bound": 0.25,
+      "cap_upper_bound": 0.75,
+      "cap_active": false,
+      "cap_type": "None"
+    }
+  ]
+}

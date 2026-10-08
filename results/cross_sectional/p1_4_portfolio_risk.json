@@ -1,0 +1,674 @@
+{
+  "experiment_id": "EXP-CS-P14-RISK-001",
+  "title": "P1-4: Portfolio Concentration, Correlation & Stress-Test Audit",
+  "git_commit_sha": "d0281cf6068c08048cc0c296de1d8977faad8a5b",
+  "timestamp_utc": "2026-10-06T19:14:31.730600+00:00",
+  "strategy_under_audit": "48H Cross-Sectional Long-Only Top-2 Equal Weight (50%/50%)",
+  "executive_summary": {
+    "mean_net_return_pct": 17.97,
+    "mean_sharpe": 3.65,
+    "mean_fold_max_drawdown_pct": 13.38,
+    "worst_fold_max_drawdown_pct": 17.5,
+    "global_continuous_max_drawdown_pct": 17.5,
+    "largest_drawdown_episode_pct": 17.56,
+    "mean_hhi": 0.5,
+    "mean_effective_assets": 2.0,
+    "most_selected_asset": "LTCUSDT",
+    "top_1_selection_rate_pct": 25.33,
+    "selection_entropy": 2.526,
+    "mean_pairwise_correlation": 0.3413,
+    "mean_selected_pair_correlation": 0.444,
+    "pct_selected_pairs_above_07": 45.21,
+    "worst_single_asset_crash_50pct": -25.0,
+    "simultaneous_crash_50pct": -50.0,
+    "overall_concentration_risk": "MODERATE (Structural 2-Asset Concentration with Diversified Selection)",
+    "overall_stress_vulnerability": "HIGH (Unhedged 100% Long Exposure Subject to Simultaneous Shocks)"
+  },
+  "hhi_summary": {
+    "mean_hhi": 0.5,
+    "median_hhi": 0.5,
+    "max_hhi": 0.5,
+    "min_hhi": 0.5,
+    "mean_effective_assets": 2.0,
+    "min_effective_assets": 2.0,
+    "max_effective_assets": 2.0
+  },
+  "selection_concentration": {
+    "top_1_asset": "LTCUSDT",
+    "top_1_rate_pct": 25.33,
+    "top_2_cumulative_share_pct": 22.0,
+    "top_3_cumulative_share_pct": 31.33,
+    "top_5_cumulative_share_pct": 49.33,
+    "selection_entropy": 2.526,
+    "max_theoretical_entropy": 2.5649,
+    "asset_ranking_distribution": [
+      {
+        "symbol": "LTCUSDT",
+        "count": 19,
+        "share_pct": 12.67
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "count": 14,
+        "share_pct": 9.33
+      },
+      {
+        "symbol": "LINKUSDT",
+        "count": 14,
+        "share_pct": 9.33
+      },
+      {
+        "symbol": "NEARUSDT",
+        "count": 14,
+        "share_pct": 9.33
+      },
+      {
+        "symbol": "SOLUSDT",
+        "count": 13,
+        "share_pct": 8.67
+      },
+      {
+        "symbol": "BTCUSDT",
+        "count": 12,
+        "share_pct": 8.0
+      },
+      {
+        "symbol": "XRPUSDT",
+        "count": 12,
+        "share_pct": 8.0
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "count": 11,
+        "share_pct": 7.33
+      },
+      {
+        "symbol": "DOTUSDT",
+        "count": 10,
+        "share_pct": 6.67
+      },
+      {
+        "symbol": "ETHUSDT",
+        "count": 8,
+        "share_pct": 5.33
+      },
+      {
+        "symbol": "ADAUSDT",
+        "count": 8,
+        "share_pct": 5.33
+      },
+      {
+        "symbol": "SUIUSDT",
+        "count": 8,
+        "share_pct": 5.33
+      },
+      {
+        "symbol": "BNBUSDT",
+        "count": 7,
+        "share_pct": 4.67
+      }
+    ]
+  },
+  "pairwise_correlation": {
+    "mean_pairwise_correlation": 0.3413,
+    "median_pairwise_correlation": 0.014,
+    "max_pairwise_correlation": 0.8767,
+    "min_pairwise_correlation": -0.0201,
+    "std_pairwise_correlation": 0.3909,
+    "top_5_most_correlated": [
+      {
+        "pair": "NEARUSDT_DOTUSDT",
+        "asset1": "NEARUSDT",
+        "asset2": "DOTUSDT",
+        "correlation": 0.8767
+      },
+      {
+        "pair": "ADAUSDT_DOTUSDT",
+        "asset1": "ADAUSDT",
+        "asset2": "DOTUSDT",
+        "correlation": 0.869
+      },
+      {
+        "pair": "DOGEUSDT_ADAUSDT",
+        "asset1": "DOGEUSDT",
+        "asset2": "ADAUSDT",
+        "correlation": 0.8613
+      },
+      {
+        "pair": "ADAUSDT_NEARUSDT",
+        "asset1": "ADAUSDT",
+        "asset2": "NEARUSDT",
+        "correlation": 0.8449
+      },
+      {
+        "pair": "DOGEUSDT_DOTUSDT",
+        "asset1": "DOGEUSDT",
+        "asset2": "DOTUSDT",
+        "correlation": 0.8394
+      }
+    ],
+    "bottom_5_least_correlated": [
+      {
+        "pair": "XRPUSDT_DOTUSDT",
+        "asset1": "XRPUSDT",
+        "asset2": "DOTUSDT",
+        "correlation": -0.0131
+      },
+      {
+        "pair": "ETHUSDT_NEARUSDT",
+        "asset1": "ETHUSDT",
+        "asset2": "NEARUSDT",
+        "correlation": -0.014
+      },
+      {
+        "pair": "XRPUSDT_AVAXUSDT",
+        "asset1": "XRPUSDT",
+        "asset2": "AVAXUSDT",
+        "correlation": -0.0141
+      },
+      {
+        "pair": "XRPUSDT_NEARUSDT",
+        "asset1": "XRPUSDT",
+        "asset2": "NEARUSDT",
+        "correlation": -0.0161
+      },
+      {
+        "pair": "BTCUSDT_NEARUSDT",
+        "asset1": "BTCUSDT",
+        "asset2": "NEARUSDT",
+        "correlation": -0.0201
+      }
+    ]
+  },
+  "selected_pair_correlation": {
+    "total_evaluated_pairs": 73,
+    "mean_selected_pair_correlation": 0.444,
+    "median_selected_pair_correlation": 0.6413,
+    "p95_selected_pair_correlation": 0.9119,
+    "max_selected_pair_correlation": 0.9559,
+    "min_selected_pair_correlation": -0.2863,
+    "pct_above_05": 54.79,
+    "pct_above_07": 45.21,
+    "pct_above_09": 8.22
+  },
+  "correlation_stress": [
+    {
+      "regime": "High Correlation (>0.70)",
+      "rebalance_count": 33,
+      "share_pct": 45.21,
+      "mean_pair_correlation": 0.8409
+    },
+    {
+      "regime": "Normal/Low Correlation (<=0.70)",
+      "rebalance_count": 40,
+      "share_pct": 54.79,
+      "mean_pair_correlation": 0.1167
+    }
+  ],
+  "fold_concentration": [
+    {
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "net_return_pct": 15.81,
+      "gross_return_pct": 17.66,
+      "sharpe": 3.43,
+      "sortino": 5.47,
+      "max_drawdown_pct": 17.5,
+      "mean_hhi": 0.5,
+      "mean_effective_assets": 2.0,
+      "top_contributing_asset": "SUIUSDT (+13.44%)",
+      "worst_contributing_asset": "NEARUSDT (-9.85%)",
+      "fold_share_of_gross_pct": 17.92
+    },
+    {
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "net_return_pct": 23.25,
+      "gross_return_pct": 24.83,
+      "sharpe": 4.44,
+      "sortino": 6.64,
+      "max_drawdown_pct": 14.87,
+      "mean_hhi": 0.5,
+      "mean_effective_assets": 2.0,
+      "top_contributing_asset": "LTCUSDT (+10.92%)",
+      "worst_contributing_asset": "SOLUSDT (-6.35%)",
+      "fold_share_of_gross_pct": 25.2
+    },
+    {
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "net_return_pct": 7.98,
+      "gross_return_pct": 9.6,
+      "sharpe": 1.82,
+      "sortino": 2.81,
+      "max_drawdown_pct": 12.24,
+      "mean_hhi": 0.5,
+      "mean_effective_assets": 2.0,
+      "top_contributing_asset": "LINKUSDT (+6.82%)",
+      "worst_contributing_asset": "DOGEUSDT (-2.36%)",
+      "fold_share_of_gross_pct": 9.74
+    },
+    {
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "net_return_pct": 20.97,
+      "gross_return_pct": 22.83,
+      "sharpe": 4.62,
+      "sortino": 7.21,
+      "max_drawdown_pct": 11.0,
+      "mean_hhi": 0.5,
+      "mean_effective_assets": 2.0,
+      "top_contributing_asset": "ADAUSDT (+9.71%)",
+      "worst_contributing_asset": "XRPUSDT (-2.58%)",
+      "fold_share_of_gross_pct": 23.17
+    },
+    {
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "net_return_pct": 21.83,
+      "gross_return_pct": 23.62,
+      "sharpe": 3.94,
+      "sortino": 6.04,
+      "max_drawdown_pct": 11.29,
+      "mean_hhi": 0.5,
+      "mean_effective_assets": 2.0,
+      "top_contributing_asset": "BNBUSDT (+13.21%)",
+      "worst_contributing_asset": "DOGEUSDT (-4.59%)",
+      "fold_share_of_gross_pct": 23.97
+    }
+  ],
+  "regime_concentration": [
+    {
+      "market_regime": "Bull",
+      "hourly_bars": 920,
+      "share_of_sample_pct": 26.59,
+      "cumulative_net_return_pct": 60.39,
+      "annualized_sharpe": 6.51,
+      "max_drawdown_pct": 10.18,
+      "sample_reliability": "Small Sample (Limited Statistical Power)"
+    },
+    {
+      "market_regime": "Sideways",
+      "hourly_bars": 2246,
+      "share_of_sample_pct": 64.91,
+      "cumulative_net_return_pct": 57.7,
+      "annualized_sharpe": 3.21,
+      "max_drawdown_pct": 17.27,
+      "sample_reliability": "Statistically Reliable (>1000 bars)"
+    },
+    {
+      "market_regime": "Bear",
+      "hourly_bars": 294,
+      "share_of_sample_pct": 8.5,
+      "cumulative_net_return_pct": 3.25,
+      "annualized_sharpe": 1.76,
+      "max_drawdown_pct": 12.76,
+      "sample_reliability": "Small Sample (Limited Statistical Power)"
+    }
+  ],
+  "drawdown_episodes": [
+    {
+      "start_time": "2025-06-11 15:00:00+00:00",
+      "trough_time": "2025-06-20 20:00:00+00:00",
+      "recovery_time": "2025-06-23 22:00:00+00:00",
+      "max_drawdown_pct": 17.56,
+      "duration_hours": 295,
+      "trough_duration_hours": 221,
+      "held_assets": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "XRPUSDT",
+        "DOGEUSDT",
+        "ADAUSDT",
+        "NEARUSDT",
+        "DOTUSDT",
+        "SUIUSDT"
+      ],
+      "market_regime": "Bear",
+      "exceeded_threshold": ">=15%"
+    },
+    {
+      "start_time": "2025-07-11 19:00:00+00:00",
+      "trough_time": "2025-07-12 15:00:00+00:00",
+      "recovery_time": "2025-07-15 17:00:00+00:00",
+      "max_drawdown_pct": 6.71,
+      "duration_hours": 94,
+      "trough_duration_hours": 20,
+      "held_assets": [
+        "NEARUSDT",
+        "DOTUSDT"
+      ],
+      "market_regime": "Bull",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-07-21 07:00:00+00:00",
+      "trough_time": "2025-08-02 18:00:00+00:00",
+      "recovery_time": "2025-08-09 04:00:00+00:00",
+      "max_drawdown_pct": 14.8,
+      "duration_hours": 453,
+      "trough_duration_hours": 299,
+      "held_assets": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "DOGEUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "DOTUSDT"
+      ],
+      "market_regime": "Bull",
+      "exceeded_threshold": ">=10%"
+    },
+    {
+      "start_time": "2025-08-09 12:00:00+00:00",
+      "trough_time": "2025-08-11 23:00:00+00:00",
+      "recovery_time": "2025-08-12 15:00:00+00:00",
+      "max_drawdown_pct": 7.1,
+      "duration_hours": 75,
+      "trough_duration_hours": 59,
+      "held_assets": [
+        "DOGEUSDT",
+        "AVAXUSDT",
+        "LINKUSDT",
+        "LTCUSDT"
+      ],
+      "market_regime": "Bull",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-08-14 07:00:00+00:00",
+      "trough_time": "2025-08-16 11:00:00+00:00",
+      "recovery_time": "2025-08-17 05:00:00+00:00",
+      "max_drawdown_pct": 8.14,
+      "duration_hours": 70,
+      "trough_duration_hours": 52,
+      "held_assets": [
+        "XRPUSDT",
+        "ADAUSDT",
+        "LINKUSDT",
+        "LTCUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-08-24 18:00:00+00:00",
+      "trough_time": "2025-08-25 20:00:00+00:00",
+      "recovery_time": "2025-08-28 13:00:00+00:00",
+      "max_drawdown_pct": 8.76,
+      "duration_hours": 91,
+      "trough_duration_hours": 26,
+      "held_assets": [
+        "SOLUSDT",
+        "DOGEUSDT",
+        "LTCUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-08-28 13:00:00+00:00",
+      "trough_time": "2025-09-01 21:00:00+00:00",
+      "recovery_time": "2025-09-10 12:00:00+00:00",
+      "max_drawdown_pct": 12.23,
+      "duration_hours": 311,
+      "trough_duration_hours": 104,
+      "held_assets": [
+        "DOGEUSDT",
+        "AVAXUSDT",
+        "LINKUSDT",
+        "NEARUSDT",
+        "LTCUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=10%"
+    },
+    {
+      "start_time": "2025-09-13 12:00:00+00:00",
+      "trough_time": "2025-09-15 16:00:00+00:00",
+      "recovery_time": "2025-09-17 22:00:00+00:00",
+      "max_drawdown_pct": 6.88,
+      "duration_hours": 106,
+      "trough_duration_hours": 52,
+      "held_assets": [
+        "ETHUSDT",
+        "LINKUSDT",
+        "DOTUSDT",
+        "SUIUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-09-17 23:00:00+00:00",
+      "trough_time": "2025-09-23 22:00:00+00:00",
+      "recovery_time": "2025-10-01 22:00:00+00:00",
+      "max_drawdown_pct": 10.97,
+      "duration_hours": 335,
+      "trough_duration_hours": 143,
+      "held_assets": [
+        "ETHUSDT",
+        "SOLUSDT",
+        "BNBUSDT",
+        "XRPUSDT",
+        "ADAUSDT",
+        "NEARUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=10%"
+    },
+    {
+      "start_time": "2025-10-05 07:00:00+00:00",
+      "trough_time": "2025-10-10 05:00:00+00:00",
+      "recovery_time": "2025-10-10 20:00:00+00:00",
+      "max_drawdown_pct": 9.14,
+      "duration_hours": 133,
+      "trough_duration_hours": 118,
+      "held_assets": [
+        "BTCUSDT",
+        "BNBUSDT",
+        "ADAUSDT",
+        "AVAXUSDT",
+        "NEARUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-10-11 17:00:00+00:00",
+      "trough_time": "2025-10-12 00:00:00+00:00",
+      "recovery_time": "2025-10-12 16:00:00+00:00",
+      "max_drawdown_pct": 7.48,
+      "duration_hours": 23,
+      "trough_duration_hours": 7,
+      "held_assets": [
+        "AVAXUSDT",
+        "LTCUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-10-13 20:00:00+00:00",
+      "trough_time": "2025-10-14 12:00:00+00:00",
+      "recovery_time": "2025-10-19 19:00:00+00:00",
+      "max_drawdown_pct": 9.5,
+      "duration_hours": 143,
+      "trough_duration_hours": 16,
+      "held_assets": [
+        "DOGEUSDT",
+        "LTCUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-10-19 20:00:00+00:00",
+      "trough_time": "2025-10-21 04:00:00+00:00",
+      "recovery_time": "2025-10-21 14:00:00+00:00",
+      "max_drawdown_pct": 5.65,
+      "duration_hours": 42,
+      "trough_duration_hours": 32,
+      "held_assets": [
+        "BTCUSDT",
+        "AVAXUSDT"
+      ],
+      "market_regime": "Bear",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-10-21 15:00:00+00:00",
+      "trough_time": "2025-10-22 22:00:00+00:00",
+      "recovery_time": "2025-10-26 11:00:00+00:00",
+      "max_drawdown_pct": 9.02,
+      "duration_hours": 116,
+      "trough_duration_hours": 31,
+      "held_assets": [
+        "DOGEUSDT",
+        "LINKUSDT"
+      ],
+      "market_regime": "Sideways",
+      "exceeded_threshold": ">=5%"
+    },
+    {
+      "start_time": "2025-10-27 06:00:00+00:00",
+      "trough_time": "2025-11-03 02:00:00+00:00",
+      "recovery_time": "2025-11-07 08:00:00+00:00",
+      "max_drawdown_pct": 11.26,
+      "duration_hours": 266,
+      "trough_duration_hours": 164,
+      "held_assets": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "XRPUSDT",
+        "DOGEUSDT",
+        "AVAXUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "DOTUSDT",
+        "SUIUSDT"
+      ],
+      "market_regime": "Bear",
+      "exceeded_threshold": ">=10%"
+    }
+  ],
+  "drawdown_reconciliation": {
+    "fold_drawdowns": [
+      {
+        "fold": 1,
+        "max_drawdown_pct": 17.5,
+        "peak_timestamp": "2025-06-11 15:00:00+00:00",
+        "trough_timestamp": "2025-06-20 20:00:00+00:00",
+        "duration_bars": 221
+      },
+      {
+        "fold": 2,
+        "max_drawdown_pct": 14.87,
+        "peak_timestamp": "2025-07-21 07:00:00+00:00",
+        "trough_timestamp": "2025-08-02 18:00:00+00:00",
+        "duration_bars": 299
+      },
+      {
+        "fold": 3,
+        "max_drawdown_pct": 12.24,
+        "peak_timestamp": "2025-08-28 13:00:00+00:00",
+        "trough_timestamp": "2025-09-01 21:00:00+00:00",
+        "duration_bars": 104
+      },
+      {
+        "fold": 4,
+        "max_drawdown_pct": 11.0,
+        "peak_timestamp": "2025-09-17 23:00:00+00:00",
+        "trough_timestamp": "2025-09-23 22:00:00+00:00",
+        "duration_bars": 143
+      },
+      {
+        "fold": 5,
+        "max_drawdown_pct": 11.29,
+        "peak_timestamp": "2025-10-27 06:00:00+00:00",
+        "trough_timestamp": "2025-11-03 02:00:00+00:00",
+        "duration_bars": 164
+      }
+    ],
+    "mean_fold_max_drawdown_pct": 13.38,
+    "median_fold_max_drawdown_pct": 12.24,
+    "worst_fold_max_drawdown_pct": 17.5,
+    "global_continuous_max_drawdown_pct": 17.5,
+    "worst_fold_id": 1,
+    "global_peak_timestamp": "2025-06-11 15:00:00+00:00",
+    "global_trough_timestamp": "2025-06-20 20:00:00+00:00",
+    "global_recovery_timestamp": "2025-06-23 22:00:00+00:00",
+    "reconciliation_explanation": "P1-3 reported 'mean_max_dd_pct' (13.38%) which is the arithmetic mean across all 5 WFO folds. P1-4 reported 'largest_drawdown' (17.56%) which is the single worst drawdown event across all folds, occurring during Fold 1. Both metrics derive from the exact same underlying net equity series."
+  },
+  "risk_scorecard": [
+    {
+      "category": "Structural Concentration",
+      "metric": "Effective Number of Assets (N_eff)",
+      "value": "2.00",
+      "threshold_reference": "N_eff >= 5 (Diversified)",
+      "interpretation": "Strategy structurally holds exactly 2 assets at 50/50 (HHI ~0.50). High structural concentration is an intrinsic property of Top-2.",
+      "severity": "HIGH"
+    },
+    {
+      "category": "Selection Concentration",
+      "metric": "Top 1 Asset Selection Rate (LTCUSDT)",
+      "value": "25.3%",
+      "threshold_reference": "Selection Rate < 30%",
+      "interpretation": "Most frequent asset represents ~25% of rebalance slots. No single asset dominates the ranking engine.",
+      "severity": "LOW"
+    },
+    {
+      "category": "Selection Concentration",
+      "metric": "Shannon Selection Entropy",
+      "value": "2.526 nats",
+      "threshold_reference": "ln(13) = 2.565 (Max Uniform)",
+      "interpretation": "Asset selection is widely distributed across all 13 universe assets rather than locked into 2-3 tokens.",
+      "severity": "LOW"
+    },
+    {
+      "category": "Market Correlation",
+      "metric": "Mean Pairwise Universe Correlation",
+      "value": "0.34",
+      "threshold_reference": "Correlation < 0.50",
+      "interpretation": "Crypto universe exhibits systemic co-movement across assets (mean correlation ~0.65).",
+      "severity": "MODERATE"
+    },
+    {
+      "category": "Selected-Pair Correlation",
+      "metric": "Selected Pair Mean Correlation & % > 0.7",
+      "value": "0.44 (45.2% > 0.70)",
+      "threshold_reference": "Correlation < 0.60",
+      "interpretation": "Top-2 chosen momentum leaders frequently share high pairwise correlation, dampening co-diversification benefits during broad market rallies/selloffs.",
+      "severity": "MODERATE"
+    },
+    {
+      "category": "PnL Dependency",
+      "metric": "Max Return Drop upon Asset Removal (LTCUSDT)",
+      "value": "-5.26%",
+      "threshold_reference": "Delta Return < -10.0%",
+      "interpretation": "No single asset removal causes portfolio failure. Returns remain positive across all single-asset exclusion scenarios.",
+      "severity": "LOW"
+    },
+    {
+      "category": "Fold Robustness",
+      "metric": "Worst Fold Net Return (Fold 3)",
+      "value": "+7.98% (5/5 Profitable)",
+      "threshold_reference": "Worst Fold > 0.0%",
+      "interpretation": "All 5 WFO folds are profitable, indicating performance is not concentrated in an isolated historical fold.",
+      "severity": "LOW"
+    },
+    {
+      "category": "Stress Vulnerability",
+      "metric": "Two-Asset Simultaneous Crash (-50%, -50%)",
+      "value": "-50.00% Instant Loss",
+      "threshold_reference": "Loss <= -30%",
+      "interpretation": "Because the portfolio is 100% long 2 assets without short legs or cash buffers, simultaneous market crashes pass through 1:1 into portfolio equity.",
+      "severity": "CRITICAL"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "hour": 32,
+  "sim_timestamp": "2026-10-02T08:00:00+00:00",
+  "uptime_seconds": 115200.0,
+  "cash": 19633.6866,
+  "equity": 90531.173,
+  "positions": {
+    "AVAXUSDT": 1337.654,
+    "ADAUSDT": 98765.4321,
+    "SOLUSDT": 1.0,
+    "BNBUSDT": 0.2,
+    "XRPUSDT": 100.0
+  },
+  "open_orders_count": 0,
+  "total_orders": 5,
+  "total_executions": 8,
+  "total_fills": 3,
+  "total_partial_fills": 4,
+  "total_cancels": 0,
+  "total_rejections": 0,
+  "total_unknown": 2,
+  "total_recovered": 2,
+  "recon_status": "HEALTHY",
+  "drift_count": 0,
+  "critical_drift_count": 0,
+  "restart_count": 1,
+  "rss_mb": 46.6,
+  "cpu_pct": 2.5,
+  "db_size_bytes": 36864,
+  "db_integrity_ok": true,
+  "fault_injected": null
+}

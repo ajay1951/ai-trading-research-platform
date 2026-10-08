@@ -1,0 +1,14 @@
+{
+  "model_id": "MOD-P33-LGBM-CHAMPION",
+  "model_version": "1.0.0",
+  "model_family": "LGBM_CROSS_SECTIONAL",
+  "promotion_timestamp": "2026-10-07 19:22:33 UTC",
+  "promotion_reason": "ROLLBACK: Simulated post-promotion anomaly detection verification.",
+  "approval_record": "RESEARCH_APPROVED",
+  "evaluation_summary": {
+    "rollback_from": "MOD-CHALLENGER-A-CALIBRATED"
+  },
+  "health_state": "HEALTHY",
+  "rollback_parent": "MOD-P3-LGBM-V0",
+  "artifact_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee"
+}

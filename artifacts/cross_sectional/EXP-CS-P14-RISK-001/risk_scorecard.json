@@ -1,0 +1,66 @@
+[
+  {
+    "category": "Structural Concentration",
+    "metric": "Effective Number of Assets (N_eff)",
+    "value": "2.00",
+    "threshold_reference": "N_eff >= 5 (Diversified)",
+    "interpretation": "Strategy structurally holds exactly 2 assets at 50/50 (HHI ~0.50). High structural concentration is an intrinsic property of Top-2.",
+    "severity": "HIGH"
+  },
+  {
+    "category": "Selection Concentration",
+    "metric": "Top 1 Asset Selection Rate (LTCUSDT)",
+    "value": "25.3%",
+    "threshold_reference": "Selection Rate < 30%",
+    "interpretation": "Most frequent asset represents ~25% of rebalance slots. No single asset dominates the ranking engine.",
+    "severity": "LOW"
+  },
+  {
+    "category": "Selection Concentration",
+    "metric": "Shannon Selection Entropy",
+    "value": "2.526 nats",
+    "threshold_reference": "ln(13) = 2.565 (Max Uniform)",
+    "interpretation": "Asset selection is widely distributed across all 13 universe assets rather than locked into 2-3 tokens.",
+    "severity": "LOW"
+  },
+  {
+    "category": "Market Correlation",
+    "metric": "Mean Pairwise Universe Correlation",
+    "value": "0.34",
+    "threshold_reference": "Correlation < 0.50",
+    "interpretation": "Crypto universe exhibits systemic co-movement across assets (mean correlation ~0.65).",
+    "severity": "MODERATE"
+  },
+  {
+    "category": "Selected-Pair Correlation",
+    "metric": "Selected Pair Mean Correlation & % > 0.7",
+    "value": "0.44 (45.2% > 0.70)",
+    "threshold_reference": "Correlation < 0.60",
+    "interpretation": "Top-2 chosen momentum leaders frequently share high pairwise correlation, dampening co-diversification benefits during broad market rallies/selloffs.",
+    "severity": "MODERATE"
+  },
+  {
+    "category": "PnL Dependency",
+    "metric": "Max Return Drop upon Asset Removal (LTCUSDT)",
+    "value": "-5.26%",
+    "threshold_reference": "Delta Return < -10.0%",
+    "interpretation": "No single asset removal causes portfolio failure. Returns remain positive across all single-asset exclusion scenarios.",
+    "severity": "LOW"
+  },
+  {
+    "category": "Fold Robustness",
+    "metric": "Worst Fold Net Return (Fold 3)",
+    "value": "+7.98% (5/5 Profitable)",
+    "threshold_reference": "Worst Fold > 0.0%",
+    "interpretation": "All 5 WFO folds are profitable, indicating performance is not concentrated in an isolated historical fold.",
+    "severity": "LOW"
+  },
+  {
+    "category": "Stress Vulnerability",
+    "metric": "Two-Asset Simultaneous Crash (-50%, -50%)",
+    "value": "-50.00% Instant Loss",
+    "threshold_reference": "Loss <= -30%",
+    "interpretation": "Because the portfolio is 100% long 2 assets without short legs or cash buffers, simultaneous market crashes pass through 1:1 into portfolio equity.",
+    "severity": "CRITICAL"
+  }
+]

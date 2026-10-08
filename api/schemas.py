@@ -11,6 +11,8 @@ class HealthResponse(BaseModel):
     version: str
     redis_connected: bool
     database_connected: bool
+    market_data_status: Optional[str] = "HEALTHY"
+    market_data_healthy: Optional[bool] = True
 
 
 class ExperimentMetadata(BaseModel):

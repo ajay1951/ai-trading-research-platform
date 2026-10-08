@@ -1,0 +1,38 @@
+[
+  {
+    "cadence_hours": 18,
+    "gross_return_pct": -2.06,
+    "net_return_pct": -28.33,
+    "net_sharpe": -5.83,
+    "max_drawdown": 0.3591,
+    "total_turnover": 306.0,
+    "avg_cost_bps": 51.11
+  },
+  {
+    "cadence_hours": 24,
+    "gross_return_pct": 8.27,
+    "net_return_pct": -15.33,
+    "net_sharpe": -2.92,
+    "max_drawdown": 0.2545,
+    "total_turnover": 237.0,
+    "avg_cost_bps": 51.58
+  },
+  {
+    "cadence_hours": 36,
+    "gross_return_pct": 7.16,
+    "net_return_pct": -8.6,
+    "net_sharpe": -1.37,
+    "max_drawdown": 0.2151,
+    "total_turnover": 154.0,
+    "avg_cost_bps": 51.27
+  },
+  {
+    "cadence_hours": 48,
+    "gross_return_pct": 18.39,
+    "net_return_pct": 2.21,
+    "net_sharpe": 0.8,
+    "max_drawdown": 0.1926,
+    "total_turnover": 130.0,
+    "avg_cost_bps": 56.5
+  }
+]

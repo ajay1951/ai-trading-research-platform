@@ -1,0 +1,165 @@
+{
+  "universe": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "NEARUSDT",
+    "LTCUSDT",
+    "DOTUSDT",
+    "SUIUSDT"
+  ],
+  "duration_hours": 168,
+  "step_seconds": 3600,
+  "starting_cash": 100000.0,
+  "fee_rate": 0.0004,
+  "db_path": "artifacts/soak/p2-8/oms_soak_168h.db",
+  "artifacts_dir": "artifacts/soak/p2-8",
+  "rebalance_interval_hours": 48,
+  "seed": 42,
+  "mode": "MODE_A_ACCELERATED",
+  "fault_schedule": [
+    {
+      "hour": 4,
+      "fault_type": "WEBSOCKET_DISCONNECT",
+      "symbol": "BTCUSDT",
+      "params": {},
+      "description": "WebSocket disconnect on BTCUSDT stream (P2-5 health gate blocks trading)"
+    },
+    {
+      "hour": 8,
+      "fault_type": "HTTP_503_SERVICE_UNAVAILABLE",
+      "symbol": "ETHUSDT",
+      "params": {},
+      "description": "Broker HTTP 503 service unavailable during order dispatch"
+    },
+    {
+      "hour": 12,
+      "fault_type": "PARTIAL_FILL_EVENT",
+      "symbol": "SOLUSDT",
+      "params": {
+        "fill_pcts": [
+          0.25,
+          0.25,
+          0.3,
+          0.2
+        ]
+      },
+      "description": "Multi-tranche partial fill across 4 executions totaling 100% with VWAP"
+    },
+    {
+      "hour": 18,
+      "fault_type": "LOST_RESPONSE_UNKNOWN_ORDER",
+      "symbol": "BNBUSDT",
+      "params": {},
+      "description": "Broker executes order but response packet lost -> UNKNOWN -> recovered to FILLED"
+    },
+    {
+      "hour": 24,
+      "fault_type": "PROCESS_CRASH_RESTART",
+      "symbol": null,
+      "params": {},
+      "description": "Intentional process crash and cold restart: replay SQLite journal & reconcile"
+    },
+    {
+      "hour": 30,
+      "fault_type": "RECONCILIATION_POSITION_DRIFT",
+      "symbol": "XRPUSDT",
+      "params": {
+        "drift_qty": 0.1
+      },
+      "description": "Reconciliation detects position discrepancy -> halts XRP -> safe repair & resume"
+    },
+    {
+      "hour": 36,
+      "fault_type": "STATUS_QUERY_TIMEOUT",
+      "symbol": "DOGEUSDT",
+      "params": {},
+      "description": "Status query timeout during UNKNOWN recovery -> bounded retry -> resolved"
+    },
+    {
+      "hour": 48,
+      "fault_type": "CANCEL_FILL_RACE",
+      "symbol": "ADAUSDT",
+      "params": {},
+      "description": "Cancel/Fill race: order fills on exchange milliseconds before cancel arrives"
+    },
+    {
+      "hour": 60,
+      "fault_type": "MARKET_DATA_STALE_EVENT",
+      "symbol": "AVAXUSDT",
+      "params": {},
+      "description": "AVAX candle timestamp frozen -> P2-5 health gate marks STALE -> trading gated"
+    },
+    {
+      "hour": 72,
+      "fault_type": "CRASH_DURING_RECOVERY",
+      "symbol": "LINKUSDT",
+      "params": {},
+      "description": "Process crash mid-recovery of UNKNOWN order -> restart restores durable state"
+    },
+    {
+      "hour": 84,
+      "fault_type": "HTTP_429_RATE_LIMIT_STORM",
+      "symbol": "NEARUSDT",
+      "params": {},
+      "description": "Broker HTTP 429 rate limit storm -> backoff delay respected -> success"
+    },
+    {
+      "hour": 96,
+      "fault_type": "DUPLICATE_EXECUTION_EVENTS",
+      "symbol": "LTCUSDT",
+      "params": {},
+      "description": "Duplicate execution callback received -> idempotency engine suppresses double-fill"
+    },
+    {
+      "hour": 108,
+      "fault_type": "BROKER_API_UNAVAILABLE",
+      "symbol": null,
+      "params": {},
+      "description": "All broker endpoints return 503 -> Global trading halt -> restored"
+    },
+    {
+      "hour": 120,
+      "fault_type": "PROCESS_CRASH_RESTART",
+      "symbol": null,
+      "params": {},
+      "description": "Process restart checkpoint: verify determinism of journal replay and cash balance"
+    },
+    {
+      "hour": 132,
+      "fault_type": "PARTIAL_FILL_AND_RESTART",
+      "symbol": "DOTUSDT",
+      "params": {
+        "first_fill_pct": 0.5
+      },
+      "description": "Order 50% filled -> process crashes -> restart preserves remaining quantity"
+    },
+    {
+      "hour": 144,
+      "fault_type": "ORPHAN_BROKER_ORDER",
+      "symbol": "SUIUSDT",
+      "params": {},
+      "description": "Orphan order appears on exchange -> reconciliation flags drift -> classified & handled"
+    },
+    {
+      "hour": 156,
+      "fault_type": "COMBINED_BROKER_DATA_FAILURE",
+      "symbol": "BTCUSDT",
+      "params": {},
+      "description": "Correlated multi-system fault: market data disconnect + broker 503 timeout"
+    },
+    {
+      "hour": 168,
+      "fault_type": "FINAL_SETTLE_RECONCILIATION",
+      "symbol": null,
+      "params": {},
+      "description": "Final end-of-soak full reconciliation: verify 0 drift, 0 UNKNOWN, 100% integrity"
+    }
+  ]
+}

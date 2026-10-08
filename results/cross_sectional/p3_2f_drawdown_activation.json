@@ -1,0 +1,55 @@
+{
+  "total_rebalance_events": 75,
+  "state_counts": {
+    "NORMAL": 58,
+    "CAUTION": 15,
+    "DEFENSIVE": 2,
+    "SEVERE": 0
+  },
+  "triggered_rebalance_count": 17,
+  "activation_rate_pct": 22.67,
+  "average_exposure_reduction_when_triggered": 0.2353,
+  "corrected_performance": {
+    "avg_net_return_pct": 9.65,
+    "avg_net_sharpe": 2.23,
+    "annual_volatility_pct": 60.05,
+    "mean_fold_max_dd": 0.1512
+  },
+  "folds": [
+    {
+      "fold": 1,
+      "net_return_pct": 3.47,
+      "net_sharpe": 1.11,
+      "annual_volatility_pct": 50.64,
+      "max_drawdown": 0.1777
+    },
+    {
+      "fold": 2,
+      "net_return_pct": 16.89,
+      "net_sharpe": 3.51,
+      "annual_volatility_pct": 61.9,
+      "max_drawdown": 0.1457
+    },
+    {
+      "fold": 3,
+      "net_return_pct": 4.98,
+      "net_sharpe": 1.28,
+      "annual_volatility_pct": 63.85,
+      "max_drawdown": 0.1275
+    },
+    {
+      "fold": 4,
+      "net_return_pct": 15.28,
+      "net_sharpe": 3.55,
+      "annual_volatility_pct": 55.06,
+      "max_drawdown": 0.1301
+    },
+    {
+      "fold": 5,
+      "net_return_pct": 7.63,
+      "net_sharpe": 1.7,
+      "annual_volatility_pct": 68.79,
+      "max_drawdown": 0.1748
+    }
+  ]
+}

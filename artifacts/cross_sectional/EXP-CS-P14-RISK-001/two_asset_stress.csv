@@ -1,0 +1,7 @@
+scenario,asset_1_shock_pct,asset_2_shock_pct,portfolio_instantaneous_loss_pct,severity
+"Mild Simultaneous (-10%, -10%)",-10.0,-10.0,-10.0,MODERATE
+"Moderate Simultaneous (-20%, -20%)",-20.0,-20.0,-20.0,HIGH
+"Severe Simultaneous (-30%, -30%)",-30.0,-30.0,-30.0,CRITICAL
+"Extreme Simultaneous (-50%, -50%)",-50.0,-50.0,-50.0,CRITICAL
+"Asymmetric Crash A (-50%, -20%)",-50.0,-20.0,-35.0,CRITICAL
+"Asymmetric Crash B (-20%, -50%)",-20.0,-50.0,-35.0,CRITICAL

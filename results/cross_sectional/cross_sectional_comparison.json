@@ -1,0 +1,53 @@
+{
+  "experiment_id": "EXP-CS-001",
+  "experiment_type": "cross_sectional_momentum_ranking",
+  "universe_size": 13,
+  "universe_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "NEARUSDT",
+    "LTCUSDT",
+    "DOTUSDT",
+    "SUIUSDT"
+  ],
+  "total_folds": 5,
+  "execution_model": "t+1_open",
+  "friction_assumptions": {
+    "maker_fee_bps": 4.0,
+    "slippage_bps": 2.0,
+    "total_round_trip_bps": 12.000000000000002
+  },
+  "strategies": {
+    "cross_sectional_long_short": {
+      "mean_fold_return_pct": -48.69,
+      "mean_fold_sharpe": -12.27,
+      "mean_fold_max_dd": 51.38,
+      "profitable_folds": 0
+    },
+    "cross_sectional_long_only": {
+      "mean_fold_return_pct": -27.27,
+      "mean_fold_sharpe": -5.61,
+      "mean_fold_max_dd": 33.92,
+      "profitable_folds": 0
+    },
+    "equal_weight_buy_and_hold": {
+      "mean_fold_return_pct": -1.26,
+      "mean_fold_sharpe": 0.07,
+      "mean_fold_max_dd": 18.55,
+      "profitable_folds": 2
+    },
+    "single_asset_baseline_btc": {
+      "mean_fold_return_pct": -8.44,
+      "mean_fold_sharpe": -2.13,
+      "mean_fold_max_dd": 12.88,
+      "profitable_folds": 1
+    }
+  }
+}

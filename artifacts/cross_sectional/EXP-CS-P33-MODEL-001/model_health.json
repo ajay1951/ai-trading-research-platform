@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-11-07 11:00:00+00:00",
+  "model_version": "P3-3-LGBM-v1",
+  "health_state": "DRIFTING",
+  "health_score": 73.0,
+  "calibration_score": 20.0,
+  "feature_drift_score": 21.0,
+  "prediction_drift_score": 15.0,
+  "performance_score": 17.0,
+  "primary_reason": "Distribution drift detected: Input features or predictions shifting.",
+  "reason_codes": [
+    "Uncalibrated slope: 0.37 outside [0.60, 1.40]",
+    "Moderate prediction drift: PSI = 0.2191 > 0.10",
+    "Sub-par hit rate: rolling hit rate = 42.75% < 48.0%"
+  ],
+  "active_alerts_count": 0,
+  "is_operational": true
+}

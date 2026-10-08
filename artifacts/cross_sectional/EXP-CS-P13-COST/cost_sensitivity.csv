@@ -1,0 +1,10 @@
+cost_bps,mode,strategy,mean_net_return_pct,mean_gross_return_pct,mean_costs_pct,mean_sharpe,mean_max_dd_pct,mean_daily_turnover,profitable_folds
+0.0,equal,Equal Weight,20.04,20.04,0.0,3.99,12.98,1.006,5/5
+0.0,inverse_vol,Inverse Vol,18.64,18.64,0.0,3.84,13.22,1.0171,5/5
+0.0,iv_capped,IV Capped,18.63,18.63,0.0,3.83,13.22,1.0171,5/5
+12.0,equal,Equal Weight,17.97,19.71,1.74,3.65,13.38,1.006,5/5
+12.0,inverse_vol,Inverse Vol,16.57,18.33,1.76,3.48,13.7,1.0171,5/5
+12.0,iv_capped,IV Capped,16.56,18.32,1.76,3.48,13.7,1.0171,5/5
+20.0,equal,Equal Weight,16.61,19.5,2.9,3.42,13.64,1.006,5/5
+20.0,inverse_vol,Inverse Vol,15.2,18.14,2.93,3.25,14.02,1.0171,5/5
+20.0,iv_capped,IV Capped,15.19,18.13,2.93,3.24,14.02,1.0171,5/5

@@ -1,0 +1,9 @@
+strategy,frequency,interval_bars,mean_return_pct,mean_gross_return_pct,mean_costs_pct,mean_sharpe,mean_sortino,mean_max_dd_pct,mean_daily_turnover,mean_holding_period_hours,mean_rebalances_per_fold,profitable_folds
+Cross-Sectional Long-Only (Top 2),1H,1,-27.27,9.88,37.15,-5.61,-7.43,33.92,21.4758,2.24,682.6,0/5
+Cross-Sectional Long/Short (Top 2 / Bottom 2),1H,1,-48.69,26.08,74.78,-12.27,-16.88,51.38,43.2234,2.31,691.0,0/5
+Cross-Sectional Long-Only (Top 2),4H,4,-10.64,1.79,12.43,-1.78,-2.45,21.53,7.1843,6.73,670.8,1/5
+Cross-Sectional Long/Short (Top 2 / Bottom 2),4H,4,-18.62,6.75,25.37,-3.72,-5.18,27.81,14.6676,7.23,691.0,1/5
+Cross-Sectional Long-Only (Top 2),12H,12,2.5,7.89,5.4,0.85,1.23,16.5,3.1187,15.74,671.8,3/5
+Cross-Sectional Long/Short (Top 2 / Bottom 2),12H,12,-2.68,8.23,10.91,-0.75,-1.04,19.68,6.3068,18.86,691.0,2/5
+Cross-Sectional Long-Only (Top 2),24H,24,4.1,7.12,3.02,1.16,1.76,15.95,1.7483,28.6,672.2,5/5
+Cross-Sectional Long/Short (Top 2 / Bottom 2),24H,24,4.18,10.43,6.26,0.78,1.42,15.9,3.617,35.93,691.0,3/5

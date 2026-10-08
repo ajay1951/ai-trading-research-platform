@@ -1,0 +1,29 @@
+{
+  "hour": 59,
+  "sim_timestamp": "2026-10-03T11:00:00+00:00",
+  "uptime_seconds": 212400.0,
+  "cash": 18741.7924,
+  "equity": 95208.1458,
+  "positions": {
+    "SUIUSDT": 18716.4769,
+    "DOTUSDT": 8900.1831
+  },
+  "open_orders_count": 0,
+  "total_orders": 15,
+  "total_executions": 18,
+  "total_fills": 12,
+  "total_partial_fills": 4,
+  "total_cancels": 0,
+  "total_rejections": 0,
+  "total_unknown": 3,
+  "total_recovered": 3,
+  "recon_status": "HEALTHY",
+  "drift_count": 0,
+  "critical_drift_count": 0,
+  "restart_count": 1,
+  "rss_mb": 47.95,
+  "cpu_pct": 2.5,
+  "db_size_bytes": 45056,
+  "db_integrity_ok": true,
+  "fault_injected": null
+}

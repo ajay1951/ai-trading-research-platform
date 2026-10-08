@@ -1,0 +1,20 @@
+{
+  "BULL": {
+    "avg_cost_bps": 52.63,
+    "median_cost_bps": 34.0,
+    "p95_cost_bps": 140.32,
+    "trade_count": 46
+  },
+  "SIDEWAYS": {
+    "avg_cost_bps": 54.35,
+    "median_cost_bps": 33.81,
+    "p95_cost_bps": 182.83,
+    "trade_count": 168
+  },
+  "BEAR": {
+    "avg_cost_bps": 68.73,
+    "median_cost_bps": 33.64,
+    "p95_cost_bps": 178.97,
+    "trade_count": 46
+  }
+}

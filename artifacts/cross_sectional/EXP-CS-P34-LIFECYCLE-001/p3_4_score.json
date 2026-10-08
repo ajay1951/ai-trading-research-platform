@@ -1,0 +1,15 @@
+{
+  "model_registry_versioning_score": 15.0,
+  "lifecycle_state_machine_score": 10.0,
+  "champion_challenger_score": 15.0,
+  "promotion_gates_score": 15.0,
+  "shadow_evaluation_score": 10.0,
+  "retraining_eligibility_score": 10.0,
+  "demotion_suspension_score": 10.0,
+  "rollback_recovery_score": 5.0,
+  "auditability_score": 5.0,
+  "causality_reproducibility_score": 5.0,
+  "total_p3_4_score": 100.0,
+  "target_threshold": 90.0,
+  "is_accepted": true
+}

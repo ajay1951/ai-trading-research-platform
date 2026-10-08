@@ -1,0 +1,62 @@
+[
+  {
+    "bucket_label": "Low (0.00-0.45)",
+    "lower_bound": 0.0,
+    "upper_bound": 0.45,
+    "sample_count": 30512,
+    "hit_rate": 0.4134,
+    "mean_forward_return_pct": 0.0,
+    "median_forward_return_pct": 0.0,
+    "brier_score": 0.2434,
+    "log_loss": 0.68,
+    "realized_sharpe": 0.1
+  },
+  {
+    "bucket_label": "Neutral (0.45-0.55)",
+    "lower_bound": 0.45,
+    "upper_bound": 0.55,
+    "sample_count": 13393,
+    "hit_rate": 0.45,
+    "mean_forward_return_pct": 0.01,
+    "median_forward_return_pct": 0.05,
+    "brier_score": 0.2484,
+    "log_loss": 0.69,
+    "realized_sharpe": 0.25
+  },
+  {
+    "bucket_label": "Moderate Bullish (0.55-0.65)",
+    "lower_bound": 0.55,
+    "upper_bound": 0.65,
+    "sample_count": 1664,
+    "hit_rate": 0.4748,
+    "mean_forward_return_pct": 0.12,
+    "median_forward_return_pct": 0.08,
+    "brier_score": 0.262,
+    "log_loss": 0.7176,
+    "realized_sharpe": 2.79
+  },
+  {
+    "bucket_label": "High Bullish (0.65-0.75)",
+    "lower_bound": 0.65,
+    "upper_bound": 0.75,
+    "sample_count": 337,
+    "hit_rate": 0.5519,
+    "mean_forward_return_pct": 0.36,
+    "median_forward_return_pct": 0.37,
+    "brier_score": 0.2628,
+    "log_loss": 0.7216,
+    "realized_sharpe": 7.42
+  },
+  {
+    "bucket_label": "Extreme Bullish (0.75-1.00)",
+    "lower_bound": 0.75,
+    "upper_bound": 1.0,
+    "sample_count": 62,
+    "hit_rate": 0.5323,
+    "mean_forward_return_pct": 0.62,
+    "median_forward_return_pct": 0.38,
+    "brier_score": 0.3175,
+    "log_loss": 0.865,
+    "realized_sharpe": 16.09
+  }
+]

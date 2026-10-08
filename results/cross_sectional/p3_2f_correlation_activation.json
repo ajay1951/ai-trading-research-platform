@@ -1,0 +1,10 @@
+{
+  "total_rebalance_events": 75,
+  "triggered_events_count": 24,
+  "trigger_rate_pct": 32.0,
+  "mean_selected_pair_correlation": 0.4304,
+  "median_selected_pair_correlation": 0.6306,
+  "p95_selected_pair_correlation": 0.9102,
+  "max_selected_pair_correlation": 0.9604,
+  "mean_exposure_scale_when_triggered": 0.8641
+}

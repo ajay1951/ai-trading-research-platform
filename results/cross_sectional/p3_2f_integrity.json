@@ -1,0 +1,94 @@
+{
+  "audit_version": "P3-2F-v1",
+  "drawdown_activation": {
+    "total_rebalance_events": 75,
+    "state_counts": {
+      "NORMAL": 58,
+      "CAUTION": 15,
+      "DEFENSIVE": 2,
+      "SEVERE": 0
+    },
+    "triggered_rebalance_count": 17,
+    "activation_rate_pct": 22.67,
+    "average_exposure_reduction_when_triggered": 0.2353,
+    "corrected_performance": {
+      "avg_net_return_pct": 9.65,
+      "avg_net_sharpe": 2.23,
+      "annual_volatility_pct": 60.05,
+      "mean_fold_max_dd": 0.1512
+    },
+    "folds": [
+      {
+        "fold": 1,
+        "net_return_pct": 3.47,
+        "net_sharpe": 1.11,
+        "annual_volatility_pct": 50.64,
+        "max_drawdown": 0.1777
+      },
+      {
+        "fold": 2,
+        "net_return_pct": 16.89,
+        "net_sharpe": 3.51,
+        "annual_volatility_pct": 61.9,
+        "max_drawdown": 0.1457
+      },
+      {
+        "fold": 3,
+        "net_return_pct": 4.98,
+        "net_sharpe": 1.28,
+        "annual_volatility_pct": 63.85,
+        "max_drawdown": 0.1275
+      },
+      {
+        "fold": 4,
+        "net_return_pct": 15.28,
+        "net_sharpe": 3.55,
+        "annual_volatility_pct": 55.06,
+        "max_drawdown": 0.1301
+      },
+      {
+        "fold": 5,
+        "net_return_pct": 7.63,
+        "net_sharpe": 1.7,
+        "annual_volatility_pct": 68.79,
+        "max_drawdown": 0.1748
+      }
+    ]
+  },
+  "iv_vs_erc_equivalence": {
+    "total_weight_elements": 44980,
+    "max_absolute_weight_difference": 0.0,
+    "mean_absolute_weight_difference": 0.0,
+    "differing_allocations_count": 0,
+    "mathematical_identity_verified": true,
+    "explanation": "For any 2-asset long-only portfolio (w1 + w2 = 1), setting CRC1 = CRC2 yields w1(w1*var1 + w2*cov12) = w2(w2*var2 + w1*cov12). The covariance cross-term w1*w2*cov12 cancels out algebraically on both sides, reducing exactly to w1*sigma1 = w2*sigma2. Thus, Equal Risk Contribution is mathematically identical to Inverse Volatility weighting."
+  },
+  "correlation_activation": {
+    "total_rebalance_events": 75,
+    "triggered_events_count": 24,
+    "trigger_rate_pct": 32.0,
+    "mean_selected_pair_correlation": 0.4304,
+    "median_selected_pair_correlation": 0.6306,
+    "p95_selected_pair_correlation": 0.9102,
+    "max_selected_pair_correlation": 0.9604,
+    "mean_exposure_scale_when_triggered": 0.8641
+  },
+  "regime_activation": {
+    "total_hourly_observations": 4419,
+    "hourly_regime_counts": {
+      "BULL": 743,
+      "SIDEWAYS": 3133,
+      "BEAR": 543
+    },
+    "rebalance_regime_counts": {
+      "BULL": 14,
+      "SIDEWAYS": 49,
+      "BEAR": 12
+    },
+    "exposure_multipliers": {
+      "BULL": 1.0,
+      "SIDEWAYS": 0.8,
+      "BEAR": 0.5
+    }
+  }
+}

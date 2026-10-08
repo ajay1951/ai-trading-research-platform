@@ -1,0 +1,744 @@
+{
+  "audit_title": "P1-2F: 48H Performance Anomaly, SOL Dependency & Regime-Classification Audit",
+  "git_commit_sha": "d0281cf6068c08048cc0c296de1d8977faad8a5b",
+  "timestamp_utc": "2026-10-06T15:59:57.355381+00:00",
+  "exp_p12f_freq_fold": {
+    "fold_comparison": [
+      {
+        "fold": 1,
+        "test_period": "2025-06-08 to 2025-07-07",
+        "bars_count": 692,
+        "h24_net_return_pct": 7.27,
+        "h24_gross_return_pct": 10.44,
+        "h24_costs_pct": 3.17,
+        "h24_sharpe": 1.92,
+        "h24_max_dd_pct": 11.52,
+        "h24_turnover": 1.8319,
+        "h24_trades": 673,
+        "h24_rebalances": 673,
+        "h24_avg_hold_hours": 27.1,
+        "h36_net_return_pct": 9.32,
+        "h36_gross_return_pct": 11.21,
+        "h36_costs_pct": 1.89,
+        "h36_sharpe": 2.33,
+        "h36_max_dd_pct": 13.99,
+        "h36_turnover": 1.094,
+        "h36_trades": 667,
+        "h36_rebalances": 667,
+        "h36_avg_hold_hours": 46.07,
+        "h48_net_return_pct": 15.81,
+        "h48_gross_return_pct": 17.66,
+        "h48_costs_pct": 1.85,
+        "h48_sharpe": 3.43,
+        "h48_max_dd_pct": 17.5,
+        "h48_turnover": 1.0692,
+        "h48_trades": 674,
+        "h48_rebalances": 674,
+        "h48_avg_hold_hours": 47.66
+      },
+      {
+        "fold": 2,
+        "test_period": "2025-07-09 to 2025-08-07",
+        "bars_count": 692,
+        "h24_net_return_pct": 6.21,
+        "h24_gross_return_pct": 9.3,
+        "h24_costs_pct": 3.08,
+        "h24_sharpe": 1.46,
+        "h24_max_dd_pct": 18.24,
+        "h24_turnover": 1.7828,
+        "h24_trades": 672,
+        "h24_rebalances": 672,
+        "h24_avg_hold_hours": 28.2,
+        "h36_net_return_pct": 12.47,
+        "h36_gross_return_pct": 14.78,
+        "h36_costs_pct": 2.31,
+        "h36_sharpe": 2.64,
+        "h36_max_dd_pct": 17.35,
+        "h36_turnover": 1.3338,
+        "h36_trades": 674,
+        "h36_rebalances": 674,
+        "h36_avg_hold_hours": 38.39,
+        "h48_net_return_pct": 23.25,
+        "h48_gross_return_pct": 24.83,
+        "h48_costs_pct": 1.59,
+        "h48_sharpe": 4.44,
+        "h48_max_dd_pct": 14.87,
+        "h48_turnover": 0.9167,
+        "h48_trades": 671,
+        "h48_rebalances": 671,
+        "h48_avg_hold_hours": 57.58
+      },
+      {
+        "fold": 3,
+        "test_period": "2025-08-09 to 2025-09-07",
+        "bars_count": 692,
+        "h24_net_return_pct": 2.2,
+        "h24_gross_return_pct": 5.24,
+        "h24_costs_pct": 3.05,
+        "h24_sharpe": 0.77,
+        "h24_max_dd_pct": 10.92,
+        "h24_turnover": 1.7626,
+        "h24_trades": 666,
+        "h24_rebalances": 666,
+        "h24_avg_hold_hours": 28.2,
+        "h36_net_return_pct": -8.93,
+        "h36_gross_return_pct": -7.07,
+        "h36_costs_pct": 1.86,
+        "h36_sharpe": -1.5,
+        "h36_max_dd_pct": 16.64,
+        "h36_turnover": 1.0723,
+        "h36_trades": 668,
+        "h36_rebalances": 668,
+        "h36_avg_hold_hours": 47.66,
+        "h48_net_return_pct": 7.98,
+        "h48_gross_return_pct": 9.6,
+        "h48_costs_pct": 1.62,
+        "h48_sharpe": 1.82,
+        "h48_max_dd_pct": 12.24,
+        "h48_turnover": 0.9341,
+        "h48_trades": 676,
+        "h48_rebalances": 676,
+        "h48_avg_hold_hours": 55.28
+      },
+      {
+        "fold": 4,
+        "test_period": "2025-09-08 to 2025-10-07",
+        "bars_count": 692,
+        "h24_net_return_pct": 3.49,
+        "h24_gross_return_pct": 6.49,
+        "h24_costs_pct": 2.99,
+        "h24_sharpe": 1.07,
+        "h24_max_dd_pct": 18.29,
+        "h24_turnover": 1.729,
+        "h24_trades": 676,
+        "h24_rebalances": 676,
+        "h24_avg_hold_hours": 28.79,
+        "h36_net_return_pct": 4.81,
+        "h36_gross_return_pct": 6.85,
+        "h36_costs_pct": 2.04,
+        "h36_sharpe": 1.51,
+        "h36_max_dd_pct": 14.72,
+        "h36_turnover": 1.177,
+        "h36_trades": 673,
+        "h36_rebalances": 673,
+        "h36_avg_hold_hours": 43.19,
+        "h48_net_return_pct": 20.97,
+        "h48_gross_return_pct": 22.83,
+        "h48_costs_pct": 1.86,
+        "h48_sharpe": 4.62,
+        "h48_max_dd_pct": 11.0,
+        "h48_turnover": 1.0748,
+        "h48_trades": 679,
+        "h48_rebalances": 679,
+        "h48_avg_hold_hours": 47.66
+      },
+      {
+        "fold": 5,
+        "test_period": "2025-10-09 to 2025-11-07",
+        "bars_count": 692,
+        "h24_net_return_pct": 1.32,
+        "h24_gross_return_pct": 4.15,
+        "h24_costs_pct": 2.83,
+        "h24_sharpe": 0.6,
+        "h24_max_dd_pct": 20.8,
+        "h24_turnover": 1.6354,
+        "h24_trades": 674,
+        "h24_rebalances": 674,
+        "h24_avg_hold_hours": 30.71,
+        "h36_net_return_pct": 6.58,
+        "h36_gross_return_pct": 8.62,
+        "h36_costs_pct": 2.03,
+        "h36_sharpe": 1.43,
+        "h36_max_dd_pct": 25.26,
+        "h36_turnover": 1.1759,
+        "h36_trades": 676,
+        "h36_rebalances": 676,
+        "h36_avg_hold_hours": 43.19,
+        "h48_net_return_pct": 21.83,
+        "h48_gross_return_pct": 23.62,
+        "h48_costs_pct": 1.79,
+        "h48_sharpe": 3.94,
+        "h48_max_dd_pct": 11.29,
+        "h48_turnover": 1.0352,
+        "h48_trades": 669,
+        "h48_rebalances": 669,
+        "h48_avg_hold_hours": 49.36
+      }
+    ],
+    "frequency_averages": {
+      "24H": {
+        "mean_net_return_pct": 4.1,
+        "mean_gross_return_pct": 7.12,
+        "mean_costs_pct": 3.02,
+        "mean_sharpe": 1.16,
+        "mean_max_dd_pct": 15.95,
+        "mean_turnover": 1.7483,
+        "mean_trades": 672.2,
+        "mean_rebalances": 672.2,
+        "mean_avg_hold_hours": 28.6,
+        "profitable_folds": "5/5"
+      },
+      "36H": {
+        "mean_net_return_pct": 4.85,
+        "mean_gross_return_pct": 6.88,
+        "mean_costs_pct": 2.03,
+        "mean_sharpe": 1.28,
+        "mean_max_dd_pct": 17.59,
+        "mean_turnover": 1.1706,
+        "mean_trades": 671.6,
+        "mean_rebalances": 671.6,
+        "mean_avg_hold_hours": 43.7,
+        "profitable_folds": "4/5"
+      },
+      "48H": {
+        "mean_net_return_pct": 17.97,
+        "mean_gross_return_pct": 19.71,
+        "mean_costs_pct": 1.74,
+        "mean_sharpe": 3.65,
+        "mean_max_dd_pct": 13.38,
+        "mean_turnover": 1.006,
+        "mean_trades": 673.8,
+        "mean_rebalances": 673.8,
+        "mean_avg_hold_hours": 51.51,
+        "profitable_folds": "5/5"
+      }
+    }
+  },
+  "exp_p12f_sol": [
+    {
+      "frequency": "24H",
+      "interval_bars": 24,
+      "full_universe": {
+        "mean_net_return_pct": 4.1,
+        "mean_gross_return_pct": 7.12,
+        "mean_costs_pct": 3.02,
+        "mean_sharpe": 1.16,
+        "mean_sortino": 1.76,
+        "mean_max_dd_pct": 15.95,
+        "mean_turnover": 1.7483,
+        "mean_holding_period_hours": 28.6,
+        "profitable_folds": "5/5"
+      },
+      "without_sol": {
+        "mean_net_return_pct": -1.94,
+        "mean_gross_return_pct": 1.03,
+        "mean_costs_pct": 2.98,
+        "mean_sharpe": -0.02,
+        "mean_sortino": 0.02,
+        "mean_max_dd_pct": 20.09,
+        "mean_turnover": 1.7229,
+        "mean_holding_period_hours": 28.98,
+        "profitable_folds": "2/5"
+      },
+      "sol_delta_return_pct": 6.04,
+      "sol_delta_sharpe": 1.18,
+      "dependency_classification": "Material Dependency"
+    },
+    {
+      "frequency": "36H",
+      "interval_bars": 36,
+      "full_universe": {
+        "mean_net_return_pct": 4.85,
+        "mean_gross_return_pct": 6.88,
+        "mean_costs_pct": 2.03,
+        "mean_sharpe": 1.28,
+        "mean_sortino": 1.88,
+        "mean_max_dd_pct": 17.59,
+        "mean_turnover": 1.1706,
+        "mean_holding_period_hours": 43.7,
+        "profitable_folds": "4/5"
+      },
+      "without_sol": {
+        "mean_net_return_pct": 7.62,
+        "mean_gross_return_pct": 9.66,
+        "mean_costs_pct": 2.04,
+        "mean_sharpe": 1.89,
+        "mean_sortino": 2.83,
+        "mean_max_dd_pct": 17.82,
+        "mean_turnover": 1.1783,
+        "mean_holding_period_hours": 43.08,
+        "profitable_folds": "4/5"
+      },
+      "sol_delta_return_pct": -2.77,
+      "sol_delta_sharpe": -0.61,
+      "dependency_classification": "Low Dependency"
+    },
+    {
+      "frequency": "48H",
+      "interval_bars": 48,
+      "full_universe": {
+        "mean_net_return_pct": 17.97,
+        "mean_gross_return_pct": 19.71,
+        "mean_costs_pct": 1.74,
+        "mean_sharpe": 3.65,
+        "mean_sortino": 5.63,
+        "mean_max_dd_pct": 13.38,
+        "mean_turnover": 1.006,
+        "mean_holding_period_hours": 51.51,
+        "profitable_folds": "5/5"
+      },
+      "without_sol": {
+        "mean_net_return_pct": 20.84,
+        "mean_gross_return_pct": 22.55,
+        "mean_costs_pct": 1.71,
+        "mean_sharpe": 3.94,
+        "mean_sortino": 6.02,
+        "mean_max_dd_pct": 13.84,
+        "mean_turnover": 0.9867,
+        "mean_holding_period_hours": 52.21,
+        "profitable_folds": "5/5"
+      },
+      "sol_delta_return_pct": -2.87,
+      "sol_delta_sharpe": -0.29,
+      "dependency_classification": "Low Dependency"
+    }
+  ],
+  "exp_p12f_asset_contrib": {
+    "comparison": [
+      {
+        "symbol": "BTCUSDT",
+        "selection_pct_24h": 13.1,
+        "selection_pct_48h": 16.0,
+        "gross_contrib_24h_pct": -0.3,
+        "gross_contrib_48h_pct": 5.47,
+        "avg_hold_24h_hours": 26.6,
+        "avg_hold_48h_hours": 45.7
+      },
+      {
+        "symbol": "ETHUSDT",
+        "selection_pct_24h": 14.48,
+        "selection_pct_48h": 10.67,
+        "gross_contrib_24h_pct": -0.23,
+        "gross_contrib_48h_pct": -8.79,
+        "avg_hold_24h_hours": 28.0,
+        "avg_hold_48h_hours": 48.0
+      },
+      {
+        "symbol": "SOLUSDT",
+        "selection_pct_24h": 21.38,
+        "selection_pct_48h": 17.33,
+        "gross_contrib_24h_pct": 8.81,
+        "gross_contrib_48h_pct": -5.33,
+        "avg_hold_24h_hours": 27.4,
+        "avg_hold_48h_hours": 54.2
+      },
+      {
+        "symbol": "BNBUSDT",
+        "selection_pct_24h": 13.79,
+        "selection_pct_48h": 9.33,
+        "gross_contrib_24h_pct": 0.41,
+        "gross_contrib_48h_pct": 18.43,
+        "avg_hold_24h_hours": 24.0,
+        "avg_hold_48h_hours": 48.0
+      },
+      {
+        "symbol": "XRPUSDT",
+        "selection_pct_24h": 19.31,
+        "selection_pct_48h": 16.0,
+        "gross_contrib_24h_pct": -0.52,
+        "gross_contrib_48h_pct": 13.01,
+        "avg_hold_24h_hours": 35.4,
+        "avg_hold_48h_hours": 52.4
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "selection_pct_24h": 16.55,
+        "selection_pct_48h": 18.67,
+        "gross_contrib_24h_pct": 3.11,
+        "gross_contrib_48h_pct": 3.85,
+        "avg_hold_24h_hours": 27.2,
+        "avg_hold_48h_hours": 46.0
+      },
+      {
+        "symbol": "ADAUSDT",
+        "selection_pct_24h": 12.41,
+        "selection_pct_48h": 10.67,
+        "gross_contrib_24h_pct": 15.26,
+        "gross_contrib_48h_pct": 9.39,
+        "avg_hold_24h_hours": 30.9,
+        "avg_hold_48h_hours": 48.0
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "selection_pct_24h": 14.48,
+        "selection_pct_48h": 14.67,
+        "gross_contrib_24h_pct": -11.58,
+        "gross_contrib_48h_pct": 7.38,
+        "avg_hold_24h_hours": 31.0,
+        "avg_hold_48h_hours": 52.4
+      },
+      {
+        "symbol": "LINKUSDT",
+        "selection_pct_24h": 13.79,
+        "selection_pct_48h": 18.67,
+        "gross_contrib_24h_pct": -12.45,
+        "gross_contrib_48h_pct": 7.48,
+        "avg_hold_24h_hours": 29.8,
+        "avg_hold_48h_hours": 46.0
+      },
+      {
+        "symbol": "NEARUSDT",
+        "selection_pct_24h": 15.86,
+        "selection_pct_48h": 18.67,
+        "gross_contrib_24h_pct": 2.5,
+        "gross_contrib_48h_pct": -6.24,
+        "avg_hold_24h_hours": 28.4,
+        "avg_hold_48h_hours": 49.0
+      },
+      {
+        "symbol": "LTCUSDT",
+        "selection_pct_24h": 20.0,
+        "selection_pct_48h": 25.33,
+        "gross_contrib_24h_pct": 17.58,
+        "gross_contrib_48h_pct": 24.89,
+        "avg_hold_24h_hours": 27.7,
+        "avg_hold_48h_hours": 73.7
+      },
+      {
+        "symbol": "DOTUSDT",
+        "selection_pct_24h": 12.41,
+        "selection_pct_48h": 13.33,
+        "gross_contrib_24h_pct": 5.3,
+        "gross_contrib_48h_pct": 12.95,
+        "avg_hold_24h_hours": 30.9,
+        "avg_hold_48h_hours": 53.3
+      },
+      {
+        "symbol": "SUIUSDT",
+        "selection_pct_24h": 12.41,
+        "selection_pct_48h": 10.67,
+        "gross_contrib_24h_pct": 14.91,
+        "gross_contrib_48h_pct": 16.15,
+        "avg_hold_24h_hours": 27.0,
+        "avg_hold_48h_hours": 48.0
+      }
+    ],
+    "contrib_24h": [
+      {
+        "symbol": "LTCUSDT",
+        "selection_pct": 20.0,
+        "selection_count": 29,
+        "gross_return_contribution_pct": 17.58,
+        "avg_holding_duration_hours": 27.7
+      },
+      {
+        "symbol": "ADAUSDT",
+        "selection_pct": 12.41,
+        "selection_count": 18,
+        "gross_return_contribution_pct": 15.26,
+        "avg_holding_duration_hours": 30.9
+      },
+      {
+        "symbol": "SUIUSDT",
+        "selection_pct": 12.41,
+        "selection_count": 18,
+        "gross_return_contribution_pct": 14.91,
+        "avg_holding_duration_hours": 27.0
+      },
+      {
+        "symbol": "SOLUSDT",
+        "selection_pct": 21.38,
+        "selection_count": 31,
+        "gross_return_contribution_pct": 8.81,
+        "avg_holding_duration_hours": 27.4
+      },
+      {
+        "symbol": "DOTUSDT",
+        "selection_pct": 12.41,
+        "selection_count": 18,
+        "gross_return_contribution_pct": 5.3,
+        "avg_holding_duration_hours": 30.9
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "selection_pct": 16.55,
+        "selection_count": 24,
+        "gross_return_contribution_pct": 3.11,
+        "avg_holding_duration_hours": 27.2
+      },
+      {
+        "symbol": "NEARUSDT",
+        "selection_pct": 15.86,
+        "selection_count": 23,
+        "gross_return_contribution_pct": 2.5,
+        "avg_holding_duration_hours": 28.4
+      },
+      {
+        "symbol": "BNBUSDT",
+        "selection_pct": 13.79,
+        "selection_count": 20,
+        "gross_return_contribution_pct": 0.41,
+        "avg_holding_duration_hours": 24.0
+      },
+      {
+        "symbol": "ETHUSDT",
+        "selection_pct": 14.48,
+        "selection_count": 21,
+        "gross_return_contribution_pct": -0.23,
+        "avg_holding_duration_hours": 28.0
+      },
+      {
+        "symbol": "BTCUSDT",
+        "selection_pct": 13.1,
+        "selection_count": 19,
+        "gross_return_contribution_pct": -0.3,
+        "avg_holding_duration_hours": 26.6
+      },
+      {
+        "symbol": "XRPUSDT",
+        "selection_pct": 19.31,
+        "selection_count": 28,
+        "gross_return_contribution_pct": -0.52,
+        "avg_holding_duration_hours": 35.4
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "selection_pct": 14.48,
+        "selection_count": 21,
+        "gross_return_contribution_pct": -11.58,
+        "avg_holding_duration_hours": 31.0
+      },
+      {
+        "symbol": "LINKUSDT",
+        "selection_pct": 13.79,
+        "selection_count": 20,
+        "gross_return_contribution_pct": -12.45,
+        "avg_holding_duration_hours": 29.8
+      }
+    ],
+    "contrib_48h": [
+      {
+        "symbol": "LTCUSDT",
+        "selection_pct": 25.33,
+        "selection_count": 19,
+        "gross_return_contribution_pct": 24.89,
+        "avg_holding_duration_hours": 73.7
+      },
+      {
+        "symbol": "BNBUSDT",
+        "selection_pct": 9.33,
+        "selection_count": 7,
+        "gross_return_contribution_pct": 18.43,
+        "avg_holding_duration_hours": 48.0
+      },
+      {
+        "symbol": "SUIUSDT",
+        "selection_pct": 10.67,
+        "selection_count": 8,
+        "gross_return_contribution_pct": 16.15,
+        "avg_holding_duration_hours": 48.0
+      },
+      {
+        "symbol": "XRPUSDT",
+        "selection_pct": 16.0,
+        "selection_count": 12,
+        "gross_return_contribution_pct": 13.01,
+        "avg_holding_duration_hours": 52.4
+      },
+      {
+        "symbol": "DOTUSDT",
+        "selection_pct": 13.33,
+        "selection_count": 10,
+        "gross_return_contribution_pct": 12.95,
+        "avg_holding_duration_hours": 53.3
+      },
+      {
+        "symbol": "ADAUSDT",
+        "selection_pct": 10.67,
+        "selection_count": 8,
+        "gross_return_contribution_pct": 9.39,
+        "avg_holding_duration_hours": 48.0
+      },
+      {
+        "symbol": "LINKUSDT",
+        "selection_pct": 18.67,
+        "selection_count": 14,
+        "gross_return_contribution_pct": 7.48,
+        "avg_holding_duration_hours": 46.0
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "selection_pct": 14.67,
+        "selection_count": 11,
+        "gross_return_contribution_pct": 7.38,
+        "avg_holding_duration_hours": 52.4
+      },
+      {
+        "symbol": "BTCUSDT",
+        "selection_pct": 16.0,
+        "selection_count": 12,
+        "gross_return_contribution_pct": 5.47,
+        "avg_holding_duration_hours": 45.7
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "selection_pct": 18.67,
+        "selection_count": 14,
+        "gross_return_contribution_pct": 3.85,
+        "avg_holding_duration_hours": 46.0
+      },
+      {
+        "symbol": "SOLUSDT",
+        "selection_pct": 17.33,
+        "selection_count": 13,
+        "gross_return_contribution_pct": -5.33,
+        "avg_holding_duration_hours": 54.2
+      },
+      {
+        "symbol": "NEARUSDT",
+        "selection_pct": 18.67,
+        "selection_count": 14,
+        "gross_return_contribution_pct": -6.24,
+        "avg_holding_duration_hours": 49.0
+      },
+      {
+        "symbol": "ETHUSDT",
+        "selection_pct": 10.67,
+        "selection_count": 8,
+        "gross_return_contribution_pct": -8.79,
+        "avg_holding_duration_hours": 48.0
+      }
+    ]
+  },
+  "exp_p12f_48h_attribution": [
+    {
+      "fold": 1,
+      "test_period": "2025-06-08 to 2025-07-07",
+      "gross_return_pct": 17.66,
+      "total_costs_pct": 1.85,
+      "net_return_pct": 15.81,
+      "sharpe": 3.43,
+      "max_drawdown": 17.5,
+      "turnover": 1.0692,
+      "trades": 674,
+      "dominant_assets": "NEARUSDT(5), XRPUSDT(3), SUIUSDT(3)",
+      "fold_share_of_total_gross_pct": 17.9
+    },
+    {
+      "fold": 2,
+      "test_period": "2025-07-09 to 2025-08-07",
+      "gross_return_pct": 24.83,
+      "total_costs_pct": 1.59,
+      "net_return_pct": 23.25,
+      "sharpe": 4.44,
+      "max_drawdown": 14.87,
+      "turnover": 0.9167,
+      "trades": 671,
+      "dominant_assets": "SOLUSDT(6), LTCUSDT(5), XRPUSDT(4)",
+      "fold_share_of_total_gross_pct": 25.2
+    },
+    {
+      "fold": 3,
+      "test_period": "2025-08-09 to 2025-09-07",
+      "gross_return_pct": 9.6,
+      "total_costs_pct": 1.62,
+      "net_return_pct": 7.98,
+      "sharpe": 1.82,
+      "max_drawdown": 12.24,
+      "turnover": 0.9341,
+      "trades": 676,
+      "dominant_assets": "LTCUSDT(7), LINKUSDT(4), NEARUSDT(3)",
+      "fold_share_of_total_gross_pct": 9.7
+    },
+    {
+      "fold": 4,
+      "test_period": "2025-09-08 to 2025-10-07",
+      "gross_return_pct": 22.83,
+      "total_costs_pct": 1.86,
+      "net_return_pct": 20.97,
+      "sharpe": 4.62,
+      "max_drawdown": 11.0,
+      "turnover": 1.0748,
+      "trades": 679,
+      "dominant_assets": "ADAUSDT(4), NEARUSDT(4), LINKUSDT(3)",
+      "fold_share_of_total_gross_pct": 23.2
+    },
+    {
+      "fold": 5,
+      "test_period": "2025-10-09 to 2025-11-07",
+      "gross_return_pct": 23.62,
+      "total_costs_pct": 1.79,
+      "net_return_pct": 21.83,
+      "sharpe": 3.94,
+      "max_drawdown": 11.29,
+      "turnover": 1.0352,
+      "trades": 669,
+      "dominant_assets": "LTCUSDT(5), BNBUSDT(4), AVAXUSDT(4)",
+      "fold_share_of_total_gross_pct": 24.0
+    }
+  ],
+  "exp_p12f_alignment_audit": [
+    {
+      "frequency": "18H",
+      "interval_bars": 18,
+      "total_fold_bars": 692,
+      "expected_rebalances": 38,
+      "actual_weight_updates": 36,
+      "partial_interval_tail_bars": 8,
+      "day_boundary_synchronized": false,
+      "t_plus_1_execution_verified": true
+    },
+    {
+      "frequency": "24H",
+      "interval_bars": 24,
+      "total_fold_bars": 692,
+      "expected_rebalances": 28,
+      "actual_weight_updates": 28,
+      "partial_interval_tail_bars": 20,
+      "day_boundary_synchronized": true,
+      "t_plus_1_execution_verified": true
+    },
+    {
+      "frequency": "36H",
+      "interval_bars": 36,
+      "total_fold_bars": 692,
+      "expected_rebalances": 19,
+      "actual_weight_updates": 18,
+      "partial_interval_tail_bars": 8,
+      "day_boundary_synchronized": false,
+      "t_plus_1_execution_verified": true
+    },
+    {
+      "frequency": "48H",
+      "interval_bars": 48,
+      "total_fold_bars": 692,
+      "expected_rebalances": 14,
+      "actual_weight_updates": 15,
+      "partial_interval_tail_bars": 20,
+      "day_boundary_synchronized": true,
+      "t_plus_1_execution_verified": true
+    }
+  ],
+  "exp_p12f_regime_audit": {
+    "bull_regime": {
+      "regime_name": "Bull Market (BTC > +5% 100d SMA)",
+      "observations_bars": 920,
+      "observations_days": 38.3,
+      "strategy_cum_return_pct": 7.51,
+      "btc_cum_return_pct": 5.17,
+      "strategy_excess_vs_btc_pct": 2.34,
+      "annualized_sharpe": 1.37,
+      "regime_max_dd_pct": 14.84
+    },
+    "sideways_regime": {
+      "regime_name": "Sideways Market (Consolidation)",
+      "observations_bars": 2246,
+      "observations_days": 93.6,
+      "strategy_cum_return_pct": 16.05,
+      "btc_cum_return_pct": 3.81,
+      "strategy_excess_vs_btc_pct": 12.25,
+      "annualized_sharpe": 1.28,
+      "regime_max_dd_pct": 18.26
+    },
+    "bear_regime": {
+      "regime_name": "Bear Market (BTC < -5% 100d SMA)",
+      "observations_bars": 294,
+      "observations_days": 12.2,
+      "strategy_cum_return_pct": -1.24,
+      "btc_cum_return_pct": -15.08,
+      "strategy_excess_vs_btc_pct": 13.84,
+      "annualized_sharpe": -0.13,
+      "regime_max_dd_pct": 19.02
+    }
+  }
+}

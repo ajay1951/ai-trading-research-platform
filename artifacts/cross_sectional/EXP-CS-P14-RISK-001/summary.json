@@ -1,0 +1,20 @@
+{
+  "mean_net_return_pct": 17.97,
+  "mean_sharpe": 3.65,
+  "mean_fold_max_drawdown_pct": 13.38,
+  "worst_fold_max_drawdown_pct": 17.5,
+  "global_continuous_max_drawdown_pct": 17.5,
+  "largest_drawdown_episode_pct": 17.56,
+  "mean_hhi": 0.5,
+  "mean_effective_assets": 2.0,
+  "most_selected_asset": "LTCUSDT",
+  "top_1_selection_rate_pct": 25.33,
+  "selection_entropy": 2.526,
+  "mean_pairwise_correlation": 0.3413,
+  "mean_selected_pair_correlation": 0.444,
+  "pct_selected_pairs_above_07": 45.21,
+  "worst_single_asset_crash_50pct": -25.0,
+  "simultaneous_crash_50pct": -50.0,
+  "overall_concentration_risk": "MODERATE (Structural 2-Asset Concentration with Diversified Selection)",
+  "overall_stress_vulnerability": "HIGH (Unhedged 100% Long Exposure Subject to Simultaneous Shocks)"
+}

@@ -1,0 +1,347 @@
+[
+  {
+    "event_id": "EVT-00001",
+    "model_id": "MOD-P3-LGBM-V0",
+    "model_version": "0.9.0",
+    "event_type": "MODEL_REGISTERED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "CANDIDATE",
+    "reason_code": "REGISTRATION_SUCCESS",
+    "evidence_hash": "e931ac7718a9b43cf941d4023fcaf2288c17958a3e69bba1b9b54bc3794fb1ec",
+    "actor": "SYSTEM_REGISTRY",
+    "metadata": {
+      "artifact_hash": "e931ac7718a9b43cf941d4023fcaf2288c17958a3e69bba1b9b54bc3794fb1ec"
+    }
+  },
+  {
+    "event_id": "EVT-00002",
+    "model_id": "MOD-P3-LGBM-V0",
+    "model_version": "0.9.0",
+    "event_type": "VALIDATION_STARTED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "VALIDATING",
+    "reason_code": "RESEARCH_VALIDATION",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATING"
+    }
+  },
+  {
+    "event_id": "EVT-00003",
+    "model_id": "MOD-P3-LGBM-V0",
+    "model_version": "0.9.0",
+    "event_type": "VALIDATION_PASSED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "VALIDATING",
+    "new_state": "VALIDATED",
+    "reason_code": "VALIDATION_PASSED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATED"
+    }
+  },
+  {
+    "event_id": "EVT-00004",
+    "model_id": "MOD-P3-LGBM-V0",
+    "model_version": "0.9.0",
+    "event_type": "PROMOTION_ELIGIBLE",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "VALIDATED",
+    "new_state": "ELIGIBLE",
+    "reason_code": "SHADOW_PASSED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "ELIGIBLE"
+    }
+  },
+  {
+    "event_id": "EVT-00005",
+    "model_id": "MOD-P3-LGBM-V0",
+    "model_version": "0.9.0",
+    "event_type": "PROMOTED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "ELIGIBLE",
+    "new_state": "CHAMPION",
+    "reason_code": "INITIAL_BASELINE_CHAMPION",
+    "evidence_hash": "14748f0b0c965b9b3ebaabd4f7cac3c174a3d18d4ca69f71a0f545f498d1d3a8",
+    "actor": "PROMOTION_ENGINE",
+    "metadata": {
+      "rollback_parent": null
+    }
+  },
+  {
+    "event_id": "EVT-00006",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "MODEL_REGISTERED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "CANDIDATE",
+    "reason_code": "REGISTRATION_SUCCESS",
+    "evidence_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee",
+    "actor": "SYSTEM_REGISTRY",
+    "metadata": {
+      "artifact_hash": "70d22e1d72363f376eb093a17ef3975c242590d1ed62667529b96d1884b368ee"
+    }
+  },
+  {
+    "event_id": "EVT-00007",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "VALIDATING",
+    "reason_code": "VALIDATING_V1",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATING"
+    }
+  },
+  {
+    "event_id": "EVT-00008",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "VALIDATING",
+    "new_state": "VALIDATED",
+    "reason_code": "VALIDATED_V1",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATED"
+    }
+  },
+  {
+    "event_id": "EVT-00009",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "VALIDATED",
+    "new_state": "ELIGIBLE",
+    "reason_code": "ELIGIBLE_V1",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "ELIGIBLE"
+    }
+  },
+  {
+    "event_id": "EVT-00010",
+    "model_id": "MOD-P3-LGBM-V0",
+    "model_version": "0.9.0",
+    "event_type": "DEMOTED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "CHAMPION",
+    "new_state": "ARCHIVED",
+    "reason_code": "SUPERSEDED_BY_NEW_CHAMPION",
+    "evidence_hash": "a6420f6e81a4e6cccde62be6d0eb8b197eebd26a003c91151789903b0ba07352",
+    "actor": "PROMOTION_ENGINE",
+    "metadata": {
+      "new_champion_id": "MOD-P33-LGBM-CHAMPION"
+    }
+  },
+  {
+    "event_id": "EVT-00011",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "PROMOTED",
+    "timestamp": "2026-10-07 19:22:26 UTC",
+    "previous_state": "ELIGIBLE",
+    "new_state": "CHAMPION",
+    "reason_code": "PROMOTED_V1_CHAMPION",
+    "evidence_hash": "14748f0b0c965b9b3ebaabd4f7cac3c174a3d18d4ca69f71a0f545f498d1d3a8",
+    "actor": "PROMOTION_ENGINE",
+    "metadata": {
+      "rollback_parent": "MOD-P3-LGBM-V0"
+    }
+  },
+  {
+    "event_id": "EVT-00012",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "MODEL_REGISTERED",
+    "timestamp": "2026-10-07 19:22:27 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "CANDIDATE",
+    "reason_code": "REGISTRATION_SUCCESS",
+    "evidence_hash": "b1468a5d194cc4a69e331f71a530e9d81df054b60008986060765dc908dc085a",
+    "actor": "SYSTEM_REGISTRY",
+    "metadata": {
+      "artifact_hash": "b1468a5d194cc4a69e331f71a530e9d81df054b60008986060765dc908dc085a"
+    }
+  },
+  {
+    "event_id": "EVT-00013",
+    "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+    "model_version": "1.1.0-challenger.b",
+    "event_type": "MODEL_REGISTERED",
+    "timestamp": "2026-10-07 19:22:27 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "CANDIDATE",
+    "reason_code": "REGISTRATION_SUCCESS",
+    "evidence_hash": "1c4f3fdb52ec6a2d6fd6512eb1c6640b849380704e530ffad89e24ce0d2b5be3",
+    "actor": "SYSTEM_REGISTRY",
+    "metadata": {
+      "artifact_hash": "1c4f3fdb52ec6a2d6fd6512eb1c6640b849380704e530ffad89e24ce0d2b5be3"
+    }
+  },
+  {
+    "event_id": "EVT-00014",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "VALIDATING",
+    "reason_code": "VALIDATION_PASSED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATING"
+    }
+  },
+  {
+    "event_id": "EVT-00015",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "VALIDATING",
+    "new_state": "VALIDATED",
+    "reason_code": "SHADOW_VALIDATION",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATED"
+    }
+  },
+  {
+    "event_id": "EVT-00016",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "VALIDATED",
+    "new_state": "SHADOW",
+    "reason_code": "SHADOW_COMPLETED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "SHADOW"
+    }
+  },
+  {
+    "event_id": "EVT-00017",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "SHADOW",
+    "new_state": "ELIGIBLE",
+    "reason_code": "GATES_PASSED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "ELIGIBLE"
+    }
+  },
+  {
+    "event_id": "EVT-00018",
+    "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+    "model_version": "1.1.0-challenger.b",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "CANDIDATE",
+    "new_state": "VALIDATING",
+    "reason_code": "EVALUATION_FAILED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "VALIDATING"
+    }
+  },
+  {
+    "event_id": "EVT-00019",
+    "model_id": "MOD-CHALLENGER-B-OVERFITTED",
+    "model_version": "1.1.0-challenger.b",
+    "event_type": "HEALTH_CHANGED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "VALIDATING",
+    "new_state": "REJECTED",
+    "reason_code": "FAILED_GATES_REJECTED",
+    "evidence_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "actor": "SYSTEM_OPERATOR",
+    "metadata": {
+      "new_state": "REJECTED"
+    }
+  },
+  {
+    "event_id": "EVT-00020",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "DEMOTED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "CHAMPION",
+    "new_state": "ARCHIVED",
+    "reason_code": "SUPERSEDED_BY_NEW_CHAMPION",
+    "evidence_hash": "bb678bfb12ae410b2506913745a741f4c93ca56782c9c949e593754274eb0ff8",
+    "actor": "PROMOTION_ENGINE",
+    "metadata": {
+      "new_champion_id": "MOD-CHALLENGER-A-CALIBRATED"
+    }
+  },
+  {
+    "event_id": "EVT-00021",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "PROMOTED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "ELIGIBLE",
+    "new_state": "CHAMPION",
+    "reason_code": "Passed all 10 promotion gates with superior calibration and risk efficiency.",
+    "evidence_hash": "4ac6d62e610fdeaad12b4a26ec9bdfc1db84e8e8ad8d9a7100b992c5e7ea60e3",
+    "actor": "PROMOTION_ENGINE",
+    "metadata": {
+      "rollback_parent": "MOD-P33-LGBM-CHAMPION"
+    }
+  },
+  {
+    "event_id": "EVT-00022",
+    "model_id": "MOD-CHALLENGER-A-CALIBRATED",
+    "model_version": "1.1.0-challenger.a",
+    "event_type": "DEMOTED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "CHAMPION",
+    "new_state": "DEMOTED",
+    "reason_code": "Simulated post-promotion anomaly detection verification.",
+    "evidence_hash": "368fe1230f0537a2ceca2f74556cd9081ee9a62d3e3167eee1d7c563ceb44feb",
+    "actor": "ROLLBACK_ENGINE",
+    "metadata": {
+      "rollback_to": "MOD-P33-LGBM-CHAMPION"
+    }
+  },
+  {
+    "event_id": "EVT-00023",
+    "model_id": "MOD-P33-LGBM-CHAMPION",
+    "model_version": "1.0.0",
+    "event_type": "ROLLBACK_COMPLETED",
+    "timestamp": "2026-10-07 19:22:33 UTC",
+    "previous_state": "ARCHIVED",
+    "new_state": "CHAMPION",
+    "reason_code": "ROLLBACK_REINSTATED: Simulated post-promotion anomaly detection verification.",
+    "evidence_hash": "368fe1230f0537a2ceca2f74556cd9081ee9a62d3e3167eee1d7c563ceb44feb",
+    "actor": "ROLLBACK_ENGINE",
+    "metadata": {
+      "demoted_champion": "MOD-CHALLENGER-A-CALIBRATED"
+    }
+  }
+]

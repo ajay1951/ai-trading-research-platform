@@ -1,0 +1,38 @@
+[
+  {
+    "window_start": "2025-08-23 17:00:00+00:00",
+    "window_end": "2025-09-22 16:00:00+00:00",
+    "champion_net_return": -4.52,
+    "challenger_net_return": -3.98,
+    "champion_sharpe": -0.92,
+    "challenger_sharpe": -0.76,
+    "selection_jaccard": 0.8095
+  },
+  {
+    "window_start": "2025-09-07 17:00:00+00:00",
+    "window_end": "2025-10-07 16:00:00+00:00",
+    "champion_net_return": 9.94,
+    "challenger_net_return": 8.06,
+    "champion_sharpe": 2.59,
+    "challenger_sharpe": 2.0,
+    "selection_jaccard": 0.619
+  },
+  {
+    "window_start": "2025-09-22 17:00:00+00:00",
+    "window_end": "2025-10-22 16:00:00+00:00",
+    "champion_net_return": -14.39,
+    "challenger_net_return": -11.77,
+    "champion_sharpe": -3.05,
+    "challenger_sharpe": -2.24,
+    "selection_jaccard": 0.8571
+  },
+  {
+    "window_start": "2025-10-07 17:00:00+00:00",
+    "window_end": "2025-11-06 16:00:00+00:00",
+    "champion_net_return": 4.22,
+    "challenger_net_return": 9.92,
+    "champion_sharpe": 1.18,
+    "challenger_sharpe": 2.2,
+    "selection_jaccard": 0.7857
+  }
+]

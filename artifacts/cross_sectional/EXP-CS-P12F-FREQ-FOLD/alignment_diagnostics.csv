@@ -1,0 +1,5 @@
+frequency,interval_bars,total_fold_bars,expected_rebalances,actual_weight_updates,partial_interval_tail_bars,day_boundary_synchronized,t_plus_1_execution_verified
+18H,18,692,38,36,8,False,True
+24H,24,692,28,28,20,True,True
+36H,36,692,19,18,8,False,True
+48H,48,692,14,15,20,True,True

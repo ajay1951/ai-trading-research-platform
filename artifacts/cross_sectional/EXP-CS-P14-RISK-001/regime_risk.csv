@@ -1,0 +1,4 @@
+market_regime,hourly_bars,share_of_sample_pct,cumulative_net_return_pct,annualized_sharpe,max_drawdown_pct,sample_reliability
+Bull,920,26.59,60.39,6.51,10.18,Small Sample (Limited Statistical Power)
+Sideways,2246,64.91,57.7,3.21,17.27,Statistically Reliable (>1000 bars)
+Bear,294,8.5,3.25,1.76,12.76,Small Sample (Limited Statistical Power)

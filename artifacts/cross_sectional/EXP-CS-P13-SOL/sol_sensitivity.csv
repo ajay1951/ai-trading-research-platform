@@ -1,0 +1,4 @@
+mode,strategy,full_mean_return_pct,full_mean_sharpe,full_max_dd_pct,nosol_mean_return_pct,nosol_mean_sharpe,nosol_max_dd_pct,sol_delta_return_pct
+equal,Equal Weight,17.97,3.65,13.38,20.84,3.94,13.84,-2.87
+inverse_vol,Inverse Vol,16.57,3.48,13.7,22.09,4.14,14.17,-5.52
+iv_capped,IV Capped,16.56,3.48,13.7,22.07,4.14,14.17,-5.51
